@@ -34,3 +34,16 @@ if xxx:
    if xxx:
        shkjhgkjhkjgk
 
+name="abcdef"
+len(name)
+name[len(name)-1]
+name[-1]
+name[0]
+name="abcdefABCDEF"
+name[2:6]
+name[2:-1]
+name[2:]
+name[2:-1:2]
+[起始位置:终止位置:步长]
+name[0:]  正序
+name[-1::-1]==name[::-1]  逆序
