@@ -130,7 +130,7 @@ myStr.find("world")
 # Out[72]: ['aa', 's', 'gd', 's', 'a', 'g', 'lk', 'j', 'shijh', 'j', 'l', 'k', 'g']    #变成列表
 # "".join(result)                                                                      #转变成字符串
 # Out[73]: 'aasgdsaglkjshijhjlkg'
-# names = ["老王","老李","老刘"]
+# names = ["老王","老李","老刘"]   #列表是处理相同的元素的
 # names
 # Out[76]: ['老王', '老李', '老刘']
 # nums = [11,22,3.14,"100","laowang"]

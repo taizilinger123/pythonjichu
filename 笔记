@@ -67,3 +67,28 @@ xxxx[下标] = new值
 in
 not  in
 
+字典:
+添加
+xxx[新的key] = value
+
+删除
+del xxx[key]
+
+修改
+xxx[已存在的key] = new_value
+
+查询
+xxx.get[key]
+
+4种函数:
+def 函数名():
+    pass
+
+def 函数名():
+    return xxx
+
+def 函数名(参数):
+    pass
+
+def 函数名(参数):
+    return xxx
