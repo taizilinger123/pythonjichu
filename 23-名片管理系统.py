@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
+
 #1.打印功能提示
 print("="*50)
 print(" 名字关系系统 v0.01")
