@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-import os
-while True:
-    os.fork()
+#1.utf-8
+#2.import
+#3.全局变量
+#4.函数
+#5.main

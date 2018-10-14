@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-f = open("test1.py", "w")
+f = open("设计4s店类-1.py", "w")
 f.read() #全部读出来,包括换行\n
 f.read(2) #读多少
 f.write("hahah")
