@@ -16,7 +16,7 @@ class Gun(object):
 class Danjia(object):
     """弹夹类"""
     def  __init__(self, max_num):
-        super(Gun, self).__init__()
+        super(, self).__init__()
         self.max_num = max_num #用来记录弹夹的最大容量
 
 
