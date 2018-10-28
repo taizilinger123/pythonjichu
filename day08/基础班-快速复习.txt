@@ -3,7 +3,8 @@
 	if/else/elif/break/continue/for/while/and/or/not/in/True/
 	False/try/except/finally/as/import/from/def/class/return/None
 	global/lambda
-
+    import  keyword  #查看关键字
+    keyword.kwlist
 2. 变量、输入、输出
 
 	a = 100 引用
@@ -65,7 +66,6 @@
 	{"name":"asdf","age":10}
 
 	[{"name":"xxx","family":[{"小姑":"aa","family":["a","b","cc"]},"bb","ccc"]},{},{}]
-
 
 	a = [111,22,33,1,111,111,111,343]
 	b = set(a)

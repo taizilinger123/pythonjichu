@@ -1,0 +1,195 @@
+[root@localhost ~]# yum  install httpd  httpd-devel tftp-server  xinetd  dhcp*  -y
+[root@localhost ~]# rpm  -qa  | grep -E "httpd|tftp|xinetd"
+httpd-2.4.6-80.el7.centos.1.x86_64
+xinetd-2.3.15-13.el7.x86_64
+tftp-server-5.2-22.el7.x86_64
+httpd-tools-2.4.6-80.el7.centos.1.x86_64
+httpd-devel-2.4.6-80.el7.centos.1.x86_64
+[root@localhost ~]# vim  /etc/xinetd.d/tftp
+[root@localhost ~]# cat  /etc/xinetd.d/tftp
+# default: off
+# description: The tftp server serves files using the trivial file transfer \
+#	protocol.  The tftp protocol is often used to boot diskless \
+#	workstations, download configuration files to network-aware printers, \
+#	and to start the installation process for some operating systems.
+service tftp
+{
+	socket_type		= dgram
+	protocol		= udp
+	wait			= yes
+	user			= root
+	server			= /usr/sbin/in.tftpd
+	server_args		= -s /var/lib/tftpboot
+	disable			= no
+	per_source		= 11
+	cps			= 100 2
+	flags			= IPv4
+}
+[root@localhost ~]# mount  /dev/cdrom  /mnt
+mount: /dev/sr0 is write-protected, mounting read-only
+[root@localhost ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda3        98G   11G   88G  11% /
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           489M     0  489M   0% /dev/shm
+tmpfs           489M   26M  463M   6% /run
+tmpfs           489M     0  489M   0% /sys/fs/cgroup
+/dev/sda1       297M  141M  156M  48% /boot
+tmpfs            98M   40K   98M   1% /run/user/1000
+tmpfs            98M     0   98M   0% /run/user/0
+/dev/sr0        4.3G  4.3G     0 100% /mnt
+[root@localhost ~]# cd  /mnt
+[root@localhost mnt]# ls
+CentOS_BuildTag  EFI  EULA  GPL  images  isolinux  LiveOS  Packages  repodata  RPM-GPG-KEY-CentOS-7  RPM-GPG-KEY-CentOS-Testing-7  TRANS.TBL
+[root@localhost mnt]# cd  isolinux/
+[root@localhost isolinux]# ls
+boot.cat  boot.msg  grub.conf  initrd.img  isolinux.bin  isolinux.cfg  memtest  splash.png  TRANS.TBL  vesamenu.c32  vmlinuz
+[root@localhost isolinux]# yum  install  syslinux  syslinux-devel  -y
+[root@localhost isolinux]# ln -s  /var/lib/tftpboot/   /
+[root@localhost isolinux]# cd  /
+[root@localhost /]# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tftpboot  tmp  usr  var
+[root@localhost /]# ll
+[root@localhost /]# mkdir  /var/lib/tftpboot/pxelinux.cfg
+[root@localhost /]# mkdir -p  /var/lib/tftpboot/pxelinux.cfg
+[root@localhost /]# \cp  /mnt/isolinux/isolinux.cfg  /var/lib/tftpboot/pxelinux.cfg/default
+[root@localhost /]# \cp  /usr/share/syslinux/vesamenu.c32   /var/lib/tftpboot/
+[root@localhost /]# \cp  /mnt/images/pxeboot/vmlinuz   /var/lib/tftpboot/
+[root@localhost /]# \cp  /mnt/images/pxeboot/initrd.img   /var/lib/tftpboot/
+[root@localhost /]# \cp  /usr/share/syslinux/pxelinux.0   /var/lib/tftpboot/
+[root@localhost /]# chmod  644  /var/lib/tftpboot/pxelinux.cfg/default
+[root@localhost /]# cd   /var/lib/tftpboot/
+[root@localhost tftpboot]# ll
+total 53220
+-rw-r--r--. 1 root root 48434768 Oct 28 07:47 initrd.img
+-rw-r--r--. 1 root root    26764 Oct 28 07:47 pxelinux.0
+drwxr-xr-x. 2 root root       21 Oct 28 07:45 pxelinux.cfg
+-rw-r--r--. 1 root root   152976 Oct 28 07:45 vesamenu.c32
+-rwxr-xr-x. 1 root root  5877760 Oct 28 07:46 vmlinuz
+[root@localhost tftpboot]# cd   pxelinux.cfg/
+[root@localhost pxelinux.cfg]# ls
+default
+[root@localhost pxelinux.cfg]# cat    default
+default  vesamenu.c32
+timeout  10
+display  boot.msg
+menu  clear
+menu  background  splash.png
+menu  title  CentOS  Linux  7
+label  linux
+   menu lable ^Install CentOS Linux  7
+   menu default
+   Kernel vmlinuz
+   append  initrd=initrd.img  inst.repo=http://192.168.239.162/centos7  quiet ks=http://192.168.239.162/ks.cfg
+label check
+   menu  label Test this ^media & install CentOS Linux 7
+   Kernel  vmlinuz
+   append  initrd=initrd.img  inst.stage2=hd:LABEL=CentOS\x207\x20x86_64  rd.live.check quiet
+
+[root@localhost ~]# mkdir  -p  /var/www/html/centos7
+[root@localhost ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda3        98G   11G   88G  11% /
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           489M     0  489M   0% /dev/shm
+tmpfs           489M   26M  463M   6% /run
+tmpfs           489M     0  489M   0% /sys/fs/cgroup
+/dev/sda1       297M  141M  156M  48% /boot
+tmpfs            98M   44K   98M   1% /run/user/1000
+tmpfs            98M     0   98M   0% /run/user/0
+/dev/sr0        4.3G  4.3G     0 100% /mnt
+[root@localhost ~]# mount  /dev/cdrom  /var/www/html/centos7/
+mount: /dev/sr0 is write-protected, mounting read-only
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]#
+[root@localhost ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda3        98G   11G   88G  11% /
+devtmpfs        474M     0  474M   0% /dev
+tmpfs           489M     0  489M   0% /dev/shm
+tmpfs           489M   26M  463M   6% /run
+tmpfs           489M     0  489M   0% /sys/fs/cgroup
+/dev/sda1       297M  141M  156M  48% /boot
+tmpfs            98M   44K   98M   1% /run/user/1000
+tmpfs            98M     0   98M   0% /run/user/0
+/dev/sr0        4.3G  4.3G     0 100% /mnt
+[root@localhost ~]# cd  /var/www/html/centos7/
+[root@localhost centos7]# ls
+CentOS_BuildTag  EFI  EULA  GPL  images  isolinux  LiveOS  Packages  repodata  RPM-GPG-KEY-CentOS-7  RPM-GPG-KEY-CentOS-Testing-7  TRANS.TBL
+[root@localhost html]# pwd
+/var/www/html
+[root@localhost html]# ll
+total 2
+drwxr-xr-x. 8 sige sige 2048 Sep  5  2017 centos7
+[root@localhost html]# cat  ks.cfg
+install
+text
+keyboard 'us'
+rootpw www.jfedu.net
+timezone Asia/Shanghai
+url --url=http://192.168.239.162/centos7
+reboot
+lang zh_CN
+firewall --disabled
+network  --bootproto=dhcp  --device ens33
+auth  --useshadow  --passalgo=sha512
+firstboot --disable
+selinux  disabled
+bootloader  --location=mbr
+clearpart --all  --initlabel
+part /boot  --fstype="ext4"  --size=300
+part  /  --fstype="ext4"  --grow
+part  swap  --fstype="swap"  --size=512
+%packages
+@base
+@core
+%end
+
+[root@localhost html]# cat  /etc/dhcp/dhcpd.conf
+ddns-update-style  interim;
+ignore  client-updates;
+next-server  192.168.239.162;
+filename  "pxelinux.0";
+allow  booting;
+allow  bootp;
+subnet  192.168.239.0  netmask 255.255.255.0 {
+#default gateway
+option routers  192.168.239.2;
+option subnet-mask 255.255.255.0;
+range  dynamic-bootp  192.168.239.160  192.168.239.170;
+host ns {
+hardware ethernet  00:1a:a0:2b:38:81;
+#hardware ethernet  00:0c:29:97:27:8e;
+fixed-address  192.168.239.101;
+#fixed-address  192.168.239.162;
+}
+}
+[root@localhost html]# systemctl  restart  httpd
+[root@localhost html]# systemctl  restart  dhcpd
+[root@localhost html]# systemctl  restart  xineted
+Failed to restart xineted.service: Unit not found.
+[root@localhost html]# service   xinetd  restart
+Redirecting to /bin/systemctl restart xinetd.service
+[root@localhost html]# systemctl   stop  firewalld
+[root@localhost html]# systemctl   status  firewalld
+[root@localhost html]# setenforce  0
+[root@localhost html]# getenforce
+Permissive
+[root@localhost html]# vim  /etc/selinux/config
+[root@localhost html]# getenforce
+Permissive
+[root@localhost html]# cat  /etc/selinux/config
+
+# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=disabled
+# SELINUXTYPE= can take one of three two values:
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected.
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+虚拟机内存调到2G就好了
