@@ -1,0 +1,302 @@
+X670-48x.1 # show  configuration 
+#
+# Module devmgr configuration.
+#
+configure sys-recovery-level switch reset
+
+#
+# Module vlan configuration.
+#
+configure vlan default delete ports all
+configure vr VR-Default delete ports 1-48
+configure vr VR-Default add ports 1-48
+enable flow-control tx-pause port 1
+configure ports 1 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 2
+configure ports 2 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 3
+configure ports 3 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 4
+configure ports 4 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 5
+configure ports 5 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 6
+configure ports 6 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 7
+configure ports 7 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 8
+configure ports 8 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 9
+configure ports 9 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 10
+configure ports 10 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 11
+configure ports 11 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 12
+configure ports 12 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 13
+configure ports 13 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 14
+configure ports 14 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 15
+configure ports 15 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 16
+configure ports 16 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 17
+configure ports 17 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 18
+configure ports 18 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 19
+configure ports 19 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 20
+configure ports 20 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 21
+configure ports 21 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 22
+configure ports 22 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 23
+configure ports 23 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 24
+configure ports 24 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 25
+configure ports 25 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 26
+configure ports 26 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 27
+configure ports 27 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 28
+configure ports 28 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 29
+configure ports 29 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 30
+configure ports 30 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 31
+configure ports 31 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 32
+configure ports 32 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 33
+configure ports 33 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 34
+configure ports 34 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 35
+configure ports 35 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 36
+configure ports 36 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 37
+configure ports 37 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 38
+configure ports 38 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 39
+configure ports 39 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 40
+configure ports 40 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 41
+configure ports 41 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 42
+configure ports 42 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 43
+configure ports 43 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 44
+configure ports 44 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 45
+configure ports 45 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 46
+configure ports 46 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 47
+configure ports 47 auto off speed 10000 duplex full 
+enable flow-control tx-pause port 48
+configure ports 48 auto off speed 10000 duplex full 
+configure vlan Default add ports 1-48 untagged  
+configure vlan Mgmt ipaddress 192.168.10.5 255.255.255.0
+
+#
+# Module fdb configuration.
+#
+
+#
+# Module rtmgr configuration.
+#
+configure iproute add default 192.168.10.1
+
+#
+# Module mcmgr configuration.
+#
+
+#
+# Module aaa configuration.
+#
+
+#
+# Module acl configuration.
+#
+
+
+
+
+#
+# Module bfd configuration.
+#
+
+#
+# Module ces configuration.
+#
+
+#
+# Module cfgmgr configuration.
+#
+
+#
+# Module dosprotect configuration.
+#
+
+#
+# Module dot1ag configuration.
+#
+
+#
+# Module eaps configuration.
+#
+
+#
+# Module edp configuration.
+#
+
+#
+# Module elrp configuration.
+#
+
+#
+# Module ems configuration.
+#
+
+#
+# Module epm configuration.
+#
+
+#
+# Module erps configuration.
+#
+
+#
+# Module esrp configuration.
+#
+
+#
+# Module ethoam configuration.
+#
+
+#
+# Module etmon configuration.
+#
+
+#
+# Module hal configuration.
+#
+
+#
+# Module idMgr configuration.
+#
+
+#
+# Module ipSecurity configuration.
+#
+
+#
+# Module ipfix configuration.
+#
+
+#
+# Module lldp configuration.
+#
+
+#
+# Module mrp configuration.
+#
+
+#
+# Module msdp configuration.
+#
+
+#
+# Module netLogin configuration.
+#
+
+#
+# Module netTools configuration.
+#
+
+#
+# Module ntp configuration.
+#
+
+#
+# Module ospf configuration.
+#
+
+#
+# Module ospfv3 configuration.
+#
+
+
+#
+# Module pim configuration.
+#
+
+#
+# Module poe configuration.
+#
+
+#
+# Module rip configuration.
+#
+
+#
+# Module ripng configuration.
+#
+
+#
+# Module snmpMaster configuration.
+#
+
+#
+# Module stp configuration.
+#
+configure mstp region 0004969e4581
+configure stpd s0 delete vlan default ports all
+disable stpd s0 auto-bind vlan default
+enable stpd s0 auto-bind vlan Default
+
+#
+# Module synce configuration.
+#
+
+#
+# Module techSupport configuration.
+#
+debug tech-support configure max-collectors 2
+
+#
+# Module telnetd configuration.
+#
+
+#
+# Module tftpd configuration.
+#
+
+#
+# Module thttpd configuration.
+#
+enable web http
+
+#
+# Module vmt configuration.
+#
+
+#
+# Module vrrp configuration.
+#
+
+#
+# Module vsm configuration.
+#
+X670-48x.2 # 
