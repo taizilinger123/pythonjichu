@@ -1,0 +1,135 @@
+import  sys
+sys.path
+sys.path.append("/home")
+sys.path
+Out[5]:
+['E:\\pycharm2017pre\\PyCharm 2017.2.3\\helpers\\pydev',
+ 'E:\\pycharm2017pre\\PyCharm 2017.2.3\\helpers\\pydev',
+ 'E:\\python35\\python35.zip',
+ 'E:\\python35\\DLLs',
+ 'E:\\python35\\lib',
+ 'E:\\python35',
+ 'C:\\Users\\sige\\AppData\\Roaming\\Python\\Python35\\site-packages',
+ 'E:\\python35\\lib\\site-packages',
+ 'E:\\python35\\lib\\site-packages\\IPython\\extensions',
+ 'E:\\pythonjichu',
+ 'E:/pythonjichu',
+ '/home']
+##########################################################
+a = [11,22,33]
+b = [11,22,33]
+a == b
+Out[8]: True
+a is b
+Out[9]: False
+id(a)
+Out[10]: 71016136
+id(b)
+Out[11]: 72593352
+c = a
+a
+Out[13]: [11, 22, 33]
+b
+Out[14]: [11, 22, 33]
+c
+Out[15]: [11, 22, 33]
+id(a)
+Out[16]: 71016136
+id(b)
+Out[17]: 72593352
+id(c)
+Out[18]: 71016136
+a is c
+Out[19]: True
+a = 100
+b = 100
+a == b
+Out[22]: True
+a is b
+Out[23]: True
+a = 10000
+b = 10000
+a is b
+Out[26]: False
+#######################
+浅拷贝
+a = [11,22,33]
+b = a
+id(a)
+Out[29]: 72591240
+id(b)
+Out[30]: 72591240
+深拷贝
+import copy
+c = copy.deepcopy(a)
+id(a)
+Out[34]: 72591240
+id(c)
+Out[35]: 72694408
+a.append(44)
+a
+Out[37]: [11, 22, 33, 44]
+b
+Out[38]: [11, 22, 33, 44]
+c
+Out[39]: [11, 22, 33]
+####################################
+a = [11,22,33]
+b = [44,55,66]
+c = [a,b]
+d = c
+id(c)
+Out[44]: 72571912
+id(d)
+Out[45]: 72571912
+e = copy.deepcopy(c)
+id(e)
+Out[47]: 72699976
+a.append(44)
+c[0]
+Out[49]: [11, 22, 33, 44]
+e[0]
+Out[50]: [11, 22, 33]
+#################################
+a = [1,2,3]
+b = [4,5,6]
+c = (a,b)
+e = copy.deepcopy(c)
+a.append(4)
+c[0]
+Out[56]: [1, 2, 3, 4]
+e[0]
+Out[57]: [1, 2, 3]
+###################################
+a = [1,2,3]
+b = [4,5,6]
+c = [a,b]#列表可变
+e = copy.copy(c)
+a.append(4)
+c[0]
+Out[63]: [1, 2, 3, 4]
+e[0]
+Out[64]: [1, 2, 3, 4]
+id(c)
+Out[65]: 72555784
+id(e)
+Out[66]: 72686472
+###############################
+a = [1,2,3]
+b = [4,5,6]
+c = (a,b)  #元组不可变
+e = copy.copy(c)
+id(c)
+Out[71]: 71012552
+id(e)
+Out[72]: 71012552
+a.append(4)
+a
+Out[74]: [1, 2, 3, 4]
+c[0]
+Out[75]: [1, 2, 3, 4]
+e[0]
+Out[76]: [1, 2, 3, 4]
+
+
+
