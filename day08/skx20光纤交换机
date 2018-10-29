@@ -1,0 +1,277 @@
+%% Invalid input detected at '^' marker.
+X670G2-72x.1 # show  configuration 
+#
+# Module devmgr configuration.
+#
+configure sys-recovery-level switch reset
+
+#
+# Module vlan configuration.
+#
+configure vlan default delete ports all
+configure vr VR-Default delete ports 1-72
+configure vr VR-Default add ports 1-72
+configure ports 1 auto off speed 10000 duplex full 
+configure ports 2 auto off speed 10000 duplex full 
+configure ports 3 auto off speed 10000 duplex full 
+configure ports 4 auto off speed 10000 duplex full 
+configure ports 5 auto off speed 10000 duplex full 
+configure ports 6 auto off speed 10000 duplex full 
+configure ports 7 auto off speed 10000 duplex full 
+configure ports 8 auto off speed 10000 duplex full 
+configure ports 9 auto off speed 10000 duplex full 
+configure ports 10 auto off speed 10000 duplex full 
+configure ports 11 auto off speed 10000 duplex full 
+configure ports 12 auto off speed 10000 duplex full 
+configure ports 13 auto off speed 10000 duplex full 
+configure ports 14 auto off speed 10000 duplex full 
+configure ports 15 auto off speed 10000 duplex full 
+configure ports 16 auto off speed 10000 duplex full 
+configure ports 17 auto off speed 10000 duplex full 
+configure ports 18 auto off speed 10000 duplex full 
+configure ports 19 auto off speed 10000 duplex full 
+configure ports 20 auto off speed 10000 duplex full 
+configure ports 21 auto off speed 10000 duplex full 
+configure ports 22 auto off speed 10000 duplex full 
+configure ports 23 auto off speed 10000 duplex full 
+configure ports 24 auto off speed 10000 duplex full 
+configure ports 25 auto off speed 10000 duplex full 
+configure ports 26 auto off speed 10000 duplex full 
+configure ports 27 auto off speed 10000 duplex full 
+configure ports 28 auto off speed 10000 duplex full 
+configure ports 29 auto off speed 10000 duplex full 
+configure ports 30 auto off speed 10000 duplex full 
+configure ports 31 auto off speed 10000 duplex full 
+configure ports 32 auto off speed 10000 duplex full 
+configure ports 33 auto off speed 10000 duplex full 
+configure ports 34 auto off speed 10000 duplex full 
+configure ports 35 auto off speed 10000 duplex full 
+configure ports 36 auto off speed 10000 duplex full 
+configure ports 37 auto off speed 10000 duplex full 
+configure ports 38 auto off speed 10000 duplex full 
+configure ports 39 auto off speed 10000 duplex full 
+configure ports 40 auto off speed 10000 duplex full 
+configure ports 41 auto off speed 10000 duplex full 
+configure ports 42 auto off speed 10000 duplex full 
+configure ports 43 auto off speed 10000 duplex full 
+configure ports 44 auto off speed 10000 duplex full 
+configure ports 45 auto off speed 10000 duplex full 
+configure ports 46 auto off speed 10000 duplex full 
+configure ports 47 auto off speed 10000 duplex full 
+configure ports 48 auto off speed 10000 duplex full 
+configure ports 49 auto off speed 10000 duplex full 
+configure ports 50 auto off speed 10000 duplex full 
+configure ports 51 auto off speed 10000 duplex full 
+configure ports 52 auto off speed 10000 duplex full 
+configure ports 53 auto off speed 10000 duplex full 
+configure ports 54 auto off speed 10000 duplex full 
+configure ports 55 auto off speed 10000 duplex full 
+configure ports 56 auto off speed 10000 duplex full 
+configure ports 57 auto off speed 10000 duplex full 
+configure ports 58 auto off speed 10000 duplex full 
+configure ports 59 auto off speed 10000 duplex full 
+configure ports 60 auto off speed 10000 duplex full 
+configure ports 61 auto off speed 10000 duplex full 
+configure ports 62 auto off speed 10000 duplex full 
+configure ports 63 auto off speed 10000 duplex full 
+configure ports 64 auto off speed 10000 duplex full 
+configure ports 65 auto off speed 10000 duplex full 
+configure ports 66 auto off speed 10000 duplex full 
+configure ports 67 auto off speed 10000 duplex full 
+configure ports 68 auto off speed 10000 duplex full 
+configure ports 69 auto off speed 10000 duplex full 
+configure ports 70 auto off speed 10000 duplex full 
+configure ports 71 auto off speed 10000 duplex full 
+configure ports 72 auto off speed 10000 duplex full 
+configure vlan Default add ports 1-72 untagged  
+configure vlan Mgmt ipaddress 192.168.10.4 255.255.255.0
+
+#
+# Module fdb configuration.
+#
+
+#
+# Module rtmgr configuration.
+#
+
+#
+# Module mcmgr configuration.
+#
+
+#
+# Module aaa configuration.
+#
+
+#
+# Module acl configuration.
+#
+
+
+
+
+#
+# Module bfd configuration.
+#
+
+#
+# Module ces configuration.
+#
+
+#
+# Module cfgmgr configuration.
+#
+
+#
+# Module dosprotect configuration.
+#
+
+#
+# Module dot1ag configuration.
+#
+
+#
+# Module eaps configuration.
+#
+
+#
+# Module edp configuration.
+#
+
+#
+# Module elrp configuration.
+#
+
+#
+# Module ems configuration.
+#
+
+#
+# Module epm configuration.
+#
+
+#
+# Module erps configuration.
+#
+
+#
+# Module esrp configuration.
+#
+
+#
+# Module ethoam configuration.
+#
+
+#
+# Module etmon configuration.
+#
+
+#
+# Module hal configuration.
+#
+
+#
+# Module idMgr configuration.
+#
+
+#
+# Module ipSecurity configuration.
+#
+
+#
+# Module ipfix configuration.
+#
+
+#
+# Module lldp configuration.
+#
+
+#
+# Module mrp configuration.
+#
+
+#
+# Module msdp configuration.
+#
+
+#
+# Module netLogin configuration.
+#
+
+#
+# Module netTools configuration.
+#
+
+#
+# Module ntp configuration.
+#
+
+#
+# Module ospf configuration.
+#
+
+#
+# Module ospfv3 configuration.
+#
+
+
+#
+# Module pim configuration.
+#
+
+#
+# Module poe configuration.
+#
+
+#
+# Module rip configuration.
+#
+
+#
+# Module ripng configuration.
+#
+
+#
+# Module snmpMaster configuration.
+#
+
+#
+# Module stp configuration.
+#
+configure mstp region 0004969a1e04
+configure stpd s0 delete vlan default ports all
+disable stpd s0 auto-bind vlan default
+enable stpd s0 auto-bind vlan Default
+
+#
+# Module synce configuration.
+#
+
+#
+# Module techSupport configuration.
+#
+debug tech-support configure max-collectors 2
+
+#
+# Module telnetd configuration.
+#
+
+#
+# Module tftpd configuration.
+#
+
+#
+# Module thttpd configuration.
+#
+enable web http
+
+#
+# Module vmt configuration.
+#
+
+#
+# Module vrrp configuration.
+#
+
+#
+# Module vsm configuration.
+#
