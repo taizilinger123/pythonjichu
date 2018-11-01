@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 class Test(object):
     def __init__(self):
-        self.__num = 100
+        self.__num = 100   #子类不能继承，外面也不能更改__num
 
     def setNum(self, newNum):
         self.__num = newNum
