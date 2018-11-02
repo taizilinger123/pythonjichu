@@ -94,7 +94,12 @@ label kickstart-7.5
   menu label ^KickStart Install CentOS Linux 7.5
   menu default
   kernel images/centos-7.5/vmlinuz
-  append ks=http://192.168.10.1/ks.cfg initrd=images/centos-7.5/initrd.img
+  append ks=http://192.168.10.1/ks-75.cfg initrd=images/centos-7.5/initrd.img
+ 
+label centos-7.5
+  menu label ^Install CentOS Linux 7.5
+  kernel images/centos-7.5/vmlinuz
+  append initrd=images/centos-7.4/initrd.img ip=dhcp inst.repo=http://192.168.10.1/repo/centos/7.5.1804/os/x86_64/
 
 label centos-7.4
   menu label ^Install CentOS Linux 7.4
@@ -171,6 +176,64 @@ menu end
 [root@mlt-ace pxelinux.cfg]# cd  /var/www/html
 [root@mlt-ace html]# ls
 ks.cfg  ks-icl.cfg  repo  software
+
+[root@mlt-ace html]# cp  ks.cfg   ks-75.cfg
+[root@mlt-ace html]# cat  ks-75.cfg
+#platform=x86, AMD64, or Intel EM64T
+#version=DEVEL
+# Install OS instead of upgrade
+install
+# Keyboard layouts
+keyboard 'us'
+# Root password
+rootpw --iscrypted $1$akJ8T0bj$Eiuls3j0NXxcscrXa8KUu.
+# Use network installation
+url --url="http://192.168.10.1/repo/centos/7.5.1804/os/x86_64/"
+# System language
+lang en_US
+# Firewall configuration
+firewall --disabled
+# System authorization information
+auth  --useshadow  --passalgo=sha512
+# Use text mode install
+text
+# SELinux configuration
+selinux --disabled
+# Do not configure the X Window System
+skipx
+
+# Network information
+network  --bootproto=dhcp --device=eno1 --activate
+network  --bootproto=dhcp --device=eno2 --activate
+network  --bootproto=dhcp --device=enp61s0f0 --activate
+network  --bootproto=dhcp --device=enp61s0f1 --activate
+# Reboot after installation
+reboot
+# System timezone
+timezone Asia/Shanghai
+# System bootloader configuration
+bootloader --location=mbr
+autopart --type=lvm
+# Clear the Master Boot Record
+zerombr
+# Partition clearing information
+clearpart --all --initlabel
+
+# Packages
+%packages
+@^minimal
+@core
+kexec-tools
+@development
+@X Window System
+vim
+
+%end
+
+%addon com_redhat_kdump --enable --reserve-mb="auto"
+
+%end
+
 [root@mlt-ace html]# cat  ks.cfg
 #platform=x86, AMD64, or Intel EM64T
 #version=DEVEL
@@ -384,6 +447,11 @@ set timeout=60
 search --no-floppy --set=root -l 'CentOS 7 x86_64'
 
 ### BEGIN /etc/grub.d/10_linux ###
+menuentry 'KickStart Install CentOS Linux 7.5' --class fedora --class gnu-linux --class gnu --class os {
+	linuxefi (tftp)/pxelinux/images/centos-7.5/vmlinuz inst.ks=http://192.168.10.1/ks-75.cfg ip=dhcp
+	initrdefi (tftp)/pxelinux/images/centos-7.5/initrd.img
+}
+
 menuentry 'KickStart Install CentOS Linux 7.4' --class fedora --class gnu-linux --class gnu --class os {
 	linuxefi (tftp)/pxelinux/images/centos-7.4/vmlinuz inst.ks=http://192.168.10.1/ks.cfg ip=dhcp
 	initrdefi (tftp)/pxelinux/images/centos-7.4/initrd.img
@@ -392,6 +460,11 @@ menuentry 'KickStart Install CentOS Linux 7.4' --class fedora --class gnu-linux 
 menuentry 'KickStart Install CentOS Linux 7.3' --class fedora --class gnu-linux --class gnu --class os {
 	linuxefi (tftp)/pxelinux/images/centos-7.3/vmlinuz inst.ks=http://192.168.10.1/ks.cfg ip=dhcp modprobe.blacklist=ast quiet
 	initrdefi (tftp)/pxelinux/images/centos-7.3/initrd.img
+}
+
+menuentry 'Install CentOS Linux 7.5' --class fedora --class gnu-linux --class gnu --class os {
+	linuxefi (tftp)/pxelinux/images/centos-7.5/vmlinuz inst.repo=http://192.168.10.1/repo/centos/7.5.1804/os/x86_64/ ip=dhcp
+	initrdefi (tftp)/pxelinux/images/centos-7.5/initrd.img
 }
 
 menuentry 'Install CentOS Linux 7.4' --class fedora --class gnu-linux --class gnu --class os {
