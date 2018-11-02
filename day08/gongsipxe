@@ -99,7 +99,7 @@ label kickstart-7.5
 label centos-7.5
   menu label ^Install CentOS Linux 7.5
   kernel images/centos-7.5/vmlinuz
-  append initrd=images/centos-7.4/initrd.img ip=dhcp inst.repo=http://192.168.10.1/repo/centos/7.5.1804/os/x86_64/
+  append initrd=images/centos-7.5/initrd.img ip=dhcp inst.repo=http://192.168.10.1/repo/centos/7.5.1804/os/x86_64/
 
 label centos-7.4
   menu label ^Install CentOS Linux 7.4
@@ -171,7 +171,12 @@ label returntomain
 
 menu end
 
-
+cd /var/lib/tftpboot/pxelinux/images/
+mkdir centos-7.5
+cd centos-7.5/
+cp /var/www/html/repo/centos/7.5.1804/os/x86_64/isolinux/initrd.img ./
+cp /var/www/html/repo/centos/7.5.1804/os/x86_64/isolinux/memtest ./
+cp /var/www/html/repo/centos/7.5.1804/os/x86_64/isolinux/vmlinuz ./
 
 [root@mlt-ace pxelinux.cfg]# cd  /var/www/html
 [root@mlt-ace html]# ls
