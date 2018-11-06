@@ -33,31 +33,10 @@ p1.run()#虽然p1对象中run属性已经指向了11行的函数，但是这句�
 #
 # p1.run = run
 # p1.run()
-# Traceback(most
-# recent
-# call
-# last):
-# File
-# "E:\python35\lib\site-packages\IPython\core\interactiveshell.py", line
-# 2961, in run_code
-# exec(code_obj, self.user_global_ns, self.user_ns)
-# File
-# "<ipython-input-139-38e460692d0e>", line
-# 1, in < module >
-# p1.run()
 # TypeError: run()
-# missing
-# 1
-# required
-# positional
-# argument: 'self'
+# missing 1 required positional argument: 'self'
 # import types
-#
 # help(types.MethodType)
-# Help
-# on
-#
-#
 # class method in module builtins:
 #     class method(object)
 #         | method(function, instance)
@@ -126,63 +105,20 @@ p1.run()#虽然p1对象中run属性已经指向了11行的函数，但是这句�
 #         | __new__(*args, **kwargs)
 #         from builtins.type
 #         | Create and
-#         return a
-#         new
-#         object.See
-#         help(type)
-#         for accurate signature.
+#         return a new object.See  help(type) for accurate signature.
 #             |
 #             | __reduce__(...)
 #             | helper
-#             for pickle
-#                 |
-#                 | __repr__(self, /)
-#                 | Return
-#                 repr(self).
-#                 |
-#                 | __setattr__(self, name, value, /)
-#                 | Implement
-#                 setattr(self, name, value).
-#                 |
-#                 | ----------------------------------------------------------------------
-#                 | Data
-#                 descriptors
-#                 defined
-#                 here:
-#                 |
-#                 | __func__
-#                 | the
-#                 function( or other
-#                 callable) implementing
-#                 a
-#                 method
-#                 |
-#                 | __self__
-#                 | the
-#                 instance
-#                 to
-#                 which
-#                 a
-#                 method is bound
+
 #         p1
-#         Out[142]: < __main__.P
-#         at
-#         0x455d128 >
+#         Out[142]: < __main__.P  at  0x455d128 >
 #         types.MethodType(run, p1)
-#         Out[143]: < bound
-#         method
-#         run
-#         of < __main__.P
-#         object
-#         at
-#         0x000000000455D128 >>
+#         Out[143]: < bound  method run  of < __main__.P  object  at 0x000000000455D128 >>
 #         p1.run = types.MethodType(run, p1)
 #         p1.run()
 #         ----p1在跑 - --
 #         p1
-#         Out[146]: < __main__.P
-#         at
-#         0x455d128 >
+#         Out[146]: < __main__.P  at  0x455d128 >
 #
 #         def eat(self):
 #             print("----%s在吃----" % self.name)
@@ -258,5 +194,3 @@ p1.run()#虽然p1对象中run属性已经指向了11行的函数，但是这句�
 # p.name = "dfdfd"
 # p.age = 10  #必须是__slots__ = ("name")这里面有的，不然会报错
 # AttributeError: 'Person' object has no attribute 'age'
-
-
