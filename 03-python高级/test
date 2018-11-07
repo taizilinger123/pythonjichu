@@ -1,0 +1,116 @@
+class  Test(object):
+    pass
+t = Test()
+t()
+TypeError: 'Test' object is not callable
+
+__new__ __init__ __del__ __str__ __call__
+###############################################
+class Test(object):
+    def __call__(self):
+        print("---test---")
+
+t = Test()
+t()
+---test---
+###############################################
+class Test(object):
+    def __init__(self, func):
+        print("----初始化----")
+        print("func name is %s"%func.__name__)
+        self.__func = func
+    def __call__(self):
+        print("-----装饰器中的功能-------")
+        self.__func()
+
+def test():
+    print("-----test------")
+
+test()
+-----test------
+@Test
+def test():
+    print("-----test------")
+
+----初始化----
+func name is test
+test()
+-----装饰器中的功能-------
+-----test------
+##################################
+type(100)
+Out[13]: int
+type("hello")
+Out[14]: str
+class Person:
+    pass
+p1 = Person()
+type(p1)
+Out[17]: __main__.Person
+type(100)
+Out[18]: int
+class Test:
+    pass
+t1 = Test()
+type("Test2", (), {})
+Out[21]: __main__.Test2
+Test2 = type("Test2", (), {})
+t2 = Test2()
+type(t1)
+Out[24]: __main__.Test
+type(t2)
+Out[25]: __main__.Test2
+################################
+class Person:
+    nums = 0
+
+Person2 = type("person2", (), {"num":0})
+p1 = Person()
+p1.nums
+Out[31]: 0
+p2 = Person2()
+p2.num
+Out[33]: 0
+#################################
+def printNum(self):
+    print("----num-%d----"%self.num)
+
+Test3 = type("Test3", (), {"printNum":printNum})
+t1 = Test3()
+t1.num = 100
+t1.printNum()
+----num-100----
+class printNum2:
+    def printNum(self):
+        print("---num-%d---"%self.num)
+
+t2 = printNum2()
+t2.num = 100
+t2.printNum()
+---num-100---
+##################################
+class Animal:
+    def eat(self):
+        print("----eat----")
+
+class Dog(Animal):
+    pass
+wangcai = Dog()
+wangcai.eat()
+----eat----
+wangcai.eat
+Out[48]: <bound method Animal.eat of <__main__.Dog object at 0x00000000043DA940>>
+Cat = type("Cat", (Animal,), {})  #Animal继承了上面的Animal类
+xiaohuamao = Cat()
+xiaohuamao.eat()
+----eat----
+wangcai.__class__
+Out[53]: __main__.Dog
+xiaohuamao.__class__
+Out[55]: __main__.Cat
+Dog.__class__
+Out[56]: type
+Cat.__class__
+Out[57]: type
+type.__class__
+Out[58]: type
