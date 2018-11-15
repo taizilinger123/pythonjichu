@@ -1,0 +1,12 @@
+# ret = os.fork()
+# if ret==0:
+#     #子进程
+# else:
+#     #进程父
+#
+# p1 = Process(target=xxxx)
+# p1.start()
+#
+# pool = Pool(30)
+# pool.apply_async(xxxx)
+# #主进程一般用来等待，，，，真正的任务都在子进程中执行
