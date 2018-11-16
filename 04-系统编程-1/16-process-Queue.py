@@ -18,3 +18,9 @@ except:
 #推荐的⽅式， 先判断消息列队是否已满， 再写⼊
 if not q.full():
 	q.put_nowait("消息4")
+
+
+#读取消息时， 先判断消息列队是否为空， 再读取
+if not q.empty():
+	for i in range(q.qsize()):
+		print(q.get_nowait())
