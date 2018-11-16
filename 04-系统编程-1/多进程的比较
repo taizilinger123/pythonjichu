@@ -2,7 +2,7 @@
 # if ret==0:
 #     #子进程
 # else:
-#     #进程父
+#     #父进程
 #
 # p1 = Process(target=xxxx)
 # p1.start()
