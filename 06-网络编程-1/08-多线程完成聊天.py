@@ -19,9 +19,9 @@ destPort = 0             #下面返回数字就用0
 
 def main():
     
-    global udpSocket
-    global destIp
-    global destPort 
+    global udpSocket #下面用到就申明为global
+    global destIp    #下面用到就申明为global
+    global destPort  #下面用到就申明为global
 
     destIp = input("对方的ip:")   #返回字符串   
     destPort = int(input("对方的port:"))  #返回数字
