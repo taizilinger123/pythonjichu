@@ -13,9 +13,9 @@ def sendData():
         sendInfo = input("<<")
         udpSocket.sendto(sendInfo.encode("gb2312"), (destIp, destPort))
 
-udpSocket = None         #是返回对象
-destIp = ""              #返回字符串   
-destPort = 0             #返回数字
+udpSocket = None         #下面是返回对象就用None
+destIp = ""              #下面返回字符串就用""   
+destPort = 0             #下面返回数字就用0
 
 def main():
     
