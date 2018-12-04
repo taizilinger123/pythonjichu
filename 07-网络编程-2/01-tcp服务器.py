@@ -4,7 +4,7 @@ serverSocket = socket(AF_INET,SOCK_STREAM)
 
 serverSocket.bind(("",8899))
 
-srverSocket.listen(5)
+serverSocket.listen(5)
 
 print("-----1-----")
 clientSocket,clientInfo = serverSocket.accept()
