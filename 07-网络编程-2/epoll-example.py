@@ -28,18 +28,23 @@ while	True:
   epoll_list=epoll.poll()
   #对事件进⾏判断				
   for fd,events in epoll_list:
-	#print	fd								    #print events
+	#print  fd 
+        #print events
         #如果是socket创建的套接字被激活								
-	if fd == s.fileno():								conn,addr=s.accept()
+	if fd == s.fileno():								
+            conn,addr=s.accept()
             print('有新的客户端到来%s'%str(addr))
             #将conn和addr信息分别保存起来				
-            connections[conn.fileno()] = conn						addresses[conn.fileno()] = addr
+            connections[conn.fileno()] = conn						
+            addresses[conn.fileno()] = addr
             #向epoll中注册连接socket的可读事件				
             epoll.register(conn.fileno(), select.EPOLLIN | select.EPOLLET
         elif events == select.EPOLLIN:												
 	     #从激活fd上接收												
 	     recvData =	connections[fd].recv(1024)
-         if  len(recvData)>0:								   print('recv:%s'%recvData)						 else:																
+         if  len(recvData)> 0:
+               print('recv:%s'%recvData)						
+         else:																
                #从epoll中移除该连接fd					
                epoll.unregister(fd)
                #server侧主动关闭该连接fd		
