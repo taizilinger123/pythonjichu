@@ -1,0 +1,24 @@
+In [1]: import  sys
+
+In [2]: sys.stdin
+Out[2]: <_io.TextIOWrapper name='<stdin>' mode='r' encoding='UTF-8'>
+
+In [3]: sys.stdout
+Out[3]: <_io.TextIOWrapper name='<stdout>' mode='w' encoding='UTF-8'>
+
+In [4]: sys.stderr
+Out[4]: <_io.TextIOWrapper name='<stderr>' mode='w' encoding='UTF-8'>
+
+In [5]: sys.stdin.fileno()
+Out[5]: 0
+
+In [6]: sys.stdout.fileno()
+Out[6]: 1
+
+In [7]: sys.stderr.fileno()
+Out[7]: 2
+
+In [8]: f = open("xxx.txt","w")
+
+In [9]: f.fileno()
+Out[9]: 6
