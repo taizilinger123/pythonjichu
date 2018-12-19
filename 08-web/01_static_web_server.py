@@ -29,7 +29,7 @@ if  __name__ == "__main__":
 
     while True:
         client_socket, client_address = server_socket.accept()
-        print("[%s,%s]用户连接上了" %(client_address[0],client_address[1]))
+        # print("[%s,%s]用户连接上了" %(client_address[0],client_address[1]))
         #ctrl+d复制当前行到下一行
         print("[%s,%s]用户连接上了" %client_address)
         # 光标放到hand_client上按alt+enter就会自动创建函数
