@@ -53,23 +53,33 @@ class HTTPServer(object):
             print(line)
 
         # 解析请求报文
-        # 'GET /HTTP/1.1'
+        # 'GET / HTTP/1.1'
         if len(request_lines)>0:
             request_start_line = request_lines[0]
             print("*" * 10)
             print(request_start_line.decode("utf-8"))
             file_name = re.match(r"\w+ +(/[^ ]*) ", request_start_line.decode("utf-8")).group(1)
+            method = re.match(r"(\w)+ +/[^ ]* ", request_start_line.decode("utf-8")).group(1)
         else:
             request_start_line = b""
             file_name = ""
         # 提取用户请求的文件名
 
 
-        # "/time.py"
+        # "/ctime.py"
+        #  "/sayhello.py"
         if file_name.endswith(".py"):
-            m = __import__(file_name[1:-3])
-            env = {}
-            response_body = m.application(env, self.start_response)
+            try:
+                m = __import__(file_name[1:-3])
+            except  Exception:
+                self.response_headers = "HTTP/1.1 404 Not Found\r\n"
+                response_body = "not found"
+            else:
+                env = {
+                    "PATH_INFO": file_name,
+                    "METHOD": method
+                }
+                response_body = m.application(env, self.start_response)
             response = self.response_headers + "\r\n" + response_body
         else:
             if "/" == file_name:
