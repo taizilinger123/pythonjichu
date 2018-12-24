@@ -87,10 +87,20 @@ def main():
         sys.exit("python MyWebServer.py Module:app")
     # python MyWebServer.py  MyWebFramework:app
     module_name, app_name = sys.argv[1].split(":")
+    print("111111111111")
+    print(module_name)
+    print("111111111111")
+    print(app_name)
     #module_name = "MyWebFrameWork"
+    print("2222222222222")
     #app_name = "app"
     m = __import__(module_name) #动态导入模块
+    print(m)
+    print("5555555555555555555")
     app = getattr(m, app_name) #获取前面m导入的模块里面的Application类
+    print("3333333333333333333")
+    print(app)
+    print("4444444444444444444")
     http_server = HTTPServer(app)
     # http_server.set_port
     http_server.bind(8000)
@@ -99,3 +109,6 @@ def main():
 
 if  __name__ == "__main__":
     main()
+#python MyWebServer.py  MyWebFramework:app
+#python3  MyWebServer.py  DjangoWeb:django_app
+#http://sige1:8000/static/index.html
