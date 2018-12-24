@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #coding:utf-8
 
 import time
@@ -17,3 +18,24 @@ def application(env, start_response):
      start_response(status, headers)
 
      return time.ctime()
+=======
+#coding:utf-8
+
+import time
+
+# "/ctime.py?timezone=e8"
+# "/ctime.py?timezone=e1"
+
+def application(env, start_response):
+     # env.get("Method")
+     # env.get("PATH_INFO")
+     # env.get("QUERY_STRING")
+
+     status = "200 OK"
+     headers = [
+         ("Content-Type","text/plain")
+     ]
+     start_response(status, headers)
+
+     return time.ctime()
+>>>>>>> bf82e81a9c06a69b93322ca3c82c6c3ccc48fe88
