@@ -63,7 +63,7 @@ def say_hello(env, start_response):
     ]
     start_response(status, headers)
 
-    return "hello itcast"
+    return "hello django"
 
 def say_haha(env, start_response):
     status = "200 OK"
@@ -80,7 +80,7 @@ urls = [
     ("/sayhello", say_hello),
     ("/sayhaha", say_haha)
 ]
-app = Application(urls)
+django_app = Application(urls)
 
 # if __name__ == "__main__":
 #     urls = [
@@ -99,6 +99,4 @@ app = Application(urls)
 # http://127.0.0.1:8000/sayhaha
 # http://127.0.0.1:8000/ctime
 # http://127.0.0.1:8000/static/index.html
-# pycharm远程上传文件到Linux:https://www.cnblogs.com/jtlin/p/5970163.html
-# 使用Pycharm给Python程序传递参数:https://blog.csdn.net/counte_rking/article/details/78837028
 

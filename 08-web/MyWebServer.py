@@ -83,7 +83,15 @@ class HTTPServer(object):
 
 def main():
     sys.path.insert(1, WSGI_PYTHON_DIR)
-    http_server = HTTPServer()
+    if len(sys.argv)<2:
+        sys.exit("python MyWebServer.py Module:app")
+    # python MyWebServer.py  MyWebFramework:app
+    module_name, app_name = sys.argv[1].split(":")
+    #module_name = "MyWebFrameWork"
+    #app_name = "app"
+    m = __import__(module_name) #动态导入模块
+    app = getattr(m, app_name) #获取前面m导入的模块里面的Application类
+    http_server = HTTPServer(app)
     # http_server.set_port
     http_server.bind(8000)
     #看bind函数的实现方法，先把鼠标放到bind里，然后按住ctrl,再鼠标左键点击bind字体就自动跳转到方法的实现了，或者直接ctrl+b也可以
