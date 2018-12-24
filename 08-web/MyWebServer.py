@@ -11,9 +11,11 @@ WSGI_PYTHON_DIR = "./wsgipython"
 
 class HTTPServer(object):
     """"""
-    def __init__(self):
+    def __init__(self,application):
+        """构造函数，application指的是框架的app"""
         self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.app = application
 
     def start(self):
         self.server_socket.listen(128)
@@ -45,47 +47,30 @@ class HTTPServer(object):
         request_data = client_socket.recv(1024)
         print("request data:", request_data)
         request_lines = request_data.splitlines()
+        print(request_lines)
+        #request_lines = request_data
         for line in request_lines:
             print(line)
 
-
         # 解析请求报文
-        # 'GET /HTTP/1.1'
-        request_start_line = request_lines[0]
-        # 提取用户请求的文件名
-        print("*" * 10)
-        print(request_start_line.decode("utf-8"))
-        file_name = re.match(r"\w+ +(/[^ ]*) ", request_start_line.decode("utf-8")).group(1)
-
-
-        # "/time.py"
-        if file_name.endswith(".py"):
-            m = __import__(file_name[1:-3])
-            env = {}
-            response_body = m.application(env, self.start_response)
-            response = self.response_headers + "\r\n" + response_body
+        # 'GET / HTTP/1.1'
+        if len(request_lines)>0:
+            request_start_line = request_lines[0]
+            print("*" * 10)
+            print(request_start_line.decode("utf-8"))
+            file_name = re.match(r"\w+ +(/[^ ]*) ", request_start_line.decode("utf-8")).group(1)
+            method = re.match(r"(\w)+ +/[^ ]* ", request_start_line.decode("utf-8")).group(1)
         else:
-            if "/" == file_name:
-                file_name = "/index.html"
-
-            # 打开文件，读取内容
-            try:
-                file = open(HTML_ROOT_DIR + file_name, "rb")
-            except IOError:
-                response_start_line = "HTTP/1.1 404 Not Found\r\n"
-                response_headers = "Server:My server\r\n"
-                response_body = "The file is not found!"
-            else:
-                file_data = file.read()
-                file.close()
-
-                # 构造响应数据
-                response_start_line = "HTTP/1.1 200 OK\r\n"
-                response_headers = "Server:My server\r\n"
-                response_body = file_data.decode("utf-8")
-
-            response = response_start_line + response_headers + "\r\n" + response_body
-            print("response data:", response)
+            request_start_line = b""
+            file_name = ""
+        # 提取用户请求的文件名
+        method = ""
+        env = {
+                "PATH_INFO": file_name,
+                "METHOD": method
+             }
+        response_body = self.app(env, self.start_response)
+        response = self.response_headers + "\r\n" + response_body
 
         # 向客户端返回响应数据  ###注释的#和后面的字体之间留一个空格
         client_socket.send(bytes(response, "utf-8"))  # python3 bytes
@@ -98,7 +83,15 @@ class HTTPServer(object):
 
 def main():
     sys.path.insert(1, WSGI_PYTHON_DIR)
-    http_server = HTTPServer()
+    if len(sys.argv)<2:
+        sys.exit("python MyWebServer.py Module:app")
+    # python MyWebServer.py  MyWebFramework:app
+    module_name, app_name = sys.argv[1].split(":")
+    #module_name = "MyWebFrameWork"
+    #app_name = "app"
+    m = __import__(module_name) #动态导入模块
+    app = getattr(m, app_name) #获取前面m导入的模块里面的Application类
+    http_server = HTTPServer(app)
     # http_server.set_port
     http_server.bind(8000)
     #看bind函数的实现方法，先把鼠标放到bind里，然后按住ctrl,再鼠标左键点击bind字体就自动跳转到方法的实现了，或者直接ctrl+b也可以
