@@ -1,0 +1,117 @@
+In [23]: import re
+
+In [24]: pattern = "itcast"
+
+In [25]: s = "itheima"
+
+In [26]: re.match(pattern, s)
+
+In [28]: s = "itcast"
+
+In [29]: re.match(pattern, s)
+Out[29]: <_sre.SRE_Match at 0x69d9fa8>
+
+In [30]: result = re.match(pattern,s)
+
+In [31]: dir(result)
+Out[31]:
+['__class__',
+ '__copy__',
+ '__deepcopy__',
+ '__delattr__',
+ '__doc__',
+ '__format__',
+ '__getattribute__',
+ '__hash__',
+ '__init__',
+ '__new__',
+ '__reduce__',
+ '__reduce_ex__',
+ '__repr__',
+ '__setattr__',
+ '__sizeof__',
+ '__str__',
+ '__subclasshook__',
+ 'end',
+ 'endpos',
+ 'expand',
+ 'group',
+ 'groupdict',
+ 'groups',
+ 'lastgroup',
+ 'lastindex',
+ 'pos',
+ 're',
+ 'regs',
+ 'span',
+ 'start',
+ 'string']
+
+In [32]: result.group()
+Out[32]: 'itcast'
+
+In [33]: result = re.match("itcast","itcastitheima")
+
+In [34]: result.group()
+Out[34]: 'itcast'
+In [35]: re.match(".", "i")
+Out[35]: <_sre.SRE_Match at 0x6a131e0>
+
+In [36]: re.match(".", "ifdsfwe")
+Out[36]: <_sre.SRE_Match at 0x6a13560>
+
+In [37]: re.match(".", "\n")
+
+In [38]: re.match("...", "ab")
+
+In [39]: re.match("...", "abc")
+Out[39]: <_sre.SRE_Match at 0x6a135d0>
+
+In [40]: re.match("...", "abcd")
+Out[40]: <_sre.SRE_Match at 0x6a136b0>
+In [41]: re.match("\d", "1")
+Out[41]: <_sre.SRE_Match at 0x6a13720>
+
+In [42]: re.match("\d", "2")
+Out[42]: <_sre.SRE_Match at 0x6a136e8>
+
+In [43]: re.match("\d", "a")
+
+In [44]: re.match("\D", "a")
+Out[44]: <_sre.SRE_Match at 0x6a13800>
+
+In [45]: re.match("\s", " a")
+Out[45]: <_sre.SRE_Match at 0x6a13838>
+
+In [46]: re.match("\s", "\ta")
+Out[46]: <_sre.SRE_Match at 0x6a138a8>
+
+In [47]: re.match("\s", "\na")
+Out[47]: <_sre.SRE_Match at 0x6a13918>
+
+In [48]: re.match("\S", "\na")
+In [49]: re.match("\w","\na")
+
+In [50]: re.match("\w","-a")
+
+In [51]: re.match("\w","_a")
+Out[51]: <_sre.SRE_Match at 0x6a13a68>
+
+In [52]: re.match("\w","1a")
+Out[52]: <_sre.SRE_Match at 0x6a13aa0>
+
+In [53]: re.match("\W","1a")
+In [54]: re.match("\w\W", "1a")
+
+In [55]: re.match("1\d\d\d\d\d\d\d\d\d\d","12343")
+
+In [56]: re.match("1\d\d\d\d\d\d\d\d\d\d","18111111111")
+Out[56]: <_sre.SRE_Match at 0x6a13b80>
+
+In [57]: re.match("1\d\d\d\d\d\d\d\d\d\d","28111111111")
+
+In [58]: re.match("1\d\d\d\d\d\d\d\d\d\d","28111111111ahbdi")
+
+
+
+
