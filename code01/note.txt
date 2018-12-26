@@ -540,6 +540,43 @@ Out[31]: 's://rpic.douyucdn.cn/appCovers/2016/1\n1/13/1213973_201611131917_small
 
 In [32]: r_s.search(s).group()
 Out[32]: 'https://rpic.douyucdn.cn/appCovers/2016/1\n1/13/1213973_201611131917_small.jpg'
+
+In [8]: a = """sdfkhellolsdlfsdfiooefo:
+   ...: 877898989worldafdsf"""
+
+In [9]: b = re.findall('hello(.*?)world',a)
+
+In [10]: c = re.findall('hello(.*?)world',a,re.S)
+在字符串a中，包含换行符\n，在这种情况下，如果不使用re.S参数，则只在每一行内进行匹配，如果一行没有，就换下一行重新开始。
+而使用re.S参数以后，正则表达式会将这个字符串作为一个整体，在整体中进行匹配
+
+In [11]: print('b is', b)
+b is []
+
+In [12]: print('c is', c)
+
+c is ['lsdlfsdfiooefo:\n877898989']
+In [13]: re.match(r"A", "abc", re.I)
+re.I 忽略大小写
+Out[13]: <_sre.SRE_Match object; span=(0, 1), match='a'>
+
+In [14]: s="i am boy\nyou are girl\nhe is man"
+
+In [15]: re.findall(r"\w+$", s, re.M)
+re.M,将所有行的尾字母输出 multiple
+Out[15]: ['boy', 'girl', 'man']
+
+
+>>> import re
+>>> some_text = 'a,b,,,,c d'
+>>> reObj = re.compile('[, ]+') #直接转为正则表达式了
+>>> reObj.split(some_text) #调用上面的re.compile
+['a', 'b', 'c', 'd']
+
+>>> import re
+>>> some_text = 'a,b,,,,c d'
+>>> re.split('[, ]+',some_text)
+['a', 'b', 'c', 'd']
 -----------------------------------------------------------------------------------------------
 In [120]: s = "http://www.interoem.com/messageinfo.asp?id=35"
 
