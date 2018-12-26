@@ -373,6 +373,193 @@ In [44]: s = "<h2><h>itcast</h></h2>"
 
 In [45]: re.match(r"<(.+)><(.+)>.+</\2></\1>", s)
 Out[45]: <_sre.SRE_Match object; span=(0, 22), match='<h2><h>itcast</h></h2>'>
+In [46]: p = r"(\w+)@(163|126|gmail|qq)\.(com|cn|net)$"
+
+In [47]: r = re.match(p,"itcast@qq.com")
+
+In [48]: r.group()
+Out[48]: 'itcast@qq.com'
+
+In [49]: r.group(1)
+Out[49]: 'itcast'
+----------------------------------------------
+In [52]: s = "<html><h1>itcast</h1></html>"
+
+In [53]: re.match(r"<(.+)><(.+)>.+</\2></\1>", s)
+Out[53]: <_sre.SRE_Match object; span=(0, 28), match='<html><h1>itcast</h1></html>'>
+
+In [54]: re.match(r"<(?P<key1>.+)><(?P<key2>.+)>.+</(?P=key2)></(?P=key1)>", s)
+Out[54]: <_sre.SRE_Match object; span=(0, 28), match='<html><h1>itcast</h1></html>'>
+
+In [55]: s = "<html><h1>itcast</h1></ht>"
+
+In [56]: re.match(r"<(?P<key1>.+)><(?P<key2>.+)>.+</(?P=key2)></(?P=key1)>", s)
+
+------------------------------------------------------------
+In [57]: s = "<html><h1>itcast</h1></html>"
+
+In [58]: re.search(r"itcast",s)
+Out[58]: <_sre.SRE_Match object; span=(10, 16), match='itcast'>
+
+In [59]: re.search(r"^itcast$",s)
+
+In [60]: re.search(r"^itcast",s)
+
+In [61]: s = "itcast</h1></html>"
+
+In [62]: re.search(r"^itcast",s)
+Out[62]: <_sre.SRE_Match object; span=(0, 6), match='itcast'>
+--------------------------------------------------
+In [65]: s = "itcast</h1></html>itheima</h1>"
+
+In [66]: re.search(r"\w+</h1>",s)
+Out[66]: <_sre.SRE_Match object; span=(0, 11), match='itcast</h1>'>
+
+In [67]: r = re.search(r"\w+</h1>",s)
+
+In [68]: r.group()
+Out[68]: 'itcast</h1>'
+
+In [69]: r = re.findall(r"\w+</h1>",s)
+
+In [70]: r
+Out[70]: ['itcast</h1>', 'itheima</h1>']
+-------------------------------------------------
+In [71]: re.sub(r"php", "python", "itcast python cpp php python php")
+Out[71]: 'itcast python cpp python python python'
+
+In [72]: re.sub(r"\d+", "50", "python=1000, php=0")
+Out[72]: 'python=50, php=50'
+
+In [73]: def replace(result):
+    ...:     print(result.group())
+    ...:     return "50"
+
+In [74]: re.sub(r"\d+", replace, "python=1000, php=0")
+1000
+0
+Out[74]: 'python=50, php=50'
+In [78]: def replace(result):
+    ...:     print(result.group())
+    ...:     r = int(result.group()) + 50
+    ...:     return str(r)
+    ...:
+    ...:
+
+In [79]: re.sub(r"\d+", replace, "python=1000, php=0")
+1000
+0
+Out[79]: 'python=1050, php=50'
+-------------------------------------------
+In [81]: s = """
+    ...: <div>
+    ...: <p>岗位职责：</p>
+    ...: <p>完成推荐算法、数据统计、接⼝、后台等服务器端相关⼯作</p>
+    ...: <p><br></p>
+    ...: <p>必备要求：</p>
+    ...: <p>良好的⾃我驱动⼒和职业素养，⼯作积极主动、结果导向</p>
+    ...: <p>&nbsp;<br></p>
+    ...: <p>技术要求：</p>
+    ...: <p>1、⼀年以上 Python 开发经验，掌握⾯向对象分析和设计，了解设计模式</p
+    ...: >
+    ...: <p>2、掌握HTTP协议，熟悉MVC、MVVM等概念以及相关WEB开发框架</p>
+    ...: <p>3、掌握关系数据库开发设计，掌握 SQL，熟练使⽤ MySQL/PostgreSQL 中
+    ...: 的⼀种<br></p>
+    ...: <p>4、掌握NoSQL、MQ，熟练使⽤对应技术解决⽅案</p>
+    ...: <p>5、熟悉 Javascript/CSS/HTML5，JQuery、React、Vue.js</p>
+    ...: <p>&nbsp;<br></p>
+    ...: <p>加分项：</p>
+    ...: <p>⼤数据，数理统计，机器学习，sklearn，⾼性能，⼤并发。</p>
+    ...: </div>
+    ...: """
+In [82]: re.sub(r"<.+>", "",s)
+Out[82]: '\n\n\n\n\n\n\n\n\n1、⼀年以上 Python 开发经验，掌握⾯向对象分析和设计，了解设计
+模式</p\n>\n\n3、掌握关系数据库开发设计，掌握 SQL，熟练使⽤ MySQL/PostgreSQL 中\n的⼀种\n\
+n\n\n\n\n\n'
+
+In [83]: re.sub(r"<\w+>", "",s)
+Out[83]: '\n\n岗位职责：</p>\n完成推荐算法、数据统计、接⼝、后台等服务器端相关⼯作</p>\n</p>\n必备要求：</p>\n良好的⾃我驱动⼒和职业素养，⼯作积极主动
+、结果导向</p>\n&nbsp;</p>\n技术要求：</p>\n1、⼀年以上 Python 开发经验，掌握⾯向对象分析和设计，了解设计模式</p\n>\n2、掌握HTTP协议，熟悉MVC、MVVM等概
+念以及相关WEB开发框架</p>\n3、掌握关系数据库开发设计，掌握 SQL，熟练使⽤ MySQL/PostgreSQL 中\n的⼀种</p>\n4、掌握NoSQL、MQ，熟练使⽤对应技术解决⽅案</p
+>\n5、熟悉 Javascript/CSS/HTML5，JQuery、React、Vue.js</p>\n&nbsp;</p>\n加分项：</p>\n⼤数据，数理统计，机器学习，sklearn，⾼性能，⼤并发。</p>\n</div>
+\n'
+
+In [84]: re.sub(r"</?\w+>", "",s)
+Out[84]: '\n\n岗位职责：\n完成推荐算法、数据统计、接⼝、后台等服务器端相关⼯作\n\n必备要求：\n良好的⾃我驱动⼒和职业素养，⼯作积极主动、结果导向\n&nbsp
+;\n技术要求：\n1、⼀年以上 Python 开发经验，掌握⾯向对象分析和设计，了解设计模式</p\n>\n2、掌握HTTP协议，熟悉MVC、MVVM等概念以及相关WEB开发框架\n3、掌
+握关系数据库开发设计，掌握 SQL，熟练使⽤ MySQL/PostgreSQL 中\n的⼀种\n4、掌握NoSQL、MQ，熟练使⽤对应技术解决⽅案\n5、熟悉 Javascript/CSS/HTML5，JQuery
+、React、Vue.js\n&nbsp;\n加分项：\n⼤数据，数理统计，机器学习，sklearn，⾼性能，⼤并发。\n\n'
+-------------------------------------------
+In [86]: s = "itcast:php,python,cpp-java"
+
+In [87]: re.split(r":|,|-", s)
+Out[87]: ['itcast', 'php', 'python', 'cpp', 'java']
+---------------------------------------------------
+In [90]: s="This is a number 234-235-22-423"
+
+In [91]: r = re.match(r".+(\d+-\d+-\d+-\d+)", s)
+
+In [92]: r.group(1)
+Out[92]: '4-235-22-423'
+
+In [93]: r = re.match(r"(.+)(\d+-\d+-\d+-\d+)", s)
+
+In [94]: r.groups()
+Out[94]: ('This is a number 23', '4-235-22-423')
+
+In [95]: r = re.match(r"(.+?)(\d+-\d+-\d+-\d+)", s) #?关闭贪婪模式
+
+In [96]: r.groups()
+Out[96]: ('This is a number ', '234-235-22-423')
+In [97]: re.match(r"aa(\d+)","aa2343ddd").group(1)
+Out[97]: '2343'
+
+In [98]: re.match(r"aa(\d+?)","aa2343ddd").group(1)
+Out[98]: '2'
+
+In [99]: re.match(r"aa(\d+)ddd","aa2343ddd").group(1)
+Out[99]: '2343'
+
+In [100]: re.match(r"aa(\d+?)ddd","aa2343ddd").group(1)
+Out[100]: '2343'
+---------------------------------------------
+In [33]:  s = '<img data-original="https://rpic.douyucdn.cn/appCovers/2016/1/13/1213973_201611131917_small.jpg" src="https://rpic.douyucdn.cn/appCovers/2016/11/13/1213973_201611131917_small.jpg" style="display: inline;">'
+
+In [34]: re.search(r"https.+?\.jpg" ,s).group()
+Out[34]: 'https://rpic.douyucdn.cn/appCovers/2016/1/13/1213973_201611131917_small.jpg'
+
+In [35]: re.search(r"https.+\.jpg" ,s).group()
+Out[35]: 'https://rpic.douyucdn.cn/appCovers/2016/1/13/1213973_201611131917_small.jpg" src="https://rpic.douyucdn.cn/appCovers/2016/11/13/1213973_201611131917_small.jpg'
+----------------------------------------------------------
+In [29]: s = '<img data-original="https://rpic.douyucdn.cn/appCovers/2016/1\n1/13/1213973_201611131917_small.jpg" src="https://rpic.douyuc\ndn.cn/appCovers/2016/11/13/1213973_201611131917_small.jpg" st\nyle="display: inline;">'
+
+In [30]: r_s = re.compile("http(.*?).jpg",re.M|re.S)
+
+In [31]: r_s.search(s).group(1)
+Out[31]: 's://rpic.douyucdn.cn/appCovers/2016/1\n1/13/1213973_201611131917_small'
+
+In [32]: r_s.search(s).group()
+Out[32]: 'https://rpic.douyucdn.cn/appCovers/2016/1\n1/13/1213973_201611131917_small.jpg'
+-----------------------------------------------------------------------------------------------
+In [120]: s = "http://www.interoem.com/messageinfo.asp?id=35"
+
+In [121]: re.sub(r"http://.+?/", "", s)
+Out[121]: 'messageinfo.asp?id=35'
+
+In [122]: re.sub(r"http://.+?/(.*)", "", s)
+Out[122]: ''
+
+In [123]: re.sub(r"(http://.+?/).*", lambda x:x.group(1), s)
+Out[123]: 'http://www.interoem.com/'
+
+In [124]: s = "hello world ha ha"
+
+In [125]: re.split(r" +", s)
+Out[125]: ['hello', 'world', 'ha', 'ha']
+
+In [126]: re.findall(r"\b[a-zA-Z]+\b", s)
+Out[126]: ['hello', 'world', 'ha', 'ha']
+
 
 
 
