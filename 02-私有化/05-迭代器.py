@@ -57,18 +57,18 @@
 # next(b)
 # Out[104]: 11
 -------------------------------------
-# def test():
+# def code01():
 #     print("----1----")
-# test()
+# code01()
 # ----1 - ---
-# test
+# code01
 # Out[107]: < function
-# __main__.test() >
-# b = test
+# __main__.code01() >
+# b = code01
 # b
 # Out[109]: < function
-# __main__.test() >
-# test()
+# __main__.code01() >
+# code01()
 # ----1 - ---
 # b()
 # ----1 - ---

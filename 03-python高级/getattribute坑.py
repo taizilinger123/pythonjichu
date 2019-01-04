@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 class Person(object):
     def __getattribute__(self, obj):
-        print("----test-----")
+        print("----code01-----")
         if obj.startswith("a"):
             return "haha"
         else:

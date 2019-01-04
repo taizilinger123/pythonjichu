@@ -15,7 +15,7 @@ def createNum():
 # a = createNum()
 # next(a)
 
-# from test import *
+# from code01 import *
 # createNum()
 # a = createNum()
 # next(a)

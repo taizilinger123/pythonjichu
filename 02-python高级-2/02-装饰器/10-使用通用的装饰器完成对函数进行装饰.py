@@ -11,7 +11,7 @@ def func(functionName):
 
 @func
 def  test():
-    print("----test-----")
+    print("----code01-----")
     return "haha"
 
 @func
@@ -23,7 +23,7 @@ def  test3(a):
     print("----test3---a=%d--"%a)
 
 ret = test()
-print("test return value is %s"%ret)
+print("code01 return value is %s"%ret)
 
 a = test2()
 print("test2 return value is %s"%a)

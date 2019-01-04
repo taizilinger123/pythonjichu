@@ -34,7 +34,7 @@ while True:
 
         #将一个字典，添加到列表中
         card_infors.append(new_infor)
-        #print(card_infors)#for test
+        #print(card_infors)#for code01
 
     elif num==2:
         pass

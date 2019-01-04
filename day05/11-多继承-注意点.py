@@ -15,7 +15,7 @@ class B(Base):
 
 class C(A,B):
     pass
-    # def  test(self):
+    # def  code01(self):
     #     print("-----C")
 
 c = C()

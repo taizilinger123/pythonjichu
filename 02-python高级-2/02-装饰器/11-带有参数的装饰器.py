@@ -17,7 +17,7 @@ def func_arg(arg):
 #3.使用@func对test进行装饰
 @func_arg("heihei")
 def  test():
-    print("----test----")
+    print("----code01----")
 
 #带有参数的装饰器，能够起到在运行时，有不同的功能
 @func_arg("haha")

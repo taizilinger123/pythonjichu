@@ -7,16 +7,16 @@ def  test():
 # a = 100
 # a
 # Out[113]: 100
-# import test
+# import code01
 #
-# test.test()
-# from test import *
+# code01.code01()
+# from code01 import *
 #
-# test()
+# code01()
 # a
 # Out[118]: 100
 #
-# def test():
+# def code01():
 #     b = 200
 #
 # globals
@@ -24,12 +24,12 @@ def  test():
 # globals() >
 # globals()
 #
-# def test():
+# def code01():
 #     a = 100
 #     b = 200
 #     print(locals())
 #
-# test()
+# code01()
 # {'a': 100, 'b': 200}
 # dir(__builtin__)
 # Out[124]:

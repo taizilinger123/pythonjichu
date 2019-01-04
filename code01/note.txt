@@ -596,13 +596,3 @@ Out[125]: ['hello', 'world', 'ha', 'ha']
 
 In [126]: re.findall(r"\b[a-zA-Z]+\b", s)
 Out[126]: ['hello', 'world', 'ha', 'ha']
-
-
-
-
-
-
-
-
-
-

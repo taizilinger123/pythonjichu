@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 class Person(object):
     num = 0
-    print("----person---test----")
+    print("----person---code01----")
 
     def __init__(self):
         self.name = "abc"

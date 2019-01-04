@@ -24,6 +24,7 @@ def __getattr__(self, item):
     pass
 
 #Settings->Plugins->Install JetBrains Plugins->输入vim->install
+#菜单栏:tools->vim emulator  关闭vim模式，再点一下就是打开vim模式
 
 
 

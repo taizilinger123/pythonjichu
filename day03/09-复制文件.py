@@ -6,7 +6,7 @@ old_file_name = input("请输入要复制的文件名:")
 #2.打开要复制的文件
 old_file = open(old_file_name, "r")
 
-#test.py  ------> test[复件].py
+#code01.py  ------> code01[复件].py
 #new_file_name = "[复件]"+old_file_name
 position = old_file_name.rfind(".")
 #new_file_name = old_file_name[0:position] + "[复件]" + old_file_name[position:]

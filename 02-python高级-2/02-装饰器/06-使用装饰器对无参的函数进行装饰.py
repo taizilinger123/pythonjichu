@@ -13,7 +13,7 @@ def func(functionName):
 
 @func
 def  test():
-    print("----test-----")
+    print("----code01-----")
 
-#test = func(test)
+#code01 = func(code01)
 test()

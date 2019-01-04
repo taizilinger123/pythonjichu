@@ -43,11 +43,11 @@ print(ret)
 #p ret
 #q
 
-# def test(a,b):
+# def code01(a,b):
 #     c = a+b
 #     return c
 # #import pdb
-# pdb.run("test(11,22)")
+# pdb.run("code01(11,22)")
 # s
 # l
 # a

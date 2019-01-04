@@ -10,7 +10,7 @@ def note(func):
 
 @note
 def test():
-    "test function"
-    print('I am test')
+    "code01 function"
+    print('I am code01')
 
 print(help(test))

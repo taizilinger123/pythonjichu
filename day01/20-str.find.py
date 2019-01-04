@@ -63,14 +63,14 @@ myStr.find("world")
 # Out[35]: '想要陪你一起看大海                                         '  #右边空格50个
 # lyric.rjust(50)
 # Out[36]: '                                         想要陪你一起看大海'  #左边空格50个
-# test = lyric.center(50)
-# test
+# code01 = lyric.center(50)
+# code01
 # Out[38]: '                    想要陪你一起看大海                     '
-# test.lstrip()
+# code01.lstrip()
 # Out[39]: '想要陪你一起看大海                     '                      #去掉左边的空格
-# test.rstrip()
+# code01.rstrip()
 # Out[40]: '                    想要陪你一起看大海'                       #去掉右边的空格
-# test.strip()
+# code01.strip()
 # Out[41]: '想要陪你一起看大海'                                           #去掉两边的空格
 # myStr.rfind("itcast")                                                   #从右边开始找
 # Out[44]: 23
@@ -82,16 +82,16 @@ myStr.find("world")
 # Out[47]: ('hello world ', 'itcast', ' and itcastxxxcpp')
 # myStr.rpartition("itcast")                       #以右边第一个itcast从右往左的往2边扩散
 # Out[48]: ('hello world itcast and ', 'itcast', 'xxxcpp')
-# test="hello\nworld\nxxx\nyy\nzz"
-# test
+# code01="hello\nworld\nxxx\nyy\nzz"
+# code01
 # Out[50]: 'hello\nworld\nxxx\nyy\nzz'
-# print(test)
+# print(code01)
 # hello
 # world
 # xxx
 # yy
 # zz
-# test.splitlines()
+# code01.splitlines()
 # Out[52]: ['hello', 'world', 'xxx', 'yy', 'zz']  #以换行\n分割字符串为列表
 # num = input("请输入一个选项(1-6):")
 # 请输入一个选项(1 - 6):q
@@ -122,10 +122,10 @@ myStr.find("world")
 # b = " "
 # b.join(a)
 # Out[68]: 'aaa bbb cccc'
-# test = "aa s  \tgd  \ts a \tg\tlk  \tj\t  shijh  j \tl\t k g"
-# test.split()
+# code01 = "aa s  \tgd  \ts a \tg\tlk  \tj\t  shijh  j \tl\t k g"
+# code01.split()
 # Out[70]: ['aa', 's', 'gd', 's', 'a', 'g', 'lk', 'j', 'shijh', 'j', 'l', 'k', 'g']
-# result = test.split()
+# result = code01.split()
 # result
 # Out[72]: ['aa', 's', 'gd', 's', 'a', 'g', 'lk', 'j', 'shijh', 'j', 'l', 'k', 'g']    #变成列表
 # "".join(result)                                                                      #转变成字符串
