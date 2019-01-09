@@ -1,3 +1,5 @@
+admin 
+Intel@123
 switch(config-if)# switchport   access  vlan  1
 switch(config-if)# interface   ethernet   1/48
 switch(config-if)# switchport
@@ -254,6 +256,8 @@ switch(config-if)#
 ####################################################
 2楼铜交换机配置
 ####################################################
+admin 
+intel@123
 switch(config-if)# switchport  access  vlan  1
 switch(config-if)# no  shutdown 
 switch(config-if)# interface  Ethernet1/47
