@@ -67,3 +67,6 @@ print("append", timer6.timeit(1000))
 
 timer7 = Timer("t7()", "from __main__ import t7")
 print("insert(0)", timer7.timeit(1000))
+# Ctrl + Shift + F 全局查找
+# Ctrl + Shift + R 全局替换
+# Ctrl + R 替换
