@@ -115,6 +115,7 @@ class SingleCycleLinkList(object):
                     # 中间节点
                     pre.next = cur.next
                 return
+                # break
             else:
                 pre = cur
                 cur = cur.next

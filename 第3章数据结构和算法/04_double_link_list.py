@@ -83,7 +83,7 @@ class DoubleLinkList(object):
             if cur.elem == item:
                 # 先判断此结点是否是头节点
                 # 头节点
-                if cur == self.__head:
+                if cur == self.__head: #代表第一个节点
                     self.__head = cur.next
                     if cur.next:
                         # 判断链表是否只有一个结点
