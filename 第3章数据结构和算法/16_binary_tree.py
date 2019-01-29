@@ -89,5 +89,3 @@ if __name__ == "__main__":
     print(" ")
     tree.postorder(tree.root)
     print(" ")
-
-#反推：给先序和中序,中序和后序能画出一颗树,因为中序把左右分开了，左根右所以要有中序才能画出一颗树

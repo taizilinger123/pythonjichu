@@ -1,6 +1,4 @@
 gongsipxe
-http://blog.51cto.com/144432/2067418
-http://www.itkeyword.com/doc/0967884061857357057/uefi-PXE-syslinuxlinuxbios
 [root@mlt-ace tftpboot]# pwd
 /var/lib/tftpboot
 [root@mlt-ace tftpboot]# ll
