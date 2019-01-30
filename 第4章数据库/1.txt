@@ -302,3 +302,60 @@ mysql> select *  from  students;
 |  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
 +----+-----------+--------+---------------------+----------+
 5 rows in set (0.00 sec)
+sige@sige1:~/Desktop$ mysql  -uroot  -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 39
+Server version: 5.7.25-0ubuntu0.16.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use  python3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show  tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| students          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> create table  rooms(id int primary key not null,
+    -> title varchar(10));
+Query OK, 0 rows affected (0.35 sec)
+
+mysql> create table  stu(id  int primary key  auto_increment  not null,
+    -> name varchar(10),
+    -> roomid int);
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> alter  table stu  add  constraint stu_room foreign  key(roomid) references  rooms(id);
+Query OK, 0 rows affected (0.46 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert  into stu values(0,'??',314);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`python3`.`stu`, CONSTRAINT `stu_room` FOREIGN KEY (`roomid`) REFERENCES `rooms` (`id`))
+mysql> insert into rooms values(314,'???');
+Query OK, 1 row affected (0.29 sec)
+
+mysql> insert  into stu values(0,'??',314);
+Query OK, 1 row affected (0.29 sec)
+
+mysql> desc stu;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(10) | YES  |     | NULL    |                |
+| roomid | int(11)     | YES  | MUL | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
