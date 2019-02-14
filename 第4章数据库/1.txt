@@ -821,6 +821,211 @@ mysql> select * from students limit 1,3;
 +----+-----------+--------+---------------------+----------+
 3 rows in set (0.00 sec)
 mysql> select * from students where isdelete=0 limit (n-1)*m,m;  #n从1开始
+###########################################################
+mysql> use python3;      #外键约束
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| rooms             |
+| stu               |
+| students          |
+| subjects          |
++-------------------+
+4 rows in set (0.00 sec)
 
+mysql> create table scores(
+    -> id int  auto_increment primary key not null,
+    -> score decimal(4,1),
+    -> stuid int,
+    -> subid int,
+    -> foreign key(stuid) references students(id),
+    -> foreign key(subid) references subjects(id));
+Query OK, 0 rows affected (0.37 sec)
 
+mysql> select * from scores;
+Empty set (0.00 sec)
 
+mysql> desc scores;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int(11)      | NO   | PRI | NULL    | auto_increment |
+| score | decimal(4,1) | YES  |     | NULL    |                |
+| stuid | int(11)      | YES  | MUL | NULL    |                |
+| subid | int(11)      | YES  | MUL | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into scores values(0,100,1,1);
+Query OK, 1 row affected (0.31 sec)
+
+mysql> select * from scores;
++----+-------+-------+-------+
+| id | score | stuid | subid |
++----+-------+-------+-------+
+|  1 | 100.0 |     1 |     1 |
++----+-------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into scores values(0,100,10,10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`python3`.`scores`, CONSTRAINT `scores_ibfk_1` FOREIGN KEY (`stuid`) REFERENCES `students` (`id`))
+###########################################################
+mysql> insert into scores values(0,90,1,2);
+Query OK, 1 row affected (0.29 sec)
+
+mysql> insert into scores values(0,80,1,3);
+Query OK, 1 row affected (0.29 sec)
+
+mysql> insert into scores values(0,99,2,1);
+Query OK, 1 row affected (0.29 sec)
+
+mysql> insert into scores values(0,98,2,2);
+Query OK, 1 row affected (0.28 sec)
+
+mysql> insert into scores values(0,97,2,3);
+Query OK, 1 row affected (0.28 sec)
+
+mysql> insert into scores values(0,90,3,1);
+Query OK, 1 row affected (0.57 sec)
+
+mysql> insert into scores values(0,80,3,2);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into scores values(0,70,3,3);
+Query OK, 1 row affected (0.28 sec)
+
+mysql> select *  from scores;
++----+-------+-------+-------+
+| id | score | stuid | subid |
++----+-------+-------+-------+
+|  1 | 100.0 |     1 |     1 |
+|  3 |  90.0 |     1 |     2 |
+|  4 |  80.0 |     1 |     3 |
+|  5 |  99.0 |     2 |     1 |
+|  6 |  98.0 |     2 |     2 |
+|  7 |  97.0 |     2 |     3 |
+|  8 |  90.0 |     3 |     1 |
+|  9 |  80.0 |     3 |     2 |
+| 10 |  70.0 |     3 |     3 |
++----+-------+-------+-------+
+9 rows in set (0.00 sec)
+##多表关联查询
+mysql> select students.name,subjects.title,scores.score
+    -> from scores
+    -> inner join students on scores.stuid=students.id
+    -> inner join subjects on scores.subid=subjects.id;
++-----------+--------+-------+
+| name      | title  | score |
++-----------+--------+-------+
+| 郭靖      | python | 100.0 |
+| 黄蓉      | python |  99.0 |
+| 小龙女    | python |  90.0 |
+| 郭靖      | linux  |  90.0 |
+| 黄蓉      | linux  |  98.0 |
+| 小龙女    | linux  |  80.0 |
+| 郭靖      | mysql  |  80.0 |
+| 黄蓉      | mysql  |  97.0 |
+| 小龙女    | mysql  |  70.0 |
++-----------+--------+-------+
+9 rows in set (0.00 sec)
+mysql> select students.name,subjects.title,scores.score
+    -> from students
+    -> inner join scores on scores.stuid=students.id
+    -> inner join subjects on scores.subid=subjects.id;
++-----------+--------+-------+
+| name      | title  | score |
++-----------+--------+-------+
+| 郭靖      | python | 100.0 |
+| 黄蓉      | python |  99.0 |
+| 小龙女    | python |  90.0 |
+| 郭靖      | linux  |  90.0 |
+| 黄蓉      | linux  |  98.0 |
+| 小龙女    | linux  |  80.0 |
+| 郭靖      | mysql  |  80.0 |
+| 黄蓉      | mysql  |  97.0 |
+| 小龙女    | mysql  |  70.0 |
++-----------+--------+-------+
+9 rows in set (0.00 sec)
+mysql> select * from  scores inner join students on students.id=scores.stuid; #inner join左边和右边两个表都匹配的出现
++----+-------+-------+-------+----+-----------+--------+---------------------+----------+
+| id | score | stuid | subid | id | name      | gender | birthday            | isDelete |
++----+-------+-------+-------+----+-----------+--------+---------------------+----------+
+|  1 | 100.0 |     1 |     1 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  3 |  90.0 |     1 |     2 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  4 |  80.0 |     1 |     3 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  5 |  99.0 |     2 |     1 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  6 |  98.0 |     2 |     2 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  7 |  97.0 |     2 |     3 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  8 |  90.0 |     3 |     1 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|  9 |  80.0 |     3 |     2 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+| 10 |  70.0 |     3 |     3 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
++----+-------+-------+-------+----+-----------+--------+---------------------+----------+
+9 rows in set (0.00 sec)
+#left join左边和右边两个表都匹配的出现，以left join左边的students为主的出现
+mysql> select * from  students  left  join scores  on students.id=scores.stuid;
++----+-----------+--------+---------------------+----------+------+-------+-------+-------+
+| id | name      | gender | birthday            | isDelete | id   | score | stuid | subid |
++----+-----------+--------+---------------------+----------+------+-------+-------+-------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |    1 | 100.0 |     1 |     1 |
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |    3 |  90.0 |     1 |     2 |
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |    4 |  80.0 |     1 |     3 |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |    5 |  99.0 |     2 |     1 |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |    6 |  98.0 |     2 |     2 |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |    7 |  97.0 |     2 |     3 |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |    8 |  90.0 |     3 |     1 |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |    9 |  80.0 |     3 |     2 |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |   10 |  70.0 |     3 |     3 |
+|  4 | 杨过      |       | 2001-10-20 00:00:00 |          | NULL |  NULL |  NULL |  NULL |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         | NULL |  NULL |  NULL |  NULL |
+|  7 | 黄药师    |       | NULL                |          | NULL |  NULL |  NULL |  NULL |
++----+-----------+--------+---------------------+----------+------+-------+-------+-------+
+12 rows in set (0.00 sec)
+#right join左边和右边两个表都匹配的出现，以right join右边的students为主的出现
+mysql> select * from  scores  right  join  students  on students.id=scores.stuid;
++------+-------+-------+-------+----+-----------+--------+---------------------+----------+
+| id   | score | stuid | subid | id | name      | gender | birthday            | isDelete |
++------+-------+-------+-------+----+-----------+--------+---------------------+----------+
+|    1 | 100.0 |     1 |     1 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|    3 |  90.0 |     1 |     2 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|    4 |  80.0 |     1 |     3 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|    5 |  99.0 |     2 |     1 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|    6 |  98.0 |     2 |     2 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|    7 |  97.0 |     2 |     3 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|    8 |  90.0 |     3 |     1 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|    9 |  80.0 |     3 |     2 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|   10 |  70.0 |     3 |     3 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+| NULL |  NULL |  NULL |  NULL |  4 | 杨过      |       | 2001-10-20 00:00:00 |          |
+| NULL |  NULL |  NULL |  NULL |  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
+| NULL |  NULL |  NULL |  NULL |  7 | 黄药师    |       | NULL                |          |
++------+-------+-------+-------+----+-----------+--------+---------------------+----------+
+12 rows in set (0.00 sec)
+######################################
+mysql> select name,avg(score) from scores
+    -> inner join students on scores.stuid=students.id group by stuid;
++-----------+------------+
+| name      | avg(score) |
++-----------+------------+
+| 郭靖      |   90.00000 |
+| 黄蓉      |   98.00000 |
+| 小龙女    |   80.00000 |
++-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select name,avg(score) as avg1 from scores  inner join students on scores.stuid=students.id group by stuid order by avg1;
++-----------+----------+
+| name      | avg1     |
++-----------+----------+
+| 小龙女    | 80.00000 |
+| 郭靖      | 90.00000 |
+| 黄蓉      | 98.00000 |
++-----------+----------+
+3 rows in set (0.00 sec)
+
+select distinct 列*
+from 表1 inner|left|right join 表2 on 表1与表2的关系
+where ...
+group by ... having ...
+order by ... asc|desc
+limit start,count
