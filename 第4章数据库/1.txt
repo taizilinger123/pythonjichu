@@ -1370,3 +1370,15 @@ mysql> show  profiles;
 +----------+------------+---------------------------------------------+
 4 rows in set, 1 warning (0.00 sec)
 where gender=0 and isdelete=0 and birthday>'1990-1-1'#索引要条件缩小前面的条件
+###################################################
+sige@sige1:~/pythonjichu/day03$ sudo  apt-get  install  python-mysqldb  #与python交互
+sige@sige1:~/pythonjichu/day03$ python
+Python 2.7.12 (default, Nov 12 2018, 14:36:49)
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import  MySQLdb
+>>> exit()
+
+a' or 1=1 or'  #sql注入
+select * from students where name='a' or 1=1 or''
+select * from students where name=@name
