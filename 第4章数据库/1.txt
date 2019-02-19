@@ -1382,3 +1382,13 @@ Type "help", "copyright", "credits" or "license" for more information.
 a' or 1=1 or'  #sql注入
 select * from students where name='a' or 1=1 or''
 select * from students where name=@name
+########################################
+mysql> use  python3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table users(
+    -> id int auto_increment primary key not null,
+    -> name varchar(20),
+    -> passwd char(40));
