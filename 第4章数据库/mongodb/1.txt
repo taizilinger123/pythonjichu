@@ -1,0 +1,227 @@
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+mongo -version
+sudo service mongod start
+sudo service mongod stop
+sudo service mongod restart
+sudo cat /var/log/mongodb/mongod.log
+sige@sige1:~$ sudo  mongod   #服务器端
+sige@sige1:~$ sudo wget https://download.robomongo.org/0.9.0/linux/robomongo-0.9.0-linux-x86_64-0786489.tar.gz
+sige@sige1:~$ sudo mongo     #客户端
+> db
+test
+> show dbs
+admin  0.078GB
+local  0.078GB
+> use py3
+switched to db py3
+> show dbs
+admin  0.078GB
+local  0.078GB
+> db.createCollection('stu')
+{ "ok" : 1 }
+> show collections
+stu
+system.indexes
+> db.stu.drop()
+true
+> show collections
+system.indexes
+> db.stu.insert({name:'gj',gender:true})
+WriteResult({ "nInserted" : 1 })
+> show collections
+stu
+system.indexes
+> db.stu.find()
+{ "_id" : ObjectId("5c6e0aaf948ad277862b3c20"), "name" : "gj", "gender" : true }
+> db.stu.insert({name:'hr',age:18})
+WriteResult({ "nInserted" : 1 })
+> db.stu.find()
+{ "_id" : ObjectId("5c6e0aaf948ad277862b3c20"), "name" : "gj", "gender" : true }
+{ "_id" : ObjectId("5c6e0b53948ad277862b3c21"), "name" : "hr", "age" : 18 }
+> db.stu.update({},{name:'gj1'})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.stu.find()
+{ "_id" : ObjectId("5c6e0aaf948ad277862b3c20"), "name" : "gj1" }
+{ "_id" : ObjectId("5c6e0b53948ad277862b3c21"), "name" : "hr", "age" : 18 }
+> db.stu.drop()
+true
+> db.stu.insert({name:'gj',gender:true})
+WriteResult({ "nInserted" : 1 })
+> db.stu.find()
+{ "_id" : ObjectId("5c6e0cdc948ad277862b3c22"), "name" : "gj", "gender" : true }
+> db.stu.update({},{$set:{name:'gj1'}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.stu.find()
+{ "_id" : ObjectId("5c6e0cdc948ad277862b3c22"), "name" : "gj1", "gender" : true }
+> db.stu.remove({})  #删除所有
+WriteResult({ "nRemoved" : 1 })
+> db.stu.find()
+
+> db.createCollection('sub',{capped:true,size:10})
+{ "ok" : 1 }
+> db.sub.insert({title:'python',count:10})
+WriteResult({ "nInserted" : 1 })
+> db.sub.insert({title:'linux',count:15})
+WriteResult({ "nInserted" : 1 })
+> db.sub.insert({title:'sql',count:4})
+WriteResult({ "nInserted" : 1 })
+> db.sub.insert({title:'mongodb',count:2})
+WriteResult({ "nInserted" : 1 })
+> db.stu.find()
+> db.sub.find() = db.getCollection('sub').find({})#这个是在robomongo数据库图形界面直接点击Collections-sub
+{ "_id" : ObjectId("5c6e124c948ad277862b3c23"), "title" : "python", "count" : 10 }
+{ "_id" : ObjectId("5c6e1255948ad277862b3c24"), "title" : "linux", "count" : 15 }
+{ "_id" : ObjectId("5c6e125e948ad277862b3c25"), "title" : "sql", "count" : 4 }
+{ "_id" : ObjectId("5c6e126d948ad277862b3c26"), "title" : "mongodb", "count" : 2 }
+>db.sub.insert({title:'html',count:1})
+>db.sub.insert({title:'css',count:3})
+>db.sub.insert({title:'javascript',count:3})
+>db.sub.find()
+>db.sub.findOne()
+>db.sub.find().pretty()
+> db.sub.find({title:'mongodb'}) #查询title等于mongodb的
+{ "_id" : ObjectId("5c6e126d948ad277862b3c26"), "title" : "mongodb", "count" : 2 }
+> db.sub.find({title:'html'})
+{ "_id" : ObjectId("5c6e3439f1cb48b5d16fea64"), "title" : "html", "count" : 1 }
+> db.sub.find({count:{$gt:2}}) #查询count值大于2的
+> db.sub.find({title:'css',count:{$gt:2}}) #查询title等于css 并且 count大于2的,逻辑运算符并且
+{ "_id" : ObjectId("5c6e34caf1cb48b5d16fea65"), "title" : "css", "count" : 3 }
+> db.sub.find({$or:[{title:'css'},{count:{$gt:2}}]}) #查询title课程是css或者count大于2的，逻辑运算符或者
+> db.sub.find({count:{$in:[1,3]}}) #查询课时在1到3天的
+{ "_id" : ObjectId("5c6e3439f1cb48b5d16fea64"), "title" : "html", "count" : 1 }
+{ "_id" : ObjectId("5c6e34caf1cb48b5d16fea65"), "title" : "css", "count" : 3 }
+{ "_id" : ObjectId("5c6e3514f1cb48b5d16fea66"), "title" : "javascript", "count" : 3 }
+> db.sub.find({count:{$nin:[1,3]}}) #查询课时不在1到3天的
+{ "_id" : ObjectId("5c6e124c948ad277862b3c23"), "title" : "python", "count" : 10 }
+{ "_id" : ObjectId("5c6e1255948ad277862b3c24"), "title" : "linux", "count" : 15 }
+{ "_id" : ObjectId("5c6e125e948ad277862b3c25"), "title" : "sql", "count" : 4 }
+{ "_id" : ObjectId("5c6e126d948ad277862b3c26"), "title" : "mongodb", "count" : 2 }
+> db.stu.remove({})
+WriteResult({ "nRemoved" : 2 })
+> db.stu.find()
+> use py3
+switched to db py3
+> db.stu.insert({name:'gj',age:18})
+WriteResult({ "nInserted" : 1 })
+> db.stu.insert({name:'gxj',age:28})
+WriteResult({ "nInserted" : 1 })
+> db.getCollection('stu').find({})
+{ "_id" : ObjectId("5c6e48c8948ad277862b3c29"), "name" : "gj", "age" : 18 }
+{ "_id" : ObjectId("5c6e48cc948ad277862b3c2a"), "name" : "gxj", "age" : 28 }
+> db.stu.find({name:/^g/})  #正则表达式
+{ "_id" : ObjectId("5c6e48c8948ad277862b3c29"), "name" : "gj", "age" : 18 }
+{ "_id" : ObjectId("5c6e48cc948ad277862b3c2a"), "name" : "gxj", "age" : 28 }
+> db.stu.find({$where:function(){return this.age>20}}) #自定义匿名函数查询
+{ "_id" : ObjectId("5c6e48cc948ad277862b3c2a"), "name" : "gxj", "age" : 28 }
+> db.stu.find({$where:function(){return this.name.indexOf('g')==0}}) #用js函数indexOf
+{ "_id" : ObjectId("5c6e48c8948ad277862b3c29"), "name" : "gj", "age" : 18 }
+{ "_id" : ObjectId("5c6e48cc948ad277862b3c2a"), "name" : "gxj", "age" : 28 }
+> db.stu.find({$where:function(){return this.name.indexOf('x')>=0}})
+{ "_id" : ObjectId("5c6e48cc948ad277862b3c2a"), "name" : "gxj", "age" : 28 }
+> db.stu.find()
+{ "_id" : ObjectId("5c6e48c8948ad277862b3c29"), "name" : "gj", "age" : 18 }
+{ "_id" : ObjectId("5c6e48cc948ad277862b3c2a"), "name" : "gxj", "age" : 28 }
+> db.stu.find().limit(1)#查1个
+{ "_id" : ObjectId("5c6e48c8948ad277862b3c29"), "name" : "gj", "age" : 18 }
+> db.stu.find().limit(1).skip(1) #查跳过去1个
+{ "_id" : ObjectId("5c6e48cc948ad277862b3c2a"), "name" : "gxj", "age" : 28 }
+> db.stu.find().skip(1).limit(1) #limit和skip位置不分前后
+{ "_id" : ObjectId("5c6e48cc948ad277862b3c2a"), "name" : "gxj", "age" : 28 }
+> db.stu.find({},{name:1})  #投影筛选
+{ "_id" : ObjectId("5c6e48c8948ad277862b3c29"), "name" : "gj" }
+{ "_id" : ObjectId("5c6e48cc948ad277862b3c2a"), "name" : "gxj" }
+> db.stu.find({},{name:1,_id:0})#投影筛选,只查自己需要的字段
+{ "name" : "gj" }
+{ "name" : "gxj" }
+> db.stu.find().sort({age:-1}) #-1由大到小排序
+{ "_id" : ObjectId("5c6e48cc948ad277862b3c2a"), "name" : "gxj", "age" : 28 }
+{ "_id" : ObjectId("5c6e48c8948ad277862b3c29"), "name" : "gj", "age" : 18 }
+> db.stu.count({age:{$gt:20}}) #count统计个数
+1
+> db.stu.remove({})
+WriteResult({ "nRemoved" : 2 })
+>
+> db.stu.insert({name:'gj',gender:true,age:18})
+WriteResult({ "nInserted" : 1 })
+> db.stu.insert({name:'gj1',gender:true,age:28})
+WriteResult({ "nInserted" : 1 })
+> db.stu.insert({name:'hr',gender:false,age:18})
+WriteResult({ "nInserted" : 1 })
+> db.stu.insert({name:'hr1',gender:false,age:28})
+WriteResult({ "nInserted" : 1 })
+> db.stu.find()
+{ "_id" : ObjectId("5c6e4eb9948ad277862b3c2b"), "name" : "gj", "gender" : true, "age" : 18 }
+{ "_id" : ObjectId("5c6e4ec2948ad277862b3c2c"), "name" : "gj1", "gender" : true, "age" : 28 }
+{ "_id" : ObjectId("5c6e4ed5948ad277862b3c2d"), "name" : "hr", "gender" : false, "age" : 18 }
+{ "_id" : ObjectId("5c6e4ede948ad277862b3c2e"), "name" : "hr1", "gender" : false, "age" : 28 }
+> db.stu.distinct('gender',{age:{$gt:20}}) #去重，查找年龄大于20的
+[ true, false ]
+> db.stu.aggregate([                #聚合
+... {$group:{_id:'$gender',counter:{$sum:1}}}
+... ])
+{ "_id" : false, "counter" : 2 }
+{ "_id" : true, "counter" : 2 }
+> db.stu.aggregate([ {$group:{_id:'$gender',counter:{$sum:'$age'}}} ])#管道
+{ "_id" : false, "counter" : 46 }
+{ "_id" : true, "counter" : 46 }
+> db.stu.aggregate([ {$group:{_id:'$gender',counter:{$avg:'$age'}}} ])
+{ "_id" : false, "counter" : 23 }
+{ "_id" : true, "counter" : 23 }
+> db.stu.aggregate([ {$group:{_id:'$gender',counter:{$first:'$age'}}} ])
+{ "_id" : false, "counter" : 18 }
+{ "_id" : true, "counter" : 18 }
+> db.stu.aggregate([ {$group:{_id:'$gender',counter:{$last:'$age'}}} ])
+{ "_id" : false, "counter" : 28 }
+{ "_id" : true, "counter" : 28 }
+> db.stu.aggregate([ {$group:{_id:'$gender',counter:{$push:'$age'}}} ])
+{ "_id" : false, "counter" : [ 18, 28 ] }
+{ "_id" : true, "counter" : [ 18, 28 ] }
+> db.stu.aggregate([ {$group:{_id:'$gender',counter:{$push:'$$ROOT'}}} ]) #基于整个文档给你分组
+{ "_id" : false, "counter" : [ { "_id" : ObjectId("5c6e4ed5948ad277862b3c2d"), "name" : "hr", "gender" : false, "age" : 18 }, { "_id" : ObjectId("5c6e4ede948ad277862b3c2e"), "name" : "hr1", "gender" : false, "age" : 28 } ] }
+{ "_id" : true, "counter" : [ { "_id" : ObjectId("5c6e4eb9948ad277862b3c2b"), "name" : "gj", "gender" : true, "age" : 18 }, { "_id" : ObjectId("5c6e4ec2948ad277862b3c2c"), "name" : "gj1", "gender" : true, "age" : 28 } ] }
+###################在ubuntu16.04 LTS里装了vnc，然后windows10里装vnc viewer连robomongo就可以##########
+db.stu.aggregate([
+   {$match:{age:{$gt:20}}}
+])
+
+db.stu.aggregate([
+   {$match:{age:{$gt:20}}},   #过滤,把过滤的结果给$group管道
+   {$group:{                  #管道
+       _id:'$gender',
+       counter:{$sum:1}
+       }}
+])
+
+db.stu.aggregate([
+   {$match:{age:{$gt:20}}},
+   {$group:{
+       _id:'$gender',
+       counter:{$sum:1}
+       }},
+       {$project:{_id:0,counter:1}}   #投影
+])
+
+db.stu.aggregate([
+   {$match:{age:{$gt:20}}},
+   {$group:{
+       _id:'$gender',
+       counter:{$sum:1}
+       }},
+       {$project:{_id:1,counter:1}},
+       {$sort:{_id:-1}}
+])
+
+db.stu.aggregate([
+   {$match:{age:{$gt:20}}},
+   {$group:{
+       _id:'$gender',
+       counter:{$sum:1}
+       }},
+       {$project:{_id:1,counter:1}},
+       {$sort:{_id:-1}},
+       {$skip:1},      #$skip和$limit顺序有区别
+       {$limit:1}
+])
