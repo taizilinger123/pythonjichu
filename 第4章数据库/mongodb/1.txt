@@ -225,3 +225,80 @@ db.stu.aggregate([
        {$skip:1},      #$skip和$limit顺序有区别
        {$limit:1}
 ])
+
+db.t2.insert({_id:1,title:'t-shirt',size:['M','L','S']})
+db.t2.aggregate([            #unwind
+  {$unwind:'$size'}
+])
+#######结果#########
+/* 1 */
+{
+    "_id" : 1.0,
+    "title" : "t-shirt",
+    "size" : "M"
+}
+
+/* 2 */
+{
+    "_id" : 1.0,
+    "title" : "t-shirt",
+    "size" : "L"
+}
+
+/* 3 */
+{
+    "_id" : 1.0,
+    "title" : "t-shirt",
+    "size" : "S"
+}
+db.t2.insert({_id:2,title:'t2',size:{}})
+db.t2.insert({_id:3,title:'t3'})
+db.t2.insert({_id:4,title:'t4',size:null})
+db.t2.insert({_id:5,title:'t5',size:'M'})
+db.t2.find()
+
+db.t2.aggregate([
+    {$unwind:{path:'$size',preserveNullAndEmptyArrays:true}}
+])
+
+db.stu.aggregate([
+    {$group:{_id:'$gender',counter:{$sum:1},docs:{$push:'$$ROOT'}}},
+])
+
+db.stu.aggregate([
+    {$group:{_id:'$gender',counter:{$sum:1},docs:{$push:'$$ROOT'}}},
+    {$project:{_id:0,counter:1,docs:1}},
+    {$unwind:'$docs'},
+])
+#################
+* 1 */
+{
+    "counter" : 2.0,
+    "docs" : {
+        "_id" : ObjectId("5c6e4ed5948ad277862b3c2d"),
+        "name" : "hr",
+        "gender" : false,
+        "age" : 18.0
+    }
+}
+
+/* 2 */
+{
+    "counter" : 2.0,
+    "docs" : {
+        "_id" : ObjectId("5c6e4ede948ad277862b3c2e"),
+        "name" : "hr1",
+        "gender" : false,
+        "age" : 28.0
+    }
+}
+
+/* 3 */
+{
+    "counter" : 2.0,
+    "docs" : {
+        "_id" : ObjectId("5c6e4eb9948ad277862b3c2b"),
+        "name" : "gj",
+        "gender" : true,
+        "age" : 18.0
+    }
