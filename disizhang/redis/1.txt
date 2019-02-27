@@ -1,0 +1,270 @@
+sige@sige1:~$ wget http://download.redis.io/releases/redis-3.0.4.tar.gz
+tar -xzvf redis-3.0.4.tar.gz
+mv  redis-3.0.4   redis
+sudo  mv redis  /usr/local/
+cd  /usr/local/redis
+sudo make
+sudo make install
+sige@sige1:/usr/local/redis$ sudo  cat   tests/integration/replication-psync.tcl | grep  after
+                        after 500   #100改为500再测试就不会报错了。
+sudo test
+sige@sige1:/usr/local/redis$ sudo cp  redis.conf  /etc/redis
+sige@sige1:/usr/local/redis$ sudo cat /etc/redis/redis.conf | grep  daemonize
+# Note that Redis will write a pid file in /var/run/redis.pid when daemonized.
+daemonize yes
+sige@sige1:/usr/local/redis$ cd  /usr/local/bin/
+sige@sige1:/usr/local/bin$ ls
+easy_install      pip     pip3             redis-check-aof   redis-sentinel
+easy_install-2.7  pip2    pip3.5           redis-check-dump  redis-server
+easy_install-3.5  pip2.7  redis-benchmark  redis-cli
+sige@sige1:/usr/local/bin$ sudo /usr/local/bin/redis-server /etc/redis/redis.conf
+sige@sige1:/usr/local/bin$ ps aux | grep redis
+root      4967  0.0  0.1  39980  8336 ?        Ssl  16:56   0:00 ./redis-server 127.0.0.1:6379
+sige      4978  0.0  0.0  15960   944 pts/8    S+   16:57   0:00 grep --color=auto redis
+sige@sige1:/usr/local/bin$ sudo  -s
+root@sige1:/usr/local/bin# sudo echo "/usr/local/bin/redis-server /etc/redis/redis.conf" >>/etc/rc.local
+sige@sige1:/etc$ grep   -vE  "^$|^#"  redis.conf
+daemonize yes
+pidfile /var/run/redis/redis-server.pid
+port 6379
+tcp-backlog 511
+bind 127.0.0.1
+timeout 0
+tcp-keepalive 0
+loglevel notice
+logfile /var/log/redis/redis-server.log
+databases 16
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+dir  /var/lib/redis
+slave-serve-stale-data yes
+slave-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+slave-priority 100
+appendonly no
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+lua-time-limit 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-entries 512
+list-max-ziplist-value 64
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit slave 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+aof-rewrite-incremental-fsync yes
+sudo  kill  -9  pid
+#####################################
+sige@sige1:~$ redis-cli
+127.0.0.1:6379> ping
+PONG
+127.0.0.1:6379> set 'py3' 'hello'
+OK
+127.0.0.1:6379> set 'py31' 'hello1'
+OK
+127.0.0.1:6379> setex 'py32' 1 'hello1'
+OK
+127.0.0.1:6379> get py3
+"hello"
+127.0.0.1:6379> get py31
+"hello1"
+127.0.0.1:6379> get py32
+(nil)
+127.0.0.1:6379> mget py3 py31
+1) "hello"
+2) "hello1"
+127.0.0.1:6379> append py3 'world'
+(integer) 10
+127.0.0.1:6379> get py3
+"helloworld"
+127.0.0.1:6379> strlen py3
+(integer) 10
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py31"
+127.0.0.1:6379> keys '*1*'
+1) "py31"
+127.0.0.1:6379> exists py32
+(integer) 0
+127.0.0.1:6379> exists py3
+(integer) 1
+127.0.0.1:6379> type py3
+string
+127.0.0.1:6379> del py31
+(integer) 1
+127.0.0.1:6379> keys *
+1) "py3"
+127.0.0.1:6379> expire py3 10
+(integer) 1
+127.0.0.1:6379> ttl py3
+(integer) 5
+127.0.0.1:6379> ttl py3
+(integer) -2
+127.0.0.1:6379> keys *
+(empty list or set)
+127.0.0.1:6379> hset py3 name '郭靖'
+(integer) 1
+127.0.0.1:6379> type py3
+hash
+127.0.0.1:6379> hget py3 name
+"\xe9\x83\xad\xe9\x9d\x96"
+127.0.0.1:6379> hset py3 gender 1
+(integer) 1
+127.0.0.1:6379> hgetall py3
+1) "name"
+2) "\xe9\x83\xad\xe9\x9d\x96"
+3) "gender"
+4) "1"
+127.0.0.1:6379> hkeys py3
+1) "name"
+2) "gender"
+127.0.0.1:6379> hlen py3
+(integer) 2
+127.0.0.1:6379> hvals py3
+1) "\xe9\x83\xad\xe9\x9d\x96"
+2) "1"
+127.0.0.1:6379> lpush  py4 'abc' '123'
+(integer) 2
+127.0.0.1:6379> rpush py5 'hello' ' world'
+(integer) 2
+127.0.0.1:6379> linsert py6 after  0  'haha'
+(integer) 0
+127.0.0.1:6379> lpop py4
+"123"
+127.0.0.1:6379> rpop py5
+" world"
+127.0.0.1:6379> lpop py6
+(nil)
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py5"
+3) "py4"
+127.0.0.1:6379> lpush  py4 'abc'
+(integer) 2
+127.0.0.1:6379> lpop py4
+"abc"
+127.0.0.1:6379> linsert py4 after 0 'hello'
+(integer) -1
+127.0.0.1:6379> lpop py4
+"abc"
+127.0.0.1:6379> lrange py4 0 -1
+(empty list or set)
+127.0.0.1:6379>
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py5"
+127.0.0.1:6379> lpush  py4 'abc'
+(integer) 1
+127.0.0.1:6379> lpush  py4 '123'
+(integer) 2
+127.0.0.1:6379> lrange py4 0 -1
+1) "123"
+2) "abc"
+127.0.0.1:6379> linsert py4 after '123' 'hello'
+(integer) 3
+127.0.0.1:6379> lrange py4 0 -1
+1) "123"
+2) "hello"
+3) "abc"
+127.0.0.1:6379> lpop py4
+"123"
+127.0.0.1:6379> lrange py4 0 -1
+1) "hello"
+2) "abc"
+127.0.0.1:6379> lindex py4 1
+"abc"
+127.0.0.1:6379> lpush  py4 h1
+(integer) 3
+127.0.0.1:6379> lpush  py4 h2
+(integer) 4
+127.0.0.1:6379> lpush  py4 h3
+(integer) 5
+127.0.0.1:6379> lpush  py4 h4
+(integer) 6
+127.0.0.1:6379> lrange py4 0 -1
+1) "h4"
+2) "h3"
+3) "h2"
+4) "h1"
+5) "hello"
+6) "abc"
+127.0.0.1:6379> ltrim  py4 1 2
+OK
+127.0.0.1:6379> lrange py4  0 -1
+1) "h3"
+2) "h2"
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py5"
+3) "py4"
+127.0.0.1:6379>
+127.0.0.1:6379> sadd py6 abc 123 hello
+(integer) 3
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py5"
+3) "py6"
+4) "py4"
+127.0.0.1:6379> smembers py6
+1) "hello"
+2) "abc"
+3) "123"
+127.0.0.1:6379> sadd py6 456
+(integer) 1
+127.0.0.1:6379> smembers py6
+1) "hello"
+2) "456"
+3) "abc"
+4) "123"
+127.0.0.1:6379> scard py6
+(integer) 4
+127.0.0.1:6379> sadd py61 123 456 789 world
+(integer) 4
+127.0.0.1:6379> smembers py61
+1) "world"
+2) "456"
+3) "789"
+4) "123"
+127.0.0.1:6379> sinter  py6 py61
+1) "456"
+2) "123"
+127.0.0.1:6379> sdiff py6 py61
+1) "hello"
+2) "abc"
+127.0.0.1:6379> sdiff py61 py6
+1) "world"
+2) "789"
+127.0.0.1:6379> sunion py6 py61
+1) "123"
+2) "456"
+3) "abc"
+4) "789"
+5) "hello"
+6) "world"
+127.0.0.1:6379> sismember  py6  world
+(integer) 0
+127.0.0.1:6379> sismember  py6  hello
+(integer) 1
+
+
