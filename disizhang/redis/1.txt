@@ -480,5 +480,65 @@ test2@hun2:~$ redis-cli  -h  192.168.122.139
 1) "py100"
 192.168.122.139:6379> get py100
 "hello world"
+#########################################
+mysql  -uroot  -p123456
+mysql> show  databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| py31               |
+| python3            |
+| sys                |
++--------------------+
+6 rows in set (0.25 sec)
 
+mysql> use python3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
 
+Database changed
+mysql> show  tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| areas             |
+| rooms             |
+| scores            |
+| stu               |
+| students          |
+| subjects          |
+| users             |
+| v_1               |
++-------------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from users;
++----+------+------------------------------------------+
+| id | name | passwd                                   |
++----+------+------------------------------------------+
+|  3 | abc  | 40bd001563085fc35165329ea1ff5c5ecbdbbeef |
++----+------+------------------------------------------+
+1 row in set (0.00 sec)
+###################
+sige@sige1:~$ redis-cli
+127.0.0.1:6379> get py10
+"hello1"
+127.0.0.1:6379>
+127.0.0.1:6379>
+127.0.0.1:6379>
+127.0.0.1:6379>
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py7"
+3) "abc"
+4) "py5"
+5) "py11"
+6) "py61"
+7) "py6"
+8) "py10"
+9) "py4"
+127.0.0.1:6379> get abc
+"40bd001563085fc35165329ea1ff5c5ecbdbbeef"
