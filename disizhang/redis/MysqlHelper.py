@@ -51,4 +51,3 @@ class MysqlHelper:
            return result
         except Exception,e:
            print(e.message)
-
