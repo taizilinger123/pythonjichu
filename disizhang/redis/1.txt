@@ -542,3 +542,5 @@ sige@sige1:~$ redis-cli
 9) "py4"
 127.0.0.1:6379> get abc
 "40bd001563085fc35165329ea1ff5c5ecbdbbeef"
+http://redis.cn/commands.html  #查redis命令
+
