@@ -1,0 +1,3 @@
+在以html文件名结尾的文件里敲
+XHTML：(html:xt)
+h5：(!tab)
