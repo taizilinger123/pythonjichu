@@ -6,7 +6,7 @@
 	<style type="text/css">
 		.con,.con2{
 			width: 300px;
-			/*height: 300px;*/ /*下面的内容太多自动伸开*/
+			/*height: 300px;*/ /*高度不要的时候下面的内容太多自动伸开*/
 			border:1px  solid #000;
 			margin: 100px auto 0;
 			font-size: 0;
@@ -53,7 +53,7 @@
 			3.当父元素没有高的时候，解决浮动方框合在一起问题
 		}*/
         
-        /*以下是结合了margin-top塌陷和清除浮动问题*/
+        /*解决方案：以下是结合了margin-top塌陷和清除浮动问题*/
         .clearfix:before,.clearfix:after{
         	content: "";
         	display:table;
