@@ -17,3 +17,7 @@ def  main():
 
 if  __name__  == '__main__':
     main()
+
+# super(test, self).__init__()
+# 是什么意思
+# 首先找到test的父类（比如是类A），然后把类test的对象self转换为类A的对象，然后“被转换”的类A对象调用自己的__init__函数
