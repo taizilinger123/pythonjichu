@@ -156,6 +156,7 @@ body{
 	color:#f80;
 }
 
+/* 左侧主菜单样式*/
 .center_con_con{
 	width:1200px;
 	height:270px;
@@ -208,4 +209,66 @@ body{
 
 .center_con_con .main_menu li .ice{
 	background-position: 33px -338px;
+}
+
+/* 幻灯片样式*/
+.slide_con{
+	width: 760px;
+	height: 270px;
+	position: relative;
+}
+
+.prev,.next{
+	width: 15px;
+	height: 23px;
+	position: absolute;
+	left: 11px;
+	top: 122px;
+	cursor:pointer;
+	background:url(../images/icons.png) -1px -451px no-repeat;
+}
+
+.next{
+	left: 732px;
+	background:url(../images/icons.png) -1px -501px no-repeat;
+}
+
+.points{
+	position: absolute;
+	width: 100%;
+	height: 11px;
+	left: 0;
+	bottom:9px;
+	text-align: center;
+	font-size: 0px;
+}
+
+.points li{
+	width: 11px;
+	height: 11px;
+	display: inline-block;
+	background-color: #9f9f9f;
+	margin: 0 5px;
+	/*设置圆角*/
+	border-radius: 50%; 
+}
+
+.points .active{
+	background-color: #cecece;
+}
+
+.adv{
+	width: 240px;
+	height: 270px;
+}
+
+.adv a{
+	float: left;
+	width: 240px;
+	height: 135px;
+}
+
+/*解决图片下方出现3像素空白的bug*/
+.adv a img{
+	display: block;
 }
