@@ -272,3 +272,126 @@ body{
 .adv a img{
 	display: block;
 }
+
+.common_model{
+	width: 1200px;
+	height: 340px;
+	margin: 18px auto 0;
+}
+
+.common_model .common_title{
+    height: 38px;
+    border-bottom: 2px solid #42ad46;
+} 
+
+.common_model .common_title h3{
+	font:bold 16px/38px 'Microsoft Yahei';
+	color: #37ab40;
+}
+
+.common_model .common_title ul{
+	height: 12px;
+	margin: 12px 0 0 20px;
+}
+
+.common_model .common_title li{
+	float: left;
+	margin:0 10px;
+}
+
+.common_model .common_title li a{
+	color: #666;
+	font-size: 12px;
+	line-height: 10px;
+}
+
+.common_model .common_title li a:hover,.common_model .common_title .more:hover{
+	color: #f80;
+}
+
+.common_model .common_title .more{
+	height: 38px;
+	line-height: 38px;
+	color: 
+}
+
+.common_model .common_goods_list{
+	width: 1200px;
+	height: 300px;
+}
+
+.common_model .common_goods_list .goods_banner{
+    width: 200px;
+    height: 300px;
+}
+
+.common_model .common_goods_list .goods_list{
+	width: 1000px;
+	height: 300px;
+}
+
+.common_model .common_goods_list .goods_list li{
+	width: 249px;
+	height: 299px;
+	border-right: 1px solid #ededed;
+	border-bottom: 1px solid #ededed;
+	float:left;
+}
+
+.common_model .common_goods_list .goods_list li:hover{
+    width: 248px;
+    height: 298px;
+    border: 1px solid #ff0;
+}
+
+.common_goods_list .goods_list li h4{
+	height: 52px;
+	font:14px/52px 'Microsoft Yahei';
+	color: #666;
+	text-align: center;
+}
+
+.common_goods_list .goods_list li a{
+	display: block;
+	width: 180px;
+	height: 180px;
+	margin: 0 auto;
+}
+
+.common_goods_list .goods_list li p{
+	height: 52px;
+	font:bold 20px/52px 'Microsoft Yahei';
+	color: #c40000;
+	text-align: center;
+}
+
+.footer{
+	height: 145px;
+	border-top:2px solid #4ab14e;
+	margin-top: 30px;
+}
+
+.footer .links{
+	text-align: center;
+	margin-top: 40px;
+}
+
+.footer .links a{
+	color: #4e4e4e;
+}
+
+.footer .links a:hover{
+	color: #f80;
+}
+
+.footer .links span{
+	color: #4e4e4e;
+	margin: 0 10px;
+}
+
+.footer p{
+    text-align: center;
+    line-height: 27px;
+    color: #4e4e4e;
+    margin-top:10px;
+}
