@@ -11,7 +11,10 @@ body{
 	bottom:0;
 	background-color:gold;
 }
-/* Preferences->Browse Packages->把cssrem文件夹复制进去->关闭sublime重启*/
+/*
+rem单位自动换算:
+Preferences->Browse Packages->把cssrem文件夹复制进去->关闭sublime重启
+*/
 /* Preferences->Package Settings->cssrem->Settings-Default->
 {
     "px_to_rem": 40,
