@@ -2,8 +2,8 @@ body{
 	font-family:'Microsoft Yahei';
 }
 
-
 .main_wrap{
+	/*用absolute绝对定位，不用fix固定定位，微信里会出问题*/
 	position:absolute;
 	left:0;
 	right:0;
