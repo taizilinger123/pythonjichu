@@ -11,7 +11,7 @@ source /usr/local/bin/virtualenvwrapper.sh
 sige@sige1:~$ source   ~/.bashrc
 cd  Desktop/
 mkvirtualenv  h4
-sige@sige1:~$ mkvirtualenv -p /usr/bin/python  h5
+sige@sige1:~$ mkvirtualenv -p /usr/bin/python  h5   #python2.7
 (h4) sige@sige1:~/Desktop$ deactivate
 sige@sige1:~/Desktop$
 sige@sige1:~/Desktop$ workon h4
