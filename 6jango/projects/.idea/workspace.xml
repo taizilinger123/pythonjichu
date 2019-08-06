@@ -8,8 +8,17 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectId" id="1Olq20CMY2hkh4AGxu3gktcfZRx" />
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.virtualenvs/h4/bin/python" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -37,7 +46,7 @@
       <option name="presentableId" value="Default" />
       <updated>1564562319464</updated>
       <workItem from="1564562320872" duration="12806000" />
-      <workItem from="1565062842599" duration="1712000" />
+      <workItem from="1565062842599" duration="9916000" />
     </task>
     <servers />
   </component>
