@@ -185,3 +185,122 @@ admin的使用:admin.py
 定义显示的样子
 加载:读取文件的内容到内存
 渲染:填坑
+
+开发流程：
+step1:创建虚拟环境
+step2:安装django
+step3:创建项目
+step4:创建应用
+step5:在models.py中定义模型类
+step6:定义视图
+step7:配置url
+step8:创建模板
+
+BookInfo
+
+HeroInfo
+        book=models.ForeignKey(BookInfo)
+
+英雄对象hero.book.id
+       hero.book_id
+书对象book.heroinfo_set
+
+sige@sige1:~$ sudo  apt-get  install python-dev
+sige@sige1:~$ workon  h5
+(h5) sige@sige1:~/Desktop/projects$ django-admin  startproject test2
+(h5) sige@sige1:~/Desktop/projects$ ls
+test1  test2
+(h5) sige@sige1:~$ pip   install mysql-python
+(h5) sige@sige1:~$ pip  list
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+Package      Version
+------------ -------
+Django       1.8.2
+MySQL-python 1.2.5
+pip          19.2.1
+setuptools   41.0.1
+wheel        0.33.4
+sige@sige1:~/Desktop$ sudo  service  mysql  start
+sige@sige1:~/Desktop$ sudo netstat -tap | grep mysql
+tcp6       0      0 [::]:mysql              [::]:*                  LISTEN      5262/mysqld
+sige@sige1:/etc/mysql$ pwd
+/etc/mysql
+sige@sige1:/etc/mysql$ ls
+conf.d  debian.cnf  debian-start  my.cnf  my.cnf.fallback  mysql.cnf  mysql.conf.d
+sige@sige1:/etc/mysql$ sudo cat debian.cnf
+# Automatically generated for Debian scripts. DO NOT TOUCH!
+[client]
+host     = localhost
+user     = debian-sys-maint
+password = xuAoLxkWjlMEN9nf
+socket   = /var/run/mysqld/mysqld.sock
+[mysql_upgrade]
+host     = localhost
+user     = debian-sys-maint
+password = xuAoLxkWjlMEN9nf
+socket   = /var/run/mysqld/mysqld.sock
+sige@sige1:/etc/mysql$  mysql  -udebian-sys-maint  -pxuAoLxkWjlMEN9nf
+sige@sige1:/etc/mysql$ mysql  -uroot -p123456
+mysql> show databases;
+mysql> create  database test2 charset=utf8;
+Query OK, 1 row affected (0.00 sec)
+mysql> use test2;
+sige@sige1:~/.virtualenvs/h5/lib/python2.7/site-packages/django/db/backends$ ls
+base   __init__.py   mysql   postgresql_psycopg2  signals.pyc  util.py   utils.py
+dummy  __init__.pyc  oracle  signals.py           sqlite3      util.pyc  utils.pyc
+(h5) sige@sige1:~/Desktop/projects$ cd  test2
+(h5) sige@sige1:~/Desktop/projects/test2$ ls
+manage.py  test2
+(h5) sige@sige1:~/Desktop/projects/test2$ python manage.py startapp booktest
+(h5) sige@sige1:~/Desktop/projects/test2$ ls
+booktest  manage.py  test2
+ubuntu16.04里的pycharm要ctrl+s保存一下models.py
+(h5) sige@sige1:~/Desktop/projects/test2$ python manage.py makemigrations
+Migrations for 'booktest':
+  0001_initial.py:
+    - Create model BookInfo
+    - Create model HeroInfo
+(h5) sige@sige1:~/Desktop/projects/test2$ python manage.py migrate
+mysql> show tables;
++----------------------------+
+| Tables_in_test2            |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| bookinfo                   |
+| booktest_heroinfo          |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
++----------------------------+
+12 rows in set (0.00 sec)
+mysql> desc bookinfo;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| btitle   | varchar(20) | NO   |     | NULL    |                |
+| pub_date | datetime(6) | NO   |     | NULL    |                |
+| bread    | int(11)     | NO   |     | NULL    |                |
+| bcommet  | int(11)     | NO   |     | NULL    |                |
+| isDelete | tinyint(1)  | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+mysql> desc booktest_heroinfo;
++----------+---------------+------+-----+---------+----------------+
+| Field    | Type          | Null | Key | Default | Extra          |
++----------+---------------+------+-----+---------+----------------+
+| id       | int(11)       | NO   | PRI | NULL    | auto_increment |
+| hname    | varchar(10)   | NO   |     | NULL    |                |
+| hgender  | tinyint(1)    | NO   |     | NULL    |                |
+| hcontent | varchar(1000) | NO   |     | NULL    |                |
+| isDelete | tinyint(1)    | NO   |     | NULL    |                |
+| book_id  | int(11)       | NO   | MUL | NULL    |                |
++----------+---------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+

@@ -20,7 +20,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../.virtualenvs/h4/bin/python" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
@@ -46,7 +46,9 @@
       <option name="presentableId" value="Default" />
       <updated>1564562319464</updated>
       <workItem from="1564562320872" duration="12806000" />
-      <workItem from="1565062842599" duration="9916000" />
+      <workItem from="1565062842599" duration="12217000" />
+      <workItem from="1565161967196" duration="244000" />
+      <workItem from="1565163006273" duration="4364000" />
     </task>
     <servers />
   </component>
