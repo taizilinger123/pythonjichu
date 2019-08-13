@@ -205,6 +205,12 @@ HeroInfo
        hero.book_id
 书对象book.heroinfo_set
 
+管理器是模型类的属性，用于将对象与数据表映射
+
+query=BookInfo.objects.all()
+for ... in query
+for ... in query[11:20]
+
 sige@sige1:~$ sudo  apt-get  install python-dev
 sige@sige1:~$ workon  h5
 (h5) sige@sige1:~/Desktop/projects$ django-admin  startproject test2
@@ -303,4 +309,96 @@ mysql> desc booktest_heroinfo;
 | book_id  | int(11)       | NO   | MUL | NULL    |                |
 +----------+---------------+------+-----+---------+----------------+
 6 rows in set (0.00 sec)
-
+mysql> select * from  bookinfo;
++----+----------------------+----------------------------+-------+---------+----------+
+| id | btitle               | pub_date                   | bread | bcommet | isDelete |
++----+----------------------+----------------------------+-------+---------+----------+
+|  1 | 射雕英雄传             | 1980-05-01 00:00:00.000000 |    12 |      34 |        0 |
+|  2 | 天龙八部               | 1986-07-24 00:00:00.000000 |    36 |      40 |        1 |
+|  3 | 笑傲江湖               | 1995-12-24 00:00:00.000000 |    20 |      80 |        1 |
+|  4 | 雪山飞狐               | 1987-11-11 00:00:00.000000 |    58 |      24 |        0 |
++----+----------------------+----------------------------+-------+---------+----------+
+sige@sige1:~/Desktop/projects/test2$ workon h5
+(h5) sige@sige1:~/Desktop/projects/test2$ python  manage.py  shell
+Python 2.7.12 (default, Nov 12 2018, 14:36:49)
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>>
+>>> from  booktest.models import BookInfo
+>>> BookInfo.books1.all()
+[<BookInfo: BookInfo object>, <BookInfo: BookInfo object>, <BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+>>> BookInfo.books2.all()
+[<BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+(h5) sige@sige1:~/Desktop/projects/test2$ python  manage.py  shell
+Python 2.7.12 (default, Nov 12 2018, 14:36:49)
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>>
+>>> from  booktest.models import BookInfo
+>>> from  datetime import datetime
+>>> b=BookInfo.create('abc',datetime(1990,1,1))  #如果create方法没有，就保存一下pycharm的models.py文件,然后再查看项目下文件里有没有create方法
+>>> b.save()
+/home/sige/.virtualenvs/h5/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1474: RuntimeWarning: DateTimeField BookInfo.bpub_date received a naive datetime (1990-01-01 00:00:00) while time zone support is active.
+  RuntimeWarning)
+mysql> select  *  from  bookinfo;
++----+-----------------+----------------------------+-------+---------+----------+
+| id | btitle          | pub_date                   | bread | bcommet | isDelete |
++----+-----------------+----------------------------+-------+---------+----------+
+|  1 | 射雕英雄传      | 1980-05-01 00:00:00.000000 |    12 |      34 |        0 |
+|  2 | 天龙八部        | 1986-07-24 00:00:00.000000 |    36 |      40 |        1 |
+|  3 | 笑傲江湖        | 1995-12-24 00:00:00.000000 |    20 |      80 |        1 |
+|  4 | 雪山飞狐        | 1987-11-11 00:00:00.000000 |    58 |      24 |        0 |
+|  5 | abc             | 1990-01-01 00:00:00.000000 |     0 |       0 |        0 |
++----+-----------------+----------------------------+-------+---------+----------+
+5 rows in set (0.00 sec)
+(h5) sige@sige1:~/Desktop/projects/test2$ python  manage.py  shell
+Python 2.7.12 (default, Nov 12 2018, 14:36:49)
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from booktest.models import BookInfo
+>>> from datetime import datetime
+>>> b=BookInfo.books2.create('123',datetime(2017,1,1))
+>>> b.save()
+/home/sige/.virtualenvs/h5/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1474: RuntimeWarning: DateTimeField BookInfo.bpub_date received a naive datetime (2017-01-01 00:00:00) while time zone support is active.
+  RuntimeWarning)
+mysql> select  *  from  bookinfo;
++----+-----------------+----------------------------+-------+---------+----------+
+| id | btitle          | pub_date                   | bread | bcommet | isDelete |
++----+-----------------+----------------------------+-------+---------+----------+
+|  1 | 射雕英雄传      | 1980-05-01 00:00:00.000000 |    12 |      34 |        0 |
+|  2 | 天龙八部        | 1986-07-24 00:00:00.000000 |    36 |      40 |        1 |
+|  3 | 笑傲江湖        | 1995-12-24 00:00:00.000000 |    20 |      80 |        1 |
+|  4 | 雪山飞狐        | 1987-11-11 00:00:00.000000 |    58 |      24 |        0 |
+|  5 | abc             | 1990-01-01 00:00:00.000000 |     0 |       0 |        0 |
+|  6 | 123             | 2017-01-01 00:00:00.000000 |     0 |       0 |        0 |
++----+-----------------+----------------------------+-------+---------+----------+
+6 rows in set (0.00 sec)
+(h5) sige@sige1:~/Desktop/projects/test2$ python  manage.py  shell
+Python 2.7.12 (default, Nov 12 2018, 14:36:49)
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from  booktest.models import  BookInfo
+>>> BookInfo.objects.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'BookInfo' has no attribute 'objects'
+>>> BookInfo.books2.all()
+[<BookInfo: BookInfo object>, <BookInfo: BookInfo object>, <BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+>>> BookInfo.books2.values()
+[{'bcommet': 34L, 'btitle': u'\u5c04\u96d5\u82f1\u96c4\u4f20', 'bpub_date': datetime.datetime(1980, 5, 1, 0, 0, tzinfo=<UTC>), 'isDelete': False, u'id': 1L, 'bread': 12L}, {'bcommet': 24L, 'btitle': u'\u96ea\u5c71\u98de\u72d0', 'bpub_date': datetime.datetime(1987, 11, 11, 0, 0, tzinfo=<UTC>), 'isDelete': False, u'id': 4L, 'bread': 58L}, {'bcommet': 0L, 'btitle': u'abc', 'bpub_date': datetime.datetime(1990, 1, 1, 0, 0, tzinfo=<UTC>), 'isDelete': False, u'id': 5L, 'bread': 0L}, {'bcommet': 0L, 'btitle': u'123', 'bpub_date': datetime.datetime(2017, 1, 1, 0, 0, tzinfo=<UTC>), 'isDelete': False, u'id': 6L, 'bread': 0L}]
+>>> BookInfo.books2.count()
+4
+>>> BookInfo.books1.filter(isDelete=True)
+[<BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+>>> BookInfo.books1.filter(btitle__contains='传')
+[<BookInfo: BookInfo object>]
+>>> BookInfo.books1.filter(id__in=[1,2,3])
+[<BookInfo: BookInfo object>, <BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+>>> BookInfo.books1.filter(bpub_date__year=1990)
+[<BookInfo: BookInfo object>]
+>>> BookInfo.books1.filter(heroinfo__hcontent__contains='八')
+[]
