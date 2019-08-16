@@ -1,0 +1,27 @@
+#manage.py(os.environ.setdefault("DJANGO_SETTINGS_MODULE", "test3.settings"))->settings.py(ROOT_URLCONF = 'test3.urls')
+#->test3/urls.py(url(r'^booktest/', include('booktest.urls')))->booktest/urls.py(url(r'^$',views.index),)
+#->booktest/views.py(def index(request):)
+#(h5) sige@sige1:~/Desktop/projects$ django-admin startproject test3
+#(h5) sige@sige1:~/Desktop/projects$ cd  test3
+#(h5) sige@sige1:~/Desktop/projects/test3$ python manage.py startapp booktest
+#(h5) sige@sige1:~/Desktop/projects/test3$ python manage.py runserver
+#http://127.0.0.1:8000/booktest/
+#http://127.0.0.1:8000/booktest/123
+#http://127.0.0.1:8000/booktest/2016/12/27/
+#http://127.0.0.1:8000/booktest/getTest1/
+#views.py->urls.py->templates(booktest)(postTest1)
+#http://127.0.0.1:8000/booktest/postTest1/
+#http://127.0.0.1:8000/booktest/cookieTest/
+
+谷歌浏览器查看form data的方法
+打开登录页面
+
+按下f12
+
+打开network
+
+按下网页里登录的按键（不要写入任何信息）
+
+出现的新连接里就会有form data
+
+（按一下登录页面很关键，许多人都不知道这一点）
