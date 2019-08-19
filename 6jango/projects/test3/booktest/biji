@@ -12,6 +12,8 @@
 #views.py->urls.py->templates(booktest)(postTest1)
 #http://127.0.0.1:8000/booktest/postTest1/
 #http://127.0.0.1:8000/booktest/cookieTest/
+#http://127.0.0.1:8000/booktest/redTest1/
+#http://127.0.0.1:8000/booktest/session2_handle/
 
 谷歌浏览器查看form data的方法
 打开登录页面
