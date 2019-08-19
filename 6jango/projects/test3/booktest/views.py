@@ -42,7 +42,7 @@ def postTest2(request):
 #cookie练习
 def cookieTest(request):
     response=HttpResponse()
-    cookie=response.cookies
+    cookie=request.COOKIES
     if cookie.has_key('t1'):
         response.write(cookie['t1'])
     # response.set_cookie('t1','abc')
