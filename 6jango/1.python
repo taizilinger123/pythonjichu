@@ -458,3 +458,76 @@ AttributeError: type object 'BookInfo' has no attribute 'objects'
 [<BookInfo: BookInfo object>]
 >>> BookInfo.books1.filter(heroinfo__hcontent__contains='八')
 [<BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+####################################
+python3 manage.py makemigrations
+python3 manage.py migrate
+还是不能生成表,提示:No changes detected
+首先删除了app对应目录下的数据库对应的文件和缓存文件:rm -rf migrations/ __pycache__/
+然后发现有一张django_migrations表,里面记录这有关创建表的记录,删除对应的数据表:
+delete from django_migrations where app='yourappname';
+(h5) sige@sige1:~/Desktop/projects/test3$ mysql  -uroot  -p123456
+mysql> use  test2;
+mysql> delete  from  django_migrations  where  app='booktest';
+Query OK, 1 row affected (0.40 sec)
+mysql> delete  from  django_migrations  where  app='sessions';
+Query OK, 1 row affected (0.02 sec)
+mysql> drop  table  django_session;
+mysql> exit;
+(h5) sige@sige1:~/Desktop/projects/test3$ python manage.py makemigrations
+No changes detected
+(h5) sige@sige1:~/Desktop/projects/test3$ python manage.py migrate
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, messages
+  Apply all migrations: admin, contenttypes, auth, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying sessions.0001_initial... OK
+#########################################
+(h5) sige@sige1:~$ pip  install  django-redis-sessions
+sige@sige1:~$ cat  /etc/rc.local
+/usr/local/bin/redis-server /etc/redis.conf
+/usr/local/bin/redis-server /etc/redis/redis.conf
+/home/sige/Downloads/pycharm-2019.2/bin/pycharm.sh
+/home/sige/navicat121_premium_en_x64/start_navicat
+/usr/lib/notepadqq/notepadqq.sh
+/usr/bin/google-chrome-stable
+sige@sige1:~$ sudo  /usr/local/bin/redis-server /etc/redis/redis.conf
+sige@sige1:~$ ps  aux |  grep  redis
+root     21295  0.0  0.0  39992  2744 ?        Ssl  16:26   0:00 /usr/local/bin/redis-server 127.0.0.1:6379
+sige     21301  0.0  0.0  15972   936 pts/23   S+   16:26   0:00 grep --color=auto redis
+sige@sige1:~$ redis-cli
+127.0.0.1:6379> keys *
+1) "py6"
+2) "py3"
+3) "py11"
+4) "abc"
+5) "py7"
+6) "py61"
+7) "py4"
+8) "py5"
+9) "py10"
+http://127.0.0.1:8000/booktest/session1/
+127.0.0.1:6379> keys *
+ 1) "py6"
+ 2) "py3"
+ 3) "py11"
+ 4) "abc"
+ 5) "py7"
+ 6) "py61"
+ 7) "auqvs5tzl8nhda41nkj7abekbdet137a"
+ 8) "py4"
+ 9) "py5"
+10) "py10"
+127.0.0.1:6379> get "auqvs5tzl8nhda41nkj7abekbdet137a"
+"MjkzNDc3YjIzNjY5MjY1NzEwNmQ1MDFmY2Y2MWVlMzM0ZTJlMWJjZTp7Im15bmFtZSI6ImFiYyIsIl9zZXNzaW9uX2V4cGlyeSI6MH0="
+https://base64.supfree.net/
+MjkzNDc3YjIzNjY5MjY1NzEwNmQ1MDFmY2Y2MWVlMzM0ZTJlMWJjZTp7Im15bmFtZSI6ImFiYyIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=
+
+
+在google浏览器中按f12的network可以看到2rw155d6miumn0kw8eq6luvzymb277d3
+在127.0.0.1:6379> keys *里可以看到  2rw155d6miumn0kw8eq6luvzymb277d3
+所以说session依赖redis
