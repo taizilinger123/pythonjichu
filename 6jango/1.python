@@ -364,10 +364,10 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> b.save()
 /home/sige/.virtualenvs/h5/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1474: RuntimeWarning: DateTimeField BookInfo.bpub_date received a naive datetime (2017-01-01 00:00:00) while time zone support is active.
   RuntimeWarning)
-insert into booktest_bookinfo(btitle,bpub_date,bread,bcommet,isDelete) values('射雕英雄传','1980-5-1',12,34,0);
-insert into booktest_bookinfo(btitle,bpub_date,bread,bcommet,isDelete) values('天龙八部','1986-7-24',36,40,0);
-insert into booktest_bookinfo(btitle,bpub_date,bread,bcommet,isDelete) values('笑傲江湖','1995-12-24',20,80,0);
-insert into booktest_bookinfo(btitle,bpub_date,bread,bcommet,isDelete) values('雪山飞狐','1987-11-11',58,24,0);
+insert into booktest_bookinfo(btitle,pub_date,bread,bcommet,isDelete) values('射雕英雄传','1980-5-1',12,34,0);
+insert into booktest_bookinfo(btitle,pub_date,bread,bcommet,isDelete) values('天龙八部','1986-7-24',36,40,0);
+insert into booktest_bookinfo(btitle,pub_date,bread,bcommet,isDelete) values('笑傲江湖','1995-12-24',20,80,0);
+insert into booktest_bookinfo(btitle,pub_date,bread,bcommet,isDelete) values('雪山飞狐','1987-11-11',58,24,0);
 mysql> select  *  from  bookinfo;
 +----+-----------------+----------------------------+-------+---------+----------+
 | id | btitle          | pub_date                   | bread | bcommet | isDelete |
