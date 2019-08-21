@@ -364,7 +364,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> b.save()
 /home/sige/.virtualenvs/h5/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1474: RuntimeWarning: DateTimeField BookInfo.bpub_date received a naive datetime (2017-01-01 00:00:00) while time zone support is active.
   RuntimeWarning)
-<<<<<<< HEAD
 insert into booktest_bookinfo(btitle,bpub_date,bread,bcommet,isDelete) values('射雕英雄传','1980-5-1',12,34,0);
 insert into booktest_bookinfo(btitle,bpub_date,bread,bcommet,isDelete) values('天龙八部','1986-7-24',36,40,0);
 insert into booktest_bookinfo(btitle,bpub_date,bread,bcommet,isDelete) values('笑傲江湖','1995-12-24',20,80,0);
@@ -375,12 +374,6 @@ insert into booktest_bookinfo(btitle,pub_date,bread,bcommet,isDelete) values
 ('天龙八部','1986-7-24',36,40,0),
 ('笑傲江湖','1995-12-24',20,80,0),
 ('雪山飞狐','1987-11-11',58,24,0);
-=======
-insert into booktest_bookinfo(btitle,pub_date,bread,bcommet,isDelete) values('射雕英雄传','1980-5-1',12,34,0);
-insert into booktest_bookinfo(btitle,pub_date,bread,bcommet,isDelete) values('天龙八部','1986-7-24',36,40,0);
-insert into booktest_bookinfo(btitle,pub_date,bread,bcommet,isDelete) values('笑傲江湖','1995-12-24',20,80,0);
-insert into booktest_bookinfo(btitle,pub_date,bread,bcommet,isDelete) values('雪山飞狐','1987-11-11',58,24,0);
->>>>>>> 313e3f6db3932ffe14b4241760039715111fccb8
 mysql> select  *  from  bookinfo;
 +----+-----------------+----------------------------+-------+---------+----------+
 | id | btitle          | pub_date                   | bread | bcommet | isDelete |
@@ -563,3 +556,21 @@ MjkzNDc3YjIzNjY5MjY1NzEwNmQ1MDFmY2Y2MWVlMzM0ZTJlMWJjZTp7Im15bmFtZSI6ImFiYyIsIl9z
 在google浏览器中按f12的network可以看到2rw155d6miumn0kw8eq6luvzymb277d3
 在127.0.0.1:6379> keys *里可以看到  2rw155d6miumn0kw8eq6luvzymb277d3
 所以说session依赖redis
+#################################################
+(h5) sige@sige1:~$ cd  ~/Desktop/
+(h5) sige@sige1:~/Desktop$ ls
+bak  bak.sql  projects
+(h5) sige@sige1:~/Desktop$ cd  projects/
+(h5) sige@sige1:~/Desktop/projects$ ls
+test1  test2  test3
+(h5) sige@sige1:~/Desktop/projects$ django-admin startproject test4
+(h5) sige@sige1:~/Desktop/projects$ ls
+test1  test2  test3  test4
+(h5) sige@sige1:~/Desktop/projects$ cd  test4
+(h5) sige@sige1:~/Desktop/projects/test4$ python manage.py  startapp booktest
+(h5) sige@sige1:~/Desktop/projects/test4$ ls
+booktest  manage.py  test4
+(h5) sige@sige1:~/Desktop/projects/test4$ python manage.py runserver
+(h5) sige@sige1:~/Desktop/projects/test4$ ifconfig
+(h5) sige@sige1:~/Desktop/projects/test4$ python manage.py runserver  10.239.177.85:8000
+http://10.239.177.85:8000/csrf1
