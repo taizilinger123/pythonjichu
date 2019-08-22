@@ -574,3 +574,5 @@ booktest  manage.py  test4
 (h5) sige@sige1:~/Desktop/projects/test4$ ifconfig
 (h5) sige@sige1:~/Desktop/projects/test4$ python manage.py runserver  10.239.177.85:8000
 http://10.239.177.85:8000/csrf1
+(h5) sige@sige1:~/Desktop/projects/test4$ pip  install pillow
+http://10.239.177.85:8000/verifyTest1
