@@ -576,3 +576,109 @@ booktest  manage.py  test4
 http://10.239.177.85:8000/csrf1
 (h5) sige@sige1:~/Desktop/projects/test4$ pip  install pillow
 http://10.239.177.85:8000/verifyTest1
+(h5) sige@sige1:~/Desktop/projects$ django-admin startproject test5
+(h5) sige@sige1:~/Desktop/projects$ ls
+test1  test2  test3  test4  test5
+(h5) sige@sige1:~/Desktop/projects$ cd  test5
+(h5) sige@sige1:~/Desktop/projects/test5$ ls
+manage.py  test5
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py startapp booktest
+(h5) sige@sige1:~/Desktop/projects/test5$ ls
+booktest  manage.py  test5
+(h5) sige@sige1:~/Desktop/projects/test5$ pip install pillow==3.4.1
+(h5) sige@sige1:~/Desktop/projects/test5$ pip list
+Package               Version
+--------------------- -------
+Django                1.8.2
+django-redis-sessions 0.6.1
+MySQL-python          1.2.5
+Pillow                3.4.1
+pip                   19.2.1
+redis                 3.3.7
+setuptools            41.0.1
+wheel                 0.33.4
+(h5) sige@sige1:~/Desktop/projects/test5/static/media$ sudo  chmod o+w  /home/sige/Desktop/projects/test5/static/media
+http://localhost:8000/uploadPic
+/uploadHandle----->http://localhost:8000/uploadHandle
+uploadHandle------>http://localhost:8000/uploadPic/uploadHandle
+模板：变量{{}}、标签{%%}、过滤器|、注释{##}
+     继承:block,extends,block 名称
+     转义|safe,{%autoescape off%}
+     csrf
+
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py createsuperuser
+Username (leave blank to use 'sige'): python
+Email address: python@163.com
+Password:123456
+Password (again):123456
+Superuser created successfully.
+sige@sige1:~$ mysql  -uroot  -p123456
+mysql> drop  database  test2;
+mysql> create  database test2  charset=utf8;
+重新迁移一般来说删除migrations->0001_initial.py,如果不行就删除数据库重新创建数据库就好了
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py makemigrations
+Migrations for 'booktest':
+  0001_initial.py:
+    - Create model BookInfo
+    - Create model HeroInfo
+    - Create model UserInfo
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py migrate
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, messages
+  Apply all migrations: admin, contenttypes, sessions, auth, booktest
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying booktest.0001_initial... OK
+  Applying sessions.0001_initial... OK
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py createsuperuser
+Username (leave blank to use 'sige'): python
+Email address: python@163.com
+Password: 123456
+Password (again): 123456
+Superuser created successfully.
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py  runserver
+sige@sige1:~$ mysql  -uroot  -p123456
+mysql> use test2;
+mysql> show  tables;
++----------------------------+
+| Tables_in_test2            |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| booktest_bookinfo          |
+| booktest_heroinfo          |
+| booktest_userinfo          |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
++----------------------------+
+13 rows in set (0.00 sec)
+
+mysql> desc   booktest_userinfo;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| uname    | varchar(10) | NO   |     | NULL    |                |
+| upwd     | varchar(40) | NO   |     | NULL    |                |
+| isDelete | tinyint(1)  | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)

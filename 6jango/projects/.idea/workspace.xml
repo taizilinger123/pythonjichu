@@ -11,14 +11,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
+        <option value="HTML4 File" />
       </list>
     </option>
   </component>
   <component name="ProjectId" id="1Olq20CMY2hkh4AGxu3gktcfZRx" />
   <component name="PropertiesComponent">
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="DefaultHtmlFileTemplate" value="HTML4 File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/test3/test3" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -59,7 +60,7 @@
       <workItem from="1565163006273" duration="6589000" />
       <workItem from="1565340444215" duration="22785000" />
       <workItem from="1565922147575" duration="686000" />
-      <workItem from="1565924947847" duration="51964000" />
+      <workItem from="1565924947847" duration="76113000" />
     </task>
     <servers />
   </component>
