@@ -700,3 +700,14 @@ mysql> desc  booktest_areainfo;
 | parea_id | int(11)     | YES  | MUL | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 3 rows in set (0.00 sec)
+(h5) sige@sige1:~/Desktop/projects$ django-admin  startproject test6
+(h5) sige@sige1:~/Desktop/projects$
+(h5) sige@sige1:~/Desktop/projects$ ls
+test1  test2  test3  test4  test5  test6
+(h5) sige@sige1:~/Desktop/projects$ cd test6
+(h5) sige@sige1:~/Desktop/projects/test6$ ls
+manage.py  test6
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py  startapp booktest
+(h5) sige@sige1:~/Desktop/projects/test6$ ls
+booktest  manage.py  test6
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py runserver

@@ -21,7 +21,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML4 File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/test3/test3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/test6/static/booktest" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -29,6 +29,7 @@
       <recent name="$PROJECT_DIR$/test3" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test6/static/booktest" />
       <recent name="$PROJECT_DIR$/test3/test3" />
     </key>
   </component>
@@ -60,7 +61,7 @@
       <workItem from="1565163006273" duration="6589000" />
       <workItem from="1565340444215" duration="22785000" />
       <workItem from="1565922147575" duration="686000" />
-      <workItem from="1565924947847" duration="88244000" />
+      <workItem from="1565924947847" duration="96462000" />
     </task>
     <servers />
   </component>
