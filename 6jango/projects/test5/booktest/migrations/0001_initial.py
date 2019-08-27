@@ -11,6 +11,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='AreaInfo',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=20)),
+                ('parea', models.ForeignKey(blank=True, to='booktest.AreaInfo', null=True)),
+            ],
+        ),
+        migrations.CreateModel(
             name='BookInfo',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),

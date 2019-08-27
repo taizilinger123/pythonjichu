@@ -682,3 +682,21 @@ mysql> desc   booktest_userinfo;
 | isDelete | tinyint(1)  | NO   |     | NULL    |                |
 +----------+-------------+------+-----+---------+----------------+
 4 rows in set (0.01 sec)
+sige@sige1:~/pythonjichu/6jango$ mysql  -uroot  -p123456
+mysql> use  test2;
+mysql> create table booktest_areainfo(
+    -> id int primary key,
+    -> title varchar(20),
+    -> parea_id int,
+    -> foreign key(parea_id) references booktest_areainfo(id));
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> desc  booktest_areainfo;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | NO   | PRI | NULL    |       |
+| title    | varchar(20) | YES  |     | NULL    |       |
+| parea_id | int(11)     | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
