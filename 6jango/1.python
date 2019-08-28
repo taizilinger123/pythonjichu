@@ -865,3 +865,7 @@ manage.py  test6
 (h5) sige@sige1:~/Desktop/projects/test6$ ls
 booktest  manage.py  test6
 (h5) sige@sige1:~/Desktop/projects/test6$ python manage.py runserver
+http://localhost:8000/area/
+http://localhost:8000/area/0
+http://localhost:8000/city110000/
+http://localhost:8000/
