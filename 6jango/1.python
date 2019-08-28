@@ -700,6 +700,160 @@ mysql> desc  booktest_areainfo;
 | parea_id | int(11)     | YES  | MUL | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 3 rows in set (0.00 sec)
+mysql>
+mysql>
+mysql> show  databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| py31               |
+| python3            |
+| sys                |
+| test2              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use  test2;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show  tables;
++----------------------------+
+| Tables_in_test2            |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| booktest_areainfo          |
+| booktest_bookinfo          |
+| booktest_heroinfo          |
+| booktest_userinfo          |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
++----------------------------+
+14 rows in set (0.00 sec)
+
+mysql> desc booktest_areainfo;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | NO   | PRI | NULL    |       |
+| title    | varchar(20) | YES  |     | NULL    |       |
+| parea_id | int(11)     | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from  booktest_areainfo;
++--------+--------------+----------+
+| id     | title        | parea_id |
++--------+--------------+----------+
+| 110000 | 北京市       |     NULL |
+| 110100 | 北京市       |   110000 |
+| 110101 | 东城区       |   110100 |
+| 110102 | 西城区       |   110100 |
+| 110103 | 朝阳区       |   110100 |
+| 110104 | 丰台区       |   110100 |
+| 110105 | 石景山区     |   110100 |
+| 110106 | 海淀区       |   110100 |
+| 110107 | 门头沟区     |   110100 |
+| 110108 | 房山区       |   110100 |
+| 110109 | 通州区       |   110100 |
+| 110110 | 顺义区       |   110100 |
+| 110111 | 昌平区       |   110100 |
+| 110112 | 大兴区       |   110100 |
+| 110113 | 怀柔区       |   110100 |
+| 110114 | 平谷区       |   110100 |
+| 110115 | 密云县       |   110100 |
+| 110116 | 延庆县       |   110100 |
+| 120000 | 天津市       |     NULL |
+| 120101 | 天津市       |   120000 |
++--------+--------------+----------+
+20 rows in set (0.00 sec)
+
+mysql> desc booktest_bookinfo;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| btitle   | varchar(20) | NO   |     | NULL    |                |
+| pub_date | datetime(6) | NO   |     | NULL    |                |
+| bread    | int(11)     | NO   |     | NULL    |                |
+| bcommet  | int(11)     | NO   |     | NULL    |                |
+| isDelete | tinyint(1)  | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from  booktest_bookinfo;
++----+-----------------+----------------------------+-------+---------+----------+
+| id | btitle          | pub_date                   | bread | bcommet | isDelete |
++----+-----------------+----------------------------+-------+---------+----------+
+|  1 | 中国一定强      | 2019-08-23 06:26:42.000000 |     0 |       0 |        0 |
+|  2 | 射雕英雄传      | 1980-05-01 00:00:00.000000 |    12 |      34 |        0 |
+|  3 | 天龙八部        | 1986-07-24 00:00:00.000000 |    36 |      40 |        0 |
+|  4 | 笑傲江湖        | 1995-12-24 00:00:00.000000 |    20 |      80 |        0 |
+|  5 | 雪山飞狐        | 1987-11-11 00:00:00.000000 |    58 |      24 |        0 |
++----+-----------------+----------------------------+-------+---------+----------+
+5 rows in set (0.00 sec)
+
+mysql> desc  booktest_heroinfo;
++----------+---------------+------+-----+---------+----------------+
+| Field    | Type          | Null | Key | Default | Extra          |
++----------+---------------+------+-----+---------+----------------+
+| id       | int(11)       | NO   | PRI | NULL    | auto_increment |
+| hname    | varchar(10)   | NO   |     | NULL    |                |
+| hgender  | tinyint(1)    | NO   |     | NULL    |                |
+| hcontent | varchar(1000) | NO   |     | NULL    |                |
+| isDelete | tinyint(1)    | NO   |     | NULL    |                |
+| book_id  | int(11)       | NO   | MUL | NULL    |                |
++----------+---------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select *  from booktest_heroinfo;
++----+--------------+---------+-----------------+----------+---------+
+| id | hname        | hgender | hcontent        | isDelete | book_id |
++----+--------------+---------+-----------------+----------+---------+
+| 18 | 郭靖         |       1 | 降龙十八掌      |        0 |       1 |
+| 19 | 黄蓉         |       0 | 打狗棍法        |        0 |       1 |
+| 20 | 黄药师       |       1 | 弹指神通        |        0 |       1 |
+| 21 | 欧阳锋       |       1 | 蛤蟆功          |        0 |       1 |
+| 22 | 梅超风       |       0 | 九阴白骨爪      |        0 |       1 |
+| 23 | 乔峰         |       1 | 降龙十八掌      |        0 |       2 |
+| 24 | 段誉         |       1 | 六脉神剑        |        0 |       2 |
+| 25 | 虚竹         |       1 | 天山六阳掌      |        0 |       2 |
+| 26 | 王语嫣       |       0 | 神仙姐姐        |        0 |       2 |
+| 27 | 令狐冲       |       1 | 独孤九剑        |        0 |       3 |
+| 28 | 任盈盈       |       0 | 弹琴            |        0 |       3 |
+| 29 | 岳不群       |       1 | 华山剑法        |        0 |       3 |
+| 30 | 东方不败     |       0 | 葵花宝典        |        0 |       3 |
+| 31 | 胡斐         |       1 | 胡家刀法        |        0 |       4 |
+| 32 | 苗若兰       |       0 | 黄衣            |        0 |       4 |
+| 33 | 程灵素       |       0 | 医术            |        0 |       4 |
+| 34 | 袁紫衣       |       0 | 六合拳          |        0 |       4 |
++----+--------------+---------+-----------------+----------+---------+
+17 rows in set (0.00 sec)
+
+mysql> desc booktest_userinfo;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| uname    | varchar(10) | NO   |     | NULL    |                |
+| upwd     | varchar(40) | NO   |     | NULL    |                |
+| isDelete | tinyint(1)  | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from  booktest_userinfo;
+Empty set (0.00 sec)
 (h5) sige@sige1:~/Desktop/projects$ django-admin  startproject test6
 (h5) sige@sige1:~/Desktop/projects$
 (h5) sige@sige1:~/Desktop/projects$ ls
