@@ -869,3 +869,57 @@ http://localhost:8000/area/
 http://localhost:8000/area/0
 http://localhost:8000/city110000/
 http://localhost:8000/
+#####################################################
+(h5) sige@sige1:~/Desktop/projects/test6$ pip install django-tinymce==2.4.0
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test3',                       #该数据库test2->test3
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py makemigrations
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py  migrate
+(h5) sige@sige1:~/Desktop/projects/test6$ python  manage.py  createsuperuser
+Username (leave blank to use 'sige'): python
+Email address: python@163.com
+Password: 123456
+Password (again): 123456
+Superuser created successfully.
+(h5) sige@sige1:~/Desktop/projects/test6$ python  manage.py  runserver
+mysql> use  test3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show  tables;
++----------------------------+
+| Tables_in_test3            |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| booktest_areainfo          |
+| booktest_test1             |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
++----------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc  booktest_test1;
++---------+----------+------+-----+---------+----------------+
+| Field   | Type     | Null | Key | Default | Extra          |
++---------+----------+------+-----+---------+----------------+
+| id      | int(11)  | NO   | PRI | NULL    | auto_increment |
+| content | longtext | NO   |     | NULL    |                |
++---------+----------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+
