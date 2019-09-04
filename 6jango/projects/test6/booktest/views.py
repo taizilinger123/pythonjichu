@@ -1,7 +1,9 @@
 #coding=utf-8
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponse
 from models import *
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
 
 def index(request):
     return render(request,'booktest/index.html')
@@ -33,3 +35,18 @@ def htmlEditorHandle(request):
     test1.save()
     context={'content':html}
     return render(request,'booktest/htmlShow.html',context)
+
+#缓存
+#@cache_page(60*10)
+def cache1(request):
+    # return HttpResponse('hello1')
+    # return HttpResponse('hello2')
+    # cache.set('key1','value1',600)
+    # print(cache.get('key1'))
+    # return render(request,'booktest/cache1.html')
+    cache.clear()
+    return HttpResponse('ok')
+
+#全文检索+中文分词
+def mysearch(request):
+    return render(request,'booktest/mysearch.html')

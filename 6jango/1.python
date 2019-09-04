@@ -922,4 +922,78 @@ mysql> desc  booktest_test1;
 | content | longtext | NO   |     | NULL    |                |
 +---------+----------+------+-----+---------+----------------+
 2 rows in set (0.00 sec)
-
+(h5) sige@sige1:~/Desktop/projects/test6$ pip  install  django-redis-cache==1.7.1
+(h5) sige@sige1:~/Desktop/projects/test6$ pip  list
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+Package               Version
+--------------------- -------
+Django                1.8.2      #版本不能变
+django-redis-cache    1.7.1      #版本不能变
+django-redis-sessions 0.5.6
+django-tinymce        2.4.0
+MySQL-python          1.2.5
+Pillow                3.4.1
+pip                   19.2.1
+pytz                  2019.2
+redis                 2.10.5     #版本不能变
+setuptools            41.0.1
+wheel                 0.33.4
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py  runserver
+http://127.0.0.1:8000/cache1/
+sige@sige1:~$ ps aux |  grep  redis
+root     21295  0.0  0.0  39992  3616 ?        Ssl  8月19  10:38 /usr/local/bin/redis-server 127.0.0.1:6379
+sige     27779  0.0  0.0  15972  1088 pts/22   S+   11:07   0:00 grep --color=auto redis
+sige@sige1:~$ redis-cli
+127.0.0.1:6379> select 1
+OK
+127.0.0.1:6379[1]> keys *
+1) ":1:views.decorators.cache.cache_page..GET.b8ae1c07a54f3e5305c8ec159f5ddea7.d41d8cd98f00b204e9800998ecf8427e.en-us.UTC"
+2) ":1:views.decorators.cache.cache_header..b8ae1c07a54f3e5305c8ec159f5ddea7.en-us.UTC"
+127.0.0.1:6379[1]> get :1:views.decorators.cache.cache_page..GET.b8ae1c07a54f3e5305c8ec159f5ddea7.d41d8cd98f00b204e9800998ecf8427e.en-us.UTC
+"\x80\x02cdjango.http.response\nHttpResponse\nq\x01)\x81q\x02}q\x03(U\rreason_phraseq\x04X\x02\x00\x00\x00OKq\x05U\x0e_handler_classq\x06NU\b_headersq\a}q\b(U\rlast-modifiedU\rLast-ModifiedU\x1dWed, 04 Sep 2019 03:03:48 GMT\x86U\aexpiresU\aExpiresU\x1dWed, 04 Sep 2019 03:13:48 GMT\x86U\x0ccontent-typeU\x0cContent-TypeU\x18text/html; charset=utf-8\x86U\rcache-controlU\rCache-ControlU\x0bmax-age=600\x86uU\b_charsetq\tNU\x11_closable_objectsq\n]U\acookiesq\x0bcdjango.http.cookie\nSimpleCookie\nq\x0c)\x81q\r}q\x0ebU\x06closedq\x0f\x89U\n_containerq\x10]q\x11U\x06hello1q\x12aub."
+127.0.0.1:6379[1]> del ":1:views.decorators.cache.cache_page..GET.b8ae1c07a54f3e5305c8ec159f5ddea7.d41d8cd98f00b204e9800998ecf8427e.en-us.UTC"
+(integer) 1
+127.0.0.1:6379[1]> del ":1:views.decorators.cache.cache_header..b8ae1c07a54f3e5305c8ec159f5ddea7.en-us.UTC"
+(integer) 1
+127.0.0.1:6379[1]> keys *
+(empty list or set)
+127.0.0.1:6379[1]> keys *
+1) ":1:template.cache.hello.d41d8cd98f00b204e9800998ecf8427e"
+127.0.0.1:6379[1]> get ":1:template.cache.hello.d41d8cd98f00b204e9800998ecf8427e"
+"\x80\x02cdjango.utils.safestring\nSafeText\nq\x01X\b\x00\x00\x00\nhello1\nq\x02\x85\x81q\x03}q\x04b."
+127.0.0.1:6379[1]> get :1:template.cache.hello.d41d8cd98f00b204e9800998ecf8427e
+"\x80\x02cdjango.utils.safestring\nSafeText\nq\x01X\b\x00\x00\x00\nhello1\nq\x02\x85\x81q\x03}q\x04b."
+127.0.0.1:6379[1]> keys *
+1) ":1:key1"
+2) ":1:template.cache.hello.d41d8cd98f00b204e9800998ecf8427e"
+127.0.0.1:6379[1]> get ":1:key1"
+"\x80\x02U\x06value1q\x01."
+127.0.0.1:6379[1]> keys *
+(empty list or set)
+(h5) sige@sige1:~/Desktop/projects/test6$ pip install django-haystack==2.5.1
+(h5) sige@sige1:~/Desktop/projects/test6$ pip install whoosh==2.7.4
+(h5) sige@sige1:~/Desktop/projects/test6$ pip install jieba==0.38
+(h5) sige@sige1:~/Desktop/projects/test6$ pip list
+Package               Version
+--------------------- -------
+Django                1.8.2
+django-haystack       2.5.1
+django-redis-cache    1.7.1
+django-redis-sessions 0.5.6
+django-tinymce        2.4.0
+jieba                 0.38
+MySQL-python          1.2.5
+Pillow                3.4.1
+pip                   19.2.1
+pytz                  2019.2
+redis                 2.10.5
+setuptools            41.0.1
+wheel                 0.33.4
+Whoosh                2.7.4
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py rebuild_index
+WARNING: This will irreparably remove EVERYTHING from your search index in connection 'default'.
+Your choices after this are to restore from backups or rebuild via the `rebuild_index` command.
+Are you sure you wish to continue? [y/N] y
+Removing all documents from your index because you said so.
+All documents removed.
+Indexing 2 test1s
