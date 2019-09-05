@@ -4,6 +4,7 @@ from django.http import JsonResponse,HttpResponse
 from models import *
 from django.views.decorators.cache import cache_page
 from django.core.cache import cache
+from task import *
 
 def index(request):
     return render(request,'booktest/index.html')
@@ -50,3 +51,10 @@ def cache1(request):
 #全文检索+中文分词
 def mysearch(request):
     return render(request,'booktest/mysearch.html')
+
+#celery异步
+def celeryTest(request):
+    # show()
+    show.delay()
+    return HttpResponse('ok')
+

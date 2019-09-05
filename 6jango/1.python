@@ -997,3 +997,83 @@ Are you sure you wish to continue? [y/N] y
 Removing all documents from your index because you said so.
 All documents removed.
 Indexing 2 test1s
+(h5) sige@sige1:~/Desktop/projects$ pip  install  celery==3.1.25
+(h5) sige@sige1:~/Desktop/projects$ pip  install  celery-with-redis==3.0
+(h5) sige@sige1:~/Desktop/projects$ pip  install  django-celery==3.1.17
+(h5) sige@sige1:~/Desktop/projects$ pip list
+Package               Version
+--------------------- --------
+amqp                  1.4.9
+anyjson               0.3.3
+billiard              3.3.0.23
+celery                3.1.25
+celery-with-redis     3.0
+Django                1.8.2
+django-celery         3.1.17
+django-haystack       2.5.1
+django-redis-cache    1.7.1
+django-redis-sessions 0.5.6
+django-tinymce        2.4.0
+jieba                 0.38
+kombu                 3.0.37
+MySQL-python          1.2.5
+Pillow                3.4.1
+pip                   19.2.1
+pytz                  2019.2
+redis                 2.10.5
+setuptools            41.0.1
+wheel                 0.33.4
+Whoosh                2.7.4
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py  migrate
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, tinymce, haystack, messages
+  Apply all migrations: sessions, admin, djcelery, auth, booktest, contenttypes
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying djcelery.0001_initial... OK
+sige@sige1:~$ mysql  -uroot  -p123456
+mysql> use  test3;
+mysql> show  tables;
++----------------------------+
+| Tables_in_test3            |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| booktest_areainfo          |
+| booktest_test1             |
+| celery_taskmeta            |
+| celery_tasksetmeta         |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
+| djcelery_crontabschedule   |
+| djcelery_intervalschedule  |
+| djcelery_periodictask      |
+| djcelery_periodictasks     |
+| djcelery_taskstate         |
+| djcelery_workerstate       |
++----------------------------+
+20 rows in set (0.00 sec)
+
+sige@sige1:~$ ps  aux |  grep  redis
+sige     20173  0.0  0.0  15972   940 pts/22   S+   16:03   0:00 grep --color=auto redis
+root     21295  0.0  0.0  39992  3632 ?        Ssl  8月19  11:28 /usr/local/bin/redis-server 127.0.0.1:6379
+(h5) sige@sige1:~/Desktop/projects/test6$ python  manage.py  celery worker --loglevel=info
+(h5) sige@sige1:~/Desktop/projects/test6$ python  manage.py  runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+September 05, 2019 - 08:14:48
+Django version 1.8.2, using settings 'test6.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+http://127.0.0.1:8000/celeryTest/
