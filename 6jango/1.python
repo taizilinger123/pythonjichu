@@ -1077,3 +1077,112 @@ Django version 1.8.2, using settings 'test6.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 http://127.0.0.1:8000/celeryTest/
+#####################################################
+ 装图形的ubuntu16.04的删除
+  1988  sudo  apt-get  remove  -y    gnome-panel
+ 1989  sudo  apt-get  remove  -y   gnome gnome-panel
+ 1990  sudo  apt-get  remove  -y   gnome
+ 1991  sudo  apt-get  remove  -y  gnome-core
+ 1992  sudo  apt-get  remove  -y  gdm3
+ 1993  sudo  apt-get  remove  -y   gnome gnome-panel
+ 1994  sudo  apt autoremove  gnome gnome-panel -y
+ 1995  reboot
+ ###########################################
+ cd  ~/Desktop/
+ mkdir  pytest
+ cd  pytest
+ mkdir   dailyfresh
+ cd   dailyfresh/
+ mkvirtualenv -p /usr/bin/python py_django
+ workon  py_django
+ (py_django) sige@sige1:~/Desktop/pytest/dailyfresh$ pip  install django==1.8
+ (py_django) sige@sige1:~/Desktop/pytest/dailyfresh$ pip  list
+ Package    Version
+---------- -------
+Django     1.8.2
+pip        19.2.3
+setuptools 41.2.0
+wheel      0.33.6
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh$ django-admin  startproject dailyfresh
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh$ cd  dailyfresh/
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ cd  dailyfresh/
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh/dailyfresh$ ls__init__.py  settings.py  urls.py  wsgi.py
+sige@sige1:~$ service  mysql  start
+sige@sige1:~$ mysql  -uroot  -p123456
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| py31               |
+| python3            |
+| sys                |
+| test2              |
+| test3              |
++--------------------+
+8 rows in set (0.38 sec)
+
+mysql> create database tiantian charset=utf8;
+Query OK, 1 row affected (0.18 sec)
+
+mysql> use  tiantian;
+Database changed
+sige@sige1:~$ git  clone  https://github.com/ISxiancai/dailyfresh.git
+sige@sige1:~/dailyfresh$ sudo  cp  -r  templates/   /home/sige/Desktop/pytest/dailyfresh/dailyfresh
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python  manage.py startapp df_user
+django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module: No module named MySQLdb
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ pip install mysql-python
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python  manage.py startapp df_user
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python  manage.py  makemigrations
+Migrations for 'df_user':
+  0001_initial.py:
+    - Create model UserInfo
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python  manage.py  migrate
+mysql> show  tables;
++----------------------------+
+| Tables_in_tiantian         |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| df_user_userinfo           |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
++----------------------------+
+11 rows in set (0.00 sec)
+mysql> desc df_user_userinfo;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| uname    | varchar(20)  | NO   |     | NULL    |                |
+| upwd     | varchar(40)  | NO   |     | NULL    |                |
+| uemail   | varchar(30)  | NO   |     | NULL    |                |
+| ushou    | varchar(20)  | NO   |     | NULL    |                |
+| uaddress | varchar(100) | NO   |     | NULL    |                |
+| uyoubian | varchar(6)   | NO   |     | NULL    |                |
+| uphone   | varchar(11)  | NO   |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+mysql> select  *  from  df_user_userinfo;
++----+--------+------------------------------------------+----------------+-------+----------+----------+--------+
+| id | uname  | upwd                                     | uemail         | ushou | uaddress | uyoubian | uphone |
++----+--------+------------------------------------------+----------------+-------+----------+----------+--------+
+|  1 | 123456 | 7c222fb2927d828af22f592134e8932480637c0d | 123456@163.com |       |          |          |        |
++----+--------+------------------------------------------+----------------+-------+----------+----------+--------+
+1 row in set (0.00 sec)
+8 rows in set (0.00 sec)
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python  manage.py  runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+September 24, 2019 - 06:49:15
+Django version 1.8.2, using settings 'dailyfresh.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
