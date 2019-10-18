@@ -1186,3 +1186,40 @@ September 24, 2019 - 06:49:15
 Django version 1.8.2, using settings 'dailyfresh.settings'
 Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$python manage.py startapp df_goods
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ pip install  django-tinymce==2.4.0
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ pip install  Pillow==3.4.1
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ pip  list
+Package        Version
+-------------- -------
+Django         1.8.2
+django-tinymce 2.4.0
+MySQL-python   1.2.5
+Pillow         3.4.1
+pip            19.2.3
+setuptools     41.2.0
+wheel          0.33.6
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python manage.py makemigrations
+Migrations for 'df_goods':
+  0001_initial.py:
+    - Create model GoodsInfo
+    - Create model TypeInfo
+    - Add field gtype to goodsinfo
+Migrations for 'df_user':
+  0002_auto_20191018_0739.py:
+    - Alter field uaddress on userinfo
+    - Alter field uphone on userinfo
+    - Alter field ushou on userinfo
+    - Alter field uyoubian on userinfo
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python manage.py  migrate
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, tinymce, messages
+  Apply all migrations: sessions, admin, auth, contenttypes, df_user, df_goods
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying df_goods.0001_initial... OK
+  Applying df_user.0002_auto_20191018_0739... OK
