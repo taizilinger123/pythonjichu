@@ -1,3 +1,5 @@
+#coding=utf-8
+
 """
 Django settings for dailyfresh project.
 
@@ -38,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'df_user',
+    'df_goods',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -108,3 +111,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'static')
 ]
+#开发阶段上传文件目录
+MEDIA_ROOT=os.path.join(BASE_DIR,'static')
+# wo 
+#MEDIA_ROOT='/var/www/dailyfresh/static'
