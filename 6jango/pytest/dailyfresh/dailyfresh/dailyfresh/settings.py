@@ -41,18 +41,19 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'df_user',
     'df_goods',
+    'df_order',
+    'df_cart',
     'tinymce',
 )
 
 MIDDLEWARE_CLASSES = (
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'dailyfresh.urls'
@@ -94,9 +95,24 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
 
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'zh-hans'
+
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -122,3 +138,17 @@ TINYMCE_DEFAULT_CONFIG = {
     'width': 600,
     'height': 400,
 }
+
+# HAYSTACK_CONNECTIONS = {
+#     'default': {
+#         # 使用whoosh引擎
+#         'ENGINE': 'haystack.backends.whoosh_cn_backend.WhooshEngine',
+#         # 索引文件路径
+#         'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+#     }
+# }
+
+# 当添加、修改、删除数据时，自动生成索引
+# HAYSTACK_SIGNAL_PROCESSOR = 'haystack.signals.RealtimeSignalProcessor'
+# 设置每页显示的数目，默认为20，可以自己修改
+# HAYSTACK_SEARCH_RESULTS_PER_PAGE = 15
