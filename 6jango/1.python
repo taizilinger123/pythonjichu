@@ -1256,7 +1256,7 @@ cd  nginx-1.8.1/
 apt-get install openssl -y 
 apt-get install libpcre3 libpcre3-dev -y 
 apt-get install openssl  -y 
-./configure --prefix=/usr/local/nginx
+./configure
 make
 make install
 cd  nginx/
