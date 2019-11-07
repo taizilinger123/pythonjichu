@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,4 +57,64 @@
 		<div class="box"></div>
 	</div>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+
+			$('.box').draggable({
+
+				// 约束元素在父级内拖动
+				containment:'parent',
+                
+                //限制在x轴向拖动
+				axis:'x',
+                
+                //拖动时透明度变为0.6
+				opacity:0.6,
+
+				drag:function(ev,ui){
+                    
+                    // console.log(ui);
+
+                    console.log(ui.position.left);
+
+				}
+
+			});
+		})
+
+
+
+	</script>
+    <style type="text/css">
+    	
+    	.con{
+    		width: 300px;
+    		height: 300px;
+    		border:1px solid #000;
+    		margin: 50px auto 0;
+    	}
+
+    	.box{
+    		width: 40px;
+    		height: 40px;
+    		background-color: gold;
+    		cursor: pointer;
+    	}
+
+    </style>
+</head>
+<body>
+	<div class="con">
+		<div class="box"></div>
+	</div>
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

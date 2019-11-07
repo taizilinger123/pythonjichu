@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,4 +40,47 @@
 	<div class="box">床前明月光</div>
 	<div class="box2">床前明月光</div>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css 透明度</title>
+	<style type="text/css">
+	     body{
+	     	background-color:cyan; 
+	     }
+		 .box{
+		 	width: 200px;
+		 	height: 200px;
+		 	/*background: url(images/location_bg.jpg);*/
+		 	background-color: gold;
+		 	margin: 50px auto 0;
+		 	border:2px solid #000;
+		 	border-radius: 50%;
+		 	/*标准浏览器的透明度设置*/
+            opacity: 0.3;
+            /*兼容IE设置的透明度设置*/
+            filter: alpha(opacity=30);
+            text-align: center;
+            line-height: 200px;
+		 }
+		 .box2{
+		 	width: 200px;
+		 	height: 200px;
+		 	margin: 50px auto 0;
+		 	                   /* r g b 透明度*/
+		 	border:2px solid rgba(0,0,0,0.3);
+		 	border-radius: 50%;
+            text-align: center;
+            line-height: 200px;
+            background-color: rgba(255,215,0,0.3);
+		 }
+	</style>
+</head>
+<body>
+	<div class="box">床前明月光</div>
+	<div class="box2">床前明月光</div>
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

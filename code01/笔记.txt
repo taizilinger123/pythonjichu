@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 In [6]: class A:
    ...:     def __init__(self):
    ...:         a = 10
@@ -117,3 +118,124 @@ AttributeError                            Traceback (most recent call last)
 ----> 1 foo.it
 
 AttributeError: 'Foo' object has no attribute 'it'
+=======
+In [6]: class A:
+   ...:     def __init__(self):
+   ...:         a = 10
+   ...:
+
+In [7]: class B(A):
+   ...:     pass
+   ...:
+   ...:
+
+In [8]: class C(A):
+   ...:     pass
+   ...:
+
+In [9]: class D(B,C):
+   ...:     pass
+   ...:
+
+In [10]: obj_d = D()
+
+In [11]: obj_d.a
+python2的旧事类是深度优先，object新式类是广度优先
+
+In [12]: class Foo(object):
+    ...:     c_pro = 10
+    ...:     @classmethod
+    ...:     def c_met(cls):
+    ...:         pass
+    ...:     def __init__(self):
+    ...:         self.obj_pro = 11
+    ...:
+
+In [13]: foo = Foo()
+
+In [14]: foo.obj_pro
+In [14]: foo.it
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-14-587a18bd4194> in <module>()
+----> 1 foo.it
+
+AttributeError: 'Foo' object has no attribute 'it'
+
+In [15]: dir(foo)
+Out[15]:
+['__class__',
+ '__delattr__',
+ '__dict__',
+ '__doc__',
+ '__format__',
+ '__getattribute__',
+ '__hash__',
+ '__init__',
+ '__module__',
+ '__new__',
+ '__reduce__',
+ '__reduce_ex__',
+ '__repr__',
+ '__setattr__',
+ '__sizeof__',
+ '__str__',
+ '__subclasshook__',
+ '__weakref__',
+ 'c_met',
+ 'c_pro',
+ 'obj_pro']
+
+In [16]: foo.__dict__
+Out[16]: {'obj_pro': 11}
+
+In [17]: dir(Foo)
+Out[17]:
+['__class__',
+ '__delattr__',
+ '__dict__',
+ '__doc__',
+ '__format__',
+ '__getattribute__',
+ '__hash__',
+ '__init__',
+ '__module__',
+ '__new__',
+ '__reduce__',
+ '__reduce_ex__',
+ '__repr__',
+ '__setattr__',
+ '__sizeof__',
+ '__str__',
+ '__subclasshook__',
+ '__weakref__',
+ 'c_met',
+ 'c_pro']
+
+In [18]: Foo.__dict__
+Out[18]:
+dict_proxy({'__dict__': <attribute '__dict__' of 'Foo' objects>,
+            '__doc__': None,
+            '__init__': <function __main__.__init__>,
+            '__module__': '__main__',
+            '__weakref__': <attribute '__weakref__' of 'Foo' objects>,
+            'c_met': <classmethod at 0x6a34970>,
+            'c_pro': 10})
+
+In [19]: foo.__dict__
+Out[19]: {'obj_pro': 11}
+
+In [20]: foo.obj_pro
+Out[20]: 11
+
+In [21]: foo.c_pro
+Out[21]: 10
+
+In [22]: foo.it
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+<ipython-input-22-587a18bd4194> in <module>()
+----> 1 foo.it
+
+AttributeError: 'Foo' object has no attribute 'it'
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005

@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 .box{
 	width:200px;
 	height:200px;
 	-webkit-transform:scale(0.5,0.5);
 	    -ms-transform:scale(0.5,0.5);
 	        transform:scale(0.5,0.5);
+=======
+.box{
+	width:200px;
+	height:200px;
+	-webkit-transform:scale(0.5,0.5);
+	    -ms-transform:scale(0.5,0.5);
+	        transform:scale(0.5,0.5);
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 }

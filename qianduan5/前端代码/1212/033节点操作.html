@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,4 +34,41 @@
 <body>
 	<div id="div1"></div>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>节点操作</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+             
+             var $span = $('<span>span元素</span>');
+             var $p = $('<p>p段落元素</p>');
+
+             var $h = $('<h1>页面标题</h1>');
+              
+             /*
+             $('#div1').append($span);
+             $('#div1').append($p);
+             */
+
+             $span.appendTo($('#div1'));
+             $p.appendTo('#div1');
+             
+
+             // $('#div1').before($h);
+             $h.insertBefore('#div1');
+ 
+             $p.remove();
+		})
+
+
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

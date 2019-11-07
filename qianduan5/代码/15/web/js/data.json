@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 {
 	"code":1,
 	"data":{
 		"name":"tom2016",
 		"age":18
 	}
+=======
+{
+	"code":1,
+	"data":{
+		"name":"tom2016",
+		"age":18
+	}
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 }

@@ -13,6 +13,6 @@ def func(functionName):
 
 @func
 def  test(a, b):
-    print("----test-a=%d,b=%d----"%(a,b))
+    print("----code01-a=%d,b=%d----"%(a,b))
 
 test(11,22)

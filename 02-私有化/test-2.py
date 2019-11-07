@@ -29,14 +29,14 @@ ret = next(a)
 ret = next(a)
 
 
-# def test():
+# def code01():
 #     i = 0
 #     while i < 5:
 #         temp = yield i
 #         print(temp)
 #         i += 1
 #
-# t = test()
+# t = code01()
 # t.__next__()
 # Out[33]: 0
 # t.__next__()
@@ -46,10 +46,10 @@ ret = next(a)
 # haha
 # Out[35]: 2
 
-# t = test()
+# t = code01()
 # t.send("haha")
 # TypeError: can't send non-None value to a just-started generator
-# t = test()
+# t = code01()
 # t.send()
 # TypeError: send() takes exactly one argument(0 given)
 # t.send(None)
@@ -62,7 +62,7 @@ ret = next(a)
 # Out[43]: 2
 #
 #
-# def test():
+# def code01():
 #     i = 0
 #     while i < 5:
 #         if i == 0:
@@ -71,12 +71,12 @@ ret = next(a)
 #             yield i
 #         i += 1
 #
-# t = test()
+# t = code01()
 # t.send(None)
 # Out[46]: 0
 # t.send("haha")
 # Out[47]: 1
-# t = test()
+# t = code01()
 # t.__next__()
 # Out[49]: 0
 # t.send("haha")

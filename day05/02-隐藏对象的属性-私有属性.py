@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-#!/usr/bin/env python
-# -*- coding:utf-8 -*-
+
 class Dog:
 
     def __init__(self, new_name):

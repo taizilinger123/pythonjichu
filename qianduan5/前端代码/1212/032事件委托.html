@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,4 +54,61 @@
 		<li>8</li>
 	</ul>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件委托</title>
+	<style type="text/css">
+		.list{
+			list-style: none;
+		}
+		
+		.list li{
+			height: 30px;
+			background-color: green;
+			margin-bottom: 10px;
+			color: #fff;
+		}
+
+	</style>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+            /*
+			$('.list li').click(function(){
+				alert($(this).html());
+			})
+			*/
+
+            /* 事件委托的写法*/
+
+			$('.list').delegate('li','click',function() {
+                 alert($(this).html());
+                 
+                 //取消委托
+                 // $('.list').undelegate();
+			});
+            
+
+
+		})
+
+
+	</script>
+</head>
+<body>
+	<ul class="list">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<li>6</li>
+		<li>7</li>
+		<li>8</li>
+	</ul>
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

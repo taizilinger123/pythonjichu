@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,4 +41,48 @@
 		<div class="box"></div>
 	</div>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>margin-top 塌陷</title>
+	<style type="text/css">
+		.con{
+			width:300px;
+			height: 200px;
+			background-color: gold;
+			/*line-height: 200px;*/
+
+			/*
+			第一种解决塌陷的方法:
+			border:1px solid gold;
+			*/
+
+			/*
+			第二种解决塌陷的方法:
+			overflow: hidden; 
+			*/
+
+		}
+
+		.box{
+			width: 100px;
+			height: 100px;
+			background-color: green;
+			margin-top: 50px;/*margin-top塌陷*/
+		}
+         /*第三种使用伪类的方法解决塌陷的方法:(常用css黑魔法),使盒子里套盒子的里面的小盒子上下居中*/
+		.clearfix:before{
+            content: "";
+            display:table;
+		}
+	</style>
+</head>
+<body>
+	<div class="con clearfix">
+		<div class="box"></div>
+	</div>
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

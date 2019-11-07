@@ -9,7 +9,7 @@ udpSocket = socket(...)
 udpSocket.bind(...)
 
 
-f = open("test.jpg","bw")
+f = open("code01.jpg","bw")
 
 while True:
 
@@ -45,10 +45,10 @@ import struct
 
 #只要是向网络上发送 多个字节表示1个数值的这样的数据，那么就需要pack
 #python2
-sendData = struct.pack("!H8sb5sb",1,"test.jpg",0,"octet",0)
+sendData = struct.pack("!H8sb5sb",1,"code01.jpg",0,"octet",0)
 
 #python3
-sendData = struct.pack("!H8sb5sb",1,"test.jpg".encode("utf-8"),0,"octet".encode("utf-8"),0)
+sendData = struct.pack("!H8sb5sb",1,"code01.jpg".encode("utf-8"),0,"octet".encode("utf-8"),0)
 
 #!表示 组织的数据是用来传递到网络上的，即大端格式
 #H表示 占用2个字节

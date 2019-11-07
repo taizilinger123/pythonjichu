@@ -87,10 +87,10 @@ def main():
     #老王.安装弹夹到枪中(枪, 弹夹)
     laowang.anzhuang_danjia(ak47, dan_jia)
 
-    #test:测试弹夹的信息
+    #code01:测试弹夹的信息
     # print(dan_jia)
 
-    #test:测试枪的信息
+    #code01:测试枪的信息
     # print(ak47)
 
     # 7.老王拿枪

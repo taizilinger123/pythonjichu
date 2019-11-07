@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,4 +40,47 @@
 <body>
 	<div>欢迎<span id="span01"></span>访问我的主页！</div>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取地址栏参数</title>
+	<script type="text/javascript">
+
+    window.onload = function(){
+        
+        // file:///C:/diwuzhang/1111/048%E8%8E%B7%E5%8F%96%E5%9C%B0%E5%9D%80%E6%A0%8F%E5%8F%82%E6%95%B0.html?aa=jack
+        // 欢迎jack访问我的主页！
+        var Dat = window.location.search;
+
+        // file:///C:/diwuzhang/1111/048%E8%8E%B7%E5%8F%96%E5%9C%B0%E5%9D%80%E6%A0%8F%E5%8F%82%E6%95%B0.html?aa=jack#12
+        var hash = window.location.hash;
+
+        var oSpan = document.getElementById('span01');
+
+
+        var arr = Dat.split('=');
+
+        // alert(arr);
+
+        var name = arr[1];
+
+        oSpan.innerHTML = name;
+
+        alert(hash);
+
+    }
+		
+	
+
+
+
+
+	</script>
+</head>
+<body>
+	<div>欢迎<span id="span01"></span>访问我的主页！</div>
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,4 +48,55 @@
 <body>
 	
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>类的继承</title>
+	<script type="text/javascript">
+		
+		function Fclass(name,age){
+             this.name = name;
+             this.age = age;
+		}
+
+		Fclass.prototype.showname = function(){
+			alert(this.name);
+		}
+
+	    Fclass.prototype.showage = function(){
+			alert(this.age);
+		}
+
+		// 属性用call或者apply的方式来继承
+
+		function Sclass(name,age,job){
+
+			Fclass.call(this,name,age);
+
+			this.job = job;
+		}
+        
+        // 方法继承：将父类的一个实例赋值给子类的原型属性
+		Sclass.prototype = new Fclass();
+
+		Sclass.prototype.showjob = function(){
+
+			alert(this.job);
+		}
+
+		var Tom = new Sclass('tom',18,'engineer');
+
+		Tom.showname();
+		Tom.showage();
+		Tom.showjob();
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

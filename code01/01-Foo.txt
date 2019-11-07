@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 构造一个类Foo
 
 用python的魔法方法实现
@@ -29,3 +30,36 @@ def __getattr__(self, item):
 
 
 
+=======
+构造一个类Foo
+
+用python的魔法方法实现
+
+class Foo
+
+print(Foo().think.different.itcast.itheima)
+
+think different itcast itheima
+
+__init__
+
+__str__
+
+__new__
+
+__del__
+
+__call__
+
+__repr__
+
+def __getattr__(self, item):
+    pass
+
+#Settings->Plugins->Install JetBrains Plugins->输入vim->install
+#菜单栏:tools->vim emulator  关闭vim模式，再点一下就是打开vim模式
+
+
+
+
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005

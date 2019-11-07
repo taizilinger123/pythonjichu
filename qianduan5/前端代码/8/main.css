@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .box{
 	width: 200px;
 	height: 200px;
@@ -19,4 +20,27 @@ Preferences>package setting>AutoPrefixer>Setting-User
 	"browsers":["last 7 versions"],
 	"cascade":true,
 	"remove":true
+=======
+.box{
+	width: 200px;
+	height: 200px;
+	-webkit-transform:scale(0.5,0.5);
+        -ms-transform:scale(0.5,0.5);
+            transform:scale(0.5,0.5);
+}
+
+/*Autoprefixer设置：
+在sublime3里preferences/key Bindings-Users
+{"keys":["ctrl+alt+x"],"command":"autoprefixer"}
+
+last 7 versions:最新的浏览器的7个版本
+cascade:缩进美化属性值
+remove:是否去掉不必要的前缀
+
+Preferences>package setting>AutoPrefixer>Setting-User
+{
+	"browsers":["last 7 versions"],
+	"cascade":true,
+	"remove":true
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 }*/

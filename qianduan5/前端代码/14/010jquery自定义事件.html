@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,4 +45,52 @@
 	<input type="button" name="" value="按钮" id="btn">
 	<input type="button" name="" value="按钮2" id="btn2">
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义事件</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+
+			
+
+			$('#btn').bind('hello',function(){
+				
+				alert('hello!');
+
+			});
+
+
+			$('#btn').bind('click',function(){
+				
+				alert('click');
+
+			});
+
+
+
+
+			$('#btn2').click(function() {
+				$('#btn').trigger('hello');
+				$('#btn').trigger('click');
+			});
+
+
+
+
+
+		})
+
+
+
+	</script>
+</head>
+<body>
+	<input type="button" name="" value="按钮" id="btn">
+	<input type="button" name="" value="按钮2" id="btn2">
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

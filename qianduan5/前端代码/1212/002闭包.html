@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,4 +44,51 @@
 <body>
 	
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包</title>
+	<script type="text/javascript">
+		/*
+		function  aa(n){
+
+			var b = 3;
+
+			function bb(){
+
+				alert(n);
+				alert(b);
+			}
+
+			return bb;
+		}
+
+		var cc = aa(2);
+
+		*/
+
+		var cc = (function(n){
+
+			var b = 3;
+
+			function bb(){
+				alert(n);
+				b++;
+				alert(b);
+			}
+			return bb;
+
+		})(2);
+        
+        cc();
+        cc();
+
+	</script>
+</head>
+<body>
+	
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

@@ -8,7 +8,7 @@ def test(a,b,c=33,*args,**kwargs):#在定义的时候 *,**用来表示后面的�
     print(kwargs)
 
 
-#test(11,22,33,44,55,66,77,task=99,done=89)  #用法:task=99,done=89都是给**kwargs
+#code01(11,22,33,44,55,66,77,task=99,done=89)  #用法:task=99,done=89都是给**kwargs
 
 A = (44,55,66)
 B = {"name":"laowang","age":18}

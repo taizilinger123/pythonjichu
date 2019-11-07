@@ -1,0 +1,479 @@
+[root@mlt-ace2 ~]# yum -y install syslinux xinetd tftp-server
+[root@mlt-ace2 ~]# mkdir  -p  /var/lib/tftpboot/pxelinux.cfg
+[root@mlt-ace2 ~]# cp  /usr/share/syslinux/pxelinux.0  /var/lib/tftpboot/
+[root@mlt-ace2 html]# cat  /etc/xinetd.d/tftp
+# default: off
+# description: The tftp server serves files using the trivial file transfer \
+#	protocol.  The tftp protocol is often used to boot diskless \
+#	workstations, download configuration files to network-aware printers, \
+#	and to start the installation process for some operating systems.
+service tftp
+{
+	socket_type		= dgram
+	protocol		= udp
+	wait			= yes
+	user			= root
+	server			= /usr/sbin/in.tftpd
+	server_args		= -s /var/lib/tftpboot
+	disable			= no
+	per_source		= 11
+	cps			= 100 2
+	flags			= IPv4
+}
+[root@mlt-ace2 ~]# systemctl  start xinetd
+[root@mlt-ace2 ~]# systemctl  enable xinetd
+[root@mlt-ace2 ~]# yum  install -y  dhcp
+
+
+
+
+[root@mlt-ace2 ~]# cat  /etc/dhcp/dhcpd.conf
+# dhcpd.conf
+#
+# Sample configuration file for ISC dhcpd
+#
+
+# option definitions common to all supported networks...
+#option domain-name "example.org";
+#option domain-name-servers ns1.example.org, ns2.example.org;
+
+default-lease-time 600;
+max-lease-time 7200;
+
+# Use this to enble / disable dynamic dns updates globally.
+#ddns-update-style none;
+
+# If this DHCP server is the official DHCP server for the local
+# network, the authoritative directive should be uncommented.
+#authoritative;
+
+# Use this to send dhcp log messages to a different log file (you also
+# have to hack syslog.conf to complete the redirection).
+log-facility local7;
+
+# No service will be given on this subnet, but declaring it helps the
+# DHCP server to understand the network topology.
+
+#subnet 10.152.187.0 netmask 255.255.255.0 {
+#}
+#
+## This is a very basic subnet declaration.
+#
+#subnet 10.254.239.0 netmask 255.255.255.224 {
+#  range 10.254.239.10 10.254.239.20;
+#  option routers rtr-239-0-1.example.org, rtr-239-0-2.example.org;
+#}
+#
+## This declaration allows BOOTP clients to get dynamic addresses,
+## which we don't really recommend.
+#
+#subnet 10.254.239.32 netmask 255.255.255.224 {
+#  range dynamic-bootp 10.254.239.40 10.254.239.60;
+#  option broadcast-address 10.254.239.31;
+#  option routers rtr-239-32-1.example.org;
+#}
+#
+## A slightly different configuration for an internal subnet.
+#subnet 10.5.5.0 netmask 255.255.255.224 {
+#  range 10.5.5.26 10.5.5.30;
+#  option domain-name-servers ns1.internal.example.org;
+#  option domain-name "internal.example.org";
+#  option routers 10.5.5.1;
+#  option broadcast-address 10.5.5.31;
+#  default-lease-time 600;
+#  max-lease-time 7200;
+#}
+#
+## Hosts which require special configuration options can be listed in
+## host statements.   If no address is specified, the address will be
+## allocated dynamically (if possible), but the host-specific information
+## will still come from the host declaration.
+#
+#host passacaglia {
+#  hardware ethernet 0:0:c0:5d:bd:95;
+#  filename "vmunix.passacaglia";
+#  server-name "toccata.fugue.com";
+#}
+#
+## Fixed IP addresses can also be specified for hosts.   These addresses
+## should not also be listed as being available for dynamic assignment.
+## Hosts for which fixed IP addresses have been specified can boot using
+## BOOTP or DHCP.   Hosts for which no fixed address is specified can only
+## be booted with DHCP, unless there is an address range on the subnet
+## to which a BOOTP client is connected which has the dynamic-bootp flag
+## set.
+#host fantasia {
+#  hardware ethernet 08:00:07:26:c0:a5;
+#  fixed-address fantasia.fugue.com;
+#}
+#
+## You can declare a class of clients and then do address allocation
+## based on that.   The example below shows a case where all clients
+## in a certain class get addresses on the 10.17.224/24 subnet, and all
+## other clients get addresses on the 10.0.29/24 subnet.
+#
+#class "foo" {
+#  match if substring (option vendor-class-identifier, 0, 4) = "SUNW";
+#}
+#
+#shared-network 224-29 {
+#  subnet 10.17.224.0 netmask 255.255.255.0 {
+#    option routers rtr-224.example.org;
+#  }
+#  subnet 10.0.29.0 netmask 255.255.255.0 {
+#    option routers rtr-29.example.org;
+#  }
+#  pool {
+#    allow members of "foo";
+#    range 10.17.224.10 10.17.224.250;
+#  }
+#  pool {
+#    deny members of "foo";
+#    range 10.0.29.10 10.0.29.230;
+#  }
+#}
+
+option space pxelinux;
+option pxelinux.magic code 208 = string;
+option pxelinux.configfile code 209 = text;
+option pxelinux.pathprefix code 210 = text;
+option pxelinux.reboottime code 211 = unsigned integer 32;
+option architecture-type code 93 = unsigned integer 16;
+
+subnet 10.239.45.32 netmask 255.255.255.255 {}
+subnet 192.169.20.1 netmask 255.255.255.255 {}
+subnet 192.169.10.0 netmask 255.255.255.0 {
+  range 192.169.10.100 192.169.10.253;
+  option routers 192.169.10.1ss;
+
+  class "pxeclients" {
+    match if substring (option vendor-class-identifier, 0, 9) = "PXEClient";
+    next-server 192.169.10.1;
+
+#    filename "pxelinux/pxelinux.0";
+
+    if option architecture-type = 00:07 {
+      #filename "bootx64.efi";
+      filename "shim.efi";
+    } else {
+      filename "pxelinux/pxelinux.0";
+    }
+  }
+}
+[root@mlt-ace2 ~]# systemctl   enable  dhcpd
+[root@mlt-ace2 network-scripts]# ifconfig  enp134s0f1  down   #删除多余的不用的网卡，没有ip的
+sige@sige1:~/iso$ scp   CentOS-7-x86_64-DVD-1810.iso   root@mlt-ace2:/root
+[root@mlt-ace2 ~]# mkdir  -p  /var/pxe/centos7
+[root@mlt-ace2 ~]# mount  -t  iso9660 -o loop  CentOS-7-x86_64-DVD-1810.iso  /var/pxe/centos7/
+[root@mlt-ace2 ~]# df -h
+Filesystem               Size  Used Avail Use% Mounted on
+/dev/mapper/centos-root   50G   22G   29G  43% /
+devtmpfs                  63G     0   63G   0% /dev
+tmpfs                     63G     0   63G   0% /dev/shm
+tmpfs                     63G   11M   63G   1% /run
+tmpfs                     63G     0   63G   0% /sys/fs/cgroup
+/dev/sda2               1014M  197M  818M  20% /boot
+/dev/sda1                200M   12M  189M   6% /boot/efi
+/dev/mapper/centos-home  392G   33M  392G   1% /home
+tmpfs                     13G     0   13G   0% /run/user/0
+/dev/loop0               4.3G  4.3G     0 100% /var/pxe/centos7
+[root@mlt-ace2 ~]# cd  /var/lib/tftpboot/
+[root@mlt-ace2 tftpboot]# mkdir  centos7.6
+[root@mlt-ace2 tftpboot]# ls
+centos7.6  pxelinux.0  pxelinux.cfg
+[root@mlt-ace2 tftpboot]# cp  /var/pxe/centos7/images/pxeboot/vmlinuz   /var/lib/tftpboot/centos7.6/
+[root@mlt-ace2 tftpboot]# cp  /var/pxe/centos7/images/pxeboot/initrd.img   /var/lib/tftpboot/centos7.6/
+[root@mlt-ace2 tftpboot]# cp /usr/share/syslinux/menu.c32   /var/lib/tftpboot/
+[root@mlt-ace html]# scp  ks-76.cfg   root@mlt-ace2:/var/www/html
+[root@mlt-ace2 html]# mv  ks-76.cfg ks.cfg
+[root@mlt-ace2 html]# cat ks.cfg
+#platform=x86, AMD64, or Intel EM64T
+#version=DEVEL
+# Install OS instead of upgrade
+install
+# Keyboard layouts
+keyboard 'us'
+# Root password
+rootpw --iscrypted $1$akJ8T0bj$Eiuls3j0NXxcscrXa8KUu.
+# Use network installation
+url --url="http://192.169.10.1/repo/centos/7.6.1810/os/x86_64/"
+# System language
+lang en_US
+# Firewall configuration
+firewall --disabled
+# System authorization information
+auth  --useshadow  --passalgo=sha512
+# Use text mode install
+text
+# SELinux configuration
+selinux --disabled
+# Do not configure the X Window System
+skipx
+
+# Network information
+network  --bootproto=dhcp --device=eno1 --activate
+network  --bootproto=dhcp --device=eno2 --activate
+network  --bootproto=dhcp --device=enp61s0f0 --activate
+network  --bootproto=dhcp --device=enp61s0f1 --activate
+# Reboot after installation
+reboot
+# System timezone
+timezone Asia/Shanghai
+# System bootloader configuration
+bootloader --location=mbr
+autopart --type=lvm
+# Clear the Master Boot Record
+zerombr
+# Partition clearing information
+clearpart --all --initlabel
+
+# Packages
+%packages
+@^minimal
+@core
+kexec-tools
+@development
+@X Window System
+vim
+
+%end
+
+%addon com_redhat_kdump --enable --reserve-mb="auto"
+
+%end
+################################手动指定分区大小#################################
+[root@mlt-ace2 html]# cat  ks.cfg
+#platform=x86, AMD64, or Intel EM64T
+#version=DEVEL
+# Install OS instead of upgrade
+install
+# Keyboard layouts
+keyboard 'us'
+# Root password
+rootpw –iscrypted $1$q.Dhoe2u$km7aZHJk.AFXD/nZenLes1
+# Use network installation
+url --url="http://192.169.10.1/repo/centos/7.6.1810/os/x86_64/"
+# System language
+lang en_US
+# Firewall configuration
+firewall --disabled
+# System authorization information
+auth  --useshadow  --passalgo=sha512
+# Use text mode install
+text
+# SELinux configuration
+selinux --disabled
+# Do not configure the X Window System
+skipx
+
+# Network information
+network  --bootproto=dhcp --device=eno1 --activate
+network  --bootproto=dhcp --device=eno2 --activate
+network  --bootproto=dhcp --device=enp61s0f0 --activate
+network  --bootproto=dhcp --device=enp61s0f1 --activate
+# Reboot after installation
+reboot
+# System timezone
+timezone Asia/Shanghai
+# System bootloader configuration
+bootloader --location=mbr
+#autopart --type=lvm
+# Clear the Master Boot Record
+zerombr
+# Partition clearing information
+clearpart --all --initlabel
+# Disk partitioning information
+part /boot --fstype="xfs" --size=1024
+part /boot/efi --fstype="xfs" --size=200
+part swap --fstype="swap" --recommended
+part / --fstype="xfs" --grow --size=1
+# Packages
+%packages
+@^minimal
+@core
+kexec-tools
+@development
+@X Window System
+vim
+
+%end
+
+%addon com_redhat_kdump --enable --reserve-mb="auto"
+
+%end
+[root@mlt-ace tftpboot]# scp  grubx64.efi   root@mlt-ace2:/var/lib/tftpboot/
+[root@mlt-ace tftpboot]# scp  -r  pxelinux/   root@mlt-ace2:/var/lib/tftpboot/
+[root@mlt-ace tftpboot]# scp  -r  shim.efi   root@mlt-ace2:/var/lib/tftpboot/
+[root@mlt-ace tftpboot]# scp  -r  7.6.1810/   root@mlt-ace2:/var/www/html/repo/centos/
+[root@mlt-ace tftpboot]# scp  -r  dhclient.d/  root@mlt-ace2:/etc/dhcp
+[root@mlt-ace tftpboot]# scp  -r  dhclient-exit-hooks.d/  root@mlt-ace2:/etc/dhcp
+[root@mlt-ace tftpboot]# scp  -r  dhcp6.conf  root@mlt-ace2:/etc/dhcp
+[root@mlt-ace tftpboot]# scp  -r  dhcpd6.conf  root@mlt-ace2:/etc/dhcp
+[root@mlt-ace tftpboot]# scp  -r  dhcpd.conf  root@mlt-ace2:/etc/dhcp
+ [root@mlt-ace tftpboot]#   scp  -r  scripts/  root@mlt-ace2:/etc/dhcp
+[root@mlt-ace2 pxelinux.cfg]# pwd
+/var/lib/tftpboot/pxelinux/pxelinux.cfg
+[root@mlt-ace2 pxelinux.cfg]# cat  default
+default vesamenu.c32
+timeout 100
+
+display boot.msg
+
+# Clear the screen when exiting the menu, instead of leaving the menu displayed.
+# For vesamenu, this means the graphical background is still displayed without
+# the menu itself for as long as the screen remains in graphics mode.
+menu clear
+menu background splash.png
+menu title CentOS Linux 7
+menu vshift 8
+menu rows 18
+menu margin 8
+#menu hidden
+menu helpmsgrow 15
+menu tabmsgrow 13
+
+# Border Area
+menu color border * #00000000 #00000000 none
+
+# Selected item
+menu color sel 0 #ffffffff #00000000 none
+
+# Title bar
+menu color title 0 #ff7ba3d0 #00000000 none
+
+# Press [Tab] message
+menu color tabmsg 0 #ff3a6496 #00000000 none
+
+# Unselected menu item
+menu color unsel 0 #84b8ffff #00000000 none
+
+# Selected hotkey
+menu color hotsel 0 #84b8ffff #00000000 none
+
+# Unselected hotkey
+menu color hotkey 0 #ffffffff #00000000 none
+
+# Help text
+menu color help 0 #ffffffff #00000000 none
+
+# A scrollbar of some type? Not sure.
+menu color scrollbar 0 #ffffffff #ff355594 none
+
+# Timeout msg
+menu color timeout 0 #ffffffff #00000000 none
+menu color timeout_msg 0 #ffffffff #00000000 none
+
+# Command prompt text
+menu color cmdmark 0 #84b8ffff #00000000 none
+menu color cmdline 0 #ffffffff #00000000 none
+
+# Do not display the actual menu unless the user presses a key. All that is displayed is a timeout message.
+
+menu tabmsg Press Tab for full configuration options on menu items.
+
+menu separator # insert an empty line
+menu separator # insert an empty line
+
+
+
+label centos-7.6
+  menu label ^Install CentOS Linux 7.6
+  kernel images/centos-7.6/vmlinuz
+  append initrd=images/centos-7.6/initrd.img ip=dhcp inst.repo=http://192.169.10.1/repo/centos/7.6.1810/os/x86_64/
+
+menu separator # insert an empty line
+
+# utilities submenu
+menu begin ^Troubleshooting
+  menu title Troubleshooting
+
+label vesa
+  menu indent count 5
+  menu label Install CentOS Linux 7.4 in ^basic graphics mode
+  text help
+	Try this option out if you're having trouble installing
+	CentOS Linux 7.
+  endtext
+  kernel images/centos-7.4/vmlinuz
+  append initrd=images/centos-7.4/initrd.img ip=dhcp inst.xdriver=vesa nomodeset inst.repo=http://192.169.10.1/repo/centos/7.4.1708/os/x86_64/
+
+label rescue
+  menu indent count 5
+  menu label ^Rescue a CentOS Linux system
+  text help
+	If the system will not boot, this lets you access files
+	and edit config files to try to get it booting again.
+  endtext
+  kernel images/centos-7.4/vmlinuz
+  append initrd=images/centos-7.4/initrd.img rescue
+
+label memtest
+  menu label Run a ^memory test
+  text help
+	If your system is having issues, a problem with your
+	system's memory may be the cause. Use this utility to
+	see if the memory is working correctly.
+  endtext
+  kernel images/centos-7.4/memtest
+
+menu separator # insert an empty line
+
+label local
+  menu label Boot from ^local drive
+  localboot 0xffff
+
+menu separator # insert an empty line
+menu separator # insert an empty line
+
+label returntomain
+  menu label Return to ^main menu
+  menu exit
+
+menu end
+[root@mlt-ace2 pxelinux.cfg]#
+
+[root@mlt-ace2 tftpboot]# pwd
+/var/lib/tftpboot
+[root@mlt-ace2 tftpboot]# cat  grub.cfg
+set default="0"
+
+function load_video {
+  insmod efi_gop
+  insmod efi_uga
+  insmod video_bochs
+  insmod video_cirrus
+  insmod all_video
+}
+
+load_video
+set gfxpayload=keep
+insmod gzio
+insmod part_gpt
+insmod ext2
+
+set timeout=60
+### END /etc/grub.d/00_header ###
+
+search --no-floppy --set=root -l 'CentOS 7 x86_64'
+
+### BEGIN /etc/grub.d/10_linux ###
+menuentry 'KickStart Install CentOS Linux 7.6' --class fedora --class gnu-linux --class gnu --class os {
+        linuxefi (tftp)/pxelinux/images/centos-7.6/vmlinuz inst.ks=http://192.169.10.1/ks.cfg ip=dhcp
+        initrdefi (tftp)/pxelinux/images/centos-7.6/initrd.img
+}
+
+menuentry 'Install CentOS Linux 7.6' --class fedora --class gnu-linux --class gnu --class os {
+        linuxefi (tftp)/pxelinux/images/centos-7.6/vmlinuz inst.repo=http://192.169.10.1/repo/centos/7.6.1810/os/x86_64/ ip=dhcp
+        initrdefi (tftp)/pxelinux/images/centos-7.6/initrd.img
+}
+因根磁盘空间才50G所以把repo目录转移到/home大的磁盘空间下
+[root@mlt-ace2 html]# mv  repo/   /home/repo
+[root@mlt-ace2 html]# ls
+CentOS  ks.cfg  slurm-18.08.4
+[root@mlt-ace2 html]# ln  -s  /home/repo   repo
+[root@mlt-ace2 html]# ll
+total 8
+lrwxrwxrwx 1 root root   27 Jan 10 18:20 CentOS -> /home/root_dir/repos/CentOS
+-rw-r--r-- 1 root root 1192 Jan  9 02:39 ks.cfg
+lrwxrwxrwx 1 root root   10 Jan 10 23:44 repo -> /home/repo
+drwxr-xr-x 9 root root 4096 Jassn  9 22:30 slurm-18.08.4

@@ -1,0 +1,1394 @@
+数据库命令：
+创建create database 数据库名 charset=utf8;
+删除drop database 数据库名;
+查看所有数据库：show databases;
+使用数据库：use 数据库名;
+----------------------------------------
+表命令：
+create table 表名(列...);
+唯一标识的要求：id
+	类型：int unsigned
+	约束1：not null
+	约束2：primary key
+	约束3：auto_increment
+列的格式：列的名称 类型 约束
+create table stu(
+    -> id int not null primary key auto_increment,
+    -> name varchar(10) not null,
+    -> gender bit default 1,
+    -> birthday datetime,
+    -> isDelete bit default 0,
+    -> );
+查看表show tables;
+查看表结构desc 表名;
+修改表：alter table 表名 add|modify|drop 列名 类型 约束;
+alter table stu modify column isDelete bit not null default 0;
+删除表：drop table 表名;
+----------------------------------------
+数据命令：
+添加数据：insert into 表名(列名) values(值),(值)...;
+修改数据：update 表名 set 列1=值1,... where ...;
+删除数据：delete from 表名 where ...;
+逻辑删除：update ....
+备份：mysqldump >
+恢复：mysql <
+##########################################################
+sige@sige1:~$ mysql -uroot  -p123456
+mysql> show  databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| python3            |
+| sys                |
++--------------------+
+mysql> select  version();
++-------------------------+
+| version()               |
++-------------------------+
+| 5.7.25-0ubuntu0.16.04.2 |
++-------------------------+
+mysql> drop database  python3;
+Query OK, 2 rows affected (0.38 sec)
+mysql> show  databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.00 sec)
+
+mysql> create database python3 charset=utf8;
+Query OK, 1 row affected (0.00 sec)
+mysql> use python3;
+Database changed
+mysql> show  tables;
+Empty set (0.00 sec)
+mysql> create table students(
+    -> id int auto_increment primary key not  null,
+    -> name varchar(10) not null,
+    -> gender  bit default 1,
+    -> birthday datetime);
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| students          |
++-------------------+
+1 row in set (0.00 sec)
+mysql> desc  students;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(10) | NO   |     | NULL    |                |
+| gender   | bit(1)      | YES  |     | b'1'    |                |
+| birthday | datetime    | YES  |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> alter table students  add  isDelete bit default  0;
+Query OK, 0 rows affected (0.40 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc  students;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(10) | NO   |     | NULL    |                |
+| gender   | bit(1)      | YES  |     | b'1'    |                |
+| birthday | datetime    | YES  |     | NULL    |                |
+| isDelete | bit(1)      | YES  |     | b'0'    |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+mysql> show  create  table  students;  #查看创建表的sql语句
+| students | CREATE TABLE `students` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) NOT NULL,
+  `gender` bit(1) DEFAULT b'1',
+  `birthday` datetime DEFAULT NULL,
+  `isDelete` bit(1) DEFAULT b'0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 |
+mysql> select database();
++------------+
+| database() |
++------------+
+| python3    |
++------------+
+1 row in set (0.00 sec)
+mysql> desc  students;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name     | varchar(10) | NO   |     | NULL    |                |
+| gender   | bit(1)      | YES  |     | b'1'    |                |
+| birthday | datetime    | YES  |     | NULL    |                |
+| isDelete | bit(1)      | YES  |     | b'0'    |                |
++----------+-------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> insert into  students values(0,'郭靖',1,'1990-1-1',0);
+Query OK, 1 row affected (0.28 sec)
+
+mysql> select * from  students;
++----+--------+--------+---------------------+----------+
+| id | name   | gender | birthday            | isDelete |
++----+--------+--------+---------------------+----------+
+|  1 | 郭靖   |       | 1990-01-01 00:00:00 |          |
++----+--------+--------+---------------------+----------+
+1 row in set (0.00 sec)
+mysql> insert  into  students(name) values('黄蓉');
+Query OK, 1 row affected (0.27 sec)
+
+mysql> select * from  students;
++----+--------+--------+---------------------+----------+
+| id | name   | gender | birthday            | isDelete |
++----+--------+--------+---------------------+----------+
+|  1 | 郭靖   |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉   |       | NULL                |          |
++----+--------+--------+---------------------+----------+
+2 rows in set (0.00 sec)
+mysql> insert  into  students(gender,name) values(0,'小龙女');
+Query OK, 1 row affected (0.28 sec)
+
+mysql> select * from  students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | NULL                |          |
+|  3 | 小龙女    |        | NULL                |          |
++----+-----------+--------+---------------------+----------+
+3 rows in set (0.00 sec)
+mysql> insert  into students(name) values('杨过'),('雕'),('郭襄');
+Query OK, 3 rows affected (0.28 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from  students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | NULL                |          |
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
+|  5 | 雕        |       | NULL                |          |
+|  6 | 郭襄      |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+6 rows in set (0.00 sec)
+mysql> update students set birthday='1990-2-2' where id=2;
+Query OK, 1 row affected (0.29 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from  students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
+|  5 | 雕        |       | NULL                |          |
+|  6 | 郭襄      |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+6 rows in set (0.01 sec)
+mysql> update students set  gender=0,birthday='2017-2-13' where id=6;
+Query OK, 1 row affected (0.29 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from  students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
+|  5 | 雕        |       | NULL                |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |          |
++----+-----------+--------+---------------------+----------+
+6 rows in set (0.00 sec)
+mysql> delete from students where id=5;
+Query OK, 1 row affected (0.28 sec)
+
+mysql> select * from  students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |          |
++----+-----------+--------+---------------------+----------+
+5 rows in set (0.00 sec)
+mysql> update students set isDelete=1 where id=6;  #逻辑删除
+Query OK, 1 row affected (0.28 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> update students  set birthday=('1995-07-05') where id=3;
+Query OK, 1 row affected (0.20 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> update students  set birthday=('2001-10-20') where id=4;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> select * from students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|  4 | 杨过      |       | 2001-10-20 00:00:00 |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
+|  7 | 黄药师    |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+6 rows in set (0.00 sec)
+mysql> select * from  students where isdelete=0;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+4 rows in set (0.01 sec)
+sige@sige1:~$ sudo -s
+[sudo] password for sige:
+root@sige1:~# cd  /var/lib/mysql
+root@sige1:/var/lib/mysql# ls
+auto.cnf         ibdata1      ibtmp1              python3
+debian-5.7.flag  ib_logfile0  mysql               sys
+ib_buffer_pool   ib_logfile1  performance_schema
+root@sige1:/var/lib/mysql# mysqldump -uroot -p python3 > ~/Desktop/bak.sql  #备份
+Enter password:
+root@sige1:/var/lib/mysql# exit
+exit
+sige@sige1:~$ cd  Desktop/
+sige@sige1:~/Desktop$ ls
+bak.sql
+sige@sige1:~/Desktop$ vim bak.sql
+sige@sige1:~/Desktop$ mysql  -uroot -p
+Enter password:
+mysql> create database py31 charset=utf8;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> ^DBye #ctrl+d
+sige@sige1:~/Desktop$ mysql -uroot -p py31 < bak.sql   #恢复
+Enter password:
+sige@sige1:~/Desktop$ mysql  -uroot -p
+mysql> use  py31;
+mysql> show tables;
++----------------+
+| Tables_in_py31 |
++----------------+
+| students       |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select *  from  students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
++----+-----------+--------+---------------------+----------+
+5 rows in set (0.00 sec)
+sige@sige1:~/Desktop$ mysql  -uroot  -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 39
+Server version: 5.7.25-0ubuntu0.16.04.2 (Ubuntu)
+
+Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use  python3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show  tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| students          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> create table  rooms(id int primary key not null,
+    -> title varchar(10));
+Query OK, 0 rows affected (0.35 sec)
+
+mysql> create table  stu(id  int primary key  auto_increment  not null,
+    -> name varchar(10),
+    -> roomid int);
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> alter  table stu  add  constraint stu_room foreign  key(roomid) references  rooms(id);
+Query OK, 0 rows affected (0.46 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert  into stu values(0,'??',314);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`python3`.`stu`, CONSTRAINT `stu_room` FOREIGN KEY (`roomid`) REFERENCES `rooms` (`id`))
+mysql> insert into rooms values(314,'???');
+Query OK, 1 row affected (0.29 sec)
+
+mysql> insert  into stu values(0,'??',314);
+Query OK, 1 row affected (0.29 sec)
+
+mysql> desc stu;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int(11)     | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(10) | YES  |     | NULL    |                |
+| roomid | int(11)     | YES  | MUL | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+#############################################################
+mysql> use  python3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show  tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| rooms             |
+| stu               |
+| students          |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> select  *  from students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
++----+-----------+--------+---------------------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select  id,name  from students;
++----+-----------+
+| id | name      |
++----+-----------+
+|  1 | 郭靖      |
+|  2 | 黄蓉      |
+|  3 | 小龙女    |
+|  4 | 杨过      |
+|  6 | 郭襄      |
++----+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select gender from students;
++--------+
+| gender |
++--------+
+|       |
+|       |
+|        |
+|       |
+|        |
++--------+
+5 rows in set (0.00 sec)
+
+mysql> select distinct  gender from students; #去重复
++--------+
+| gender |
++--------+
+|       |
+|        |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> select distinct  id,gender from students;
++----+--------+
+| id | gender |
++----+--------+
+|  1 |       |
+|  2 |       |
+|  3 |        |
+|  4 |       |
+|  6 |        |
++----+--------+
+5 rows in set (0.00 sec)
+
+mysql> select *  from students where id>3;
++----+--------+--------+---------------------+----------+
+| id | name   | gender | birthday            | isDelete |
++----+--------+--------+---------------------+----------+
+|  4 | 杨过   |       | NULL                |          |
+|  6 | 郭襄   |        | 2017-02-13 00:00:00 |         |
++----+--------+--------+---------------------+----------+
+2 rows in set (0.26 sec)
+
+mysql> select *  from  sub;
+ERROR 1146 (42S02): Table 'python3.sub' doesn't exist
+mysql> show tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| rooms             |
+| stu               |
+| students          |
++-------------------+
+3 rows in set (0.00 sec)
+
+mysql> select *  from subjects;
+ERROR 1146 (42S02): Table 'python3.subjects' doesn't exist
+mysql> select *  from  subjects where id<=4;
+ERROR 1146 (42S02): Table 'python3.subjects' doesn't exist
+mysql> select * from students where name!='黄蓉';
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
++----+-----------+--------+---------------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> select * from students where isdelete=0;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+4 rows in set (0.00 sec)
+mysql> select * from students where id>3 and gender=0;
++----+--------+--------+---------------------+----------+
+| id | name   | gender | birthday            | isDelete |
++----+--------+--------+---------------------+----------+
+|  6 | 郭襄   |        | 2017-02-13 00:00:00 |         |
++----+--------+--------+---------------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where id<4 or isdelete=0;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+4 rows in set (0.00 sec)
+mysql> insert into students(name) values('黄药师');
+Query OK, 1 row affected (0.28 sec)
+mysql> select * from students where name like '黄%';         #模糊查询
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  7 | 黄药师    |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from students where name like '黄_';
++----+--------+--------+---------------------+----------+
+| id | name   | gender | birthday            | isDelete |
++----+--------+--------+---------------------+----------+
+|  2 | 黄蓉   |       | 1990-02-02 00:00:00 |          |
++----+--------+--------+---------------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name like '黄__';
++----+-----------+--------+----------+----------+
+| id | name      | gender | birthday | isDelete |
++----+-----------+--------+----------+----------+
+|  7 | 黄药师    |       | NULL     |          |
++----+-----------+--------+----------+----------+
+1 row in set (0.00 sec)
+mysql> select * from students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
+|  7 | 黄药师    |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from students where name like '%龙%';
++----+-----------+--------+----------+----------+
+| id | name      | gender | birthday | isDelete |
++----+-----------+--------+----------+----------+
+|  3 | 小龙女    |        | NULL     |          |
++----+-----------+--------+----------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from students where name like '黄%' or name like '% 靖';
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  7 | 黄药师    |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+3 rows in set (0.00 sec)
+
+#####################################################################
+mysql> select * from students where id in(1,3,8);     #判断范围
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  3 | 小龙女    |        | NULL                |          |
++----+-----------+--------+---------------------+----------+
+2 rows in set (0.01 sec)
+
+mysql> select * from students where id between 3 and 8;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  3 | 小龙女    |        | NULL                |          |
+|  4 | 杨过      |       | NULL                |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
+|  7 | 黄药师    |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+4 rows in set (0.01 sec)
+
+mysql> select * from students where id between 3 and 8 and gender=1;
++----+-----------+--------+----------+----------+
+| id | name      | gender | birthday | isDelete |
++----+-----------+--------+----------+----------+
+|  4 | 杨过      |       | NULL     |          |
+|  7 | 黄药师    |       | NULL     |          |
++----+-----------+--------+----------+----------+
+2 rows in set (0.00 sec)
+####################################################################
+mysql> select * from students where birthday is null; #判空
++----+-----------+--------+----------+----------+
+| id | name      | gender | birthday | isDelete |
++----+-----------+--------+----------+----------+
+|  3 | 小龙女    |        | NULL     |          |
+|  4 | 杨过      |       | NULL     |          |
+|  7 | 黄药师    |       | NULL     |          |
++----+-----------+--------+----------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students where birthday is not  null;
++----+--------+--------+---------------------+----------+
+| id | name   | gender | birthday            | isDelete |
++----+--------+--------+---------------------+----------+
+|  1 | 郭靖   |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉   |       | 1990-02-02 00:00:00 |          |
+|  6 | 郭襄   |        | 2017-02-13 00:00:00 |         |
++----+--------+--------+---------------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from students where birthday is not  null and gender=0;
++----+--------+--------+---------------------+----------+
+| id | name   | gender | birthday            | isDelete |
++----+--------+--------+---------------------+----------+
+|  6 | 郭襄   |        | 2017-02-13 00:00:00 |         |
++----+--------+--------+---------------------+----------+
+1 row in set (0.00 sec)
+######################################################
+mysql> select count(*) from students;             #聚合函数
++----------+
+| count(*) |
++----------+
+|        6 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from students where isdelete=0;
++----------+
+| count(*) |
++----------+
+|        5 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select max(id) from students where gender=0;
++---------+
+| max(id) |
++---------+
+|       6 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select min(id) from students where isdelete=0;
++---------+
+| min(id) |
++---------+
+|       1 |
++---------+
+1 row in set (0.01 sec)
+
+mysql> select * from students where id=(select min(id) from students where isdelete=0);delete=0);
++----+--------+--------+---------------------+----------+
+| id | name   | gender | birthday            | isDelete |
++----+--------+--------+---------------------+----------+
+|  1 | 郭靖   |       | 1990-01-01 00:00:00 |          |
++----+--------+--------+---------------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select sum(id) from students where gender=1;
++---------+
+| sum(id) |
++---------+
+|      14 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select avg(id) from students where gender=0 and isdelete=0;
++---------+
+| avg(id) |
++---------+
+|  3.0000 |
++---------+
+1 row in set (0.00 sec)
+#############################################################
+mysql> select count(*) from students group by gender;      #分组
++----------+
+| count(*) |
++----------+
+|        2 |
+|        4 |
++----------+
+2 rows in set (0.00 sec)
+
+mysql> select gender,count(*) from students group by gender;
++--------+----------+
+| gender | count(*) |
++--------+----------+
+|        |        2 |
+|       |        4 |
++--------+----------+
+2 rows in set (0.00 sec)
+mysql> select gender,count(*) from students group by gender having gender=0;
++--------+----------+
+| gender | count(*) |
++--------+----------+
+|        |        2 |
++--------+----------+
+1 row in set (0.01 sec)
+mysql> select gender,count(*) from students group by gender having count(*)>2;
++--------+----------+
+| gender | count(*) |
++--------+----------+
+|       |        4 |
++--------+----------+
+1 row in set (0.00 sec)
+
+mysql> select gender,count(*) as rs from students group by gender having rs>2;
++--------+----+
+| gender | rs |
++--------+----+
+|       |  4 |
++--------+----+
+1 row in set (0.00 sec)
+#################################################################
+mysql> create  table  subjects(id int auto_increment primary key not null, title varchar(10) not null); #排序
+Query OK, 0 rows affected (0.35 sec)
+mysql> show  databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| py31               |
+| python3            |
+| sys                |
++--------------------+
+mysql> use  python3;
+Database changed
+mysql> show  tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| rooms             |
+| stu               |
+| students          |
+| subjects          |
++-------------------+
+4 rows in set (0.00 sec)
+mysql> insert into subjects  value(0,'python');
+Query OK, 1 row affected (0.29 sec)
+
+mysql> insert into subjects  value(0,'linux');
+Query OK, 1 row affected (0.28 sec)
+
+mysql> insert into subjects  value(0,'mysql');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into subjects  value(0,'mongodb');
+Query OK, 1 row affected (0.27 sec)
+
+mysql> insert into subjects  value(0,'redis');
+Query OK, 1 row affected (0.28 sec)
+mysql> select *  from subjects;
++----+---------+
+| id | title   |
++----+---------+
+|  1 | python  |
+|  2 | linux   |
+|  3 | mysql   |
+|  4 | mongodb |
+|  5 | redis   |
++----+---------+
+5 rows in set (0.00 sec)
+
+mysql> alter table subjects  add isdelete bit default 0;
+Query OK, 0 rows affected (0.44 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *  from subjects;
++----+---------+----------+
+| id | title   | isdelete |
++----+---------+----------+
+|  1 | python  |          |
+|  2 | linux   |          |
+|  3 | mysql   |          |
+|  4 | mongodb |          |
+|  5 | redis   |          |
++----+---------+----------+
+5 rows in set (0.01 sec)
+mysql> update subjects set isdelete=1 where title in('linux','redis');
+Query OK, 2 rows affected (0.29 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from subjects;
++----+---------+----------+
+| id | title   | isdelete |
++----+---------+----------+
+|  1 | python  |          |
+|  2 | linux   |         |
+|  3 | mysql   |          |
+|  4 | mongodb |          |
+|  5 | redis   |         |
++----+---------+----------+
+5 rows in set (0.00 sec)
+mysql> select *  from subjects where isdelete=0 order by id asc;
++----+---------+----------+
+| id | title   | isdelete |
++----+---------+----------+
+|  1 | python  |          |
+|  3 | mysql   |          |
+|  4 | mongodb |          |
++----+---------+----------+
+3 rows in set (0.00 sec)
+###############################################
+mysql> select * from students limit 2,1;    #分页
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
++----+-----------+--------+---------------------+----------+
+1 row in set (0.00 sec)
+
+mysql> select * from students limit 1,3;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|  4 | 杨过      |       | 2001-10-20 00:00:00 |          |
++----+-----------+--------+---------------------+----------+
+3 rows in set (0.00 sec)
+mysql> select * from students where isdelete=0 limit (n-1)*m,m;  #n从1开始
+###########################################################
+mysql> use python3;      #外键约束
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| rooms             |
+| stu               |
+| students          |
+| subjects          |
++-------------------+
+4 rows in set (0.00 sec)
+
+mysql> create table scores(
+    -> id int  auto_increment primary key not null,
+    -> score decimal(4,1),
+    -> stuid int,
+    -> subid int,
+    -> foreign key(stuid) references students(id),
+    -> foreign key(subid) references subjects(id));
+Query OK, 0 rows affected (0.37 sec)
+
+mysql> select * from scores;
+Empty set (0.00 sec)
+
+mysql> desc scores;
++-------+--------------+------+-----+---------+----------------+
+| Field | Type         | Null | Key | Default | Extra          |
++-------+--------------+------+-----+---------+----------------+
+| id    | int(11)      | NO   | PRI | NULL    | auto_increment |
+| score | decimal(4,1) | YES  |     | NULL    |                |
+| stuid | int(11)      | YES  | MUL | NULL    |                |
+| subid | int(11)      | YES  | MUL | NULL    |                |
++-------+--------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into scores values(0,100,1,1);
+Query OK, 1 row affected (0.31 sec)
+
+mysql> select * from scores;
++----+-------+-------+-------+
+| id | score | stuid | subid |
++----+-------+-------+-------+
+|  1 | 100.0 |     1 |     1 |
++----+-------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> insert into scores values(0,100,10,10);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`python3`.`scores`, CONSTRAINT `scores_ibfk_1` FOREIGN KEY (`stuid`) REFERENCES `students` (`id`))
+###########################################################
+mysql> insert into scores values(0,90,1,2);
+Query OK, 1 row affected (0.29 sec)
+
+mysql> insert into scores values(0,80,1,3);
+Query OK, 1 row affected (0.29 sec)
+
+mysql> insert into scores values(0,99,2,1);
+Query OK, 1 row affected (0.29 sec)
+
+mysql> insert into scores values(0,98,2,2);
+Query OK, 1 row affected (0.28 sec)
+
+mysql> insert into scores values(0,97,2,3);
+Query OK, 1 row affected (0.28 sec)
+
+mysql> insert into scores values(0,90,3,1);
+Query OK, 1 row affected (0.57 sec)
+
+mysql> insert into scores values(0,80,3,2);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into scores values(0,70,3,3);
+Query OK, 1 row affected (0.28 sec)
+
+mysql> select *  from scores;
++----+-------+-------+-------+
+| id | score | stuid | subid |
++----+-------+-------+-------+
+|  1 | 100.0 |     1 |     1 |
+|  3 |  90.0 |     1 |     2 |
+|  4 |  80.0 |     1 |     3 |
+|  5 |  99.0 |     2 |     1 |
+|  6 |  98.0 |     2 |     2 |
+|  7 |  97.0 |     2 |     3 |
+|  8 |  90.0 |     3 |     1 |
+|  9 |  80.0 |     3 |     2 |
+| 10 |  70.0 |     3 |     3 |
++----+-------+-------+-------+
+9 rows in set (0.00 sec)
+##多表关联查询
+mysql> select students.name,subjects.title,scores.score
+    -> from scores
+    -> inner join students on scores.stuid=students.id
+    -> inner join subjects on scores.subid=subjects.id;
++-----------+--------+-------+
+| name      | title  | score |
++-----------+--------+-------+
+| 郭靖      | python | 100.0 |
+| 黄蓉      | python |  99.0 |
+| 小龙女    | python |  90.0 |
+| 郭靖      | linux  |  90.0 |
+| 黄蓉      | linux  |  98.0 |
+| 小龙女    | linux  |  80.0 |
+| 郭靖      | mysql  |  80.0 |
+| 黄蓉      | mysql  |  97.0 |
+| 小龙女    | mysql  |  70.0 |
++-----------+--------+-------+
+9 rows in set (0.00 sec)
+mysql> select students.name,subjects.title,scores.score
+    -> from students
+    -> inner join scores on scores.stuid=students.id
+    -> inner join subjects on scores.subid=subjects.id;
++-----------+--------+-------+
+| name      | title  | score |
++-----------+--------+-------+
+| 郭靖      | python | 100.0 |
+| 黄蓉      | python |  99.0 |
+| 小龙女    | python |  90.0 |
+| 郭靖      | linux  |  90.0 |
+| 黄蓉      | linux  |  98.0 |
+| 小龙女    | linux  |  80.0 |
+| 郭靖      | mysql  |  80.0 |
+| 黄蓉      | mysql  |  97.0 |
+| 小龙女    | mysql  |  70.0 |
++-----------+--------+-------+
+9 rows in set (0.00 sec)
+mysql> select * from  scores inner join students on students.id=scores.stuid; #inner join左边和右边两个表都匹配的出现
++----+-------+-------+-------+----+-----------+--------+---------------------+----------+
+| id | score | stuid | subid | id | name      | gender | birthday            | isDelete |
++----+-------+-------+-------+----+-----------+--------+---------------------+----------+
+|  1 | 100.0 |     1 |     1 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  3 |  90.0 |     1 |     2 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  4 |  80.0 |     1 |     3 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  5 |  99.0 |     2 |     1 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  6 |  98.0 |     2 |     2 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  7 |  97.0 |     2 |     3 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  8 |  90.0 |     3 |     1 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|  9 |  80.0 |     3 |     2 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+| 10 |  70.0 |     3 |     3 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
++----+-------+-------+-------+----+-----------+--------+---------------------+----------+
+9 rows in set (0.00 sec)
+#left join左边和右边两个表都匹配的出现，以left join左边的students为主的出现
+mysql> select * from  students  left  join scores  on students.id=scores.stuid;
++----+-----------+--------+---------------------+----------+------+-------+-------+-------+
+| id | name      | gender | birthday            | isDelete | id   | score | stuid | subid |
++----+-----------+--------+---------------------+----------+------+-------+-------+-------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |    1 | 100.0 |     1 |     1 |
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |    3 |  90.0 |     1 |     2 |
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |    4 |  80.0 |     1 |     3 |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |    5 |  99.0 |     2 |     1 |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |    6 |  98.0 |     2 |     2 |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |    7 |  97.0 |     2 |     3 |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |    8 |  90.0 |     3 |     1 |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |    9 |  80.0 |     3 |     2 |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |   10 |  70.0 |     3 |     3 |
+|  4 | 杨过      |       | 2001-10-20 00:00:00 |          | NULL |  NULL |  NULL |  NULL |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         | NULL |  NULL |  NULL |  NULL |
+|  7 | 黄药师    |       | NULL                |          | NULL |  NULL |  NULL |  NULL |
++----+-----------+--------+---------------------+----------+------+-------+-------+-------+
+12 rows in set (0.00 sec)
+#right join左边和右边两个表都匹配的出现，以right join右边的students为主的出现
+mysql> select * from  scores  right  join  students  on students.id=scores.stuid;
++------+-------+-------+-------+----+-----------+--------+---------------------+----------+
+| id   | score | stuid | subid | id | name      | gender | birthday            | isDelete |
++------+-------+-------+-------+----+-----------+--------+---------------------+----------+
+|    1 | 100.0 |     1 |     1 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|    3 |  90.0 |     1 |     2 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|    4 |  80.0 |     1 |     3 |  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|    5 |  99.0 |     2 |     1 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|    6 |  98.0 |     2 |     2 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|    7 |  97.0 |     2 |     3 |  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|    8 |  90.0 |     3 |     1 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|    9 |  80.0 |     3 |     2 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|   10 |  70.0 |     3 |     3 |  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+| NULL |  NULL |  NULL |  NULL |  4 | 杨过      |       | 2001-10-20 00:00:00 |          |
+| NULL |  NULL |  NULL |  NULL |  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
+| NULL |  NULL |  NULL |  NULL |  7 | 黄药师    |       | NULL                |          |
++------+-------+-------+-------+----+-----------+--------+---------------------+----------+
+12 rows in set (0.00 sec)
+######################################
+mysql> select name,avg(score) from scores
+    -> inner join students on scores.stuid=students.id group by stuid;
++-----------+------------+
+| name      | avg(score) |
++-----------+------------+
+| 郭靖      |   90.00000 |
+| 黄蓉      |   98.00000 |
+| 小龙女    |   80.00000 |
++-----------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select name,avg(score) as avg1 from scores  inner join students on scores.stuid=students.id group by stuid order by avg1;
++-----------+----------+
+| name      | avg1     |
++-----------+----------+
+| 小龙女    | 80.00000 |
+| 郭靖      | 90.00000 |
+| 黄蓉      | 98.00000 |
++-----------+----------+
+3 rows in set (0.00 sec)
+
+select distinct 列*
+from 表1 inner|left|right join 表2 on 表1与表2的关系
+where ...
+group by ... having ...
+order by ... asc|desc
+limit start,count
+
+mysql> select name,sum(score) from  students inner join scores on students.id=scores.stuid where gender=1 group  by  name;
++--------+------------+
+| name   | sum(score) |
++--------+------------+
+| 郭靖   |      270.0 |
+| 黄蓉   |      294.0 |
++--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select name,sum(score) from  students inner join scores on students.id=scores.stuid where gender=1 group  by  students.id;
++--------+------------+
+| name   | sum(score) |
++--------+------------+
+| 郭靖   |      270.0 |
+| 黄蓉   |      294.0 |
++--------+------------+
+2 rows in set (0.00 sec)
+mysql> use  python3;
+mysql> show tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| rooms             |
+| scores            |
+| stu               |
+| students          |
+| subjects          |
++-------------------+
+5 rows in set (0.00 sec)
+
+mysql> create table areas(id int primary key auto_increment not null,
+    -> title varchar(20), pid int,
+    -> foreign key(pid) references areas(id));
+Query OK, 0 rows affected (0.39 sec)
+
+mysql> desc areas;
++-------+-------------+------+-----+---------+----------------+
+| Field | Type        | Null | Key | Default | Extra          |
++-------+-------------+------+-----+---------+----------------+
+| id    | int(11)     | NO   | PRI | NULL    | auto_increment |
+| title | varchar(20) | YES  |     | NULL    |                |
+| pid   | int(11)     | YES  | MUL | NULL    |                |
++-------+-------------+------+-----+---------+----------------+
+3 rows in set (0.00 sec)
+
+mysql> use  python3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show  tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| areas             |
+| rooms             |
+| scores            |
+| stu               |
+| students          |
+| subjects          |
++-------------------+
+6 rows in set (0.00 sec)
+
+mysql> source  areas.sql;   #导入sql语句
+mysql> select  count(*)  from  areas;
++----------+
+| count(*) |
++----------+
+|     3518 |
++----------+
+1 row in set (0.00 sec)
+###############################################
+mysql> select  *  from  scores
+    -> inner  join  students  on  scores.stuid=students.id
+    -> inner  join subjects on  scores.subid=subjects.id;
++----+-----------+--------+---------------------+----------+-------+--------+
+| id | name      | gender | birthday            | isDelete | score | title  |
++----+-----------+--------+---------------------+----------+-------+--------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          | 100.0 | python |
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |  90.0 | linux  |
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |  80.0 | mysql  |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |  99.0 | python |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |  98.0 | linux  |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |  97.0 | mysql  |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |  90.0 | python |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |  80.0 | linux  |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |  70.0 | mysql  |
++----+-----------+--------+---------------------+----------+-------+--------+
+9 rows in set (0.00 sec)
+#视图的创建
+mysql> create view v_1 as
+    -> select stu.*,sco.score,sub.title from scores as sco
+    -> inner join students as stu on sco.stuid=stu.id
+    -> inner join subjects as sub on sco.subid=sub.id;
+Query OK, 0 rows affected (0.30 sec)
+
+mysql> show tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| areas             |
+| rooms             |
+| scores            |
+| stu               |
+| students          |
+| subjects          |
+| v_1               |
++-------------------+
+7 rows in set (0.00 sec)
+mysql> select * from  v_1;
++----+-----------+--------+---------------------+----------+-------+--------+
+| id | name      | gender | birthday            | isDelete | score | title  |
++----+-----------+--------+---------------------+----------+-------+--------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          | 100.0 | python |
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |  90.0 | linux  |
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |  80.0 | mysql  |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |  99.0 | python |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |  98.0 | linux  |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |  97.0 | mysql  |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |  90.0 | python |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |  80.0 | linux  |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |  70.0 | mysql  |
++----+-----------+--------+---------------------+----------+-------+--------+
+9 rows in set (0.00 sec)
+mysql> alter view v_1 as
+    -> select stu.*,sco.score,sub.title from scores as sco
+    -> inner join students as stu on sco.stuid=stu.id
+    -> inner join subjects as sub on sco.subid=sub.id
+    -> where stu.isdelete=0 and sub.isdelete=0;
+Query OK, 0 rows affected (0.30 sec)
+
+mysql> select * from  v_1;
++----+-----------+--------+---------------------+----------+-------+--------+
+| id | name      | gender | birthday            | isDelete | score | title  |
++----+-----------+--------+---------------------+----------+-------+--------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          | 100.0 | python |
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |  80.0 | mysql  |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |  99.0 | python |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |  97.0 | mysql  |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |  90.0 | python |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |  70.0 | mysql  |
++----+-----------+--------+---------------------+----------+-------+--------+
+6 rows in set (0.01 sec)
+mysql> select sheng.id as  sid, sheng.title as  stitle,
+    -> shi.id as  shiid, shi.title as  shititle
+    -> from  areas as  sheng
+    -> inner join areas as  shi  on sheng.id=shi.pid
+    -> limit 0,100;
++--------+--------------+--------+-----------------------+
+| sid    | stitle       | shiid  | shititle              |
++--------+--------------+--------+-----------------------+
+| 110000 | 北京市       | 110100 | 北京市                |
+| 110100 | 北京市       | 110101 | 东城区                |
+| 110100 | 北京市       | 110102 | 西城区                |
+| 110100 | 北京市       | 110103 | 朝阳区                |
+| 110100 | 北京市       | 110104 | 丰台区                |
+| 110100 | 北京市       | 110105 | 石景山区              |
+| 110100 | 北京市       | 110106 | 海淀区                |
+mysql> select sheng.id as  sid, sheng.title as  stitle,
+    -> shi.id as  shiid, shi.title as  shititle
+    -> from  areas as  sheng
+    -> inner join areas as  shi  on sheng.id=shi.pid
+    -> where sheng.pid is  null
+    -> limit 0,100;
++--------+--------------------+--------+--------------------------+
+| sid    | stitle             | shiid  | shititle                 |
++--------+--------------------+--------+--------------------------+
+| 110000 | 北京市             | 110100 | 北京市                   |
+| 120000 | 天津市             | 120100 | 天津市                   |
+| 130000 | 河北省             | 130100 | 石家庄市                 |
+| 130000 | 河北省             | 130200 | 唐山市                   |
+| 130000 | 河北省             | 130300 | 秦皇岛市                 |
+| 130000 | 河北省             | 130400 | 邯郸市                   |
+| 130000 | 河北省             | 130500 | 邢台市                   |
+| 130000 | 河北省             | 130600 | 保定市                   |
+mysql> select sheng.id as  sid, sheng.title as  stitle,
+    -> shi.id as  shiid, shi.title as  shititle
+    -> from  areas as  sheng
+    -> inner join areas as  shi  on sheng.id=shi.pid
+    -> where sheng.pid is  null and sheng.title='山西省';
++--------+-----------+--------+-----------+
+| sid    | stitle    | shiid  | shititle  |
++--------+-----------+--------+-----------+
+| 140000 | 山西省    | 140100 | 太原市    |
+| 140000 | 山西省    | 140200 | 大同市    |
+| 140000 | 山西省    | 140300 | 阳泉市    |
+| 140000 | 山西省    | 140400 | 长治市    |
+| 140000 | 山西省    | 140500 | 晋城市    |
+| 140000 | 山西省    | 140600 | 朔州市    |
+| 140000 | 山西省    | 140700 | 晋中市    |
+| 140000 | 山西省    | 140800 | 运城市    |
+| 140000 | 山西省    | 140900 | 忻州市    |
+| 140000 | 山西省    | 141000 | 临汾市    |
+| 140000 | 山西省    | 141100 | 吕梁市    |
++--------+-----------+--------+-----------+
+11 rows in set (0.00 sec)                        #事物
+mysql> show create table students;  #查看表的创建
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Table    | Create Table                                                                                                                                                                                                                                                                      |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| students | CREATE TABLE `students` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) NOT NULL,
+  `gender` bit(1) DEFAULT b'1',
+  `birthday` datetime DEFAULT NULL,
+  `isDelete` bit(1) DEFAULT b'0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 |
++----------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+1 row in set (0.00 sec)
+mysql> alter  table  areas  engine=innodb;  #更改表的事物引擎为innodb
+#使用事物的情况：当数据被更改时，包括insert,update,delete
+mysql> use  python3;        #mysql事物
+mysql> select * from students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|  4 | 杨过      |       | 2001-10-20 00:00:00 |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
+|  7 | 黄药师    |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+6 rows in set (0.00 sec)
+mysql> begin;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update students set name='小郭' where id=1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> commit;
+Query OK, 0 rows affected (0.27 sec)
+mysql> select * from students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 小郭      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|  4 | 杨过      |       | 2001-10-20 00:00:00 |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
+|  7 | 黄药师    |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+6 rows in set (0.00 sec)
+mysql> begin;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update students set name='郭靖' where id=1;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 郭靖      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|  4 | 杨过      |       | 2001-10-20 00:00:00 |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
+|  7 | 黄药师    |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+6 rows in set (0.00 sec)
+mysql> rollback;
+Query OK, 0 rows affected (0.27 sec)
+mysql> select * from students;
++----+-----------+--------+---------------------+----------+
+| id | name      | gender | birthday            | isDelete |
++----+-----------+--------+---------------------+----------+
+|  1 | 小郭      |       | 1990-01-01 00:00:00 |          |
+|  2 | 黄蓉      |       | 1990-02-02 00:00:00 |          |
+|  3 | 小龙女    |        | 1995-07-05 00:00:00 |          |
+|  4 | 杨过      |       | 2001-10-20 00:00:00 |          |
+|  6 | 郭襄      |        | 2017-02-13 00:00:00 |         |
+|  7 | 黄药师    |       | NULL                |          |
++----+-----------+--------+---------------------+----------+
+6 rows in set (0.00 sec)
+############################################################
+mysql> show index from students;   #查看索引
++----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table    | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| students |          0 | PRIMARY  |            1 | id          | A         |           6 |     NULL | NULL   |      | BTREE      |         |               |
++----------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+1 row in set (0.00 sec)
+mysql> set profiling=1;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> select * from areas where title='北京市';
++--------+-----------+--------+
+| id     | title     | pid    |
++--------+-----------+--------+
+| 110000 | 北京市    |   NULL |
+| 110100 | 北京市    | 110000 |
++--------+-----------+--------+
+2 rows in set (0.00 sec)
+
+mysql> show  profiles;
++----------+------------+---------------------------------------------+
+| Query_ID | Duration   | Query                                       |
++----------+------------+---------------------------------------------+
+|        1 | 0.00349200 | select * from areas where title='北京市'    |
++----------+------------+---------------------------------------------+
+1 row in set, 1 warning (0.00 sec)
+
+mysql> show index from areas;
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| Table | Non_unique | Key_name | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment |
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+| areas |          0 | PRIMARY  |            1 | id          | A         |        3251 |     NULL | NULL   |      | BTREE      |         |               |
+| areas |          1 | pid      |            1 | pid         | A         |         578 |     NULL | NULL   | YES  | BTREE      |         |               |
++-------+------------+----------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+2 rows in set (0.00 sec)
+
+mysql> create index titleIndex on areas(title(20));
+Query OK, 0 rows affected (0.48 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from areas where title='北京市';
++--------+-----------+--------+
+| id     | title     | pid    |
++--------+-----------+--------+
+| 110000 | 北京市    |   NULL |
+| 110100 | 北京市    | 110000 |
++--------+-----------+--------+
+2 rows in set (0.01 sec)
+
+mysql> show  profiles;
++----------+------------+---------------------------------------------+
+| Query_ID | Duration   | Query                                       |
++----------+------------+---------------------------------------------+
+|        1 | 0.00349200 | select * from areas where title='北京市'    |
+|        2 | 0.00052150 | show index from areas                       |
+|        3 | 0.47707175 | create index titleIndex on areas(title(20)) |
+|        4 | 0.00056850 | select * from areas where title='北京市'    |
++----------+------------+---------------------------------------------+
+4 rows in set, 1 warning (0.00 sec)
+where gender=0 and isdelete=0 and birthday>'1990-1-1'#索引要条件缩小前面的条件
+###################################################
+sige@sige1:~/pythonjichu/day03$ sudo  apt-get  install  python-mysqldb  #与python交互
+sige@sige1:~/pythonjichu/day03$ python
+Python 2.7.12 (default, Nov 12 2018, 14:36:49)
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import  MySQLdb
+>>> exit()
+
+a' or 1=1 or'  #sql注入
+select * from students where name='a' or 1=1 or''
+select * from students where name=@name
+########################################
+mysql> use  python3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table users(
+    -> id int auto_increment primary key not null,
+    -> name varchar(20),
+    -> passwd char(40));

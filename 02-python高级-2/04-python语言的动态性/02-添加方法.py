@@ -130,13 +130,13 @@ p1.run()#虽然p1对象中run属性已经指向了11行的函数，但是这句�
 # xxxxx()
 # ----p1在吃----
 # @staticmethod
-# def test():
+# def code01():
 #     print("-----static method-----")
 #
-# P.test = test
-# P.test()
+# P.code01 = code01
+# P.code01()
 # -----static method ----
-# P.xx = test
+# P.xx = code01
 # P.xx()
 # -----static method ----
 
@@ -180,7 +180,7 @@ p1.run()#虽然p1对象中run属性已经指向了11行的函数，但是这句�
 #  'name',
 #  'printNum',
 #  'run',
-#  'test',
+#  'code01',
 #  'xx']
 # p2 = P("p2")
 # p2.age = 10

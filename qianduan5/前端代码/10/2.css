@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body{
 	background-color:#ddd;
 }
@@ -16,4 +17,24 @@ body{
 	background-color:cyan;
 	float:left;
 	margin:20px;
+=======
+body{
+	background-color:#ddd;
+}
+
+.box01{
+	width:200px;
+	height:200px;
+	background-color:red;
+	float:left;
+	margin:20px;
+}
+
+.box02{
+	width:200px;
+	height:200px;
+	background-color:cyan;
+	float:left;
+	margin:20px;
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 }

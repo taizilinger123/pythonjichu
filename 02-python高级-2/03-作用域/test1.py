@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 a = 100
 def test():
-    print("-----test")
+    print("-----code01")
 a = test
 a()
 -----test

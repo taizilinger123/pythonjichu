@@ -1,0 +1,1292 @@
+ sudo pip install virtualenv
+ sudo apt-get  update
+ sudo pip install --upgrade virtualenv
+ sudo   pip install virtualenvwrapper
+ sudo  /usr/local/bin/pip  install  virtualenv   -i https://pypi.douban.com/simple/
+ sudo  /usr/local/bin/pip2  install   virtualenvwrapper -i https://pypi.douban.com/simple/
+ mkdir  -p  $WORKON_HOME
+(h4) sige@sige1:~/Desktop$  sudo vim ~/.bashrc
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+sige@sige1:~$ source   ~/.bashrc
+cd  Desktop/
+mkvirtualenv  h4
+sige@sige1:~$ mkvirtualenv -p /usr/bin/python  h5   #python2.7
+(h4) sige@sige1:~/Desktop$ deactivate
+sige@sige1:~/Desktop$
+sige@sige1:~/Desktop$ workon h4
+(h4) sige@sige1:~/Desktop$ pip  list
+Package    Version
+---------- -------
+pip        19.2.1
+setuptools 41.0.1
+wheel      0.33.4
+(h4) sige@sige1:~/Desktop$ pip  install django==1.8.2
+(h4) sige@sige1:~/Desktop$ pip  freeze
+Django==1.8.2
+(h4) sige@sige1:~/Desktop$ pip  list
+Package    Version
+---------- -------
+Django     1.8.2
+pip        19.2.1
+setuptools 41.0.1
+wheel      0.33.4
+(h4) sige@sige1:~/Desktop$ mkdir  projects
+(h4) sige@sige1:~/Desktop$ cd  projects/
+(h4) sige@sige1:~/Desktop/projects$ django-admin  startproject test1
+(h4) sige@sige1:~/Desktop/projects$ ls
+test1
+(h4) sige@sige1:~/Desktop/projects$ cd test1
+(h4) sige@sige1:~/Desktop/projects/test1$ ls
+manage.py  test1
+(h4) sige@sige1:~/Desktop/projects/test1$ cd  test1
+(h4) sige@sige1:~/Desktop/projects/test1/test1$ ls
+__init__.py  settings.py  urls.py  wsgi.py
+(h4) sige@sige1:~/Desktop/projects/test1/test1$ cat __init__.py
+(h4) sige@sige1:~/Desktop/projects/test1/test1$
+(h4) sige@sige1:~/Desktop/projects/test1/test1$ cd  ..
+(h4) sige@sige1:~/Desktop/projects/test1$ tree  .
+.
+├── manage.py
+└── test1
+    ├── __init__.py
+    ├── settings.py
+    ├── urls.py
+    └── wsgi.py
+
+1 directory, 5 files
+(h4) sige@sige1:~/Desktop/projects/test1$ pwd
+/home/sige/Desktop/projects/test1
+(h4) sige@sige1:~/Desktop/projects/test1$ python   manage.py  startapp booktest
+(h4) sige@sige1:~/Desktop/projects/test1$ ls
+booktest  manage.py  test1
+(h4) sige@sige1:~/Desktop/projects/test1$ tree  booktest
+booktest
+├── admin.py
+├── __init__.py
+├── migrations
+│   └── __init__.py
+├── models.py
+├── tests.py
+└── views.py
+
+1 directory, 6 files
+(h4) sige@sige1:~/Desktop/projects/test1$ python  manage.py  runserver 8080
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have unapplied migrations; your app may not work properly until they are applied.
+Run 'python manage.py migrate' to apply them.
+
+August 01, 2019 - 02:46:45
+Django version 1.8.2, using settings 'test1.settings'
+Starting development server at http://127.0.0.1:8080/
+Quit the server with CONTROL-C.
+[01/Aug/2019 02:47:21]"GET / HTTP/1.1" 200 1767
+[01/Aug/2019 02:47:21]"GET /favicon.ico HTTP/1.1" 404 1935
+ubutu16.04的pycharm要ctrl+s保存不然修改不生效
+(h4) sige@sige1:~/Desktop/projects/test1$ python manage.py makemigrations
+Migrations for 'booktest':
+  0001_initial.py:
+    - Create model BookInfo
+    - Create model HeroInfo
+(h4) sige@sige1:~/Desktop/projects/test1$ python manage.py migrate
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, messages
+  Apply all migrations: sessions, auth, booktest, contenttypes, admin
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying booktest.0001_initial... OK
+  Applying sessions.0001_initial... OK
+  (h4) sige@sige1:~/Desktop/projects/test1$ python  manage.py shell
+Python 3.5.2 (default, Nov 12 2018, 13:43:14)
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from  booktest.models import *
+>>> b=BookInfo()
+>>> b.btitle='abc'
+>>> from datetime import datetime
+>>> b.bpub_date=datetime(year=1990,month=1,day=12)
+>>> b.save()
+/home/sige/.virtualenvs/h4/lib/python3.5/site-packages/django/db/models/fields/__init__.py:1474: RuntimeWarning: DateTimeField BookInfo.bpub_date received a naive datetime (1990-01-12 00:00:00) while time zone support is active.
+  RuntimeWarning)
+>>> BookInfo.objects.all()
+[<BookInfo: BookInfo object>]
+>>> exit()
+(h4) sige@sige1:~/Desktop/projects/test1$ python  manage.py shell
+Python 3.5.2 (default, Nov 12 2018, 13:43:14)
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from booktest.models import *
+>>> BookInfo.objects.all()
+[<BookInfo: abc>]
+>>> b=BookInfo.objects.get(pk=1)
+>>> b.btitle='123'
+>>> b.save()
+>>> BookInfo.objects.all()
+[<BookInfo: 123>]
+>>> b.delete()
+>>> BookInfo.objects.all()
+[]
+>>>ctrl+d
+(h4) sige@sige1:~/Desktop/projects/test1$ python manage.py createsuperuser
+Username (leave blank to use 'sige'): abc
+Email address: abc@163.com
+Password: 123
+Password (again): 123
+Superuser created successfully.
+(h4) sige@sige1:~/Desktop/projects/test1$ python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+August 01, 2019 - 05:07:26
+Django version 1.8.2, using settings 'test1.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+
+http://127.0.0.1:8000/admin
+
+虚拟环境:workon,mkvirtualenv,rmvirtualenv,deactivate
+        pip list,pip install
+django的命令:django-admin startproject
+            python manage.py startapp
+            python manage.py makemigrations
+            python manage.py migrate
+            python manage.py runserver
+            python manage.py createsuperuser
+admin的使用:admin.py
+           admin.site.register(模型类,admin类)
+
+视图View:接收请求，逻辑处理，调用数据，输出响应
+配置url:在自己的应用中配置正则url(正则表达式，视图的名称)
+
+模型Model:负责与数据库交互
+面向对象:模型对象，列表
+定义模型类:指定属性及类型，以确定表的结构，迁移
+后台管理:创建管理员,启动服务器,admin,注册admin.py
+
+模板Template
+定义显示的样子
+加载:读取文件的内容到内存
+渲染:填坑
+
+开发流程：
+step1:创建虚拟环境
+step2:安装django
+step3:创建项目
+step4:创建应用
+step5:在models.py中定义模型类
+step6:定义视图
+step7:配置url
+step8:创建模板
+
+BookInfo
+
+HeroInfo
+        book=models.ForeignKey(BookInfo)
+
+英雄对象hero.book.id
+       hero.book_id
+书对象book.heroinfo_set
+
+管理器是模型类的属性，用于将对象与数据表映射
+
+query=BookInfo.objects.all()
+for ... in query
+for ... in query[11:20]
+
+sige@sige1:~$ sudo  apt-get  install python-dev
+sige@sige1:~$ workon  h5
+(h5) sige@sige1:~/Desktop/projects$ django-admin  startproject test2
+(h5) sige@sige1:~/Desktop/projects$ ls
+test1  test2
+(h5) sige@sige1:~$ pip   install mysql-python
+(h5) sige@sige1:~$ pip  list
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+Package      Version
+------------ -------
+Django       1.8.2
+MySQL-python 1.2.5
+pip          19.2.1
+setuptools   41.0.1
+wheel        0.33.4
+sige@sige1:~/Desktop$ sudo  service  mysql  start
+sige@sige1:~/Desktop$ sudo netstat -tap | grep mysql
+tcp6       0      0 [::]:mysql              [::]:*                  LISTEN      5262/mysqld
+sige@sige1:/etc/mysql$ pwd
+/etc/mysql
+sige@sige1:/etc/mysql$ ls
+conf.d  debian.cnf  debian-start  my.cnf  my.cnf.fallback  mysql.cnf  mysql.conf.d
+sige@sige1:/etc/mysql$ sudo cat debian.cnf
+# Automatically generated for Debian scripts. DO NOT TOUCH!
+[client]
+host     = localhost
+user     = debian-sys-maint
+password = xuAoLxkWjlMEN9nf
+socket   = /var/run/mysqld/mysqld.sock
+[mysql_upgrade]
+host     = localhost
+user     = debian-sys-maint
+password = xuAoLxkWjlMEN9nf
+socket   = /var/run/mysqld/mysqld.sock
+sige@sige1:/etc/mysql$  mysql  -udebian-sys-maint  -pxuAoLxkWjlMEN9nf
+sige@sige1:/etc/mysql$ mysql  -uroot -p123456
+mysql> show databases;
+mysql> create  database test2 charset=utf8;
+Query OK, 1 row affected (0.00 sec)
+mysql> use test2;
+sige@sige1:~/.virtualenvs/h5/lib/python2.7/site-packages/django/db/backends$ ls
+base   __init__.py   mysql   postgresql_psycopg2  signals.pyc  util.py   utils.py
+dummy  __init__.pyc  oracle  signals.py           sqlite3      util.pyc  utils.pyc
+(h5) sige@sige1:~/Desktop/projects$ cd  test2
+(h5) sige@sige1:~/Desktop/projects/test2$ ls
+manage.py  test2
+(h5) sige@sige1:~/Desktop/projects/test2$ python manage.py startapp booktest
+(h5) sige@sige1:~/Desktop/projects/test2$ ls
+booktest  manage.py  test2
+ubuntu16.04里的pycharm要ctrl+s保存一下models.py
+(h5) sige@sige1:~/Desktop/projects/test2$ python manage.py makemigrations
+Migrations for 'booktest':
+  0001_initial.py:
+    - Create model BookInfo
+    - Create model HeroInfo
+(h5) sige@sige1:~/Desktop/projects/test2$ python manage.py migrate
+mysql> show tables;
++----------------------------+
+| Tables_in_test2            |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| bookinfo                   |
+| booktest_heroinfo          |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
++----------------------------+
+12 rows in set (0.00 sec)
+mysql> desc bookinfo;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| btitle   | varchar(20) | NO   |     | NULL    |                |
+| pub_date | datetime(6) | NO   |     | NULL    |                |
+| bread    | int(11)     | NO   |     | NULL    |                |
+| bcommet  | int(11)     | NO   |     | NULL    |                |
+| isDelete | tinyint(1)  | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+mysql> desc booktest_heroinfo;
++----------+---------------+------+-----+---------+----------------+
+| Field    | Type          | Null | Key | Default | Extra          |
++----------+---------------+------+-----+---------+----------------+
+| id       | int(11)       | NO   | PRI | NULL    | auto_increment |
+| hname    | varchar(10)   | NO   |     | NULL    |                |
+| hgender  | tinyint(1)    | NO   |     | NULL    |                |
+| hcontent | varchar(1000) | NO   |     | NULL    |                |
+| isDelete | tinyint(1)    | NO   |     | NULL    |                |
+| book_id  | int(11)       | NO   | MUL | NULL    |                |
++----------+---------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+mysql> select * from  bookinfo;
++----+----------------------+----------------------------+-------+---------+----------+
+| id | btitle               | pub_date                   | bread | bcommet | isDelete |
++----+----------------------+----------------------------+-------+---------+----------+
+|  1 | 射雕英雄传             | 1980-05-01 00:00:00.000000 |    12 |      34 |        0 |
+|  2 | 天龙八部               | 1986-07-24 00:00:00.000000 |    36 |      40 |        1 |
+|  3 | 笑傲江湖               | 1995-12-24 00:00:00.000000 |    20 |      80 |        1 |
+|  4 | 雪山飞狐               | 1987-11-11 00:00:00.000000 |    58 |      24 |        0 |
++----+----------------------+----------------------------+-------+---------+----------+
+sige@sige1:~/Desktop/projects/test2$ workon h5
+(h5) sige@sige1:~/Desktop/projects/test2$ python  manage.py  shell
+Python 2.7.12 (default, Nov 12 2018, 14:36:49)
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>>
+>>> from  booktest.models import BookInfo
+>>> BookInfo.books1.all()
+[<BookInfo: BookInfo object>, <BookInfo: BookInfo object>, <BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+>>> BookInfo.books2.all()
+[<BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+(h5) sige@sige1:~/Desktop/projects/test2$ python  manage.py  shell
+Python 2.7.12 (default, Nov 12 2018, 14:36:49)
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>>
+>>> from  booktest.models import BookInfo
+>>> from  datetime import datetime
+>>> b=BookInfo.create('abc',datetime(1990,1,1))  #如果create方法没有，就保存一下pycharm的models.py文件,然后再查看项目下文件里有没有create方法
+>>> b.save()
+/home/sige/.virtualenvs/h5/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1474: RuntimeWarning: DateTimeField BookInfo.bpub_date received a naive datetime (1990-01-01 00:00:00) while time zone support is active.
+  RuntimeWarning)
+mysql> select  *  from  bookinfo;
++----+-----------------+----------------------------+-------+---------+----------+
+| id | btitle          | pub_date                   | bread | bcommet | isDelete |
++----+-----------------+----------------------------+-------+---------+----------+
+|  1 | 射雕英雄传      | 1980-05-01 00:00:00.000000 |    12 |      34 |        0 |
+|  2 | 天龙八部        | 1986-07-24 00:00:00.000000 |    36 |      40 |        1 |
+|  3 | 笑傲江湖        | 1995-12-24 00:00:00.000000 |    20 |      80 |        1 |
+|  4 | 雪山飞狐        | 1987-11-11 00:00:00.000000 |    58 |      24 |        0 |
+|  5 | abc             | 1990-01-01 00:00:00.000000 |     0 |       0 |        0 |
++----+-----------------+----------------------------+-------+---------+----------+
+5 rows in set (0.00 sec)
+(h5) sige@sige1:~/Desktop/projects/test2$ python  manage.py  shell
+Python 2.7.12 (default, Nov 12 2018, 14:36:49)
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from booktest.models import BookInfo
+>>> from datetime import datetime
+>>> b=BookInfo.books2.create('123',datetime(2017,1,1))
+>>> b.save()
+/home/sige/.virtualenvs/h5/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1474: RuntimeWarning: DateTimeField BookInfo.bpub_date received a naive datetime (2017-01-01 00:00:00) while time zone support is active.
+  RuntimeWarning)
+insert into booktest_bookinfo(btitle,bpub_date,bread,bcommet,isDelete) values('射雕英雄传','1980-5-1',12,34,0);
+insert into booktest_bookinfo(btitle,bpub_date,bread,bcommet,isDelete) values('天龙八部','1986-7-24',36,40,0);
+insert into booktest_bookinfo(btitle,bpub_date,bread,bcommet,isDelete) values('笑傲江湖','1995-12-24',20,80,0);
+insert into booktest_bookinfo(btitle,bpub_date,bread,bcommet,isDelete) values('雪山飞狐','1987-11-11',58,24,0);
+===================================================================
+insert into booktest_bookinfo(btitle,pub_date,bread,bcommet,isDelete) values
+('射雕英雄传','1980-5-1',12,34,0),
+('天龙八部','1986-7-24',36,40,0),
+('笑傲江湖','1995-12-24',20,80,0),
+('雪山飞狐','1987-11-11',58,24,0);
+mysql> select  *  from  bookinfo;
++----+-----------------+----------------------------+-------+---------+----------+
+| id | btitle          | pub_date                   | bread | bcommet | isDelete |
++----+-----------------+----------------------------+-------+---------+----------+
+|  1 | 射雕英雄传      | 1980-05-01 00:00:00.000000 |    12 |      34 |        0 |
+|  2 | 天龙八部        | 1986-07-24 00:00:00.000000 |    36 |      40 |        1 |
+|  3 | 笑傲江湖        | 1995-12-24 00:00:00.000000 |    20 |      80 |        1 |
+|  4 | 雪山飞狐        | 1987-11-11 00:00:00.000000 |    58 |      24 |        0 |
+|  5 | abc             | 1990-01-01 00:00:00.000000 |     0 |       0 |        0 |
+|  6 | 123             | 2017-01-01 00:00:00.000000 |     0 |       0 |        0 |
++----+-----------------+----------------------------+-------+---------+----------+
+6 rows in set (0.00 sec)
+mysql> desc booktest_heroinfo;
++----------+---------------+------+-----+---------+----------------+
+| Field    | Type          | Null | Key | Default | Extra          |
++----------+---------------+------+-----+---------+----------------+
+| id       | int(11)       | NO   | PRI | NULL    | auto_increment |
+| hname    | varchar(10)   | NO   |     | NULL    |                |
+| hgender  | tinyint(1)    | NO   |     | NULL    |                |
+| hcontent | varchar(1000) | NO   |     | NULL    |                |
+| isDelete | tinyint(1)    | NO   |     | NULL    |                |
+| book_id  | int(11)       | NO   | MUL | NULL    |                |
++----------+---------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('郭靖',1,1,'降龙十八掌',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('黄蓉',0,1,'打狗棍法',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('黄药师',1,1,'弹指神通',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('欧阳锋',1,1,'蛤蟆功',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('梅超风',0,1,'九阴白骨爪',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('乔峰',1,2,'降龙十八掌',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('段誉',1,2,'六脉神剑',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('虚竹',1,2,'天山六阳掌',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('王语嫣',0,2,'神仙姐姐',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('令狐冲',1,3,'独孤九剑',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('任盈盈',0,3,'弹琴',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('岳不群',1,3,'华山剑法',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('东方不败',0,3,'葵花宝典',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('胡斐',1,4,'胡家刀法',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('苗若兰',0,4,'黄衣',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('程灵素',0,4,'医术',0);
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values('袁紫衣',0,4,'六合拳',0);
+=======================================================================================================
+insert into booktest_heroinfo(hname,hgender,book_id,hcontent,isDelete) values
+('郭靖',1,1,'降龙十八掌',0),
+('黄蓉',0,1,'打狗棍法',0),
+('黄药师',1,1,'弹指神通',0),
+('欧阳锋',1,1,'蛤蟆功',0),
+('梅超风',0,1,'九阴白骨爪',0),
+('乔峰',1,2,'降龙十八掌',0),
+('段誉',1,2,'六脉神剑',0),
+('虚竹',1,2,'天山六阳掌',0),
+('王语嫣',0,2,'神仙姐姐',0),
+('令狐冲',1,3,'独孤九剑',0),
+('任盈盈',0,3,'弹琴',0),
+('岳不群',1,3,'华山剑法',0),
+('东方不败',0,3,'葵花宝典',0),
+('胡斐',1,4,'胡家刀法',0),
+('苗若兰',0,4,'黄衣',0),
+('程灵素',0,4,'医术',0),
+('袁紫衣',0,4,'六合拳',0);
+mysql> select  *  from   booktest_heroinfo;
++----+--------------+---------+-----------------+----------+---------+
+| id | hname        | hgender | hcontent        | isDelete | book_id |
++----+--------------+---------+-----------------+----------+---------+
+|  1 | 郭靖         |       1 | 降龙十八掌      |        0 |       1 |
+|  2 | 黄蓉         |       0 | 打狗棍法        |        0 |       1 |
+|  3 | 黄药师       |       1 | 弹指神通        |        0 |       1 |
+|  4 | 欧阳锋       |       1 | 蛤蟆功          |        0 |       1 |
+|  5 | 梅超风       |       0 | 九阴白骨爪      |        0 |       1 |
+|  6 | 乔峰         |       1 | 降龙十八掌      |        0 |       2 |
+|  7 | 段誉         |       1 | 六脉神剑        |        0 |       2 |
+|  8 | 虚竹         |       1 | 天山六阳掌      |        0 |       2 |
+|  9 | 王语嫣       |       0 | 神仙姐姐        |        0 |       2 |
+| 10 | 令狐冲       |       1 | 独孤九剑        |        0 |       3 |
+| 11 | 任盈盈       |       0 | 弹琴            |        0 |       3 |
+| 12 | 岳不群       |       1 | 华山剑法        |        0 |       3 |
+| 13 | 东方不败     |       0 | 葵花宝典        |        0 |       3 |
+| 14 | 胡斐         |       1 | 胡家刀法        |        0 |       4 |
+| 15 | 苗若兰       |       0 | 黄衣            |        0 |       4 |
+| 16 | 程灵素       |       0 | 医术            |        0 |       4 |
+| 17 | 袁紫衣       |       0 | 六合拳          |        0 |       4 |
++----+--------------+---------+-----------------+----------+---------+
+17 rows in set (0.00 sec)
+(h5) sige@sige1:~/Desktop/projects/test2$ python  manage.py  shell
+Python 2.7.12 (default, Nov 12 2018, 14:36:49)
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from  booktest.models import  BookInfo
+>>> BookInfo.objects.all()
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'BookInfo' has no attribute 'objects'
+>>> BookInfo.books2.all()
+[<BookInfo: BookInfo object>, <BookInfo: BookInfo object>, <BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+>>> BookInfo.books2.values()
+[{'bcommet': 34L, 'btitle': u'\u5c04\u96d5\u82f1\u96c4\u4f20', 'bpub_date': datetime.datetime(1980, 5, 1, 0, 0, tzinfo=<UTC>), 'isDelete': False, u'id': 1L, 'bread': 12L}, {'bcommet': 24L, 'btitle': u'\u96ea\u5c71\u98de\u72d0', 'bpub_date': datetime.datetime(1987, 11, 11, 0, 0, tzinfo=<UTC>), 'isDelete': False, u'id': 4L, 'bread': 58L}, {'bcommet': 0L, 'btitle': u'abc', 'bpub_date': datetime.datetime(1990, 1, 1, 0, 0, tzinfo=<UTC>), 'isDelete': False, u'id': 5L, 'bread': 0L}, {'bcommet': 0L, 'btitle': u'123', 'bpub_date': datetime.datetime(2017, 1, 1, 0, 0, tzinfo=<UTC>), 'isDelete': False, u'id': 6L, 'bread': 0L}]
+>>> BookInfo.books2.count()
+4
+>>> BookInfo.books1.filter(isDelete=True)
+[<BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+>>> BookInfo.books1.filter(btitle__contains='传')
+[<BookInfo: BookInfo object>]
+>>> BookInfo.books1.filter(id__in=[1,2,3])
+[<BookInfo: BookInfo object>, <BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+>>> BookInfo.books1.filter(bpub_date__year=1990)
+[<BookInfo: BookInfo object>]
+>>> BookInfo.books1.filter(heroinfo__hcontent__contains='八')
+[<BookInfo: BookInfo object>, <BookInfo: BookInfo object>]
+####################################
+python3 manage.py makemigrations
+python3 manage.py migrate
+还是不能生成表,提示:No changes detected
+首先删除了app对应目录下的数据库对应的文件和缓存文件:rm -rf migrations/ __pycache__/
+然后发现有一张django_migrations表,里面记录这有关创建表的记录,删除对应的数据表:
+delete from django_migrations where app='yourappname';
+(h5) sige@sige1:~/Desktop/projects/test3$ mysql  -uroot  -p123456
+mysql> use  test2;
+mysql> delete  from  django_migrations  where  app='booktest';
+Query OK, 1 row affected (0.40 sec)
+mysql> delete  from  django_migrations  where  app='sessions';
+Query OK, 1 row affected (0.02 sec)
+mysql> drop  table  django_session;
+mysql> exit;
+(h5) sige@sige1:~/Desktop/projects/test3$ python manage.py makemigrations
+No changes detected
+(h5) sige@sige1:~/Desktop/projects/test3$ python manage.py migrate
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, messages
+  Apply all migrations: admin, contenttypes, auth, sessions
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying sessions.0001_initial... OK
+#########################################
+(h5) sige@sige1:~$ pip  install  django-redis-sessions
+sige@sige1:~$ cat  /etc/rc.local
+/usr/local/bin/redis-server /etc/redis.conf
+/usr/local/bin/redis-server /etc/redis/redis.conf
+/home/sige/Downloads/pycharm-2019.2/bin/pycharm.sh
+/home/sige/navicat121_premium_en_x64/start_navicat
+/usr/lib/notepadqq/notepadqq.sh
+/usr/bin/google-chrome-stable
+sige@sige1:~$ sudo  /usr/local/bin/redis-server /etc/redis/redis.conf
+sige@sige1:~$ ps  aux |  grep  redis
+root     21295  0.0  0.0  39992  2744 ?        Ssl  16:26   0:00 /usr/local/bin/redis-server 127.0.0.1:6379
+sige     21301  0.0  0.0  15972   936 pts/23   S+   16:26   0:00 grep --color=auto redis
+sige@sige1:~$ redis-cli
+127.0.0.1:6379> keys *
+1) "py6"
+2) "py3"
+3) "py11"
+4) "abc"
+5) "py7"
+6) "py61"
+7) "py4"
+8) "py5"
+9) "py10"
+http://127.0.0.1:8000/booktest/session1/
+127.0.0.1:6379> keys *
+ 1) "py6"
+ 2) "py3"
+ 3) "py11"
+ 4) "abc"
+ 5) "py7"
+ 6) "py61"
+ 7) "auqvs5tzl8nhda41nkj7abekbdet137a"
+ 8) "py4"
+ 9) "py5"
+10) "py10"
+127.0.0.1:6379> get "auqvs5tzl8nhda41nkj7abekbdet137a"
+"MjkzNDc3YjIzNjY5MjY1NzEwNmQ1MDFmY2Y2MWVlMzM0ZTJlMWJjZTp7Im15bmFtZSI6ImFiYyIsIl9zZXNzaW9uX2V4cGlyeSI6MH0="
+https://base64.supfree.net/
+MjkzNDc3YjIzNjY5MjY1NzEwNmQ1MDFmY2Y2MWVlMzM0ZTJlMWJjZTp7Im15bmFtZSI6ImFiYyIsIl9zZXNzaW9uX2V4cGlyeSI6MH0=
+
+
+在google浏览器中按f12的network可以看到2rw155d6miumn0kw8eq6luvzymb277d3
+在127.0.0.1:6379> keys *里可以看到  2rw155d6miumn0kw8eq6luvzymb277d3
+所以说session依赖redis
+#################################################
+(h5) sige@sige1:~$ cd  ~/Desktop/
+(h5) sige@sige1:~/Desktop$ ls
+bak  bak.sql  projects
+(h5) sige@sige1:~/Desktop$ cd  projects/
+(h5) sige@sige1:~/Desktop/projects$ ls
+test1  test2  test3
+(h5) sige@sige1:~/Desktop/projects$ django-admin startproject test4
+(h5) sige@sige1:~/Desktop/projects$ ls
+test1  test2  test3  test4
+(h5) sige@sige1:~/Desktop/projects$ cd  test4
+(h5) sige@sige1:~/Desktop/projects/test4$ python manage.py  startapp booktest
+(h5) sige@sige1:~/Desktop/projects/test4$ ls
+booktest  manage.py  test4
+(h5) sige@sige1:~/Desktop/projects/test4$ python manage.py runserver
+(h5) sige@sige1:~/Desktop/projects/test4$ ifconfig
+(h5) sige@sige1:~/Desktop/projects/test4$ python manage.py runserver  10.239.177.85:8000
+http://10.239.177.85:8000/csrf1
+(h5) sige@sige1:~/Desktop/projects/test4$ pip  install pillow
+http://10.239.177.85:8000/verifyTest1
+(h5) sige@sige1:~/Desktop/projects$ django-admin startproject test5
+(h5) sige@sige1:~/Desktop/projects$ ls
+test1  test2  test3  test4  test5
+(h5) sige@sige1:~/Desktop/projects$ cd  test5
+(h5) sige@sige1:~/Desktop/projects/test5$ ls
+manage.py  test5
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py startapp booktest
+(h5) sige@sige1:~/Desktop/projects/test5$ ls
+booktest  manage.py  test5
+(h5) sige@sige1:~/Desktop/projects/test5$ pip install pillow==3.4.1
+(h5) sige@sige1:~/Desktop/projects/test5$ pip list
+Package               Version
+--------------------- -------
+Django                1.8.2
+django-redis-sessions 0.6.1
+MySQL-python          1.2.5
+Pillow                3.4.1
+pip                   19.2.1
+redis                 3.3.7
+setuptools            41.0.1
+wheel                 0.33.4
+(h5) sige@sige1:~/Desktop/projects/test5/static/media$ sudo  chmod o+w  /home/sige/Desktop/projects/test5/static/media
+http://localhost:8000/uploadPic
+/uploadHandle----->http://localhost:8000/uploadHandle
+uploadHandle------>http://localhost:8000/uploadPic/uploadHandle
+模板：变量{{}}、标签{%%}、过滤器|、注释{##}
+     继承:block,extends,block 名称
+     转义|safe,{%autoescape off%}
+     csrf
+
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py createsuperuser
+Username (leave blank to use 'sige'): python
+Email address: python@163.com
+Password:123456
+Password (again):123456
+Superuser created successfully.
+sige@sige1:~$ mysql  -uroot  -p123456
+mysql> drop  database  test2;
+mysql> create  database test2  charset=utf8;
+重新迁移一般来说删除migrations->0001_initial.py,如果不行就删除数据库重新创建数据库就好了
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py makemigrations
+Migrations for 'booktest':
+  0001_initial.py:
+    - Create model BookInfo
+    - Create model HeroInfo
+    - Create model UserInfo
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py migrate
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, messages
+  Apply all migrations: admin, contenttypes, sessions, auth, booktest
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying booktest.0001_initial... OK
+  Applying sessions.0001_initial... OK
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py createsuperuser
+Username (leave blank to use 'sige'): python
+Email address: python@163.com
+Password: 123456
+Password (again): 123456
+Superuser created successfully.
+(h5) sige@sige1:~/Desktop/projects/test5$ python manage.py  runserver
+sige@sige1:~$ mysql  -uroot  -p123456
+mysql> use test2;
+mysql> show  tables;
++----------------------------+
+| Tables_in_test2            |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| booktest_bookinfo          |
+| booktest_heroinfo          |
+| booktest_userinfo          |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
++----------------------------+
+13 rows in set (0.00 sec)
+
+mysql> desc   booktest_userinfo;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| uname    | varchar(10) | NO   |     | NULL    |                |
+| upwd     | varchar(40) | NO   |     | NULL    |                |
+| isDelete | tinyint(1)  | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+sige@sige1:~/pythonjichu/6jango$ mysql  -uroot  -p123456
+mysql> use  test2;
+mysql> create table booktest_areainfo(
+    -> id int primary key,
+    -> title varchar(20),
+    -> parea_id int,
+    -> foreign key(parea_id) references booktest_areainfo(id));
+Query OK, 0 rows affected (0.14 sec)
+
+mysql> desc  booktest_areainfo;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | NO   | PRI | NULL    |       |
+| title    | varchar(20) | YES  |     | NULL    |       |
+| parea_id | int(11)     | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+mysql>
+mysql>
+mysql> show  databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| py31               |
+| python3            |
+| sys                |
+| test2              |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> use  test2;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show  tables;
++----------------------------+
+| Tables_in_test2            |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| booktest_areainfo          |
+| booktest_bookinfo          |
+| booktest_heroinfo          |
+| booktest_userinfo          |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
++----------------------------+
+14 rows in set (0.00 sec)
+
+mysql> desc booktest_areainfo;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| id       | int(11)     | NO   | PRI | NULL    |       |
+| title    | varchar(20) | YES  |     | NULL    |       |
+| parea_id | int(11)     | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from  booktest_areainfo;
++--------+--------------+----------+
+| id     | title        | parea_id |
++--------+--------------+----------+
+| 110000 | 北京市       |     NULL |
+| 110100 | 北京市       |   110000 |
+| 110101 | 东城区       |   110100 |
+| 110102 | 西城区       |   110100 |
+| 110103 | 朝阳区       |   110100 |
+| 110104 | 丰台区       |   110100 |
+| 110105 | 石景山区     |   110100 |
+| 110106 | 海淀区       |   110100 |
+| 110107 | 门头沟区     |   110100 |
+| 110108 | 房山区       |   110100 |
+| 110109 | 通州区       |   110100 |
+| 110110 | 顺义区       |   110100 |
+| 110111 | 昌平区       |   110100 |
+| 110112 | 大兴区       |   110100 |
+| 110113 | 怀柔区       |   110100 |
+| 110114 | 平谷区       |   110100 |
+| 110115 | 密云县       |   110100 |
+| 110116 | 延庆县       |   110100 |
+| 120000 | 天津市       |     NULL |
+| 120101 | 天津市       |   120000 |
++--------+--------------+----------+
+20 rows in set (0.00 sec)
+
+mysql> desc booktest_bookinfo;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| btitle   | varchar(20) | NO   |     | NULL    |                |
+| pub_date | datetime(6) | NO   |     | NULL    |                |
+| bread    | int(11)     | NO   |     | NULL    |                |
+| bcommet  | int(11)     | NO   |     | NULL    |                |
+| isDelete | tinyint(1)  | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from  booktest_bookinfo;
++----+-----------------+----------------------------+-------+---------+----------+
+| id | btitle          | pub_date                   | bread | bcommet | isDelete |
++----+-----------------+----------------------------+-------+---------+----------+
+|  1 | 中国一定强      | 2019-08-23 06:26:42.000000 |     0 |       0 |        0 |
+|  2 | 射雕英雄传      | 1980-05-01 00:00:00.000000 |    12 |      34 |        0 |
+|  3 | 天龙八部        | 1986-07-24 00:00:00.000000 |    36 |      40 |        0 |
+|  4 | 笑傲江湖        | 1995-12-24 00:00:00.000000 |    20 |      80 |        0 |
+|  5 | 雪山飞狐        | 1987-11-11 00:00:00.000000 |    58 |      24 |        0 |
++----+-----------------+----------------------------+-------+---------+----------+
+5 rows in set (0.00 sec)
+
+mysql> desc  booktest_heroinfo;
++----------+---------------+------+-----+---------+----------------+
+| Field    | Type          | Null | Key | Default | Extra          |
++----------+---------------+------+-----+---------+----------------+
+| id       | int(11)       | NO   | PRI | NULL    | auto_increment |
+| hname    | varchar(10)   | NO   |     | NULL    |                |
+| hgender  | tinyint(1)    | NO   |     | NULL    |                |
+| hcontent | varchar(1000) | NO   |     | NULL    |                |
+| isDelete | tinyint(1)    | NO   |     | NULL    |                |
+| book_id  | int(11)       | NO   | MUL | NULL    |                |
++----------+---------------+------+-----+---------+----------------+
+6 rows in set (0.00 sec)
+
+mysql> select *  from booktest_heroinfo;
++----+--------------+---------+-----------------+----------+---------+
+| id | hname        | hgender | hcontent        | isDelete | book_id |
++----+--------------+---------+-----------------+----------+---------+
+| 18 | 郭靖         |       1 | 降龙十八掌      |        0 |       1 |
+| 19 | 黄蓉         |       0 | 打狗棍法        |        0 |       1 |
+| 20 | 黄药师       |       1 | 弹指神通        |        0 |       1 |
+| 21 | 欧阳锋       |       1 | 蛤蟆功          |        0 |       1 |
+| 22 | 梅超风       |       0 | 九阴白骨爪      |        0 |       1 |
+| 23 | 乔峰         |       1 | 降龙十八掌      |        0 |       2 |
+| 24 | 段誉         |       1 | 六脉神剑        |        0 |       2 |
+| 25 | 虚竹         |       1 | 天山六阳掌      |        0 |       2 |
+| 26 | 王语嫣       |       0 | 神仙姐姐        |        0 |       2 |
+| 27 | 令狐冲       |       1 | 独孤九剑        |        0 |       3 |
+| 28 | 任盈盈       |       0 | 弹琴            |        0 |       3 |
+| 29 | 岳不群       |       1 | 华山剑法        |        0 |       3 |
+| 30 | 东方不败     |       0 | 葵花宝典        |        0 |       3 |
+| 31 | 胡斐         |       1 | 胡家刀法        |        0 |       4 |
+| 32 | 苗若兰       |       0 | 黄衣            |        0 |       4 |
+| 33 | 程灵素       |       0 | 医术            |        0 |       4 |
+| 34 | 袁紫衣       |       0 | 六合拳          |        0 |       4 |
++----+--------------+---------+-----------------+----------+---------+
+17 rows in set (0.00 sec)
+
+mysql> desc booktest_userinfo;
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(11)     | NO   | PRI | NULL    | auto_increment |
+| uname    | varchar(10) | NO   |     | NULL    |                |
+| upwd     | varchar(40) | NO   |     | NULL    |                |
+| isDelete | tinyint(1)  | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from  booktest_userinfo;
+Empty set (0.00 sec)
+(h5) sige@sige1:~/Desktop/projects$ django-admin  startproject test6
+(h5) sige@sige1:~/Desktop/projects$
+(h5) sige@sige1:~/Desktop/projects$ ls
+test1  test2  test3  test4  test5  test6
+(h5) sige@sige1:~/Desktop/projects$ cd test6
+(h5) sige@sige1:~/Desktop/projects/test6$ ls
+manage.py  test6
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py  startapp booktest
+(h5) sige@sige1:~/Desktop/projects/test6$ ls
+booktest  manage.py  test6
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py runserver
+http://localhost:8000/area/
+http://localhost:8000/area/0
+http://localhost:8000/city110000/
+http://localhost:8000/
+#####################################################
+(h5) sige@sige1:~/Desktop/projects/test6$ pip install django-tinymce==2.4.0
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'test3',                       #该数据库test2->test3
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py makemigrations
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py  migrate
+(h5) sige@sige1:~/Desktop/projects/test6$ python  manage.py  createsuperuser
+Username (leave blank to use 'sige'): python
+Email address: python@163.com
+Password: 123456
+Password (again): 123456
+Superuser created successfully.
+(h5) sige@sige1:~/Desktop/projects/test6$ python  manage.py  runserver
+mysql> use  test3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show  tables;
++----------------------------+
+| Tables_in_test3            |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| booktest_areainfo          |
+| booktest_test1             |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
++----------------------------+
+12 rows in set (0.00 sec)
+
+mysql> desc  booktest_test1;
++---------+----------+------+-----+---------+----------------+
+| Field   | Type     | Null | Key | Default | Extra          |
++---------+----------+------+-----+---------+----------------+
+| id      | int(11)  | NO   | PRI | NULL    | auto_increment |
+| content | longtext | NO   |     | NULL    |                |
++---------+----------+------+-----+---------+----------------+
+2 rows in set (0.00 sec)
+(h5) sige@sige1:~/Desktop/projects/test6$ pip  install  django-redis-cache==1.7.1
+(h5) sige@sige1:~/Desktop/projects/test6$ pip  list
+DEPRECATION: Python 2.7 will reach the end of its life on January 1st, 2020. Please upgrade your Python as Python 2.7 won't be maintained after that date. A future version of pip will drop support for Python 2.7. More details about Python 2 support in pip, can be found at https://pip.pypa.io/en/latest/development/release-process/#python-2-support
+Package               Version
+--------------------- -------
+Django                1.8.2      #版本不能变
+django-redis-cache    1.7.1      #版本不能变
+django-redis-sessions 0.5.6
+django-tinymce        2.4.0
+MySQL-python          1.2.5
+Pillow                3.4.1
+pip                   19.2.1
+pytz                  2019.2
+redis                 2.10.5     #版本不能变
+setuptools            41.0.1
+wheel                 0.33.4
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py  runserver
+http://127.0.0.1:8000/cache1/
+sige@sige1:~$ ps aux |  grep  redis
+root     21295  0.0  0.0  39992  3616 ?        Ssl  8月19  10:38 /usr/local/bin/redis-server 127.0.0.1:6379
+sige     27779  0.0  0.0  15972  1088 pts/22   S+   11:07   0:00 grep --color=auto redis
+sige@sige1:~$ redis-cli
+127.0.0.1:6379> select 1
+OK
+127.0.0.1:6379[1]> keys *
+1) ":1:views.decorators.cache.cache_page..GET.b8ae1c07a54f3e5305c8ec159f5ddea7.d41d8cd98f00b204e9800998ecf8427e.en-us.UTC"
+2) ":1:views.decorators.cache.cache_header..b8ae1c07a54f3e5305c8ec159f5ddea7.en-us.UTC"
+127.0.0.1:6379[1]> get :1:views.decorators.cache.cache_page..GET.b8ae1c07a54f3e5305c8ec159f5ddea7.d41d8cd98f00b204e9800998ecf8427e.en-us.UTC
+"\x80\x02cdjango.http.response\nHttpResponse\nq\x01)\x81q\x02}q\x03(U\rreason_phraseq\x04X\x02\x00\x00\x00OKq\x05U\x0e_handler_classq\x06NU\b_headersq\a}q\b(U\rlast-modifiedU\rLast-ModifiedU\x1dWed, 04 Sep 2019 03:03:48 GMT\x86U\aexpiresU\aExpiresU\x1dWed, 04 Sep 2019 03:13:48 GMT\x86U\x0ccontent-typeU\x0cContent-TypeU\x18text/html; charset=utf-8\x86U\rcache-controlU\rCache-ControlU\x0bmax-age=600\x86uU\b_charsetq\tNU\x11_closable_objectsq\n]U\acookiesq\x0bcdjango.http.cookie\nSimpleCookie\nq\x0c)\x81q\r}q\x0ebU\x06closedq\x0f\x89U\n_containerq\x10]q\x11U\x06hello1q\x12aub."
+127.0.0.1:6379[1]> del ":1:views.decorators.cache.cache_page..GET.b8ae1c07a54f3e5305c8ec159f5ddea7.d41d8cd98f00b204e9800998ecf8427e.en-us.UTC"
+(integer) 1
+127.0.0.1:6379[1]> del ":1:views.decorators.cache.cache_header..b8ae1c07a54f3e5305c8ec159f5ddea7.en-us.UTC"
+(integer) 1
+127.0.0.1:6379[1]> keys *
+(empty list or set)
+127.0.0.1:6379[1]> keys *
+1) ":1:template.cache.hello.d41d8cd98f00b204e9800998ecf8427e"
+127.0.0.1:6379[1]> get ":1:template.cache.hello.d41d8cd98f00b204e9800998ecf8427e"
+"\x80\x02cdjango.utils.safestring\nSafeText\nq\x01X\b\x00\x00\x00\nhello1\nq\x02\x85\x81q\x03}q\x04b."
+127.0.0.1:6379[1]> get :1:template.cache.hello.d41d8cd98f00b204e9800998ecf8427e
+"\x80\x02cdjango.utils.safestring\nSafeText\nq\x01X\b\x00\x00\x00\nhello1\nq\x02\x85\x81q\x03}q\x04b."
+127.0.0.1:6379[1]> keys *
+1) ":1:key1"
+2) ":1:template.cache.hello.d41d8cd98f00b204e9800998ecf8427e"
+127.0.0.1:6379[1]> get ":1:key1"
+"\x80\x02U\x06value1q\x01."
+127.0.0.1:6379[1]> keys *
+(empty list or set)
+(h5) sige@sige1:~/Desktop/projects/test6$ pip install django-haystack==2.5.1
+(h5) sige@sige1:~/Desktop/projects/test6$ pip install whoosh==2.7.4
+(h5) sige@sige1:~/Desktop/projects/test6$ pip install jieba==0.38
+(h5) sige@sige1:~/Desktop/projects/test6$ pip list
+Package               Version
+--------------------- -------
+Django                1.8.2
+django-haystack       2.5.1
+django-redis-cache    1.7.1
+django-redis-sessions 0.5.6
+django-tinymce        2.4.0
+jieba                 0.38
+MySQL-python          1.2.5
+Pillow                3.4.1
+pip                   19.2.1
+pytz                  2019.2
+redis                 2.10.5
+setuptools            41.0.1
+wheel                 0.33.4
+Whoosh                2.7.4
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py rebuild_index
+WARNING: This will irreparably remove EVERYTHING from your search index in connection 'default'.
+Your choices after this are to restore from backups or rebuild via the `rebuild_index` command.
+Are you sure you wish to continue? [y/N] y
+Removing all documents from your index because you said so.
+All documents removed.
+Indexing 2 test1s
+(h5) sige@sige1:~/Desktop/projects$ pip  install  celery==3.1.25
+(h5) sige@sige1:~/Desktop/projects$ pip  install  celery-with-redis==3.0
+(h5) sige@sige1:~/Desktop/projects$ pip  install  django-celery==3.1.17
+(h5) sige@sige1:~/Desktop/projects$ pip list
+Package               Version
+--------------------- --------
+amqp                  1.4.9
+anyjson               0.3.3
+billiard              3.3.0.23
+celery                3.1.25
+celery-with-redis     3.0
+Django                1.8.2
+django-celery         3.1.17
+django-haystack       2.5.1
+django-redis-cache    1.7.1
+django-redis-sessions 0.5.6
+django-tinymce        2.4.0
+jieba                 0.38
+kombu                 3.0.37
+MySQL-python          1.2.5
+Pillow                3.4.1
+pip                   19.2.1
+pytz                  2019.2
+redis                 2.10.5
+setuptools            41.0.1
+wheel                 0.33.4
+Whoosh                2.7.4
+(h5) sige@sige1:~/Desktop/projects/test6$ python manage.py  migrate
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, tinymce, haystack, messages
+  Apply all migrations: sessions, admin, djcelery, auth, booktest, contenttypes
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying djcelery.0001_initial... OK
+sige@sige1:~$ mysql  -uroot  -p123456
+mysql> use  test3;
+mysql> show  tables;
++----------------------------+
+| Tables_in_test3            |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| booktest_areainfo          |
+| booktest_test1             |
+| celery_taskmeta            |
+| celery_tasksetmeta         |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
+| djcelery_crontabschedule   |
+| djcelery_intervalschedule  |
+| djcelery_periodictask      |
+| djcelery_periodictasks     |
+| djcelery_taskstate         |
+| djcelery_workerstate       |
++----------------------------+
+20 rows in set (0.00 sec)
+
+sige@sige1:~$ ps  aux |  grep  redis
+sige     20173  0.0  0.0  15972   940 pts/22   S+   16:03   0:00 grep --color=auto redis
+root     21295  0.0  0.0  39992  3632 ?        Ssl  8月19  11:28 /usr/local/bin/redis-server 127.0.0.1:6379
+(h5) sige@sige1:~/Desktop/projects/test6$ python  manage.py  celery worker --loglevel=info
+(h5) sige@sige1:~/Desktop/projects/test6$ python  manage.py  runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+September 05, 2019 - 08:14:48
+Django version 1.8.2, using settings 'test6.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+http://127.0.0.1:8000/celeryTest/
+#####################################################
+ 装图形的ubuntu16.04的删除
+  1988  sudo  apt-get  remove  -y    gnome-panel
+ 1989  sudo  apt-get  remove  -y   gnome gnome-panel
+ 1990  sudo  apt-get  remove  -y   gnome
+ 1991  sudo  apt-get  remove  -y  gnome-core
+ 1992  sudo  apt-get  remove  -y  gdm3
+ 1993  sudo  apt-get  remove  -y   gnome gnome-panel
+ 1994  sudo  apt autoremove  gnome gnome-panel -y
+ 1995  reboot
+ ###########################################
+ cd  ~/Desktop/
+ mkdir  pytest
+ cd  pytest
+ mkdir   dailyfresh
+ cd   dailyfresh/
+ mkvirtualenv -p /usr/bin/python py_django
+ workon  py_django
+ (py_django) sige@sige1:~/Desktop/pytest/dailyfresh$ pip  install django==1.8
+ (py_django) sige@sige1:~/Desktop/pytest/dailyfresh$ pip  list
+ Package    Version
+---------- -------
+Django     1.8.2
+pip        19.2.3
+setuptools 41.2.0
+wheel      0.33.6
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh$ django-admin  startproject dailyfresh
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh$ cd  dailyfresh/
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ cd  dailyfresh/
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh/dailyfresh$ ls__init__.py  settings.py  urls.py  wsgi.py
+sige@sige1:~$ service  mysql  start
+sige@sige1:~$ mysql  -uroot  -p123456
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| py31               |
+| python3            |
+| sys                |
+| test2              |
+| test3              |
++--------------------+
+8 rows in set (0.38 sec)
+
+mysql> create database tiantian charset=utf8;
+Query OK, 1 row affected (0.18 sec)
+
+mysql> use  tiantian;
+Database changed
+sige@sige1:~$ git  clone  https://github.com/ISxiancai/dailyfresh.git
+sige@sige1:~/dailyfresh$ sudo  cp  -r  templates/   /home/sige/Desktop/pytest/dailyfresh/dailyfresh
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python  manage.py startapp df_user
+django.core.exceptions.ImproperlyConfigured: Error loading MySQLdb module: No module named MySQLdb
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ pip install mysql-python
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python  manage.py startapp df_user
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python  manage.py  makemigrations
+Migrations for 'df_user':
+  0001_initial.py:
+    - Create model UserInfo
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python  manage.py  migrate
+mysql> show  tables;
++----------------------------+
+| Tables_in_tiantian         |
++----------------------------+
+| auth_group                 |
+| auth_group_permissions     |
+| auth_permission            |
+| auth_user                  |
+| auth_user_groups           |
+| auth_user_user_permissions |
+| df_user_userinfo           |
+| django_admin_log           |
+| django_content_type        |
+| django_migrations          |
+| django_session             |
++----------------------------+
+11 rows in set (0.00 sec)
+mysql> desc df_user_userinfo;
++----------+--------------+------+-----+---------+----------------+
+| Field    | Type         | Null | Key | Default | Extra          |
++----------+--------------+------+-----+---------+----------------+
+| id       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| uname    | varchar(20)  | NO   |     | NULL    |                |
+| upwd     | varchar(40)  | NO   |     | NULL    |                |
+| uemail   | varchar(30)  | NO   |     | NULL    |                |
+| ushou    | varchar(20)  | NO   |     | NULL    |                |
+| uaddress | varchar(100) | NO   |     | NULL    |                |
+| uyoubian | varchar(6)   | NO   |     | NULL    |                |
+| uphone   | varchar(11)  | NO   |     | NULL    |                |
++----------+--------------+------+-----+---------+----------------+
+mysql> select  *  from  df_user_userinfo;
++----+--------+------------------------------------------+----------------+-------+----------+----------+--------+
+| id | uname  | upwd                                     | uemail         | ushou | uaddress | uyoubian | uphone |
++----+--------+------------------------------------------+----------------+-------+----------+----------+--------+
+|  1 | 123456 | 7c222fb2927d828af22f592134e8932480637c0d | 123456@163.com |       |          |          |        |
++----+--------+------------------------------------------+----------------+-------+----------+----------+--------+
+1 row in set (0.00 sec)
+8 rows in set (0.00 sec)
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python  manage.py  runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+September 24, 2019 - 06:49:15
+Django version 1.8.2, using settings 'dailyfresh.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$python manage.py startapp df_goods
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ pip install  django-tinymce==2.4.0
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ pip install  Pillow==3.4.1
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ pip  list
+Package        Version
+-------------- -------
+Django         1.8.2
+django-tinymce 2.4.0
+MySQL-python   1.2.5
+Pillow         3.4.1
+pip            19.2.3
+setuptools     41.2.0
+wheel          0.33.6
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python manage.py makemigrations
+Migrations for 'df_goods':
+  0001_initial.py:
+    - Create model GoodsInfo
+    - Create model TypeInfo
+    - Add field gtype to goodsinfo
+Migrations for 'df_user':
+  0002_auto_20191018_0739.py:
+    - Alter field uaddress on userinfo
+    - Alter field uphone on userinfo
+    - Alter field ushou on userinfo
+    - Alter field uyoubian on userinfo
+(py_django) sige@sige1:~/Desktop/pytest/dailyfresh/dailyfresh$ python manage.py  migrate
+Operations to perform:
+  Synchronize unmigrated apps: staticfiles, tinymce, messages
+  Apply all migrations: sessions, admin, auth, contenttypes, df_user, df_goods
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+  Installing custom SQL...
+Running migrations:
+  Rendering model states... DONE
+  Applying df_goods.0001_initial... OK
+  Applying df_user.0002_auto_20191018_0739... OK
+workon  h5
+pip  list
+pip freeze
+pip freeze > list.txt
+cd  ~/Desktop/projects/
+pip freeze > list.txt
+cat  list.txt
+django-admin startproject test7
+cd test7
+python manage.py startapp booktest
+(h5) sige@sige1:~/Desktop/projects/test7$ pip install  uwsgi
+(h5) sige@sige1:~/Desktop/projects/test7$ uwsgi --ini uwsgi.ini
+[uWSGI] getting INI configuration from uwsgi.ini
+(h5) sige@sige1:~/Desktop/projects/test7$ ps ajx|grep uwsgi
+(h5) sige@sige1:~/Desktop/projects/test7$ uwsgi --stop uwsgi.pid
+(h5) sige@sige1:~/Desktop/projects/test7$ ls
+booktest  manage.py  static  templates  test7  uswgi.log  uwsgi.ini  uwsgi.pid
+(h5) sige@sige1:~/Desktop/projects/test7$ ps ajx|grep uwsgi
+ 3393  4984  4983  3393 pts/2     4983 S+    1000   0:00 grep --color=auto uwsgi
+sudo apt-get install  -y  nginx
+sige@sige1:~/Desktop/projects/test7$ /usr/sbin/nginx  -v
+nginx version: nginx/1.10.3 (Ubuntu)
+sige@sige1:~/Desktop/projects/test7$ sudo lsof -i:80
+sige@sige1:~/Desktop/projects/test7$ ps ajx| grep  nginx
+sige@sige1:~/Desktop/projects/test7$ sudo /usr/sbin/nginx -s stop
+sige@sige1:~/Desktop/projects/test7$ ps ajx| grep  nginx
+ 5112  5766  5765  5112 pts/11    5765 S+    1000   0:00 grep --color=auto nginx
+wget -c -r -np -k -L -p -e "http_proxy=http://child-prc.intel.com:913"  https://nginx.org/download/nginx-1.8.1.tar.gz
+tar  -zxvf   nginx-1.8.1.tar.gz 
+cd  nginx-1.8.1/
+apt-get install openssl -y 
+apt-get install libpcre3 libpcre3-dev -y 
+apt-get install openssl  -y 
+./configure
+make
+make install
+cd  nginx/
+sbin/nginx -v 
+ps ajx|grep  nginx
+sbin/nginx
+ps ajx|grep  nginx
+sbin/nginx  -s  stop
+cd  conf/
+vim  nginx.conf
+#增加下面的内容
+        location / {
+            include uwsgi_params;
+            uwsgi_pass 127.0.0.1:8000;
+        }
+        
+        location /static {
+           alias /var/www/test7/static;
+         
+        }      
+root@sige1:/var/www/test7/static# chmod 777 /var/www/test7
+root@sige1:/var/www/test7# chmod 777  static/
+root@sige1:/var/www# mkdir  -p  /var/www/test7/static
+root@sige1:/usr/local/nginx# sbin/nginx -s stop
+root@sige1:/usr/local/nginx# sbin/nginx
+(h5) sige@sige1:~/Desktop/projects/test7$ python manage.py collectstatic
+root@sige1:/var/www/test7# cd  static/
+root@sige1:/var/www/test7/static# ls
+admin  booktest
+ps ajx|grep nginx
+(h5) sige@sige1:~/Desktop/projects/test7$ ps ajx|grep uwsgi
+http://127.0.0.1
+

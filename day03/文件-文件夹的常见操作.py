@@ -3,8 +3,8 @@
 import  os
 os.rename("xxx.txt", "yyy.txt")
 os.remove("yyy.txt")
-os.mkdir("test") #创建文件夹
-os.rmdir("test") #删除文件夹
+os.mkdir("code01") #创建文件夹
+os.rmdir("code01") #删除文件夹
 f = open("../xxx.txt","w")
 f.close()
 os.getcwd() #返回当前的绝对路径

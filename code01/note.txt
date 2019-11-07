@@ -1,0 +1,598 @@
+In [23]: import re
+
+In [24]: pattern = "itcast"
+
+In [25]: s = "itheima"
+
+In [26]: re.match(pattern, s)
+
+In [28]: s = "itcast"
+
+In [29]: re.match(pattern, s)
+Out[29]: <_sre.SRE_Match at 0x69d9fa8>
+
+In [30]: result = re.match(pattern,s)
+
+In [31]: dir(result)
+Out[31]:
+['__class__',
+ '__copy__',
+ '__deepcopy__',
+ '__delattr__',
+ '__doc__',
+ '__format__',
+ '__getattribute__',
+ '__hash__',
+ '__init__',
+ '__new__',
+ '__reduce__',
+ '__reduce_ex__',
+ '__repr__',
+ '__setattr__',
+ '__sizeof__',
+ '__str__',
+ '__subclasshook__',
+ 'end',
+ 'endpos',
+ 'expand',
+ 'group',
+ 'groupdict',
+ 'groups',
+ 'lastgroup',
+ 'lastindex',
+ 'pos',
+ 're',
+ 'regs',
+ 'span',
+ 'start',
+ 'string']
+
+In [32]: result.group()
+Out[32]: 'itcast'
+
+In [33]: result = re.match("itcast","itcastitheima")
+
+In [34]: result.group()
+Out[34]: 'itcast'
+In [35]: re.match(".", "i")
+Out[35]: <_sre.SRE_Match at 0x6a131e0>
+
+In [36]: re.match(".", "ifdsfwe")
+Out[36]: <_sre.SRE_Match at 0x6a13560>
+
+In [37]: re.match(".", "\n")
+
+In [38]: re.match("...", "ab")
+
+In [39]: re.match("...", "abc")
+Out[39]: <_sre.SRE_Match at 0x6a135d0>
+
+In [40]: re.match("...", "abcd")
+Out[40]: <_sre.SRE_Match at 0x6a136b0>
+In [41]: re.match("\d", "1")
+Out[41]: <_sre.SRE_Match at 0x6a13720>
+
+In [42]: re.match("\d", "2")
+Out[42]: <_sre.SRE_Match at 0x6a136e8>
+
+In [43]: re.match("\d", "a")
+
+In [44]: re.match("\D", "a")
+Out[44]: <_sre.SRE_Match at 0x6a13800>
+
+In [45]: re.match("\s", " a")
+Out[45]: <_sre.SRE_Match at 0x6a13838>
+
+In [46]: re.match("\s", "\ta")
+Out[46]: <_sre.SRE_Match at 0x6a138a8>
+
+In [47]: re.match("\s", "\na")
+Out[47]: <_sre.SRE_Match at 0x6a13918>
+
+In [48]: re.match("\S", "\na")
+In [49]: re.match("\w","\na")
+
+In [50]: re.match("\w","-a")
+
+In [51]: re.match("\w","_a")
+Out[51]: <_sre.SRE_Match at 0x6a13a68>
+
+In [52]: re.match("\w","1a")
+Out[52]: <_sre.SRE_Match at 0x6a13aa0>
+
+In [53]: re.match("\W","1a")
+In [54]: re.match("\w\W", "1a")
+
+In [55]: re.match("1\d\d\d\d\d\d\d\d\d\d","12343")
+
+In [56]: re.match("1\d\d\d\d\d\d\d\d\d\d","18111111111")
+Out[56]: <_sre.SRE_Match at 0x6a13b80>
+
+In [57]: re.match("1\d\d\d\d\d\d\d\d\d\d","28111111111")
+
+In [58]: re.match("1\d\d\d\d\d\d\d\d\d\d","28111111111ahbdi")
+In [59]: re.match("1[34578]","18")
+Out[59]: <_sre.SRE_Match at 0x6a56138>
+
+In [60]: re.match("1[34578]","19")
+
+In [61]: re.match("1[^34578]","19")
+Out[61]: <_sre.SRE_Match at 0x6a56410>
+
+In [62]: re.match("1[^34578]","1a")
+Out[62]: <_sre.SRE_Match at 0x6a56598>
+
+In [63]: re.match("1[^3^4^5^7^8]","1a")
+Out[63]: <_sre.SRE_Match at 0x6a564b8>
+
+In [64]: re.match("1[^34578]","1a")
+Out[64]: <_sre.SRE_Match at 0x6a566b0>
+In [65]: re.match("1[a-z5-9]","11")
+
+In [66]: re.match("1[a-z5-9]","19")
+Out[66]: <_sre.SRE_Match at 0x6a56bb8>
+
+\d == [0-9]
+\D == [^0-9]
+\w == [a-zA-Z0-9_]
+\W == [^a-zA-Z0-9_]
+In [67]: re.match("\d*","")
+Out[67]: <_sre.SRE_Match at 0x6a567c8>
+
+In [68]: re.match("\d*","abc")
+Out[68]: <_sre.SRE_Match at 0x6a56c98>
+
+In [69]: re.match("\d*","123")
+Out[69]: <_sre.SRE_Match at 0x6a56d08>
+
+In [70]: re.match("\d+","1")
+Out[70]: <_sre.SRE_Match at 0x6a56e20>
+
+In [71]: re.match("\d+","abc")
+
+In [72]: re.match("\d+","123abc")
+Out[72]: <_sre.SRE_Match at 0x6a5c0c8>
+
+In [73]: re.match("\d?","abc")
+Out[73]: <_sre.SRE_Match at 0x6a5c170>
+
+In [74]: re.match("\d?","1abc")
+Out[74]: <_sre.SRE_Match at 0x6a5c1a8>
+
+In [75]: re.match("\d?","1234abc")
+Out[75]: <_sre.SRE_Match at 0x6a5c410>
+
+In [76]: re.match("\d?[a-z]","1234abc")
+
+In [77]: re.match("\d?\w","1234abc")
+Out[77]: <_sre.SRE_Match at 0x6a5c5d0>
+In [78]: re.match("\d+[a-z]","1234abc")
+Out[78]: <_sre.SRE_Match at 0x6a5c330>
+
+In [79]: re.match("\d?[a-z]","1234abc")
+
+In [80]: re.match("\d+[a-z]","1234abc")
+Out[80]: <_sre.SRE_Match at 0x6a5c598>
+
+In [81]: re.match("\d\d\d\d\d\d\d[a-z]","1234abc")
+In [82]: re.match("\d{4}[a-z]","1234abc")
+Out[82]: <_sre.SRE_Match at 0x6a5c6b0>
+
+In [83]: re.match("\d{3}[a-z]","1234abc")
+
+In [84]: re.match("\d{5}[a-z]","1234abc")
+
+In [85]: re.match("\d{3,}[a-z]","1234abc")
+Out[85]: <_sre.SRE_Match at 0x6a5c790>
+
+In [86]: re.match("\d{5,}[a-z]","1234abc")
+
+In [87]: re.match("\d{1,}[a-z]","1234abc")   {1,} == +
+Out[87]: <_sre.SRE_Match at 0x6a5c838>
+
+In [88]: re.match("\d{0,}[a-z]","1234abc")   {0,} == *
+Out[88]: <_sre.SRE_Match at 0x6a5c870>
+
+In [89]: re.match("\d{3,5}[a-z]","1234abc")
+Out[89]: <_sre.SRE_Match at 0x6a5c8e0>
+
+In [90]: re.match("\d{0,1}[a-z]","1234abc")  {0,1} == ?
+
+In [91]: re.match("1[35678]\d{9}","1811111111")
+
+In [92]: re.match("1[35678]\d{9}","18111111111")
+Out[92]: <_sre.SRE_Match at 0x6a5cbb8>
+
+In [93]: re.match("1[35678]\d{9}","18111111111abcd")
+Out[93]: <_sre.SRE_Match at 0x6a5cb48>
+In [1]: import  re
+
+In [2]: re.match("\d*", "a")
+Out[2]: <_sre.SRE_Match object; span=(0, 0), match=''>
+
+In [3]: r = re.match("\d*", "a")
+
+In [4]: r.group()
+Out[4]: ''
+
+In [5]: s = "\nabc"
+
+In [6]: print(s)
+
+abc
+
+In [7]: s = "\\nabc"
+
+In [8]: print(s)
+\nabc
+
+In [9]: s
+Out[9]: '\\nabc'
+
+In [10]: re.match("\\n\w",s)
+
+In [11]: re.match("\\\\n\w",s)
+Out[11]: <_sre.SRE_Match object; span=(0, 3), match='\\na'>
+
+In [12]: re.match(r"\\n\w",s)
+Out[12]: <_sre.SRE_Match object; span=(0, 3), match='\\na'>
+
+In [13]: s = "\nabc"
+
+In [14]: s
+Out[14]: '\nabc'
+
+In [15]: print(s)
+
+abc
+
+In [16]: s = r"\nabc"
+
+In [17]: s
+Out[17]: '\\nabc'
+
+In [18]: print(s)
+\nabc
+
+In [19]: s
+Out[19]: '\\nabc'
+
+In [20]: r"\\nabc"
+Out[20]: '\\\\nabc'
+
+In [21]: r"\d\w\s\abc"
+Out[21]: '\\d\\w\\s\\abc'
+In [1]: import  re
+
+In [2]: re.match(r"1[35678]\d{9}$", "18111111111")
+Out[2]: <_sre.SRE_Match object; span=(0, 11), match='18111111111'>
+
+In [3]: re.match(r"1[35678]\d{9}$", "18111111111234")
+
+In [4]: re.match(r"^1[35678]\d{9}$", "18111111111234")
+
+In [5]: re.match(r"^1[35678]\d{9}$", "18111111111")
+Out[5]: <_sre.SRE_Match object; span=(0, 11), match='18111111111'>
+In [6]: re.match(r"^\w+ve", "hover")
+Out[6]: <_sre.SRE_Match object; span=(0, 4), match='hove'>
+
+In [7]: re.match(r"^\w+ve\b", "hover")
+
+In [8]: re.match(r"^\w+\bve\b", "hover")
+
+In [9]: re.match(r"^\w+\bve\b", "ho ve r")
+
+In [10]: re.match(r"^\w+\s\bve\b", "ho ve r")
+Out[10]: <_sre.SRE_Match object; span=(0, 5), match='ho ve'>
+
+In [11]: re.match(r"^.+\bve\b", "ho ve r")
+Out[11]: <_sre.SRE_Match object; span=(0, 5), match='ho ve'>
+In [12]: re.match(r"^.+\bve\B", "ho ve r")
+
+In [13]: re.match(r"^.+\bve\B", "ho ver")
+Out[13]: <_sre.SRE_Match object; span=(0, 5), match='ho ve'>
+
+In [14]: re.match(r"^.+\Bve\B", "ho ver")
+
+In [15]: re.match(r"^.+\Bve\B", "hover")
+Out[15]: <_sre.SRE_Match object; span=(0, 4), match='hove'>
+In [16]: re.match(r"[1-9]\d?|0|100","200")
+Out[16]: <_sre.SRE_Match object; span=(0, 2), match='20'>
+
+In [17]: re.match(r"[1-9]\d?$|0$|100$","200")
+
+In [18]: re.match(r"[1-9]\d?$|0$|100$","100")
+Out[18]: <_sre.SRE_Match object; span=(0, 3), match='100'>
+
+In [19]: re.match(r"[1-9]\d?$|0$|100$","84")
+Out[19]: <_sre.SRE_Match object; span=(0, 2), match='84'>
+
+In [20]: re.match(r"[1-9]\d?$|0$|100$","9")
+Out[20]: <_sre.SRE_Match object; span=(0, 1), match='9'>
+
+In [21]: re.match(r"[1-9]\d?$|0$|100$","084")
+
+In [22]: re.match(r"[1-9]\d?$|0$|100$","08")
+
+In [23]: re.match(r"[1-9]\d?$|0$|100$","0")
+Out[23]: <_sre.SRE_Match object; span=(0, 1), match='0'>
+
+In [24]: re.match(r"[1-9]?\d?$|100$","0")
+Out[24]: <_sre.SRE_Match object; span=(0, 1), match='0'>
+--------------------------------------------------------------
+In [25]: re.match(r"<h1>(.*)</h1>","<h1>匹配分组</h1>")
+Out[25]: <_sre.SRE_Match object; span=(0, 13), match='<h1>匹配分组</h1>'>
+
+In [26]: result = re.match(r"<h1>(.*)</h1>","<h1>匹配分组</h1>")
+
+In [27]: result.group()
+Out[27]: '<h1>匹配分组</h1>'
+
+In [28]: result.group(1)
+Out[28]: '匹配分组'
+
+In [29]: result = re.match(r"(<h1>).*(</h1>)","<h1>匹配分组</h1>")
+
+In [30]: result.group(1)
+Out[30]: '<h1>'
+
+In [31]: result.group(2)
+Out[31]: '</h1>'
+
+In [32]: result.group(0)
+Out[32]: '<h1>匹配分组</h1>'
+
+In [33]: result.groups()
+Out[33]: ('<h1>', '</h1>')
+
+In [34]: result.groups()[0]
+Out[34]: '<h1>'
+---------------------------------------------------------------------------
+In [35]: s = "<html><h1>itcast</h1></html>"
+
+In [36]: re.match(r"<.+><.+>.+</.+></.+>", s)
+Out[36]: <_sre.SRE_Match object; span=(0, 28), match='<html><h1>itcast</h1></html>'>
+
+In [37]: s = "<html><h1>itcast</h1></h>"
+
+In [38]: re.match(r"<.+><.+>.+</.+></.+>", s)
+Out[38]: <_sre.SRE_Match object; span=(0, 25), match='<html><h1>itcast</h1></h>'>
+
+In [39]: re.match(r"<(.+)><(.+)>.+</\2></\1>", s)
+
+In [40]: s = "<html><h1>itcast</h1></html>"
+
+In [41]: re.match(r"<(.+)><(.+)>.+</\2></\1>", s)
+Out[41]: <_sre.SRE_Match object; span=(0, 28), match='<html><h1>itcast</h1></html>'>
+
+In [42]: s = "<html><h1>itcast</html></h1>"
+
+In [43]: re.match(r"<(.+)><(.+)>.+</\2></\1>", s)
+
+In [44]: s = "<h2><h>itcast</h></h2>"
+
+In [45]: re.match(r"<(.+)><(.+)>.+</\2></\1>", s)
+Out[45]: <_sre.SRE_Match object; span=(0, 22), match='<h2><h>itcast</h></h2>'>
+In [46]: p = r"(\w+)@(163|126|gmail|qq)\.(com|cn|net)$"
+
+In [47]: r = re.match(p,"itcast@qq.com")
+
+In [48]: r.group()
+Out[48]: 'itcast@qq.com'
+
+In [49]: r.group(1)
+Out[49]: 'itcast'
+----------------------------------------------
+In [52]: s = "<html><h1>itcast</h1></html>"
+
+In [53]: re.match(r"<(.+)><(.+)>.+</\2></\1>", s)
+Out[53]: <_sre.SRE_Match object; span=(0, 28), match='<html><h1>itcast</h1></html>'>
+
+In [54]: re.match(r"<(?P<key1>.+)><(?P<key2>.+)>.+</(?P=key2)></(?P=key1)>", s)
+Out[54]: <_sre.SRE_Match object; span=(0, 28), match='<html><h1>itcast</h1></html>'>
+
+In [55]: s = "<html><h1>itcast</h1></ht>"
+
+In [56]: re.match(r"<(?P<key1>.+)><(?P<key2>.+)>.+</(?P=key2)></(?P=key1)>", s)
+
+------------------------------------------------------------
+In [57]: s = "<html><h1>itcast</h1></html>"
+
+In [58]: re.search(r"itcast",s)
+Out[58]: <_sre.SRE_Match object; span=(10, 16), match='itcast'>
+
+In [59]: re.search(r"^itcast$",s)
+
+In [60]: re.search(r"^itcast",s)
+
+In [61]: s = "itcast</h1></html>"
+
+In [62]: re.search(r"^itcast",s)
+Out[62]: <_sre.SRE_Match object; span=(0, 6), match='itcast'>
+--------------------------------------------------
+In [65]: s = "itcast</h1></html>itheima</h1>"
+
+In [66]: re.search(r"\w+</h1>",s)
+Out[66]: <_sre.SRE_Match object; span=(0, 11), match='itcast</h1>'>
+
+In [67]: r = re.search(r"\w+</h1>",s)
+
+In [68]: r.group()
+Out[68]: 'itcast</h1>'
+
+In [69]: r = re.findall(r"\w+</h1>",s)
+
+In [70]: r
+Out[70]: ['itcast</h1>', 'itheima</h1>']
+-------------------------------------------------
+In [71]: re.sub(r"php", "python", "itcast python cpp php python php")
+Out[71]: 'itcast python cpp python python python'
+
+In [72]: re.sub(r"\d+", "50", "python=1000, php=0")
+Out[72]: 'python=50, php=50'
+
+In [73]: def replace(result):
+    ...:     print(result.group())
+    ...:     return "50"
+
+In [74]: re.sub(r"\d+", replace, "python=1000, php=0")
+1000
+0
+Out[74]: 'python=50, php=50'
+In [78]: def replace(result):
+    ...:     print(result.group())
+    ...:     r = int(result.group()) + 50
+    ...:     return str(r)
+    ...:
+    ...:
+
+In [79]: re.sub(r"\d+", replace, "python=1000, php=0")
+1000
+0
+Out[79]: 'python=1050, php=50'
+-------------------------------------------
+In [81]: s = """
+    ...: <div>
+    ...: <p>岗位职责：</p>
+    ...: <p>完成推荐算法、数据统计、接⼝、后台等服务器端相关⼯作</p>
+    ...: <p><br></p>
+    ...: <p>必备要求：</p>
+    ...: <p>良好的⾃我驱动⼒和职业素养，⼯作积极主动、结果导向</p>
+    ...: <p>&nbsp;<br></p>
+    ...: <p>技术要求：</p>
+    ...: <p>1、⼀年以上 Python 开发经验，掌握⾯向对象分析和设计，了解设计模式</p
+    ...: >
+    ...: <p>2、掌握HTTP协议，熟悉MVC、MVVM等概念以及相关WEB开发框架</p>
+    ...: <p>3、掌握关系数据库开发设计，掌握 SQL，熟练使⽤ MySQL/PostgreSQL 中
+    ...: 的⼀种<br></p>
+    ...: <p>4、掌握NoSQL、MQ，熟练使⽤对应技术解决⽅案</p>
+    ...: <p>5、熟悉 Javascript/CSS/HTML5，JQuery、React、Vue.js</p>
+    ...: <p>&nbsp;<br></p>
+    ...: <p>加分项：</p>
+    ...: <p>⼤数据，数理统计，机器学习，sklearn，⾼性能，⼤并发。</p>
+    ...: </div>
+    ...: """
+In [82]: re.sub(r"<.+>", "",s)
+Out[82]: '\n\n\n\n\n\n\n\n\n1、⼀年以上 Python 开发经验，掌握⾯向对象分析和设计，了解设计
+模式</p\n>\n\n3、掌握关系数据库开发设计，掌握 SQL，熟练使⽤ MySQL/PostgreSQL 中\n的⼀种\n\
+n\n\n\n\n\n'
+
+In [83]: re.sub(r"<\w+>", "",s)
+Out[83]: '\n\n岗位职责：</p>\n完成推荐算法、数据统计、接⼝、后台等服务器端相关⼯作</p>\n</p>\n必备要求：</p>\n良好的⾃我驱动⼒和职业素养，⼯作积极主动
+、结果导向</p>\n&nbsp;</p>\n技术要求：</p>\n1、⼀年以上 Python 开发经验，掌握⾯向对象分析和设计，了解设计模式</p\n>\n2、掌握HTTP协议，熟悉MVC、MVVM等概
+念以及相关WEB开发框架</p>\n3、掌握关系数据库开发设计，掌握 SQL，熟练使⽤ MySQL/PostgreSQL 中\n的⼀种</p>\n4、掌握NoSQL、MQ，熟练使⽤对应技术解决⽅案</p
+>\n5、熟悉 Javascript/CSS/HTML5，JQuery、React、Vue.js</p>\n&nbsp;</p>\n加分项：</p>\n⼤数据，数理统计，机器学习，sklearn，⾼性能，⼤并发。</p>\n</div>
+\n'
+
+In [84]: re.sub(r"</?\w+>", "",s)
+Out[84]: '\n\n岗位职责：\n完成推荐算法、数据统计、接⼝、后台等服务器端相关⼯作\n\n必备要求：\n良好的⾃我驱动⼒和职业素养，⼯作积极主动、结果导向\n&nbsp
+;\n技术要求：\n1、⼀年以上 Python 开发经验，掌握⾯向对象分析和设计，了解设计模式</p\n>\n2、掌握HTTP协议，熟悉MVC、MVVM等概念以及相关WEB开发框架\n3、掌
+握关系数据库开发设计，掌握 SQL，熟练使⽤ MySQL/PostgreSQL 中\n的⼀种\n4、掌握NoSQL、MQ，熟练使⽤对应技术解决⽅案\n5、熟悉 Javascript/CSS/HTML5，JQuery
+、React、Vue.js\n&nbsp;\n加分项：\n⼤数据，数理统计，机器学习，sklearn，⾼性能，⼤并发。\n\n'
+-------------------------------------------
+In [86]: s = "itcast:php,python,cpp-java"
+
+In [87]: re.split(r":|,|-", s)
+Out[87]: ['itcast', 'php', 'python', 'cpp', 'java']
+---------------------------------------------------
+In [90]: s="This is a number 234-235-22-423"
+
+In [91]: r = re.match(r".+(\d+-\d+-\d+-\d+)", s)
+
+In [92]: r.group(1)
+Out[92]: '4-235-22-423'
+
+In [93]: r = re.match(r"(.+)(\d+-\d+-\d+-\d+)", s)
+
+In [94]: r.groups()
+Out[94]: ('This is a number 23', '4-235-22-423')
+
+In [95]: r = re.match(r"(.+?)(\d+-\d+-\d+-\d+)", s) #?关闭贪婪模式
+
+In [96]: r.groups()
+Out[96]: ('This is a number ', '234-235-22-423')
+In [97]: re.match(r"aa(\d+)","aa2343ddd").group(1)
+Out[97]: '2343'
+
+In [98]: re.match(r"aa(\d+?)","aa2343ddd").group(1)
+Out[98]: '2'
+
+In [99]: re.match(r"aa(\d+)ddd","aa2343ddd").group(1)
+Out[99]: '2343'
+
+In [100]: re.match(r"aa(\d+?)ddd","aa2343ddd").group(1)
+Out[100]: '2343'
+---------------------------------------------
+In [33]:  s = '<img data-original="https://rpic.douyucdn.cn/appCovers/2016/1/13/1213973_201611131917_small.jpg" src="https://rpic.douyucdn.cn/appCovers/2016/11/13/1213973_201611131917_small.jpg" style="display: inline;">'
+
+In [34]: re.search(r"https.+?\.jpg" ,s).group()
+Out[34]: 'https://rpic.douyucdn.cn/appCovers/2016/1/13/1213973_201611131917_small.jpg'
+
+In [35]: re.search(r"https.+\.jpg" ,s).group()
+Out[35]: 'https://rpic.douyucdn.cn/appCovers/2016/1/13/1213973_201611131917_small.jpg" src="https://rpic.douyucdn.cn/appCovers/2016/11/13/1213973_201611131917_small.jpg'
+----------------------------------------------------------
+In [29]: s = '<img data-original="https://rpic.douyucdn.cn/appCovers/2016/1\n1/13/1213973_201611131917_small.jpg" src="https://rpic.douyuc\ndn.cn/appCovers/2016/11/13/1213973_201611131917_small.jpg" st\nyle="display: inline;">'
+
+In [30]: r_s = re.compile("http(.*?).jpg",re.M|re.S)
+
+In [31]: r_s.search(s).group(1)
+Out[31]: 's://rpic.douyucdn.cn/appCovers/2016/1\n1/13/1213973_201611131917_small'
+
+In [32]: r_s.search(s).group()
+Out[32]: 'https://rpic.douyucdn.cn/appCovers/2016/1\n1/13/1213973_201611131917_small.jpg'
+
+In [8]: a = """sdfkhellolsdlfsdfiooefo:
+   ...: 877898989worldafdsf"""
+
+In [9]: b = re.findall('hello(.*?)world',a)
+
+In [10]: c = re.findall('hello(.*?)world',a,re.S)
+在字符串a中，包含换行符\n，在这种情况下，如果不使用re.S参数，则只在每一行内进行匹配，如果一行没有，就换下一行重新开始。
+而使用re.S参数以后，正则表达式会将这个字符串作为一个整体，在整体中进行匹配
+
+In [11]: print('b is', b)
+b is []
+
+In [12]: print('c is', c)
+
+c is ['lsdlfsdfiooefo:\n877898989']
+In [13]: re.match(r"A", "abc", re.I)
+re.I 忽略大小写
+Out[13]: <_sre.SRE_Match object; span=(0, 1), match='a'>
+
+In [14]: s="i am boy\nyou are girl\nhe is man"
+
+In [15]: re.findall(r"\w+$", s, re.M)
+re.M,将所有行的尾字母输出 multiple
+Out[15]: ['boy', 'girl', 'man']
+
+
+>>> import re
+>>> some_text = 'a,b,,,,c d'
+>>> reObj = re.compile('[, ]+') #直接转为正则表达式了
+>>> reObj.split(some_text) #调用上面的re.compile
+['a', 'b', 'c', 'd']
+
+>>> import re
+>>> some_text = 'a,b,,,,c d'
+>>> re.split('[, ]+',some_text)
+['a', 'b', 'c', 'd']
+-----------------------------------------------------------------------------------------------
+In [120]: s = "http://www.interoem.com/messageinfo.asp?id=35"
+
+In [121]: re.sub(r"http://.+?/", "", s)
+Out[121]: 'messageinfo.asp?id=35'
+
+In [122]: re.sub(r"http://.+?/(.*)", "", s)
+Out[122]: ''
+
+In [123]: re.sub(r"(http://.+?/).*", lambda x:x.group(1), s)
+Out[123]: 'http://www.interoem.com/'
+
+In [124]: s = "hello world ha ha"
+
+In [125]: re.split(r" +", s)
+Out[125]: ['hello', 'world', 'ha', 'ha']
+
+In [126]: re.findall(r"\b[a-zA-Z]+\b", s)
+Out[126]: ['hello', 'world', 'ha', 'ha']

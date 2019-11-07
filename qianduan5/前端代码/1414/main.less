@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @w:200px;
 
 .box(@w:100px,@h:100px,@bw:1px){
@@ -35,3 +36,42 @@
 	      }
 	}
 }
+=======
+@w:200px;
+
+.box(@w:100px,@h:100px,@bw:1px){
+	width:@w;
+	height:@h;
+	border:@bw solid gold;
+}
+
+.box01{
+	width:@w;
+	height:@w;
+	background-color:gold;
+}
+
+.box02{
+	.box(200px,300px,2px);
+	color:red;
+	transform:rotate(30deg);
+	transition:all 1s ease;
+}
+
+.list{
+	list-style:none;
+
+	li{
+	      height:30px;
+	      background-color:gold;
+
+	      a{
+	          float:left;
+
+	          &:hover{
+	              color:red;
+	          }
+	      }
+	}
+}
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005

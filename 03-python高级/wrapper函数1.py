@@ -12,9 +12,9 @@ def note(func):
 
 @note 
 def test():
-    "test function"
-    print('I am test')
+    "code01 function"
+    print('I am code01')
 
-# test()
-# print(test.__doc__)
+# code01()
+# print(code01.__doc__)
 print(help(test))

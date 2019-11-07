@@ -1,0 +1,546 @@
+sige@sige1:~$ wget http://download.redis.io/releases/redis-3.0.4.tar.gz
+tar -xzvf redis-3.0.4.tar.gz
+mv  redis-3.0.4   redis
+sudo  mv redis  /usr/local/
+cd  /usr/local/redis
+sudo make
+sudo make install
+sige@sige1:/usr/local/redis$ sudo  cat   tests/integration/replication-psync.tcl | grep  after
+                        after 500   #100改为500再测试就不会报错了。
+sudo test
+sige@sige1:/usr/local/redis$ sudo cp  redis.conf  /etc/redis
+sige@sige1:/usr/local/redis$ sudo cat /etc/redis/redis.conf | grep  daemonize
+# Note that Redis will write a pid file in /var/run/redis.pid when daemonized.
+daemonize yes
+sige@sige1:/usr/local/redis$ cd  /usr/local/bin/
+sige@sige1:/usr/local/bin$ ls
+easy_install      pip     pip3             redis-check-aof   redis-sentinel
+easy_install-2.7  pip2    pip3.5           redis-check-dump  redis-server
+easy_install-3.5  pip2.7  redis-benchmark  redis-cli
+sige@sige1:/usr/local/bin$ sudo /usr/local/bin/redis-server /etc/redis/redis.conf
+sige@sige1:/usr/local/bin$ ps aux | grep redis
+root      4967  0.0  0.1  39980  8336 ?        Ssl  16:56   0:00 ./redis-server 127.0.0.1:6379
+sige      4978  0.0  0.0  15960   944 pts/8    S+   16:57   0:00 grep --color=auto redis
+sige@sige1:/usr/local/bin$ sudo  -s
+root@sige1:/usr/local/bin# sudo echo "/usr/local/bin/redis-server /etc/redis/redis.conf" >>/etc/rc.local
+sige@sige1:/etc$ grep   -vE  "^$|^#"  redis.conf
+daemonize yes
+pidfile /var/run/redis/redis-server.pid
+port 6379
+tcp-backlog 511
+bind 127.0.0.1
+timeout 0
+tcp-keepalive 0
+loglevel notice
+logfile /var/log/redis/redis-server.log
+databases 16
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+dir  /var/lib/redis
+slave-serve-stale-data yes
+slave-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+slave-priority 100
+appendonly no
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+lua-time-limit 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-entries 512
+list-max-ziplist-value 64
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit slave 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+aof-rewrite-incremental-fsync yes
+sudo  kill  -9  pid
+#####################################
+sige@sige1:~$ redis-cli
+127.0.0.1:6379> ping
+PONG
+127.0.0.1:6379> set 'py3' 'hello'
+OK
+127.0.0.1:6379> set 'py31' 'hello1'
+OK
+127.0.0.1:6379> setex 'py32' 1 'hello1'
+OK
+127.0.0.1:6379> get py3
+"hello"
+127.0.0.1:6379> get py31
+"hello1"
+127.0.0.1:6379> get py32
+(nil)
+127.0.0.1:6379> mget py3 py31
+1) "hello"
+2) "hello1"
+127.0.0.1:6379> append py3 'world'
+(integer) 10
+127.0.0.1:6379> get py3
+"helloworld"
+127.0.0.1:6379> strlen py3
+(integer) 10
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py31"
+127.0.0.1:6379> keys '*1*'
+1) "py31"
+127.0.0.1:6379> exists py32
+(integer) 0
+127.0.0.1:6379> exists py3
+(integer) 1
+127.0.0.1:6379> type py3
+string
+127.0.0.1:6379> del py31
+(integer) 1
+127.0.0.1:6379> keys *
+1) "py3"
+127.0.0.1:6379> expire py3 10
+(integer) 1
+127.0.0.1:6379> ttl py3
+(integer) 5
+127.0.0.1:6379> ttl py3
+(integer) -2
+127.0.0.1:6379> keys *
+(empty list or set)
+127.0.0.1:6379> hset py3 name '郭靖'
+(integer) 1
+127.0.0.1:6379> type py3
+hash
+127.0.0.1:6379> hget py3 name
+"\xe9\x83\xad\xe9\x9d\x96"
+127.0.0.1:6379> hset py3 gender 1
+(integer) 1
+127.0.0.1:6379> hgetall py3
+1) "name"
+2) "\xe9\x83\xad\xe9\x9d\x96"
+3) "gender"
+4) "1"
+127.0.0.1:6379> hkeys py3
+1) "name"
+2) "gender"
+127.0.0.1:6379> hlen py3
+(integer) 2
+127.0.0.1:6379> hvals py3
+1) "\xe9\x83\xad\xe9\x9d\x96"
+2) "1"
+127.0.0.1:6379> lpush  py4 'abc' '123'
+(integer) 2
+127.0.0.1:6379> rpush py5 'hello' ' world'
+(integer) 2
+127.0.0.1:6379> linsert py6 after  0  'haha'
+(integer) 0
+127.0.0.1:6379> lpop py4
+"123"
+127.0.0.1:6379> rpop py5
+" world"
+127.0.0.1:6379> lpop py6
+(nil)
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py5"
+3) "py4"
+127.0.0.1:6379> lpush  py4 'abc'
+(integer) 2
+127.0.0.1:6379> lpop py4
+"abc"
+127.0.0.1:6379> linsert py4 after 0 'hello'
+(integer) -1
+127.0.0.1:6379> lpop py4
+"abc"
+127.0.0.1:6379> lrange py4 0 -1
+(empty list or set)
+127.0.0.1:6379>
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py5"
+127.0.0.1:6379> lpush  py4 'abc'
+(integer) 1
+127.0.0.1:6379> lpush  py4 '123'
+(integer) 2
+127.0.0.1:6379> lrange py4 0 -1
+1) "123"
+2) "abc"
+127.0.0.1:6379> linsert py4 after '123' 'hello'
+(integer) 3
+127.0.0.1:6379> lrange py4 0 -1
+1) "123"
+2) "hello"
+3) "abc"
+127.0.0.1:6379> lpop py4
+"123"
+127.0.0.1:6379> lrange py4 0 -1
+1) "hello"
+2) "abc"
+127.0.0.1:6379> lindex py4 1
+"abc"
+127.0.0.1:6379> lpush  py4 h1
+(integer) 3
+127.0.0.1:6379> lpush  py4 h2
+(integer) 4
+127.0.0.1:6379> lpush  py4 h3
+(integer) 5
+127.0.0.1:6379> lpush  py4 h4
+(integer) 6
+127.0.0.1:6379> lrange py4 0 -1
+1) "h4"
+2) "h3"
+3) "h2"
+4) "h1"
+5) "hello"
+6) "abc"
+127.0.0.1:6379> ltrim  py4 1 2
+OK
+127.0.0.1:6379> lrange py4  0 -1
+1) "h3"
+2) "h2"
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py5"
+3) "py4"
+127.0.0.1:6379>
+127.0.0.1:6379> sadd py6 abc 123 hello
+(integer) 3
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py5"
+3) "py6"
+4) "py4"
+127.0.0.1:6379> smembers py6
+1) "hello"
+2) "abc"
+3) "123"
+127.0.0.1:6379> sadd py6 456
+(integer) 1
+127.0.0.1:6379> smembers py6
+1) "hello"
+2) "456"
+3) "abc"
+4) "123"
+127.0.0.1:6379> scard py6
+(integer) 4
+127.0.0.1:6379> sadd py61 123 456 789 world
+(integer) 4
+127.0.0.1:6379> smembers py61
+1) "world"
+2) "456"
+3) "789"
+4) "123"
+127.0.0.1:6379> sinter  py6 py61
+1) "456"
+2) "123"
+127.0.0.1:6379> sdiff py6 py61
+1) "hello"
+2) "abc"
+127.0.0.1:6379> sdiff py61 py6
+1) "world"
+2) "789"
+127.0.0.1:6379> sunion py6 py61
+1) "123"
+2) "456"
+3) "abc"
+4) "789"
+5) "hello"
+6) "world"
+127.0.0.1:6379> sismember  py6  world
+(integer) 0
+127.0.0.1:6379> sismember  py6  hello
+(integer) 1
+127.0.0.1:6379> zadd  py7 1 hello 5 world 2 123
+(integer) 3
+127.0.0.1:6379> zrange py7 0 -1
+1) "hello"
+2) "123"
+3) "world"
+127.0.0.1:6379> zcard  py7
+(integer) 3
+127.0.0.1:6379> zcount py7 2 10
+(integer) 2
+127.0.0.1:6379> zscore py7 3
+(nil)
+127.0.0.1:6379> zscore py7 5
+(nil)
+127.0.0.1:6379> zscore py7 world
+"5"
+########redis的发布订阅##########
+sige@sige1:~$ redis-cli
+127.0.0.1:6379> select 1
+OK
+127.0.0.1:6379[1]> keys *
+(empty list or set)
+127.0.0.1:6379[1]> select 0
+OK
+127.0.0.1:6379> keys *
+1) "py7"
+2) "py3"
+3) "py5"
+4) "py61"
+5) "py4"
+6) "py6"
+127.0.0.1:6379> subcribe py111
+(error) ERR unknown command 'subcribe'
+127.0.0.1:6379> subscribe py111
+Reading messages... (press Ctrl-C to quit)
+1) "subscribe"
+2) "py111"
+3) (integer) 1
+1) "message"
+2) "py111"
+3) "hello"
+^C
+sige@sige1:~$ redis-cli
+127.0.0.1:6379> publish py111 hello   #发布
+(integer) 2
+###################redis主从#######################
+ubuntu16.04装kvm
+egrep "(svm|vmx)" /proc/cpuinfo
+sudo -s
+sh  -x  123.sh
+#!/bin/bash
+sudo apt-get install qemu-kvm -y
+sudo apt-get install qemu -y
+sudo apt-get install virt-manager -y
+sudo apt-get install virt-viewer -y
+sudo apt-get install libvirt-bin  -y
+sudo apt-get install bridge-utils  -y
+sudo virt-manager  #用vnc连ubuntu16.04不然图形界面出不来,然后手动装2台ubuntu18.02系统
+root@hun1:/var/log/redis# cat  /etc/environment
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+http_proxy="http://child-prc.intel.com:913/"
+https_proxy="https://child-prc.intel.com:913/"
+ftp_proxy="ftp://child-prc.intel.com:913/"
+socks_proxy="socks://child-prc.intel.com:913/"
+export socks_proxy="socks://child-prc.intel.com:913/"
+export ftp_proxy="ftp://child-prc.intel.com:913/"
+export https_proxy="https://child-prc.intel.com:913/"
+export http_proxy="http://child-prc.intel.com:913/"
+curl  www.baidu.com
+curl  www.google.com
+tar -zxvf  redis-3.0.4.tar.gz
+sudo  mv redis  /usr/local/
+cd   /usr/local/redis/
+apt-get  update
+apt-get install  -y  gcc
+apt-get install  make -y
+make MALLOC=libc
+cd src && make all
+root@hun1:~# cat  123.sh
+#!/bin/bash
+wget http://downloads.sourceforge.net/tcl/tcl8.6.1-src.tar.gz
+sudo tar xzvf tcl8.6.1-src.tar.gz  -C /usr/local/
+cd  /usr/local/tcl8.6.1/unix/
+sudo ./configure
+sudo make
+sudo make install
+make  test
+cd  /usr/local/redis
+make  install
+cd   /usr/local/bin/
+ls
+mkdir  -p  /etc/redis
+mv  redis.conf   /etc/redis/
+mkdir  -p   /var/run/redis
+mkdir -p  /var/log/redis
+mkdir -p /var/lib/redis
+root@hun1:~# grep  -vE  "^#|^$" /etc/redis/redis.conf
+daemonize yes
+pidfile /var/run/redis/redis-server.pid
+port 6379
+tcp-backlog 511
+bind 192.168.122.93    ###
+timeout 0
+tcp-keepalive 0
+loglevel notice
+logfile /var/log/redis/redis-server.log
+databases 16
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+dir /var/lib/redis
+slave-serve-stale-data yes
+slave-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+slave-priority 100
+appendonly no
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+lua-time-limit 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-entries 512
+list-max-ziplist-value 64
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit slave 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+aof-rewrite-incremental-fsync yes
+#################################################
+test2@hun2:~$ grep  -vE  "^#|^$" /etc/redis/redis.conf
+daemonize yes
+pidfile /var/run/redis/redis-server.pid
+port 6379
+tcp-backlog 511
+bind 192.168.122.139        ###
+slaveof 192.168.122.93 6379 ###
+timeout 0
+tcp-keepalive 0
+loglevel notice
+logfile /var/log/redis/redis-server.log
+databases 16
+save 900 1
+save 300 10
+save 60 10000
+stop-writes-on-bgsave-error yes
+rdbcompression yes
+rdbchecksum yes
+dbfilename dump.rdb
+dir /var/lib/redis
+slave-serve-stale-data yes
+slave-read-only yes
+repl-diskless-sync no
+repl-diskless-sync-delay 5
+repl-disable-tcp-nodelay no
+slave-priority 100
+appendonly no
+appendfilename "appendonly.aof"
+appendfsync everysec
+no-appendfsync-on-rewrite no
+auto-aof-rewrite-percentage 100
+auto-aof-rewrite-min-size 64mb
+aof-load-truncated yes
+lua-time-limit 5000
+slowlog-log-slower-than 10000
+slowlog-max-len 128
+latency-monitor-threshold 0
+notify-keyspace-events ""
+hash-max-ziplist-entries 512
+hash-max-ziplist-value 64
+list-max-ziplist-entries 512
+list-max-ziplist-value 64
+set-max-intset-entries 512
+zset-max-ziplist-entries 128
+zset-max-ziplist-value 64
+hll-sparse-max-bytes 3000
+activerehashing yes
+client-output-buffer-limit normal 0 0 0
+client-output-buffer-limit slave 256mb 64mb 60
+client-output-buffer-limit pubsub 32mb 8mb 60
+hz 10
+aof-rewrite-incremental-fsync yes
+/usr/local/bin/redis-server  /etc/redis/redis.conf
+ps  aux |  grep  redis
+test1@hun1:/var/log/redis$ redis-cli  -h  192.168.122.93
+192.168.122.93:6379> keys *
+(empty list or set)
+192.168.122.93:6379> set py100 'hello world'
+OK
+test2@hun2:~$ redis-cli  -h  192.168.122.139
+192.168.122.139:6379> keys *
+(empty list or set)
+192.168.122.139:6379> keys *
+1) "py100"
+192.168.122.139:6379> get py100
+"hello world"
+#########################################
+mysql  -uroot  -p123456
+mysql> show  databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| py31               |
+| python3            |
+| sys                |
++--------------------+
+6 rows in set (0.25 sec)
+
+mysql> use python3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show  tables;
++-------------------+
+| Tables_in_python3 |
++-------------------+
+| areas             |
+| rooms             |
+| scores            |
+| stu               |
+| students          |
+| subjects          |
+| users             |
+| v_1               |
++-------------------+
+8 rows in set (0.00 sec)
+
+mysql> select * from users;
++----+------+------------------------------------------+
+| id | name | passwd                                   |
++----+------+------------------------------------------+
+|  3 | abc  | 40bd001563085fc35165329ea1ff5c5ecbdbbeef |
++----+------+------------------------------------------+
+1 row in set (0.00 sec)
+###################
+sige@sige1:~$ redis-cli
+127.0.0.1:6379> get py10
+"hello1"
+127.0.0.1:6379>
+127.0.0.1:6379>
+127.0.0.1:6379>
+127.0.0.1:6379>
+127.0.0.1:6379> keys *
+1) "py3"
+2) "py7"
+3) "abc"
+4) "py5"
+5) "py11"
+6) "py61"
+7) "py6"
+8) "py10"
+9) "py4"
+127.0.0.1:6379> get abc
+"40bd001563085fc35165329ea1ff5c5ecbdbbeef"
+http://redis.cn/commands.html  #查redis命令
+

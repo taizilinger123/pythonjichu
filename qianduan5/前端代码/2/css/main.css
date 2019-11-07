@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 div{
 	color: red; 
 	font-size: 20px;
 	font-family: 'Microsoft Yahei';
 	line-height:40px
+=======
+div{
+	color: red; 
+	font-size: 20px;
+	font-family: 'Microsoft Yahei';
+	line-height:40px
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 }

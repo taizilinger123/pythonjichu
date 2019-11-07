@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 body,h1,h2,h3,h4,h5,h6,p,dl,dd,select,form,ul,ol,input,textarea{margin:0;padding:0}
 
 body{font-family:'Microsoft Yahei';font-size:12px;background-color:#efefef}
@@ -15,4 +16,23 @@ h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
 .clearfix{zoom:1;}
 
 .fl{float:left}
+=======
+body,h1,h2,h3,h4,h5,h6,p,dl,dd,select,form,ul,ol,input,textarea{margin:0;padding:0}
+
+body{font-family:'Microsoft Yahei';font-size:12px;background-color:#efefef}
+
+ul,ol{list-style:none;}
+
+img{border:none;}
+
+a{text-decoration:none;}
+
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+
+.clearfix:before,.clearfix:after{content:"";display:table;}
+.clearfix:after{clear:both;}
+.clearfix{zoom:1;}
+
+.fl{float:left}
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 .fr{float:right}

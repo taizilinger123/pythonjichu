@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,4 +42,49 @@
 		<span>这是一个span标签</span>
 	</div>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>内联块元素</title>
+	<style type="text/css">
+	    .con{
+			width:500px;
+			height:300px;
+			border:1px solid #333;
+			margin: 50px auto 0;
+			font-size: 0; /*解决元素列之间的空格*/
+		}
+
+		.con a{
+			background-color: gold;
+			width: 150px;
+			height: 50px;
+			display: inline-block; /*支持a标签宽和高了*/
+			margin: 10px 0;
+			padding: 5px;
+			font-size: 20px;/*解决元素列之间的空格*/
+			line-height: 50px;  /*使内联块元素垂直居中*/
+			text-decoration: none; /*去掉内联块元素的下划线*/
+		}
+
+		.con span{
+			display: inline-block;
+			background-color: gold;
+		}
+	</style>
+</head>
+<body>
+	<div class="con">
+		<a href="#">这是一个a标签</a>
+		<a href="#">这是第二个a标签</a>
+		<a href="#">这是第4个a标签</a>
+		<a href="#">这是第5个a标签</a>
+		<a href="#">这是第6个a标签</a>
+		<a href="#">这是第7个a标签</a>
+		<span>这是一个span标签</span>
+	</div>
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

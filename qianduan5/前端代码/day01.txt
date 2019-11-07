@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 在sublime里以html文件名结尾的文件里敲
 XHTML：(html:xt)
 h5：(!tab)
@@ -29,3 +30,36 @@ div>div*5tab
 table>(tr>td*5)*6
 这是一个6行5列的表格
 
+=======
+在sublime里以html文件名结尾的文件里敲
+XHTML：(html:xt)
+h5：(!tab)
+dl>(dt+dd)*3tab
+ol>li*3tab有序列表
+ol父层
+li*3就是有3个子层
+ul>li*5tab无序列表用的多
+ul>(li>a)*5
+
+<!-- ul>(li>a)*5 -->
+<ul>
+    <li><a href="">新闻标题</a></li>  #按住ctrl键1,2,3,4,5点击然后一起写新闻标题
+    <li><a href="">新闻标题</a></li>
+    <li><a href="">新闻标题</a></li>
+    <li><a href="">新闻标题</a></li>
+    <li><a href="">新闻标题</a></li>
+</ul>
+div>div*5tab
+<div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+
+<h3>个人简历表</h3>
+table>(tr>td*5)*6
+这是一个6行5列的表格
+
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005

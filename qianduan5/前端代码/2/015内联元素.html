@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,4 +48,55 @@
 		<a href="#">这是一个a标签</a>
 	</div>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>内联元素</title>
+	<style type="text/css">
+		.con,.con2{
+			width:500px;
+			height:300px;
+			border:1px solid #333;
+			margin: 50px auto 0;
+			font-size: 0;  /*1.解决内联元素之间的字体空白的问题*/
+		}
+
+		.con a{
+			/*google浏览器放大是ctrl+鼠标滚轮*/
+			background-color: gold;
+			width:500px;
+			height: 300px;
+			/*margin-right:30px;
+			margin-bottom: 50px;*/
+			padding:0px 20px;
+			font-size:20px; /*2.解决内联元素之间的字体空白的问题*/
+		}
+
+		.con2{
+			text-align: center; /*1.让元素a的字体水平居中*/
+			line-height: 300px;
+		}
+
+		.con2 a{
+			font-size:20px; /*不设置字体大小字体出不来*/
+			background-color: gold;
+		}
+	</style>
+</head>
+<body>
+	<div class="con">
+		<a href="#">这是一个a标签这是一个a标签</a>
+		<a href="#">这是第二个a标签</a>
+		<a href="#">这是第4个a标签</a>
+		<a href="#">这是第5个a标签</a>
+		<a href="#">这是第6个a标签</a>
+		<a href="#">这是第7个a标签</a>
+	</div>
+	<div class="con2">
+		<a href="#">这是一个a标签</a>
+	</div>
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

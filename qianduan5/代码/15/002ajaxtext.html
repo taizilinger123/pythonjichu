@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,4 +27,34 @@
 <body>
 	
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax test</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+		
+		$.ajax({
+			url: 'data.json',
+			type: 'get',
+			dataType: 'json'
+		})
+		.done(function(data) {
+			//console.log(data);
+			alert(data.name);
+		})
+		.fail(function() {
+			console.log("error");
+		});
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

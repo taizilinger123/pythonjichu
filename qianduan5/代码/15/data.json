@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 {
 	"name":"tom2016",
 	"age":18,
 	"info":["male","engineer"]
+=======
+{
+	"name":"tom2016",
+	"age":18,
+	"info":["male","engineer"]
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 }

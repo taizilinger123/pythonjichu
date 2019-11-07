@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,4 +52,59 @@
 		</ul>
 	</div>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>响应式布局</title>
+	<style type="text/css">
+		body,ul{
+			margin:0;
+			padding: 0;
+		}
+		ul{
+			list-style: none;
+		}
+		.con{
+			border:1px solid #000;
+			overflow: hidden;
+		}
+		.con li{
+			width: 23%;
+			height: 200px;
+			background-color: gold;
+			float: left;
+			margin: 30px 1%; 
+		}
+
+		@media (max-width: 800px){
+
+			.con li{
+				width: 46%;
+				margin: 30px 2%; 
+			}
+		}
+
+	    @media (max-width: 500px){
+
+			.con li{
+				width: 90%;
+				margin: 30px 5%; 
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="con">
+		<ul class="con">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+		</ul>
+	</div>
+</body>
+>>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
 </html>

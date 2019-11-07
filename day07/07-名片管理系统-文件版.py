@@ -35,7 +35,7 @@ def add_new_card_infor():
     global card_infors
     card_infors.append(new_infor)
 
-    # print(card_infors)# for test
+    # print(card_infors)# for code01
 
 
 def find_card_infor():
