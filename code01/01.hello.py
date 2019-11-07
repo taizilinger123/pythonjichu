@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # coding:utf-8
 class Bar(object):
     pass
@@ -29,7 +28,7 @@ print(Foo().think.different.itcast)  #打上断点（Step Into）F7
 # think different itcast
 
 
-=======
+
 # coding:utf-8
 class Bar(object):
     pass
@@ -58,6 +57,3 @@ class Foo(object): # 类之间要空2个空格，类名首字母大写
 print(Foo().think.different.itcast)  #打上断点（Step Into）F7
 
 # think different itcast
-
-
->>>>>>> 4597e8de6d0b674fb3f44a7b50aa59f9c43ad005
