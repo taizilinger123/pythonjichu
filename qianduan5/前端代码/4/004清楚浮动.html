@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>清楚浮动</title>
+	<style type="text/css">
+		.con,.con2{
+			width: 300px;
+			/*height: 300px;*/ /*高度不要的时候下面的内容太多自动伸开*/
+			border:1px  solid #000;
+			margin: 100px auto 0;
+			font-size: 0;
+			/*height: 300px;*/
+
+		}
+
+		.con a{
+			width: 50px;
+			height: 50px;
+			display: inline-block;  /*行内块元素*/
+			background-color: gold;
+			font-size: 16px;
+			margin: 10px;
+			text-align: center;
+			line-height: 50px;
+			text-decoration: none;
+		}
+        
+        .con2{
+        	/*overflow: hidden;*/  /*1.当父元素没有高的时候，解决浮动方框合在一起问题*/
+        }
+
+		.con2 a{
+			width: 50px;
+			height: 50px;
+			background-color: gold;
+			font-size: 16px;
+			margin: 10px;
+			text-align: center;
+			line-height: 50px;
+			text-decoration: none;
+            float: left;   /*都向左浮动和行内块元素一样的*/
+		}
+/*         .clearfix:before{
+         	content: "";
+         	display: table;
+         }
+         
+		.clearfix:after{
+			content: "";
+			display: table;
+			clear: both;
+			3.当父元素没有高的时候，解决浮动方框合在一起问题
+		}*/
+        
+        /*解决方案：以下是结合了margin-top塌陷和清除浮动问题*/
+        .clearfix:before,.clearfix:after{
+        	content: "";
+        	display:table;
+        }
+
+        .clearfix:after{
+        	clear: both;
+        }
+
+        .clearfix{
+        	zoom:1;
+        }
+
+	</style>
+</head>
+<body>
+	<div class="con">
+		<a href="">1</a>
+		<a href="">2</a>
+		<a href="">3</a>
+		<a href="">4</a>
+		<a href="">5</a>
+		<a href="">6</a>
+		<a href="">7</a>
+		<a href="">8</a>
+		<a href="">5</a>
+		<a href="">6</a>
+		<a href="">7</a>
+		<a href="">8</a>
+	</div>
+
+	<div class="con2 clearfix">
+		<a href="">1</a>
+		<a href="">2</a>
+		<a href="">3</a>
+		<a href="">4</a>
+		<a href="">5</a>
+		<a href="">6</a>
+		<a href="">7</a>
+		<a href="">8</a>
+		<a href="">5</a>
+		<a href="">6</a>
+		<a href="">7</a>
+		<a href="">8</a>
+		<!-- <div style="clear:both"></div>  -->
+		<!-- 2.当父元素没有高的时候，解决浮动方框合在一起问题,不推荐使用-->
+	</div>
+</body>
+</html>

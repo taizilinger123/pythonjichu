@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>布局实例</title>
+	<style type="text/css">
+		.menu{
+			list-style: none;  /*去掉无序列表前面的小点*/
+			background-color: #55a8ea;
+			padding: 0;
+			width: 960px;
+			height: 40px;
+			margin: 50px auto 0;
+			position: relative;
+		}
+		.menu li{
+			float: left;  /*设置左浮动文字就变成行内块元素了，文字就变成一行了*/
+			width: 100px;
+			height: 40px;
+			text-align: center;
+			line-height: 40px;
+		}
+        .menu li a{
+        	/*font-size: 14px;
+        	font-family: 'Microsoft Yahei';
+        	color: #fff;*/
+        	font:14px/40px 'Microsoft Yahei';
+        	color: #fff;
+        	text-decoration: none;
+        }
+
+        .menu li:hover{
+        	background-color: #00619f;
+        }
+        .menu .active{
+        	background-color: #00619f;
+        }
+        .menu .new{
+        	width: 41px;
+        	height: 22px;
+        	background: url(images/new.png) no-repeat;
+        	position: absolute;
+        	/*在展示页面的google浏览器右键小图标new然后鼠标滚动调整left和top值的大小*/
+        	left: 335px;
+        	top: -12px;
+        }
+        .menu .new:hover{
+        	background: url(images/new.png) no-repeat;
+        }
+
+
+	</style>
+</head>
+<body>
+	<ul class="menu">
+		<li class="active"><a href="">首页</a></li>
+		<li><a href="">网站建设</a></li>
+		<li><a href="">网站建设</a></li>
+		<li><a href="">网站建设</a></li>
+		<li><a href="">网站建设</a></li>
+		<li><a href="">网站建设</a></li>
+		<li><a href="">网站建设</a></li>
+		<li class="new"></li>
+	</ul>
+</body>
+</html>
