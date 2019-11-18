@@ -21,3 +21,10 @@ findall(str, begin, end)
 
 split(str,count)
 
+<div class="f18 mb20">
+........
+</div>
+
+pattern = re.compile('<div\sclass="f18 mb20">(.*?)</div>', re.S)
+content_list = pattern.findall(html)
+
