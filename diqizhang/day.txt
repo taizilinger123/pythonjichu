@@ -194,7 +194,26 @@ Google公司：Chrome（like webkit）
 其他浏览器都是IE/Chrome内核
 
 
+In [1]: import urllib
 
+In [2]: url = "http://www.baidu.com/s?"
+
+In [3]: wd = {"wd":"传智播客"}
+
+In [4]: urllib.urlencode(wd)
+Out[4]: 'wd=%E4%BC%A0%E6%99%BA%E6%92%AD%E5%AE%A2'
+
+In [5]: wd = {"wd哈":"传智播客"}
+
+In [6]: urllib.urlencode(wd)
+Out[6]: 'wd%E5%93%88=%E4%BC%A0%E6%99%BA%E6%92%AD%E5%AE%A2'
+In [7]: m = urllib.urlencode(wd)
+
+In [8]: urllib.unquote(m)
+Out[8]: 'wd\xe5\x93\x88=\xe4\xbc\xa0\xe6\x99\xba\xe6\x92\xad\xe5\xae\xa2'
+
+In [9]: print urllib.unquote(m)
+wd哈=传智播客
 
 
 urllib 的 urlencode() 接收的参数是一个字典：
@@ -219,7 +238,9 @@ AJAX 方式加载的页面，数据来源一定是JSON
 
 拿到JSON，就是拿到了网页的数据
 
-
+ipython
+In [1]: import tieba
+In [2]: help(tieba)
 
 
 

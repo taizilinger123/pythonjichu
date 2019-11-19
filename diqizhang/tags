@@ -1,0 +1,24 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+fullurl	day01/urllib2_get.py	/^fullurl = url + "?" + wd$/;"	v
+headers	day01/urllib2_get.py	/^headers = {"User-Agent" : "Mozilla 。。。。"}$/;"	v
+html	day01/urllib2_request.py	/^html = response.read()$/;"	v
+html	day01/urllib2_urlopen.py	/^html = response.read()$/;"	v
+keyword	day01/urllib2_get.py	/^keyword = raw_input("请输入需要查询的关键字： ")$/;"	v
+request	day01/urllib2_get.py	/^request = urllib2.Request(fullurl, headers = headers)$/;"	v
+request	day01/urllib2_request.py	/^request = urllib2.Request("http:\/\/www.baidu.com\/", headers = ua_headers)$/;"	v
+request	day01/urllib2_useragentlist.py	/^request = urllib2.Request(url)$/;"	v
+response	day01/urllib2_get.py	/^response = urllib2.urlopen(request)$/;"	v
+response	day01/urllib2_request.py	/^response = urllib2.urlopen(request)$/;"	v
+response	day01/urllib2_urlopen.py	/^response = urllib2.urlopen("http:\/\/www.baidu.com\/")$/;"	v
+ua_headers	day01/urllib2_request.py	/^ua_headers = {$/;"	v
+ua_list	day01/urllib2_useragentlist.py	/^ua_list = [$/;"	v
+url	day01/urllib2_get.py	/^url = "http:\/\/www.baidu.com\/s"$/;"	v
+url	day01/urllib2_useragentlist.py	/^url = "http:\/\/www.baidu.com\/"$/;"	v
+user_agent	day01/urllib2_useragentlist.py	/^user_agent = random.choice(ua_list)$/;"	v
+wd	day01/urllib2_get.py	/^wd = urllib.urlencode(wd)$/;"	v
+wd	day01/urllib2_get.py	/^wd = {"wd" : keyword}$/;"	v
