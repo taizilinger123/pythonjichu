@@ -1,0 +1,13 @@
+ sudo pip install Scrapy
+ scrapy startproject mySpider
+sige@sige1:~/pythonjichu/diqizhang/day04/mySpider/mySpider/spiders$ pwd
+/home/sige/pythonjichu/diqizhang/day04/mySpider/mySpider/spiders
+#sige@sige1:~/pythonjichu/diqizhang/day04/mySpider/mySpider/spiders$ scrapy genspider myspider itcast.cn
+Created spider 'myspider' using template 'basic' in module:
+  mySpider.spiders.myspider
+sige@sige1:~/pythonjichu/diqizhang/day04/mySpider/mySpider$ pwd
+/home/sige/pythonjichu/diqizhang/day04/mySpider/mySpider
+sige@sige1:~/pythonjichu/diqizhang/day04/mySpider/mySpider$ ls
+__init__.py   items.py        pipelines.py  settings.pyc  teacher.html
+__init__.pyc  middlewares.py  settings.py   spiders
+sige@sige1:~/pythonjichu/diqizhang/day04/mySpider/mySpider$ scrapy crawl  itcast
