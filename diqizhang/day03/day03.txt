@@ -38,3 +38,11 @@ In [10]: driver.save_screenshot("baidu.png")
 Out[10]: True
 In [12]: print driver.page_source
 In [13]: driver.get_cookies()
+sudo apt-get install tesseract-ocr -y 
+sudo apt-get install python-imaging -y 
+sudo pip install pytesseract -y 
+tesseract fonts_test.png test
+cat test.txt
+tesseract tesseracttest.jpg text2.txt
+cat text2.txt.txt
+
