@@ -28,3 +28,5 @@ split(str,count)
 pattern = re.compile('<div\sclass="f18 mb20">(.*?)</div>', re.S)
 content_list = pattern.findall(html)
 
+bs.find("input", attrs={"name":"_xsrf"}).get("value")
+
