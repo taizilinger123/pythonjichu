@@ -65,10 +65,11 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
+ITEM_PIPELINES = {
+    #设置好在管道文件里写的类
 #    'mySpider.pipelines.mySpiderPipelines': 100,
-#    'mySpider.pipelines.MyspiderPipeline': 300,
-#}
+    'mySpider.pipelines.ItcastPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
