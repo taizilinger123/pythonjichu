@@ -12,6 +12,14 @@ __init__.py   items.py        pipelines.py  settings.pyc  teacher.html
 __init__.pyc  middlewares.py  settings.py   spiders
 sige@sige1:~/pythonjichu/diqizhang/day04/mySpider/mySpider$ scrapy crawl  itcast
 sige@sige1:~/pythonjichu/diqizhang/day04/mySpider/mySpider/spiders$ scrapy crawl  itcast  -o itcast.json
+sige@sige1:~/pythonjichu/diqizhang/day04$ scrapy startproject  douyu
+sige@sige1:~/pythonjichu/diqizhang/day04/douyu/douyu$ vim  items.py 
+sige@sige1:~/pythonjichu/diqizhang/day04/douyu/douyu/spiders$ scrapy genspider douyumeinv  "capi.douyucdn.cn"
+sige@sige1:~/pythonjichu/diqizhang/day04/douyu/douyu/spiders$ vim douyumeinv.py 
+sige@sige1:~/pythonjichu/diqizhang/day04/douyu/douyu$ vim settings.py
+sige@sige1:~/pythonjichu/diqizhang/day04/douyu/douyu$ vim  pipelines.py 
+sige@sige1:~/pythonjichu/diqizhang/day04/douyu/douyu$ scrapy crawl douyumeinv
+
 In [11]: def fib(n):
    ....:     a, b, s = 0, 1, 0
    ....:     while s < n:
