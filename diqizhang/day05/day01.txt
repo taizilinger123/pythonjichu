@@ -1,0 +1,8 @@
+sige@sige1:~$ scrapy shell "http://hr.tencent.com/position.php?&start=0#a"
+In [1]: response.body
+In [2]: response.text
+In [3]: from  scrapy.linkextractors import LinkExtractor
+In [4]: link_list = LinkExtractor(allow=("start=\d+"))
+In [5]: link_list
+Out[5]: <scrapy.linkextractors.lxmlhtml.LxmlLinkExtractor at 0x7ff51a356710>
+In [6]: link_list.extract_links(response)
