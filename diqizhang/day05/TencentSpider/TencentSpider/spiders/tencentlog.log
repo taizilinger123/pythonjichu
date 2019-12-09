@@ -1,0 +1,61 @@
+2019-12-09 15:04:22 [scrapy.utils.log] INFO: Scrapy 1.8.0 started (bot: TencentSpider)
+2019-12-09 15:04:22 [scrapy.utils.log] INFO: Versions: lxml 3.5.0.0, libxml2 2.9.3, cssselect 1.1.0, parsel 1.5.2, w3lib 1.21.0, Twisted 16.0.0, Python 2.7.12 (default, Oct  8 2019, 14:14:10) - [GCC 5.4.0 20160609], pyOpenSSL 19.1.0 (OpenSSL 1.1.1d  10 Sep 2019), cryptography 2.8, Platform Linux-4.15.0-70-generic-x86_64-with-Ubuntu-16.04-xenial
+2019-12-09 15:04:22 [scrapy.crawler] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'TencentSpider.spiders', 'SPIDER_MODULES': ['TencentSpider.spiders'], 'LOG_FILE': 'tencentlog.log', 'EDITOR': '/usr/bin/vim', 'BOT_NAME': 'TencentSpider'}
+2019-12-09 15:04:22 [scrapy.extensions.telnet] INFO: Telnet Password: 4b071fa6347a3324
+2019-12-09 15:04:22 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.corestats.CoreStats']
+2019-12-09 15:04:22 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-12-09 15:04:22 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-12-09 15:04:22 [scrapy.middleware] INFO: Enabled item pipelines:
+['TencentSpider.pipelines.TencentPipeline']
+2019-12-09 15:04:22 [scrapy.core.engine] INFO: Spider opened
+2019-12-09 15:04:22 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-12-09 15:04:22 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2019-12-09 15:04:22 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://hr.tencent.com/position.php?&start=0> from <GET http://hr.tencent.com/position.php?&start=0#a>
+2019-12-09 15:04:22 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (301) to <GET https://careers.tencent.com/position.php?&start=0> from <GET https://hr.tencent.com/position.php?&start=0>
+2019-12-09 15:04:22 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (301) to <GET http://careers.tencent.com/search.html?&start=0> from <GET https://careers.tencent.com/position.php?&start=0>
+2019-12-09 15:04:23 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET https://careers.tencent.com/search.html?&start=0> from <GET http://careers.tencent.com/search.html?&start=0>
+2019-12-09 15:04:23 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://careers.tencent.com/search.html?&start=0> (referer: None)
+2019-12-09 15:04:23 [scrapy.core.engine] INFO: Closing spider (finished)
+2019-12-09 15:04:23 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 1183,
+ 'downloader/request_count': 5,
+ 'downloader/request_method_count/GET': 5,
+ 'downloader/response_bytes': 2205,
+ 'downloader/response_count': 5,
+ 'downloader/response_status_count/200': 1,
+ 'downloader/response_status_count/301': 2,
+ 'downloader/response_status_count/302': 2,
+ 'elapsed_time_seconds': 0.606401,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 12, 9, 7, 4, 23, 132482),
+ 'log_count/DEBUG': 5,
+ 'log_count/INFO': 10,
+ 'memusage/max': 71741440,
+ 'memusage/startup': 71741440,
+ 'response_received_count': 1,
+ 'scheduler/dequeued': 5,
+ 'scheduler/dequeued/memory': 5,
+ 'scheduler/enqueued': 5,
+ 'scheduler/enqueued/memory': 5,
+ 'start_time': datetime.datetime(2019, 12, 9, 7, 4, 22, 526081)}
+2019-12-09 15:04:23 [scrapy.core.engine] INFO: Spider closed (finished)

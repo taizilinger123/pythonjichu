@@ -6,3 +6,56 @@ In [4]: link_list = LinkExtractor(allow=("start=\d+"))
 In [5]: link_list
 Out[5]: <scrapy.linkextractors.lxmlhtml.LxmlLinkExtractor at 0x7ff51a356710>
 In [6]: link_list.extract_links(response)
+sige@sige1:~/pythonjichu/diqizhang/day05$ scrapy shell "http://wz.sun0769.com/html/question/201701/325184.shtml"
+In [1]: response.url
+Out[1]: 'http://wz.sun0769.com/html/question/201701/325184.shtml'
+
+In [2]: from scrapy.linkextractors import LinkExtractor
+
+In [3]: response.xpath('//div[@class="pagecenter p3"]//strong')
+Out[3]: [<Selector xpath='//div[@class="pagecenter p3"]//strong' data=u'<strong class="tgray14"> \u63d0\u95ee\uff1a\u8f66\u7ba1\u6240\u94c1\u724c\u5c1a\u672a\u62ff\u5230...'>]
+
+In [4]: response.xpath('//div[@class="pagecenter p3"]//strong').extract()[0]
+Out[4]: u'<strong class="tgray14"> \u63d0\u95ee\uff1a\u8f66\u7ba1\u6240\u94c1\u724c\u5c1a\u672a\u62ff\u5230\xa0\xa0\u7f16\u53f7:154796\xa0\xa0</strong>'
+
+In [5]: print response.xpath('//div[@class="pagecenter p3"]//strong').extract()[0]
+<strong class="tgray14"> 提问：车管所铁牌尚未拿到  编号:154796  </strong>
+
+In [6]: print response.xpath('//div[@class="pagecenter p3"]//strong/text()').extract()[0]
+ 提问：车管所铁牌尚未拿到  编号:154796  
+In [7]: title=response.xpath('//div[@class="pagecenter p3"]//strong/text()').extract()[0]
+In [11]: print title.split(' ')[-1].split(":")[-1]
+154796  
+sige@sige1:~/pythonjichu/diqizhang/day05$ scrapy shell "http://wz.sun0769.com/html/question/201701/325126.shtml"
+In [3]: print response.xpath('//div[@class="c1 text14_2"]/text()').extract()[0]
+    中国银行大岭山镇街中兴路一号ATM机取款只有一台能取，还排长队，其余全部为故障，跑到中兴路90号，一台不能现金业务，一台不能插卡业务，另两台查存折的，取点钱就这么难？？？？
+
+name = "dongguan"
+
+start_urls = ["http://wz.sun0769.com/index.php/question/questionType?type=4&page=0"]
+
+LinkExtractor(allow=r"type=4&page=\d+",follow = True)
+
+LinkExtractor(allow=r"/question/\d+/\d+.shtml", callback="parsedongguan" )
+
+def parsedongguan(self, response):
+    item = dongguanItem()
+
+    #标题
+    item[title] =  response.xpath('//div[@class="pagecenter p3"]//strong/text()').extract()[0]
+    #编号
+    item[num] = title.split(' ')[-1].split(":")[-1]
+    #内容
+    item[content] = response.xpath('//div[@class="c1 text14_2"]/text()').extract()[0]
+    #链接
+    item[url] = response.url 
+
+    yield item
+
+sige@sige1:~/pythonjichu/diqizhang/day05$ scrapy startproject dongguan
+sige@sige1:~/pythonjichu/diqizhang/day05/dongguan/dongguan$ vim items.py 
+sige@sige1:~/pythonjichu/diqizhang/day05/dongguan/dongguan/spiders$ scrapy genspider -t  crawl sun 'wz.sun0769.com'
+sige@sige1:~/pythonjichu/diqizhang/day05/dongguan/dongguan/spiders$ vim sun.py 
+sige@sige1:~/pythonjichu/diqizhang/day05/dongguan/dongguan$ vim  pipelines.py 
+sige@sige1:~/pythonjichu/diqizhang/day05/dongguan/dongguan$ vim  settings.py
+

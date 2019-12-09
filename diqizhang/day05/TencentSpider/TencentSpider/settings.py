@@ -17,7 +17,13 @@ NEWSPIDER_MODULE = 'TencentSpider.spiders'
 #保存日志信息的文件名
 LOG_FILE = "tencentlog.log"
 #保存日志等级，高于|等于此等级的信息都被保存
-LOG_LEVEL = "INFO"
+LOG_LEVEL = "DEBUG"
+
+#CRITICAL
+#ERROR
+#WARNING
+#DEBUG
+#INFO
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'TencentSpider (+http://www.yourdomain.com)'
