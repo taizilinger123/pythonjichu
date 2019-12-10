@@ -1,0 +1,45 @@
+2019-12-10 16:22:15 [scrapy.utils.log] INFO: Scrapy 1.8.0 started (bot: newdongguan)
+2019-12-10 16:22:15 [scrapy.utils.log] INFO: Versions: lxml 3.5.0.0, libxml2 2.9.3, cssselect 1.1.0, parsel 1.5.2, w3lib 1.21.0, Twisted 16.0.0, Python 2.7.12 (default, Oct  8 2019, 14:14:10) - [GCC 5.4.0 20160609], pyOpenSSL 19.1.0 (OpenSSL 1.1.1d  10 Sep 2019), cryptography 2.8, Platform Linux-4.15.0-70-generic-x86_64-with-Ubuntu-16.04-xenial
+2019-12-10 16:22:15 [scrapy.crawler] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'newdongguan.spiders', 'ROBOTSTXT_OBEY': True, 'SPIDER_MODULES': ['newdongguan.spiders'], 'BOT_NAME': 'newdongguan', 'EDITOR': '/usr/bin/vim', 'LOG_FILE': 'sun.log', 'USER_AGENT': 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0;'}
+2019-12-10 16:22:15 [scrapy.extensions.telnet] INFO: Telnet Password: 59cd9b18f488adb0
+2019-12-10 16:22:15 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.corestats.CoreStats']
+2019-12-10 16:22:15 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['scrapy.downloadermiddlewares.robotstxt.RobotsTxtMiddleware',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-12-10 16:22:15 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-12-10 16:22:15 [scrapy.middleware] INFO: Enabled item pipelines:
+['newdongguan.pipelines.NewdongguanPipeline']
+2019-12-10 16:22:15 [scrapy.core.engine] INFO: Spider opened
+2019-12-10 16:22:15 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-12-10 16:22:15 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2019-12-10 16:22:16 [scrapy.downloadermiddlewares.redirect] DEBUG: Redirecting (302) to <GET http://www.sun0769.com/error/404.htm> from <GET http://wz.sun0769.com/robots.txt>
+2019-12-10 16:22:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET http://www.sun0769.com/error/404.htm> (referer: None)
+2019-12-10 16:22:16 [scrapy.robotstxt] WARNING: Failure while parsing robots.txt. File either contains garbage or is in an encoding other than UTF-8, treating it as an empty file.
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/scrapy/robotstxt.py", line 15, in decode_robotstxt
+    robotstxt_body = robotstxt_body.decode('utf-8')
+  File "/usr/lib/python2.7/encodings/utf_8.py", line 16, in decode
+    return codecs.utf_8_decode(input, errors, True)
+UnicodeDecodeError: 'utf8' codec can't decode byte 0xb6 in position 327: invalid start byte
+2019-12-10 16:22:17 [scrapy.crawler] INFO: Received SIGINT, shutting down gracefully. Send again to force 
+2019-12-10 16:22:17 [scrapy.core.engine] INFO: Closing spider (shutdown)
+2019-12-10 16:22:17 [scrapy.crawler] INFO: Received SIGINT twice, forcing unclean shutdown
