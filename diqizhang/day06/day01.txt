@@ -1,0 +1,2 @@
+sige@sige1:~/pythonjichu/diqizhang/day06$ scrapy  startproject newdongguan
+sige@sige1:~/pythonjichu/diqizhang/day06/newdongguan/newdongguan$ scrapy genspider dongdong  -t crawl "wz.sun0769.com"
