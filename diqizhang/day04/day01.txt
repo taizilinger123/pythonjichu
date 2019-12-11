@@ -19,6 +19,7 @@ sige@sige1:~/pythonjichu/diqizhang/day04/douyu/douyu/spiders$ vim douyumeinv.py
 sige@sige1:~/pythonjichu/diqizhang/day04/douyu/douyu$ vim settings.py
 sige@sige1:~/pythonjichu/diqizhang/day04/douyu/douyu$ vim  pipelines.py 
 sige@sige1:~/pythonjichu/diqizhang/day04/douyu/douyu$ scrapy crawl douyumeinv
+scrapy shell "http://www.itcast.cn/channel/teacher.shtml"
 
 In [11]: def fib(n):
    ....:     a, b, s = 0, 1, 0
