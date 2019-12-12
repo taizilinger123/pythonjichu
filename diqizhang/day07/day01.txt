@@ -1,0 +1,74 @@
+sige@sige1:~/pythonjichu/diqizhang/day07$ scrapy  startproject douban
+sige@sige1:~/pythonjichu/diqizhang/day07/douban/douban$ vim  items.py 
+sige@sige1:~/pythonjichu/diqizhang/day07/douban/douban/spiders$ scrapy  genspider doubamovie "douban.com"
+sige@sige1:~/pythonjichu/diqizhang/day07/douban/douban$ sudo mongo -u admin  -p 123  --authenticationDatabase admin
+MongoDB shell version v3.4.23
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.4.23
+
+#查看当前数据库
+> db
+test
+
+#查看所有数据库
+> show   dbs
+admin  0.078GB
+local  0.078GB
+py3    0.078GB
+py31   0.078GB
+
+#连接到py3数据库
+> use  py3
+switched to db py3
+
+#查看当前数据库下所有的表
+> show  collections
+stu
+sub
+system.indexes
+t1
+t2
+
+#查看sub表里的数据
+> db.sub.find()
+{ "_id" : ObjectId("5c6e124c948ad277862b3c23"), "title" : "python", "count" : 10 }
+{ "_id" : ObjectId("5c6e1255948ad277862b3c24"), "title" : "linux", "count" : 15 }
+{ "_id" : ObjectId("5c6e125e948ad277862b3c25"), "title" : "sql", "count" : 4 }
+{ "_id" : ObjectId("5c6e126d948ad277862b3c26"), "title" : "mongodb", "count" : 2 }
+{ "_id" : ObjectId("5c6e3439f1cb48b5d16fea64"), "title" : "html", "count" : 1 }
+{ "_id" : ObjectId("5c6e34caf1cb48b5d16fea65"), "title" : "css", "count" : 3 }
+{ "_id" : ObjectId("5c6e3514f1cb48b5d16fea66"), "title" : "javascript", "count" : 3 }
+
+#删除当前数据库
+>db.dropDatabase()
+sige@sige1:~/pythonjichu/diqizhang/day07/douban/douban/spiders$ sudo cat  /etc/mongod.conf | grep  authorization
+   authorization: disabled
+sige@sige1:~/pythonjichu/diqizhang/day07/douban/douban/spiders$ sudo  service   mongod    restart  
+sige@sige1:~/pythonjichu/diqizhang/day07/douban/douban/spiders$ sudo  mongo
+MongoDB shell version v3.4.23
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.4.23
+> show  dbs
+admin  0.078GB
+local  0.078GB
+py3    0.078GB
+py31   0.078GB
+###############################################
+sige@sige1:~/pythonjichu/diqizhang/day07/douban/douban/spiders$ scrapy  crawl  doubanmovie
+sige@sige1:~/pythonjichu/diqizhang/day07$ sudo  mongo
+MongoDB shell version v3.4.23
+connecting to: mongodb://127.0.0.1:27017
+MongoDB server version: 3.4.23
+> show  dbs
+Douban  0.078GB
+admin   0.078GB
+local   0.078GB
+py3     0.078GB
+py31    0.078GB
+> use  Douban
+switched to db Douban
+> show  collections
+doubanmovies
+system.indexes
+> db.doubanmovies.find()
+或者用robomongo图形化工具连看数据
