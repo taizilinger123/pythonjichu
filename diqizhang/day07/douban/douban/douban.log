@@ -1,0 +1,209 @@
+2019-12-13 13:09:17 [scrapy.utils.log] INFO: Scrapy 1.8.0 started (bot: douban)
+2019-12-13 13:09:17 [scrapy.utils.log] INFO: Versions: lxml 3.5.0.0, libxml2 2.9.3, cssselect 1.1.0, parsel 1.5.2, w3lib 1.21.0, Twisted 16.0.0, Python 2.7.12 (default, Oct  8 2019, 14:14:10) - [GCC 5.4.0 20160609], pyOpenSSL 19.1.0 (OpenSSL 1.1.1d  10 Sep 2019), cryptography 2.8, Platform Linux-4.15.0-70-generic-x86_64-with-Ubuntu-16.04-xenial
+2019-12-13 13:09:17 [scrapy.crawler] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'douban.spiders', 'SPIDER_MODULES': ['douban.spiders'], 'BOT_NAME': 'douban', 'COOKIES_ENABLED': False, 'EDITOR': '/usr/bin/vim', 'LOG_FILE': 'douban.log', 'USER_AGENT': 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0;'}
+2019-12-13 13:09:17 [scrapy.extensions.telnet] INFO: Telnet Password: 88b0c1c5d580127a
+2019-12-13 13:09:17 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.corestats.CoreStats']
+2019-12-13 13:09:17 [twisted] CRITICAL: Unhandled error in Deferred:
+2019-12-13 13:09:17 [twisted] CRITICAL: 
+2019-12-13 13:11:14 [scrapy.utils.log] INFO: Scrapy 1.8.0 started (bot: douban)
+2019-12-13 13:11:15 [scrapy.utils.log] INFO: Versions: lxml 3.5.0.0, libxml2 2.9.3, cssselect 1.1.0, parsel 1.5.2, w3lib 1.21.0, Twisted 16.0.0, Python 2.7.12 (default, Oct  8 2019, 14:14:10) - [GCC 5.4.0 20160609], pyOpenSSL 19.1.0 (OpenSSL 1.1.1d  10 Sep 2019), cryptography 2.8, Platform Linux-4.15.0-70-generic-x86_64-with-Ubuntu-16.04-xenial
+2019-12-13 13:11:15 [scrapy.crawler] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'douban.spiders', 'SPIDER_MODULES': ['douban.spiders'], 'BOT_NAME': 'douban', 'COOKIES_ENABLED': False, 'EDITOR': '/usr/bin/vim', 'LOG_FILE': 'douban.log', 'USER_AGENT': 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0;'}
+2019-12-13 13:11:15 [scrapy.extensions.telnet] INFO: Telnet Password: d1e6d7f76188e132
+2019-12-13 13:11:15 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.corestats.CoreStats']
+2019-12-13 13:11:15 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['douban.middlewares.RandomUserAgent',
+ 'douban.middlewares.RandomProxy',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-12-13 13:11:15 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-12-13 13:11:15 [scrapy.middleware] INFO: Enabled item pipelines:
+['douban.pipelines.DoubanPipeline']
+2019-12-13 13:11:15 [scrapy.core.engine] INFO: Spider opened
+2019-12-13 13:11:15 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-12-13 13:11:15 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2019-12-13 13:11:15 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=0> (referer: None)
+2019-12-13 13:11:15 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=25> (referer: https://movie.douban.com/top250?start=0)
+2019-12-13 13:11:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=50> (referer: https://movie.douban.com/top250?start=25)
+2019-12-13 13:11:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=75> (referer: https://movie.douban.com/top250?start=50)
+2019-12-13 13:11:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=100> (referer: https://movie.douban.com/top250?start=75)
+2019-12-13 13:11:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=125> (referer: https://movie.douban.com/top250?start=100)
+2019-12-13 13:11:16 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=150> (referer: https://movie.douban.com/top250?start=125)
+2019-12-13 13:11:17 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=175> (referer: https://movie.douban.com/top250?start=150)
+2019-12-13 13:11:17 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=200> (referer: https://movie.douban.com/top250?start=175)
+2019-12-13 13:11:17 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=225> (referer: https://movie.douban.com/top250?start=200)
+2019-12-13 13:11:17 [scrapy.core.engine] INFO: Closing spider (finished)
+2019-12-13 13:11:17 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 3058,
+ 'downloader/request_count': 10,
+ 'downloader/request_method_count/GET': 10,
+ 'downloader/response_bytes': 131595,
+ 'downloader/response_count': 10,
+ 'downloader/response_status_count/200': 10,
+ 'elapsed_time_seconds': 2.545148,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 12, 13, 5, 11, 17, 763312),
+ 'log_count/DEBUG': 10,
+ 'log_count/INFO': 10,
+ 'memusage/max': 73097216,
+ 'memusage/startup': 73097216,
+ 'request_depth_max': 9,
+ 'response_received_count': 10,
+ 'scheduler/dequeued': 10,
+ 'scheduler/dequeued/memory': 10,
+ 'scheduler/enqueued': 10,
+ 'scheduler/enqueued/memory': 10,
+ 'start_time': datetime.datetime(2019, 12, 13, 5, 11, 15, 218164)}
+2019-12-13 13:11:17 [scrapy.core.engine] INFO: Spider closed (finished)
+2019-12-13 13:15:04 [scrapy.utils.log] INFO: Scrapy 1.8.0 started (bot: douban)
+2019-12-13 13:15:04 [scrapy.utils.log] INFO: Versions: lxml 3.5.0.0, libxml2 2.9.3, cssselect 1.1.0, parsel 1.5.2, w3lib 1.21.0, Twisted 16.0.0, Python 2.7.12 (default, Oct  8 2019, 14:14:10) - [GCC 5.4.0 20160609], pyOpenSSL 19.1.0 (OpenSSL 1.1.1d  10 Sep 2019), cryptography 2.8, Platform Linux-4.15.0-70-generic-x86_64-with-Ubuntu-16.04-xenial
+2019-12-13 13:15:04 [scrapy.crawler] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'douban.spiders', 'SPIDER_MODULES': ['douban.spiders'], 'BOT_NAME': 'douban', 'COOKIES_ENABLED': False, 'EDITOR': '/usr/bin/vim', 'LOG_FILE': 'douban.log', 'USER_AGENT': 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0;'}
+2019-12-13 13:15:04 [scrapy.extensions.telnet] INFO: Telnet Password: f4aad30066e36c79
+2019-12-13 13:15:04 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.corestats.CoreStats']
+2019-12-13 13:15:04 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['douban.middlewares.RandomUserAgent',
+ 'douban.middlewares.RandomProxy',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-12-13 13:15:04 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-12-13 13:15:04 [scrapy.middleware] INFO: Enabled item pipelines:
+['douban.pipelines.DoubanPipeline']
+2019-12-13 13:15:04 [scrapy.core.engine] INFO: Spider opened
+2019-12-13 13:15:04 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-12-13 13:15:04 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2019-12-13 13:15:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=0> (referer: None)
+2019-12-13 13:15:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=25> (referer: https://movie.douban.com/top250?start=0)
+2019-12-13 13:15:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=50> (referer: https://movie.douban.com/top250?start=25)
+2019-12-13 13:15:05 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=75> (referer: https://movie.douban.com/top250?start=50)
+2019-12-13 13:15:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=100> (referer: https://movie.douban.com/top250?start=75)
+2019-12-13 13:15:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=125> (referer: https://movie.douban.com/top250?start=100)
+2019-12-13 13:15:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=150> (referer: https://movie.douban.com/top250?start=125)
+2019-12-13 13:15:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=175> (referer: https://movie.douban.com/top250?start=150)
+2019-12-13 13:15:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=200> (referer: https://movie.douban.com/top250?start=175)
+2019-12-13 13:15:07 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=225> (referer: https://movie.douban.com/top250?start=200)
+2019-12-13 13:15:07 [scrapy.core.engine] INFO: Closing spider (finished)
+2019-12-13 13:15:07 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 2951,
+ 'downloader/request_count': 10,
+ 'downloader/request_method_count/GET': 10,
+ 'downloader/response_bytes': 131180,
+ 'downloader/response_count': 10,
+ 'downloader/response_status_count/200': 10,
+ 'elapsed_time_seconds': 2.695012,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 12, 13, 5, 15, 7, 445275),
+ 'log_count/DEBUG': 10,
+ 'log_count/INFO': 10,
+ 'memusage/max': 73072640,
+ 'memusage/startup': 73072640,
+ 'request_depth_max': 9,
+ 'response_received_count': 10,
+ 'scheduler/dequeued': 10,
+ 'scheduler/dequeued/memory': 10,
+ 'scheduler/enqueued': 10,
+ 'scheduler/enqueued/memory': 10,
+ 'start_time': datetime.datetime(2019, 12, 13, 5, 15, 4, 750263)}
+2019-12-13 13:15:07 [scrapy.core.engine] INFO: Spider closed (finished)
+2019-12-13 13:28:05 [scrapy.utils.log] INFO: Scrapy 1.8.0 started (bot: douban)
+2019-12-13 13:28:05 [scrapy.utils.log] INFO: Versions: lxml 3.5.0.0, libxml2 2.9.3, cssselect 1.1.0, parsel 1.5.2, w3lib 1.21.0, Twisted 16.0.0, Python 2.7.12 (default, Oct  8 2019, 14:14:10) - [GCC 5.4.0 20160609], pyOpenSSL 19.1.0 (OpenSSL 1.1.1d  10 Sep 2019), cryptography 2.8, Platform Linux-4.15.0-70-generic-x86_64-with-Ubuntu-16.04-xenial
+2019-12-13 13:28:05 [scrapy.crawler] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'douban.spiders', 'SPIDER_MODULES': ['douban.spiders'], 'BOT_NAME': 'douban', 'COOKIES_ENABLED': False, 'EDITOR': '/usr/bin/vim', 'LOG_FILE': 'douban.log', 'USER_AGENT': 'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0;'}
+2019-12-13 13:28:05 [scrapy.extensions.telnet] INFO: Telnet Password: 034635d3c69bed98
+2019-12-13 13:28:05 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.memusage.MemoryUsage',
+ 'scrapy.extensions.logstats.LogStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.corestats.CoreStats']
+2019-12-13 13:28:05 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['douban.middlewares.RandomUserAgent',
+ 'douban.middlewares.RandomProxy',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-12-13 13:28:05 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-12-13 13:28:05 [scrapy.middleware] INFO: Enabled item pipelines:
+['douban.pipelines.DoubanPipeline']
+2019-12-13 13:28:05 [scrapy.core.engine] INFO: Spider opened
+2019-12-13 13:28:05 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-12-13 13:28:05 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2019-12-13 13:28:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=0> (referer: None)
+2019-12-13 13:28:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=25> (referer: https://movie.douban.com/top250?start=0)
+2019-12-13 13:28:06 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=50> (referer: https://movie.douban.com/top250?start=25)
+2019-12-13 13:28:07 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=75> (referer: https://movie.douban.com/top250?start=50)
+2019-12-13 13:28:07 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=100> (referer: https://movie.douban.com/top250?start=75)
+2019-12-13 13:28:07 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=125> (referer: https://movie.douban.com/top250?start=100)
+2019-12-13 13:28:07 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=150> (referer: https://movie.douban.com/top250?start=125)
+2019-12-13 13:28:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=175> (referer: https://movie.douban.com/top250?start=150)
+2019-12-13 13:28:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=200> (referer: https://movie.douban.com/top250?start=175)
+2019-12-13 13:28:08 [scrapy.core.engine] DEBUG: Crawled (200) <GET https://movie.douban.com/top250?start=225> (referer: https://movie.douban.com/top250?start=200)
+2019-12-13 13:28:08 [scrapy.core.engine] INFO: Closing spider (finished)
+2019-12-13 13:28:08 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 3098,
+ 'downloader/request_count': 10,
+ 'downloader/request_method_count/GET': 10,
+ 'downloader/response_bytes': 131265,
+ 'downloader/response_count': 10,
+ 'downloader/response_status_count/200': 10,
+ 'elapsed_time_seconds': 2.702287,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 12, 13, 5, 28, 8, 643932),
+ 'log_count/DEBUG': 10,
+ 'log_count/INFO': 10,
+ 'memusage/max': 73043968,
+ 'memusage/startup': 73043968,
+ 'request_depth_max': 9,
+ 'response_received_count': 10,
+ 'scheduler/dequeued': 10,
+ 'scheduler/dequeued/memory': 10,
+ 'scheduler/enqueued': 10,
+ 'scheduler/enqueued/memory': 10,
+ 'start_time': datetime.datetime(2019, 12, 13, 5, 28, 5, 941645)}
+2019-12-13 13:28:08 [scrapy.core.engine] INFO: Spider closed (finished)

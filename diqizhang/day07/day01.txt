@@ -72,3 +72,7 @@ doubanmovies
 system.indexes
 > db.doubanmovies.find()
 或者用robomongo图形化工具连看数据
+#############################################################
+scrapy startproject sinaNews
+scrapy genspider sina "sina.com.cn"
+py2  main.py

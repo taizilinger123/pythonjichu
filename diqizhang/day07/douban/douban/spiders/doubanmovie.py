@@ -30,7 +30,7 @@ class DoubamovieSpider(scrapy.Spider):
                 item['quote'] = quote[0]
 
             yield  item
-
+ 
         if self.offset < 225:
             self.offset += 25
             yield scrapy.Request(self.url + str(self.offset), callback = self.parse)
