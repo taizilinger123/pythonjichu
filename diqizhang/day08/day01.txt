@@ -1,0 +1,10 @@
+sudo pip  install  scrapy-redis
+sige@sige1:~/pythonjichu/diqizhang/day08$ redis-cli  -h  10.239.177.172
+10.239.177.172:6379> get key2
+(nil)
+sige@sige1:~/pythonjichu/diqizhang/day08/test-project/example/spiders$ scrapy  runspider myspider_redis.py
+10.239.177.172:6379> lpush myspider:start_urls http://www.dmoz.org/
+(integer) 1
+sige@sige1:~/pythonjichu/diqizhang/day08/test-project/example/spiders$ scrapy  runspider mycrawler_redis.py
+10.239.177.172:6379> lpush myspider:start_urls http://www.dmoz.org/
+(integer) 2
