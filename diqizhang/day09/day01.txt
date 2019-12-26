@@ -1,1 +1,4 @@
 sige@sige1:~/pythonjichu/diqizhang/day09$ scrapy startproject youyuan
+scrapy genspider  -t  crawl  yy  "youyuan.com"
+scrapy  crawl  yy
+
