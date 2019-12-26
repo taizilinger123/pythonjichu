@@ -1,4 +1,23 @@
 sige@sige1:~/pythonjichu/diqizhang/day09$ scrapy startproject youyuan
 scrapy genspider  -t  crawl  yy  "youyuan.com"
 scrapy  crawl  yy
-
+sige@sige1:~/pythonjichu/diqizhang/day09/youyuan/youyuan/spiders$ scrapy runspider  yy.py
+sige@sige1:~/pythonjichu/diqizhang/day09$ sudo  redis-cli
+127.0.0.1:6379> keys  *
+1) "myspider:start_urls"
+127.0.0.1:6379> lpush yyspider:start_urls http://www.youyuan.com/find/beijing/mm18-25/advance-0-0-0-0-0-0-0/p1/
+(integer) 1
+127.0.0.1:6379> keys *
+1) "yy:dupefilter"
+2) "myspider:start_urls"
+#################################
+tar  -zcvf   youyuan.tar.gz  youyuan/ day01/
+sige@sige1:~/pythonjichu/diqizhang/day09$ sftp sige@sige1
+sftp> ls
+sftp> lls
+day01.txt  youyuan  youyuan.tar
+sftp> put youyuan.tar
+可以把项目上传到其他机器然后改settings.py的REDIS_HOST和REDIS_PORT就可以运行项目了。
+sige@sige1:~/pythonjichu/diqizhang/day09/youyuan/youyuan/spiders$ scrapy runspider  yy.py
+127.0.0.1:6379> lpush yyspider:start_urls http://www.youyuan.com/find/beijing/mm18-25/advance-0-0-0-0-0-0-0/p1/
+127.0.0.1:6379> lpush yyspider:start_urls http://www.youyuan.com/find/tianjin/mm18-25/advance-0-0-0-0-0-0-0/p1/
