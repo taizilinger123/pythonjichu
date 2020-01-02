@@ -1,0 +1,5 @@
+sige@sige1:~/Desktop$ source    ~/.bashrc
+sige@sige1:~/Desktop$ mkvirtualenv -p /usr/bin/python  tornado_py2
+(tornado_py2) sige@sige1:~/pythonjichu/dibazhang/codes$ pip  install  tornado
+(tornado_py2) sige@sige1:~/pythonjichu/dibazhang/codes$ python  01.py
+ubuntu16.04 浏览器输入127.0.0.1:8001
