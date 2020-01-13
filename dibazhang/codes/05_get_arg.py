@@ -5,7 +5,7 @@ import tornado.web
 import tornado.ioloop
 import tornado.httpserver
 import tornado.options
-
+import json
 from  tornado.options  import  define, options
 from tornado.web import RequestHandler, url 
 
@@ -21,10 +21,18 @@ class IndexHandler(RequestHandler):
         # query_args = self.get_query_argument("q")
         #body_arg = self.get_body_argument("b")
         #body_args = self.get_body_arguments("b")
-        a = self.get_argument("a")
+        #a = self.get_argument("a")
         #ags = self.get_arguments("a", strip=False)
         #self.write(str(ags))
-        self.write(a)
+        # print self.request.headers.get("Content-Type")
+        # print self.request.body
+        # json_data = self.request.body 
+        # json_args = json.loads(json_data)
+        print  type(self.request.files)
+        print  self.request.files.keys()
+        print  type(self.request.files["image1"])
+        self.request.files["image1"][0]['body']
+        self.write("ok")
 
 
 if __name__ == '__main__':
