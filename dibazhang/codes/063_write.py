@@ -14,18 +14,9 @@ define("port", default=8001, type=int)
 
 class IndexHandler(RequestHandler):
 	def get(self):
-		# self.write("hello itcast1<br/>")
-		# self.write("hello itcast2<br/>")
-		# self.write("hello itcast3<br/>")
-		stu = {
-		     "name":"zhangsan",
-		     "age":24,
-		     "gender":1,
-		}
-		#stu_json = json.dumps(stu)
-		#self.write(stu_json)
-		self.write(stu)
-                self.set_header("Content-Type", "text/html")
+		self.write("hello itcast1<br/>")
+		self.write("hello itcast2<br/>")
+		self.write("hello itcast3<br/>")
 
 if __name__ == '__main__':
 	tornado.options.parse_command_line()
