@@ -52,9 +52,26 @@ class  InsertHandler(BaseHandler):
 
 class HouseHandler(BaseHandler):
     def get(self):
-    	user_id = get_argument("uid")
-    	sql = 
-
+    	user_id = self.get_argument("uid")
+    	sql = "select ui_name,ui_mobile,hi_name,hi_address,hi_price from it_user_info inner join it_house_info on ui_user_id=hi_user_id where ui_user_id=%s"
+        try:
+           ret = self.application.db.query(sql,user_id)
+        except Exception as e:
+           return self.write({"error":1, "errmsg":"db error","data":[]})
+	houses = []
+        print type(ret)
+	if ret:
+	   for l in ret:
+	      house = {
+			"uname":l["ui_name"],
+			"mobile":l["ui_mobile"],
+			"hname":l["hi_name"],
+			"address":l["hi_address"],
+			"price":l["hi_price"],
+	      } 
+	      houses.append(house)
+        self.write({"error":0,"errmsg":"OK","data":houses})
+          
 
 class Application(tornado.web.Application):
 	def __init__(self, *args, **kwargs):
@@ -86,6 +103,7 @@ if __name__ == '__main__':
  	app = Application([
             (r"/", IndexHandler),
             (r"/insert", InsertHandler),
+            (r"/house", HouseHandler),
  	    ], **settings)
  	http_server = tornado.httpserver.HTTPServer(app)
  	http_server.listen(options.port)
