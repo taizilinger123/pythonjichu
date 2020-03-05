@@ -3,3 +3,26 @@ sige@sige1:~/Desktop$ mkvirtualenv -p /usr/bin/python  tornado_py2
 (tornado_py2) sige@sige1:~/pythonjichu/dibazhang/codes$ pip  install  tornado
 (tornado_py2) sige@sige1:~/pythonjichu/dibazhang/codes$ python  01.py
 ubuntu16.04 浏览器输入127.0.0.1:8001
+(tornado_py2) sige@sige1:~/pythonjichu/dibazhang/codes$ pip  install torndb
+ipython
+In [1]: import uuid
+In [2]: dir(uuid)
+In [3]: help(uuid.uuid1)
+In [4]: help(uuid.uuid4)
+In [5]: a = uuid.uuid4()
+In [6]: a
+Out[6]: UUID('ec604b33-4b56-4f57-ae05-f3189d90d425')
+In [7]: dir(a)
+In [8]: a.get_hex()
+Out[8]: 'ec604b334b564f57ae05f3189d90d425'
+In [9]: help(a.bytes)
+no Python documentation found for '\xec`K3KVOW\xae\x05\xf3\x18\x9d\x90\xd4%'
+In [10]: a
+Out[10]: UUID('ec604b33-4b56-4f57-ae05-f3189d90d425')
+In [11]: a.bytes
+Out[11]: '\xec`K3KVOW\xae\x05\xf3\x18\x9d\x90\xd4%'
+In [12]: import base64
+In [13]: base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes)
+Out[13]: '1K6+M14RR+m+EQdZcRNxyzR7EeufSUl8vxt5pYjLTZo='
+In [14]: base64.b64encode(uuid.uuid4().bytes)
+Out[14]: 'CDUHRUD+QYqlKgLaXJbcEQ=='

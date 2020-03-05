@@ -15,7 +15,36 @@ define("port", default=8001, type=int)
 def  title_join(titles):
         return "-".join(titles)
 
-class  IndexHandler(RequestHandler):
+# def fun():
+# 	abc = 1
+# 	def fun_inner():
+# 		print abc 
+#     return fun_inner
+#  封装，继承，多态 
+
+class BaseHandler(RequestHandler):
+
+	def __init__(self,abc):
+		self.abc = abc 
+
+	def prepare(self):
+        pass
+
+	def write_error(self,status_code, **kwargs):
+        pass 
+
+	def set_default_headers(self):
+        pass 
+
+
+    def initialize(self):
+        pass 
+
+    def on_finish(self):
+    	pass 
+
+
+class  IndexHandler(BaseHandler):
 	def get(self):
 		#self.render("index.html",price1=100, price2=200)
 		#self.render("index.html",abc="abcd")
@@ -54,18 +83,18 @@ class NewHandler(RequestHandler):
 if __name__ == '__main__':
  	tornado.options.parse_command_line()
  	current_path = os.path.dirname(__file__)
+ 	settings = dict(
+        static_path=os.path.join(current_path,"static"),
+ 		template_path=os.path.join(current_path,"template"),
+ 		debug=True,
+ 		autoescape=None
+ 		)
  	app = tornado.web.Application([
             (r"/", IndexHandler),
             (r"/itcast",ItcastHandler),
             (r"/new",NewHandler),
             (r"/(.*)", StaticFileHandler,{"path":os.path.join(current_path, "static/html"),"default_filename":"index.html"}),
- 	    ],
-                
-            #dict(a="abc",b="2")
- 		static_path=os.path.join(current_path,"static"),
- 		template_path=os.path.join(current_path,"template"),
- 		debug=True,
- 		autoescape=None)
+ 	    ], **settings)
  	http_server = tornado.httpserver.HTTPServer(app)
  	http_server.listen(options.port)
  	tornado.ioloop.IOLoop.current().start()

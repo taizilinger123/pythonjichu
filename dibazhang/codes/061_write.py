@@ -36,15 +36,15 @@ class IndexHandler(RequestHandler):
 		     "gender":1,
 		}
 		stu_json = json.dumps(stu)
-	      	#err_data = {
+        self.write(stu_json)
+        #self.write(stu)
+        #self.set_header("Content-Type", "application/json; charset=UTF-8")
+	    #err_data = {
 		#     "err_content":"abc",
 		#     "err_title":"title"
 		#}		
-		self.send_error(404,**err_data)
-		#self.send_error(404,err_content="abc",err_title="title")
-		self.write(stu_json)
-		#self.write(stu)
-		#self.set_header("Content-Type", "application/json; charset=UTF-8")
+		#self.send_error(404,**err_data)
+		self.send_error(404,err_content="abc",err_title="title")
 		self.set_header("Itcast","CPP")
 		self.set_status(404, "itcast error")
 		self.redirect(self.reverse_url("itcast_url"))
