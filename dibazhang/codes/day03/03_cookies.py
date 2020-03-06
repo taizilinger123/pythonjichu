@@ -40,8 +40,24 @@ class  IndexHandler(BaseHandler):
 		# else:
                 #     self.clear_cookie("itcast")
                 #self.set_header("Set-Cookie","itcast=bcd;Path=/")
-            self.set_secure_cookie("itcast","abc")
-            self.write("aaa")
+            #self.set_secure_cookie("itcast","abc")
+            self.write('<html><head><title>被攻击的网站</title></head>'
+        '<body><h1>此网站的图片链接被修改了</h1>'
+        '<img alt="这应该是图片" src="http://127.0.0.1:8000/?f=9000/">'
+        '</body></html>')
+
+class   CookieCountHandler(BaseHandler):
+    def get(self):
+        count = self.get_secure_cookie("page_count")
+        if not count:
+            self.set_secure_cookie("page_count", "1")
+            count = 1
+        else:
+            count = int(count)
+            count += 1
+            self.set_secure_cookie("page_count", str(count))
+        self.write(str(count))
+
           
 class Application(tornado.web.Application):
 	def __init__(self, *args, **kwargs):
@@ -64,6 +80,7 @@ if __name__ == '__main__':
  	)
  	app = Application([
             (r"/", IndexHandler),
+            (r"/c", CookieCountHandler),
  	    ], **settings)
  	http_server = tornado.httpserver.HTTPServer(app)
  	http_server.listen(options.port)
