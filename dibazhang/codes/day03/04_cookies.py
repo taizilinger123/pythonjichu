@@ -33,7 +33,7 @@ class BaseHandler(RequestHandler):
 
 
 class  IndexHandler(BaseHandler):
-	def get(self):
+	def post(self):
 		# if not self.get_cookie("itcast"):
 		#     print self.get_cookie("itcast")
 		#     self.set_cookie("itcast","abc",expires=time.mktime(time.strptime("2020-2-11 23:59:59","%Y-%m-%d %H:%M:%S")))
