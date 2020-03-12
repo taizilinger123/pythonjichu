@@ -54,8 +54,9 @@ class Application(tornado.web.Application):
 	 		)
 class StaticFileHandler(tornado.web.StaticFileHandler):
     def __init__(self,*args,**kwargs):
-        super(StaticFileHandler,self).__init__()
-
+        super(StaticFileHandler,self).__init__(*args,**kwargs)
+        self.xsrf_token
+        self.set_secure_cookie("itcast","abc")
           
 if __name__ == '__main__':
  	tornado.options.parse_command_line()
