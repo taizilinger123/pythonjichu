@@ -8,6 +8,7 @@ import json
 import os
 import torndb
 import time
+import tornado.gen
 
 from tornado.web import RequestHandler,url,StaticFileHandler
 from tornado.options import define, options
@@ -16,17 +17,37 @@ from tornado.httpclient import AsyncHTTPClient
 define("port", default=8001, type=int)
 
 class  IndexHandler(RequestHandler):
-    @tornado.web.asynchronous
+    @tornado.gen.coroutine
     def get(self):
-        client = AsyncHTTPClient()
-        client.fetch("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=14.130.112.24",callback=self.on_response)
+        ips = ["14.130.112.24",
+            "15.130.112.24",
+            "16.130.112.24",
+            "17.130.112.24"]
+        rep1, rep2 = yield [self.get_ip_info(ips[0]), self.get_ip_info(ips[1])]
+        rep34_dict = yield dict(rep3=self.get_ip_info(ips[2]), rep4=self.get_ip_info(ips[3]))
+        self.write_response(ips[0], rep1) 
+        self.write_response(ips[1], rep2) 
+        self.write_response(ips[2], rep34_dict['rep3']) 
+        self.write_response(ips[3], rep34_dict['rep4']) 
 
-    def on_response(self, resp):
-        json_data = resp.body 
-        data = json.loads(json_data)
-        self.write(data.get("city", ""))
-        self.finish()
-          
+    def write_response(self, ip, response):
+        self.write(ip) 
+        self.write(":<br/>") 
+        if 1 == response["ret"]:
+            self.write(u"国家：%s 省份: %s 城市: %s<br/>" % (response["country"], response["province"], response["city"]))
+        else:
+            self.write("查询IP信息错误<br/>")
+
+    @tornado.gen.coroutine
+    def get_ip_info(self, ip):
+        http = tornado.httpclient.AsyncHTTPClient()
+        response = yield http.fetch("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=" + ip)
+        if response.error:
+            rep = {"ret:1"}
+        else:
+            rep = json.loads(response.body)
+        raise tornado.gen.Return(rep)
+
 class Application(tornado.web.Application):
 	def __init__(self, *args, **kwargs):
 	        super(Application,self).__init__(*args,**kwargs)

@@ -8,6 +8,7 @@ import json
 import os
 import torndb
 import time
+import tornado.gen
 
 from tornado.web import RequestHandler,url,StaticFileHandler
 from tornado.options import define, options
@@ -16,16 +17,23 @@ from tornado.httpclient import AsyncHTTPClient
 define("port", default=8001, type=int)
 
 class  IndexHandler(RequestHandler):
-    @tornado.web.asynchronous
+    # @tornado.web.asynchronous
+    # def get(self):
+    #     client = AsyncHTTPClient()
+    #     client.fetch("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=14.130.112.24",callback=self.on_response)
+
+    # def on_response(self, resp):
+    #     json_data = resp.body 
+    #     data = json.loads(json_data)
+    #     self.write(data.get("city", ""))
+    #     self.finish()
+    @tornado.gen.coroutine
     def get(self):
         client = AsyncHTTPClient()
-        client.fetch("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=14.130.112.24",callback=self.on_response)
-
-    def on_response(self, resp):
+        resp = yield client.fetch("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=14.130.112.24")
         json_data = resp.body 
         data = json.loads(json_data)
         self.write(data.get("city", ""))
-        self.finish()
           
 class Application(tornado.web.Application):
 	def __init__(self, *args, **kwargs):
