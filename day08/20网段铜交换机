@@ -3,6 +3,7 @@ switch(config-if)# interface   ethernet   1/48
 switch(config-if)# switchport
 switch(config-if)# switchport   mode  access
 switch(config-if)# switchport   access  vlan  1
+登录用户名admin密码大写Intel@123
 switch(config-if)# 
 switch(config-if)# 
 switch(config-if)# 
