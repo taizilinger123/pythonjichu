@@ -1,0 +1,8 @@
+[W 200415 11:39:18 Passport:11] warning msg
+[E 200415 11:39:18 Passport:12] error msg
+[I 200415 11:44:00 autoreload:199] server.py modified; restarting server
+[D 200415 11:44:32 Passport:9] debug msg
+[I 200415 11:44:32 Passport:10] info msg
+[W 200415 11:44:32 Passport:11] warning msg
+[E 200415 11:44:32 Passport:12] error msg
+[I 200415 11:44:32 web:2162] 200 GET / (10.239.4.101) 3.03ms
