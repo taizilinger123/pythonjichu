@@ -26,6 +26,19 @@ In [13]: base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes)
 Out[13]: '1K6+M14RR+m+EQdZcRNxyzR7EeufSUl8vxt5pYjLTZo='
 In [14]: base64.b64encode(uuid.uuid4().bytes)
 Out[14]: 'CDUHRUD+QYqlKgLaXJbcEQ=='
+
+In [1]: import uuid
+In [2]: uuid.uuid4().bytes
+Out[2]: '\xe9\x03x\xbf\r\xf1M\xbf\x8cA\xaa\xd5j\xd8\xa1\xf1'
+In [3]: uuid.uuid4().bytes + uuid.uuid4().bytes
+Out[3]: 'WPJC\x9d\xe0@\x8c\xa55\x03\x14R\x1e"\xe8\x1f\xc8\x97\x0cq\xe9Hc\x8fK\xf6\xc2Jc\xf8!'
+In [4]: import base64
+In [5]: base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes)
+Out[5]: 'eqjJq+QvRPWdpbaL6TMzex21da2VhEtWmIn3aGjquws='
+In [6]: base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes)
+Out[6]: 'EEk7nxO9QgeKYyqf7co3MFb2HsYQO0SZj27faPdRrtY='
+
+
 3.实时获取消息
 3.1前端轮询
 后端服务器/api/order/new 
@@ -139,4 +152,4 @@ service nginx restart # 重启
 启动：sudo sbin/nginx
 停止：sudo sbin/nginx -s stop
 重启：sudo sbin/nginx -s reload
-
+tail  -f   log实时查看日志信息
