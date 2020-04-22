@@ -19,10 +19,16 @@ function generateUUID() {
 }
 
 function generateImageCode() {
-    var picId = generateUUID();
-    $(".image-code img").attr("src", "/api/piccode?pre="+imageCodeId+"&cur="+picId);
-    imageCodeId = picId;
+    var preImageCodeId = imageCodeId;
+    imageCodeId = generateUUID();
+    $(".image-code img").attr("src", "/api/imagecode?pcodeid="+preImageCodeId+"&codeid="+imageCodeId);
 }
+
+// function generateImageCode() {
+//     var picId = generateUUID();
+//     $(".image-code img").attr("src", "/api/piccode?pre="+imageCodeId+"&cur="+picId);
+//     imageCodeId = picId;
+// }
 
 function sendSMSCode() {
     $(".phonecode-a").removeAttr("onclick");

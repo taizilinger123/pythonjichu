@@ -14,7 +14,7 @@ settings = {
 # mysql 
 mysql_options =dict(
 	host="127.0.0.1",
-	database="itcast",
+	database="ihome",
 	user="root",
 	password="123456"   
 )
