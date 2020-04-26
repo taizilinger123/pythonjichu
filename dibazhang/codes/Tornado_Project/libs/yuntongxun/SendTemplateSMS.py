@@ -94,3 +94,14 @@ if __name__ == "__main__":
 
    
 #sendTemplateSMS(手机号码,内容数据,模板Id)
+# 单例模式
+# 对于一个类而言，只有一个全局唯一的实例
+# class A(object)
+
+# obj = A()
+
+#obj = A.instance() 
+#obj = A.instance() 
+#obj = A.instance() 
+#obj = A.instance() 
+

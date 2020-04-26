@@ -46,7 +46,8 @@ function sendSMSCode() {
         $(".phonecode-a").attr("onclick", "sendSMSCode();");
         return;
     }
-    // $.get("/api/smscode", {mobile:mobile, code:imageCode, codeId:imageCodeId},
+    // 错误，传递的数据不是json格式
+    // $.post("/api/smscode", {mobile:mobile, code:imageCode, codeId:imageCodeId},
     //     function(data){
     //         if (0 != data.errno) {
     //             $("#image-code-err span").html(data.errmsg);
@@ -70,44 +71,77 @@ function sendSMSCode() {
     //             }, 1000, 60);
     //         }
     // }, 'json');
-    var data = {mobile:mobile, piccode:imageCode, piccode_id:imageCodeId};
+    var req_data = {mobile:mobile, image_code_text:imageCode, image_code_id:imageCodeId};
     $.ajax({
         url: "/api/smscode",
-        method: "POST",
-        headers: {
-            "X-XSRFTOKEN": getCookie("_xsrf"),
-        },
-        data: JSON.stringify(data),
+        type: "post",
+        data: JSON.stringify(req_data),
         contentType: "application/json",
         dataType: "json",
-        success: function (data) {
-            // data = {
-            //     errcode
-            //     errmsg
-            // }
-            if ("0" == data.errcode) {
-                var duration = 60;
-                var timeObj = setInterval(function () {
-                    duration = duration - 1;
-                    $(".phonecode-a").html(duration+"秒");
-                    if (1 == duration) {
-                        clearInterval(timeObj)
-                        $(".phonecode-a").html("获取验证码");
-                        $(".phonecode-a").attr("onclick", "sendSMSCode();")
-                    }
-                }, 1000, 60)
-            } else {
+        success: function(data){
+            if (0 != data.errno) {
                 $("#image-code-err span").html(data.errmsg);
                 $("#image-code-err").show();
-                $(".phonecode-a").attr("onclick", "sendSMSCode();")
-                if (data.errcode == "4002" || data.errcode == "4004") {
+                if ("4001" == data.errno || "4002" == data.errno || "4004" == data.errno) {
                     generateImageCode();
                 }
+                $(".phonecode-a").attr("onclick", "sendSMSCode();");
+            }
+            else {
+                var $time = $(".phonecode-a");
+                var duration = 60;
+                var intervalid = setInterval(function(){
+                    $time.html(duration + "秒");
+                    if(duration === 1){
+                        clearInterval(intervalid);
+                        $time.html('获取验证码');
+                        $(".phonecode-a").attr("onclick", "sendSMSCode();");
+                    }
+                    duration = duration - 1;
+                }, 1000, 60);
             }
         }
-    })
+    });
 
 }
+//     var data = {mobile:mobile, piccode:imageCode, piccode_id:imageCodeId};
+//     $.ajax({
+//         url: "/api/smscode",
+//         method: "POST",
+//         headers: {
+//             "X-XSRFTOKEN": getCookie("_xsrf"),
+//         },
+//         data: JSON.stringify(data),
+//         contentType: "application/json",
+//         dataType: "json",
+//         success: function (data) {
+//             // data = {
+//             //     errcode
+//             //     errmsg
+//             // }
+//             if ("0" == data.errcode) {
+//                 var duration = 60;
+//                 var timeObj = setInterval(function () {
+//                     duration = duration - 1;
+//                     $(".phonecode-a").html(duration+"秒");
+//                     if (1 == duration) {
+//                         clearInterval(timeObj)
+//                         $(".phonecode-a").html("获取验证码");
+//                         $(".phonecode-a").attr("onclick", "sendSMSCode();")
+//                     }
+//                 }, 1000, 60)
+//             } else {
+//                 $("#image-code-err span").html(data.errmsg);
+//                 $("#image-code-err").show();
+//                 $(".phonecode-a").attr("onclick", "sendSMSCode();")
+//                 if (data.errcode == "4002" || data.errcode == "4004") {
+//                     generateImageCode();
+//                 }
+//             }
+//         }
+//     })
+
+// }
 
 $(document).ready(function() {
     generateImageCode();
