@@ -78,6 +78,9 @@ function sendSMSCode() {
         data: JSON.stringify(req_data),
         contentType: "application/json",
         dataType: "json",
+        headers:{
+            "X-XSRFTOKEN":getCookie("_xsrf"),
+        }
         success: function(data){
             if (0 != data.errno) {
                 $("#image-code-err span").html(data.errmsg);
