@@ -3,7 +3,7 @@
 import  os 
 
 from handlers import Passport,VerifyCode
-from tornado.web import StaticFileHandler
+from handlers.BaseHandler import StaticFileHandler
 
 handlers = [
     (r"/api/imagecode", VerifyCode.ImageCodeHandler),

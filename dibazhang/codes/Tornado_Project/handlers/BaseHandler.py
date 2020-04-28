@@ -1,7 +1,9 @@
 # coding:utf-8
 
-from tornado.web import RequestHandler 
 import json
+import tornado.web
+from tornado.web import RequestHandler
+from utils.session import Session 
 
 
 class BaseHandler(RequestHandler):
@@ -33,3 +35,13 @@ class BaseHandler(RequestHandler):
     
    def on_finish(self):
         pass 
+    
+   def get_current_user(self):
+       self.session = Session(self)
+       return self.session.data 
+
+class StaticFileHandler(tornado.web.StaticFileHandler):
+    """"""
+    def __init__(self, *args, **kwargs):
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+        self.xsrf_token

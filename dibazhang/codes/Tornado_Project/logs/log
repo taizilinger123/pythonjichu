@@ -988,3 +988,25 @@
 [I 200426 16:21:33 web:2162] 200 POST /api/smscode (10.239.4.101) 3.73ms
 [I 200426 16:32:25 autoreload:199] /home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/VerifyCode.py modified; restarting server
 [I 200426 16:33:44 autoreload:199] /home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/VerifyCode.py modified; restarting server
+[I 200428 16:29:27 web:2162] 200 GET /register.html (10.239.4.100) 9.20ms
+[I 200428 16:29:27 web:2162] 304 GET /static/plugins/bootstrap/css/bootstrap.min.css (10.239.4.100) 2.30ms
+[I 200428 16:29:27 web:2162] 304 GET /static/plugins/font-awesome/css/font-awesome.min.css (10.239.4.100) 1.20ms
+[I 200428 16:29:27 web:2162] 304 GET /static/css/ihome/register.css (10.239.4.100) 1.04ms
+[I 200428 16:29:27 web:2162] 304 GET /static/images/logo@128x59.png (10.239.4.100) 1.01ms
+[I 200428 16:29:27 web:2162] 304 GET /static/css/ihome/main.css (10.239.4.100) 0.93ms
+[I 200428 16:29:27 web:2162] 304 GET /static/css/reset.css (10.239.4.100) 0.40ms
+[I 200428 16:29:27 web:2162] 304 GET /static/js/jquery.min.js (10.239.4.100) 0.55ms
+[I 200428 16:29:27 web:2162] 200 GET /static/js/ihome/register.js (10.239.4.100) 1.02ms
+[I 200428 16:29:27 web:2162] 304 GET /static/plugins/bootstrap/js/bootstrap.min.js (10.239.4.100) 0.86ms
+[I 200428 16:29:28 web:2162] 200 GET /favicon.ico (10.239.4.100) 1.27ms
+[I 200428 16:29:31 web:2162] 200 GET /static/plugins/bootstrap/css/bootstrap.min.css.map (10.239.4.100) 50.08ms
+[I 200428 16:29:45 autoreload:199] /home/sige/pythonjichu/dibazhang/codes/Tornado_Project/constants.py modified; restarting server
+[I 200428 16:39:55 web:2162] 200 GET /newhouse.html (10.239.4.101) 9.23ms
+[I 200428 16:39:55 web:2162] 200 GET /static/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css (10.239.4.101) 0.91ms
+[I 200428 16:39:55 web:2162] 200 GET /static/css/ihome/newhouse.css (10.239.4.101) 0.77ms
+[I 200428 16:39:55 web:2162] 200 GET /static/js/jquery.form.min.js (10.239.4.101) 1.21ms
+[I 200428 16:39:55 web:2162] 200 GET /static/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js (10.239.4.101) 1.38ms
+[I 200428 16:39:55 web:2162] 200 GET /static/js/template.js (10.239.4.101) 1.10ms
+[I 200428 16:39:55 web:2162] 200 GET /static/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js (10.239.4.101) 7.36ms
+[I 200428 16:39:55 web:2162] 200 GET /static/js/ihome/newhouse.js (10.239.4.101) 0.44ms
+[W 200428 16:39:55 web:2162] 404 GET /api/house/area (10.239.4.101) 3.31ms
