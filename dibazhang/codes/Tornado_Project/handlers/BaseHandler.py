@@ -40,8 +40,8 @@ class BaseHandler(RequestHandler):
        self.session = Session(self)
        return self.session.data 
 
-class StaticFileHandler(tornado.web.StaticFileHandler):
+class StaticFileBaseHandler(tornado.web.StaticFileHandler):
     """"""
     def __init__(self, *args, **kwargs):
-        super(StaticFileHandler, self).__init__(*args, **kwargs)
+        super(StaticFileBaseHandler, self).__init__(*args, **kwargs)
         self.xsrf_token

@@ -1010,3 +1010,354 @@
 [I 200428 16:39:55 web:2162] 200 GET /static/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js (10.239.4.101) 7.36ms
 [I 200428 16:39:55 web:2162] 200 GET /static/js/ihome/newhouse.js (10.239.4.101) 0.44ms
 [W 200428 16:39:55 web:2162] 404 GET /api/house/area (10.239.4.101) 3.31ms
+[I 200429 14:04:35 web:2162] 200 GET /my.html (10.239.4.100) 2.18ms
+[I 200429 14:04:35 web:2162] 200 GET /static/css/ihome/my.css (10.239.4.100) 1.61ms
+[I 200429 14:04:35 web:2162] 200 GET /static/js/ihome/my.js (10.239.4.100) 0.81ms
+[W 200429 14:04:35 web:2162] 404 GET /api/profile (10.239.4.100) 1.61ms
+[I 200429 14:04:40 web:2162] 200 GET /profile.html (10.239.4.100) 237.89ms
+[I 200429 14:04:41 web:2162] 200 GET /static/css/ihome/profile.css (10.239.4.100) 0.44ms
+[I 200429 14:04:41 web:2162] 200 GET /static/js/ihome/profile.js (10.239.4.100) 0.44ms
+[W 200429 14:04:41 web:2162] 404 GET /api/profile (10.239.4.100) 0.83ms
+[W 200429 14:04:42 web:2162] 404 GET /api/profile (10.239.4.100) 0.92ms
+[W 200429 14:04:45 web:2162] 404 GET /api/profile (10.239.4.100) 1.62ms
+[W 200429 14:06:23 web:2162] 405 POST /api/profile/avatar (10.239.4.101) 11.42ms
+[W 200429 14:06:34 web:2162] 405 POST /api/profile/name (10.239.4.101) 1.43ms
+[I 200429 14:06:46 web:2162] 200 GET /static/js/ihome/register.js (10.239.4.101) 2.36ms
+[I 200429 15:46:57 autoreload:199] /home/sige/pythonjichu/dibazhang/codes/Tornado_Project/urls.py modified; restarting server
+[I 200429 15:55:13 web:2162] 200 GET /register.html (10.239.4.160) 8.37ms
+[I 200429 15:55:13 web:2162] 200 GET /favicon.ico (10.239.4.160) 1.35ms
+[I 200429 15:56:36 autoreload:199] /home/sige/pythonjichu/dibazhang/codes/Tornado_Project/urls.py modified; restarting server
+[E 200429 16:09:34 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:34 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[I 200429 16:09:34 web:2162] 200 GET /favicon.ico (10.239.4.101) 3.60ms
+[E 200429 16:09:35 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:35 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[I 200429 16:09:35 web:2162] 200 GET /favicon.ico (10.239.4.101) 0.74ms
+[E 200429 16:09:36 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:36 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[I 200429 16:09:36 web:2162] 200 GET /favicon.ico (10.239.4.101) 1.27ms
+[E 200429 16:09:37 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:37 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[I 200429 16:09:37 web:2162] 200 GET /favicon.ico (10.239.4.101) 0.84ms
+[E 200429 16:09:37 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:37 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[I 200429 16:09:37 web:2162] 200 GET /favicon.ico (10.239.4.101) 1.07ms
+[E 200429 16:09:38 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:38 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[I 200429 16:09:38 web:2162] 200 GET /favicon.ico (10.239.4.101) 1.10ms
+[E 200429 16:09:38 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:38 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[I 200429 16:09:38 web:2162] 200 GET /favicon.ico (10.239.4.101) 1.19ms
+[E 200429 16:09:38 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:38 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[I 200429 16:09:38 web:2162] 200 GET /favicon.ico (10.239.4.101) 1.23ms
+[E 200429 16:09:42 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:42 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:44 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:44 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[I 200429 16:09:45 web:2162] 200 GET /favicon.ico (10.239.4.101) 0.86ms
+[E 200429 16:09:45 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:45 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[I 200429 16:09:46 web:2162] 200 GET /favicon.ico (10.239.4.101) 1.43ms
+[E 200429 16:09:46 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[E 200429 16:09:46 http1connection:55] Uncaught exception
+    Traceback (most recent call last):
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/http1connection.py", line 238, in _read_message
+        delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/routing.py", line 256, in finish
+        self.delegate.finish()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2195, in finish
+        self.execute()
+      File "/home/sige/.virtualenvs/tornado_py2/local/lib/python2.7/site-packages/tornado/web.py", line 2215, in execute
+        **self.handler_kwargs)
+      File "/home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py", line 46, in __init__
+        super(StaticFileHandler, self).__init__(*args, **kwargs)
+    NameError: global name 'StaticFileHandler' is not defined
+[I 200429 16:09:46 web:2162] 200 GET /favicon.ico (10.239.4.101) 1.31ms
+[I 200429 16:11:16 web:2162] 200 GET /register.html (10.239.4.160) 8.42ms
+[I 200429 16:11:16 web:2162] 200 GET /favicon.ico (10.239.4.160) 1.31ms
+[I 200429 16:11:22 web:2162] 200 GET / (10.239.4.160) 2.01ms
+[I 200429 16:11:22 web:2162] 200 GET /static/plugins/swiper/css/swiper.min.css (10.239.4.160) 1.28ms
+[I 200429 16:11:22 web:2162] 200 GET /static/css/ihome/index.css (10.239.4.160) 1.14ms
+[I 200429 16:11:22 web:2162] 200 GET /static/js/ihome/index.js (10.239.4.160) 1.88ms
+[I 200429 16:11:22 web:2162] 200 GET /static/plugins/swiper/js/swiper.jquery.min.js (10.239.4.160) 9.55ms
+[I 200429 16:11:22 web:2162] 200 GET /api/check_login (10.239.4.160) 1.57ms
+[E 200429 16:11:22 House:367] 'module' object has no attribute 'HOME_PAGE_MAX_HOUSES'
+[I 200429 16:11:22 web:2162] 200 GET /api/house/index (10.239.4.160) 1.69ms
+[I 200429 16:11:22 web:2162] 200 GET /favicon.ico (10.239.4.160) 0.92ms

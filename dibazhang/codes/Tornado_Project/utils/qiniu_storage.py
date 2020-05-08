@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import qiniu.config
+#import qiniu.config
 import logging
 
-from qiniu import Auth, put_data, etag, urlsafe_base64_encode
+#from qiniu import Auth, put_data, etag, urlsafe_base64_encode
 
 #需要填写你的 Access Key 和 Secret Key
 access_key = 'uzc59bVURbUbazey9vrexXKocNKBUN8NuLijk57N'

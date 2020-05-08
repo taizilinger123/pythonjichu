@@ -10,7 +10,7 @@ import redis
 
 from tornado.options import define, options 
 from tornado.web import RequestHandler 
-from urls import handlers 
+from urls import urls 
 
 define("port", type=int, default=8001, help="run server on the given port")
 
@@ -37,7 +37,7 @@ def main():
 	options.log_file_prefix = config.log_file
 	tornado.options.parse_command_line()
 	app = Application(
-              handlers, **config.settings
+                urls, **config.settings
 		)
 	http_server = tornado.httpserver.HTTPServer(app)
 	http_server.listen(options.port)

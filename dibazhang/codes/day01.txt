@@ -153,3 +153,40 @@ service nginx restart # 重启
 停止：sudo sbin/nginx -s stop
 重启：sudo sbin/nginx -s reload
 tail  -f   log实时查看日志信息
+ipython
+In [1]: def d(f):
+   ...:     def wrapper(*args, **kwargs):
+   ...:         print "inner"
+   ...:         f(*args,**kwargs)
+   ...:     return wrapper
+   ...: 
+
+In [2]: @d
+   ...: def fa():
+   ...:     print "fa"
+   ...:     
+
+In [3]: fa()
+inner
+fa
+In [26]: import functools
+In [26]: @functools.wraps(fa)
+   ....: def fa():
+   ....:     print "fa"
+   ....:     
+
+In [27]: fa()
+fa
+
+In [4]: fa.__name__
+Out[4]: 'wrapper'
+
+In [5]: def fb():
+   ...:     print "fb"
+   ...:     
+
+In [6]: fb.__name__
+Out[6]: 'fb'
+
+In [7]: import functools
+In [8]: @functools.wraps(fa)
