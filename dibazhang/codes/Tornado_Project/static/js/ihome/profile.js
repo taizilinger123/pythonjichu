@@ -19,10 +19,19 @@ $(document).ready(function () {
         else if ("0" == data.errcode) {
             $("#user-name").val(data.data.name);
             if (data.data.avatar) {
-                $("#user-avatar").attr("src", data.data.avatar);
+                $("#user-avatar").attr("src", dat#a.data.avatar);
             }
         }
     })
+    // $("#form-avatar").submit(function(){
+    //     $(this).ajaxSubmit(function(data){
+    //         if(0 == data.errno){
+    //             showSuccessMsg();
+    //             $("#user-avatar").attr("src", data.url);
+    //         }
+    //     });
+    //     return false;
+    // })
     $("#form-avatar").submit(function (e) {
         // 组织浏览器对于表单的默认行为
         e.preventDefault();

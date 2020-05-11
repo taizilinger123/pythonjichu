@@ -58,6 +58,7 @@ function goToSearchPage(th) {
 }
 
 $(document).ready(function(){
+    //调用接口获取用户的登录状态
     $.get("/api/check_login", function(data) {
         if ("0" == data.errcode) {
             $(".top-bar>.user-info>.user-name").html(data.data.name);

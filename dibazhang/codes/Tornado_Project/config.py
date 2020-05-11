@@ -27,12 +27,12 @@ settings = {
 }
 
 
-passwd_hash_key = "ihome@$^*"
+passwd_hash_key = "ihome@$^*" #密码加密salt 
 session_expires_seconds = 86400 #session数据有效期，秒,24h
 
 log_file = os.path.join(os.path.dirname(__file__),"logs/log")
 
-image_url_prefix = "http://o91qujnqh.bkt.clouddn.com/"
+image_url_prefix = "http://o91qujnqh.bkt.clouddn.com/" #七牛图片的域名
 log_level = "debug"
 
 

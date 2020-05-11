@@ -30,7 +30,7 @@ urls = [
     # (r'^/api/order/accept$', Orders.AcceptOrderHandler), # 接单
     # (r'^/api/order/reject$', Orders.RejectOrderHandler), # 拒单
     # (r'^/api/order/comment$', Orders.OrderCommentHandler),
-    (r"/(.*)", StaticFileHandler,
+    (r"/(.*)", StaticFileBaseHandler,
      dict(path=os.path.join(os.path.dirname(__file__), "html"), default_filename="index.html"))
 ]
 
