@@ -1398,3 +1398,11 @@
 [W 200511 13:45:18 web:2162] 404 GET /api/profile (10.239.4.101) 2.07ms
 [I 200511 14:48:21 autoreload:199] /home/sige/pythonjichu/dibazhang/codes/Tornado_Project/handlers/BaseHandler.py modified; restarting server
 [I 200511 14:52:41 autoreload:199] /home/sige/pythonjichu/dibazhang/codes/Tornado_Project/config.py modified; restarting server
+[W 200511 16:50:32 web:2162] 404 GET /api/profile (10.239.4.160) 5.12ms
+[W 200511 16:50:34 web:2162] 405 POST /api/profile/avatar (10.239.4.160) 1.27ms
+[W 200511 16:50:43 web:2162] 405 POST /api/profile/avatar (10.239.4.160) 15.75ms
+[W 200511 16:50:46 web:2162] 405 POST /api/profile/avatar (10.239.4.160) 10.55ms
+[W 200511 16:50:49 web:2162] 405 POST /api/profile/name (10.239.4.160) 1.53ms
+[W 200511 16:50:51 web:2162] 405 POST /api/profile/name (10.239.4.160) 0.92ms
+[W 200511 16:50:51 web:2162] 405 POST /api/profile/name (10.239.4.160) 2.02ms
+[W 200511 16:50:51 web:2162] 405 POST /api/profile/name (10.239.4.160) 1.16ms
