@@ -15,4 +15,5 @@ https://github.com/aui/artTemplate
 3.5 git checkout 分支名 切换分支
 3.6 git checkout -b 分支名 新建并切换分支
 3.7 git add  提交文件到暂存区
-3.8 git commit 提交到本地代码库
+3.8 git commit 提交到本地代码库(记得加-m注释)
+
