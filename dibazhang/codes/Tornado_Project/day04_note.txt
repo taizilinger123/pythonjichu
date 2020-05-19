@@ -24,3 +24,6 @@ https://github.com/aui/artTemplate
      git tag -a v0.1 -m "0.1"
      git tag
      git push origin kdh:kdh --tags
+
+4. Redis-py 使用
+https://redis-py.readthedocs.io/en/latest/

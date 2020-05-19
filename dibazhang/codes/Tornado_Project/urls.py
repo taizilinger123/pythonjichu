@@ -2,16 +2,21 @@
 
 import os
 
-from handlers import Passport, VerifyCode
-from handlers.BaseHandler import StaticFileBaseHandler 
+from handlers import Passport, VerifyCode, Profile, House
+from handlers.BaseHandler import StaticFileHandler 
 
 urls = [
     (r"/api/imagecode", VerifyCode.ImageCodeHandler),
     (r"/api/smscode", VerifyCode.SMSCodeHandler),
-    (r"/api/register$", Passport.RegisterHandler),
-    (r"/api/login$", Passport.LoginHandler),
-    (r"/api/logout$", Passport.LogoutHandler),
-    (r"/api/check_login$", Passport.CheckLoginHandler), # 判断用户是否登录
+    (r"^/api/register$", Passport.RegisterHandler),
+    (r"^/api/login$", Passport.LoginHandler),
+    (r"^/api/check_login$", Passport.CheckLoginHandler),
+    (r"^/api/logout$", Passport.LogoutHandler),
+    (r"^/api/profile$", Profile.ProfileHandler),
+    (r"^/api/profile/avatar$", Profile.AvatarHandler), 
+    (r"^/api/profile/name$$", Profile.NameHandler),
+    (r"^/api/profile/auth$", Profile.AuthHandler), 
+    (r"^/api/house/area$", House.AreaInfoHandler), 
 
 
     # (r"/api/profile/avatar$", Profile.AvatarHandler), # 用户上传头像
