@@ -17,6 +17,7 @@ urls = [
     (r"^/api/profile/name$$", Profile.NameHandler),
     (r"^/api/profile/auth$", Profile.AuthHandler), 
     (r"^/api/house/area$", House.AreaInfoHandler), 
+    (r"^/api/house/my$", House.MyHousesHandler), 
 
 
     # (r"/api/profile/avatar$", Profile.AvatarHandler), # 用户上传头像
@@ -35,7 +36,7 @@ urls = [
     # (r'^/api/order/accept$', Orders.AcceptOrderHandler), # 接单
     # (r'^/api/order/reject$', Orders.RejectOrderHandler), # 拒单
     # (r'^/api/order/comment$', Orders.OrderCommentHandler),
-    (r"/(.*)", StaticFileBaseHandler,
+    (r"/(.*)", StaticFileHandler,
      dict(path=os.path.join(os.path.dirname(__file__), "html"), default_filename="index.html"))
 ]
 
