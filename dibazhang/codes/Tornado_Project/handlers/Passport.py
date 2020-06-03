@@ -1,7 +1,5 @@
 # coding:utf-8
 
-# coding:utf-8
-
 import logging
 import hashlib
 import config

@@ -5,7 +5,7 @@ import os
 from handlers import Passport, VerifyCode, Profile, House
 from handlers.BaseHandler import StaticFileHandler 
 
-urls = [
+handlers = [
     (r"/api/imagecode", VerifyCode.ImageCodeHandler),
     (r"/api/smscode", VerifyCode.SMSCodeHandler),
     (r"^/api/register$", Passport.RegisterHandler),
