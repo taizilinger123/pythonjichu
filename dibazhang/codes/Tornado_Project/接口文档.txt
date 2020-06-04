@@ -44,10 +44,38 @@ house2:{}
     "errmsg":"OK"
   }
 
-get?  get_argument
-post? get_argument
-body
-      json
-      xml 
-      1,2,3,4
-      "1,2,3,4" 
+3 上传新房源
+  
+  URL: /api/house/new
+  method: post 
+  
+  传入参数:  json
+  Content-Type="application/json"
+  {
+  "title":"",
+  "price":"",
+  "area_id":"1",
+  "address":"",
+  "room_count":"",
+  "acreage":"",
+  "unit":"",
+  "capacity":"",
+  "beds":"",
+  "deposit":"",
+  "min_days":"",
+  "max_days":"",
+  "facility":["7","8"]
+  }
+ 
+  正常返回值:
+  {
+     "errno":0
+     "errmsg":"OK"
+     "house_id":123
+  }
+   
+  异常返回:
+  {
+     "errno":"4001"
+     "errmsg":
+  }

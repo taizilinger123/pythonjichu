@@ -11,7 +11,7 @@ def require_logined(fun):
 		    fun(request_handler_obj,*args,**kwargs)
 		#返回的是空字典，代表用户未登陆过,没有保存用户的session数据
 		else:
-			request_handler_obj.write(dict=(errno=RET.SESSIONERR, errmsg="用户未登录"))
+			request_handler_obj.write(dict(errno=RET.SESSIONERR, errmsg="用户未登录"))
 	return wrapper
 
 

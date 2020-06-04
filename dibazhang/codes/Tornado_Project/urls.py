@@ -2,7 +2,7 @@
 
 import os
 
-from handlers import Passport, VerifyCode, Profile, House
+from handlers import Passport, VerifyCode, Profile, House1
 from handlers.BaseHandler import StaticFileHandler 
 
 handlers = [
@@ -16,8 +16,9 @@ handlers = [
     (r"^/api/profile/avatar$", Profile.AvatarHandler), 
     (r"^/api/profile/name$$", Profile.NameHandler),
     (r"^/api/profile/auth$", Profile.AuthHandler), 
-    (r"^/api/house/area$", House.AreaInfoHandler), 
-    (r"^/api/house/my$", House.MyHousesHandler), 
+    (r"^/api/house/area$", House1.AreaInfoHandler), 
+    (r"^/api/house/my$", House1.MyHousesHandler), 
+    (r"^/api/house/info$", House1.HousesInfoHandler), 
 
 
     # (r"/api/profile/avatar$", Profile.AvatarHandler), # 用户上传头像
