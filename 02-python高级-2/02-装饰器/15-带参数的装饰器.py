@@ -17,3 +17,11 @@ def test():
     # return num+1
  
 test()  # test()=make_decorater()
+
+
+# @dec2
+# @dec1(x)
+# def f():
+#     pass 
+# #等价于
+# f = dec2(dec1(x)(f))
