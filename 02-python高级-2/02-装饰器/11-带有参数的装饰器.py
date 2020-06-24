@@ -15,7 +15,7 @@ def func_arg(arg):
 #1.先执行func_arg("heihei")函数，这个函数return的结果是func这个函数的引用
 #2.@func
 #3.使用@func对test进行装饰
-@func_arg("heihei")
+@func_arg("heihei")  #test=func_arg("heihei")(test)=func
 def  test():
     print("----code01----")
 
@@ -24,5 +24,5 @@ def  test():
 def  test2():
     print("----test2----")
 
-test()
+test()     #test()=func()
 test2()
