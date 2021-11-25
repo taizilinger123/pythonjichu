@@ -1,3 +1,4 @@
+对象的__del__是对象在被gc消除回收的时候起作用的一个方法，它的执行一般也就意味着对象不能够继续引用。
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 class Dog:
@@ -10,6 +11,14 @@ dog2 = dog1
 del dog1
 del dog2
 print("=============")
+
+class Demo:
+      def __init__(self):
+          print("calling __del__")
+        
+obj = Demo()
+obj.__del__()
+
 
 # 测量一个对象的引用计数的方式
 # import sys
