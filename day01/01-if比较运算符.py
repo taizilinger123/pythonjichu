@@ -375,6 +375,10 @@ for alien in aliens[:3]:
         alien['color'] = 'yellow'
         alien['speed'] = 'medium'
         alien['points'] = 10
+    elif alien['color'] == 'yellow':
+        alien['color'] = 'red'
+        alien['speed'] = 'fast'
+        alien['points'] = 15
     print(alien)
 
 for alien in  aliens[:5]:
