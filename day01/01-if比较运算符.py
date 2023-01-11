@@ -356,3 +356,10 @@ favorite_languages = {
 print("The following languages have been mentioned:")
 for language in  set(favorite_languages.values()):      #set去重
     print(language.title())
+    
+alien_0 = {'color':'green','points':5}
+alien_1 = {'color':'yellow','points':10}
+alien_2 = {'color':'red','points':15}
+aliens = [alien_0,alien_1,alien_2]
+for alien in aliens:
+    print(alien)
