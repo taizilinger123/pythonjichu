@@ -388,3 +388,12 @@ print(".........")
 
 print(f"Totle number of  aliens:{len(aliens)}")
 
+pizza = {
+          'crust':'thick',
+          'topping':['mushrooms','extra cheese'], 
+        }
+print(f"You ordered a {pizza['crust']}-crust pizza with the following toppings.")
+
+for  topping in  pizza['topping']:
+    print("\t" + topping)
+
