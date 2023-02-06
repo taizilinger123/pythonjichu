@@ -7,6 +7,57 @@ if age == 18:
     # age <= 18:
     # age != 18:
     print("成年，可以去网吧......")
+#print(sum(range(1,101)))
+
+# message = "Hello python world!"
+# print(message)
+
+# message = "Hello python Crash Course world!"
+# print(message)
+#
+# name = "ada lovelace"
+# print(name.title())
+# print(name.upper())
+# print(name.lower())
+
+# first_name = "ada"
+# last_name = "lovelace"
+# full_name = f"{first_name} {last_name}"
+# print(full_name)
+# print("Python")
+# print("\tPython")
+# print("\nPython")
+# print("Languages:\n\tPython\n\tC\n\tJavaScript")
+
+# favorite_language = 'python '
+# print(favorite_language.rstrip())
+# favorite_language = ' python'
+# print(favorite_language.lstrip())
+# favorite_language = ' python '
+# print(favorite_language.strip())
+# message = "One of Python's strengths is its diverse community."
+# print(message)
+# universe_age = 14_000_000_000
+# print(universe_age)
+# x = 0
+# y = 1
+# z = 2
+# print(x)
+# print(y)
+# print(z)
+# x,y,z = 0,1,2
+# print(x)
+# print(y)
+# print(z)
+
+# MAX_CONNECTIONS = 5000
+# MAX_CONNECTIONS = 4000
+# print(MAX_CONNECTIONS)
+
+# # 向大家问好。
+# print("hello everyone!")
+
+# import this
 # bicycles=['trek','cannondale','redline','specialized']
 # #print(bicycles[-2])
 # message=f'My first bicyle was a {bicycles[0].title()}.'
