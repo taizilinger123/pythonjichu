@@ -480,3 +480,211 @@ for  username,user_info in users.items():
 
     print(f"\tFull name:{full_name.title()}")       ###要在循环内部
     print(f"\tLocation:{location.title()}")         ###要在循环内部
+#print(sum(range(1,101)))
+
+# message = "Hello python world!"
+# print(message)
+
+# message = "Hello python Crash Course world!"
+# print(message)
+#
+# name = "ada lovelace"
+# print(name.title())
+# print(name.upper())
+# print(name.lower())
+
+# first_name = "ada"
+# last_name = "lovelace"
+# full_name = f"{first_name} {last_name}"
+# print(full_name)
+# print("Python")
+# print("\tPython")
+# print("\nPython")
+# print("Languages:\n\tPython\n\tC\n\tJavaScript")
+
+# favorite_language = 'python '
+# print(favorite_language.rstrip())
+# favorite_language = ' python'
+# print(favorite_language.lstrip())
+# favorite_language = ' python '
+# print(favorite_language.strip())
+# message = "One of Python's strengths is its diverse community."
+# print(message)
+# universe_age = 14_000_000_000
+# print(universe_age)
+# x = 0
+# y = 1
+# z = 2
+# print(x)
+# print(y)
+# print(z)
+# x,y,z = 0,1,2
+# print(x)
+# print(y)
+# print(z)
+
+# MAX_CONNECTIONS = 5000
+# MAX_CONNECTIONS = 4000
+# print(MAX_CONNECTIONS)
+
+# # 向大家问好。
+# print("hello everyone!")
+
+# import this
+
+# message = input("Tell me something, and i will repeat it back to you:")
+# print(message)
+
+# name = input("Please enter your name:")
+# print(f"\nHello,{name}!")
+
+# prompt="If you tell us who you are,we can personalize the messages you see."
+# prompt+="\nWhat is your first name?"
+# name = input(prompt)
+# print(f"\nHello,{name}!")
+
+# age = input("How old are you?")
+# print(int(age)>=18)
+
+# height=input("How tall are you,in inches?")
+# height=int(height)
+# if height>=48:
+#     print("\nYou're tall enough to ride!")
+# else:
+#     print("\nYou'll be able to ride when you're a little older.")
+# print(7%3)
+# number=input("Enter a number,and I'll tell you if it's even or odd:")
+# number=int(number)
+# if number%2 == 0:
+#     print(f"\nThe number {number} is even.")
+# else:
+#     print(f"\nThe number {number} is odd.")
+# current_number = 1
+# while current_number<=5:
+#     print(current_number)
+#     current_number+=1
+# prompt="\nTell me something,and I will repeat it back to you:"
+# prompt+="\nEnter 'quit' to end the program."
+# message=""
+# while message!='quit':
+#     message=input(prompt)
+#
+#     # if message!='quit':
+#     #    print(message)
+#     if message=='quit':
+#        break
+# prompt="\nTell me something,and I will repeat it back to you:"
+# prompt+="\nEnter 'quit' to end the program."
+# active=True
+# while active:
+#     message=input(prompt)
+#     if message=='quit':
+#         #while循环不再运行
+#         active=False
+#     else:
+#         print(message)
+# prompt="\nTell me something,and I will repeat it back to you:"
+# prompt+="\nEnter 'quit' to end the program."
+# while True:
+#     city=input(prompt)
+#     if city=='quit':
+#         break
+#     else:
+#         print(f"I'd love to go to {city.title()}!")
+# current_number=0
+# while current_number<10:
+#     #current_number=current_number+1
+#     current_number+=1
+#     if current_number%2==0:
+#         continue
+#     print(current_number)
+# x=1
+# while x<=5:
+#     print(x)
+#     x+=1
+# unconfirmed_users=['alice','brian','candace']
+# confirmed_users=[]
+# while unconfirmed_users:
+#     current_user=unconfirmed_users.pop()
+#     print(f"Verifying user:{current_user.title()}")
+#     confirmed_users.append(current_user)
+# #显示所有已验证的用户
+# print("\nThe following users have been confirmed:")
+# for confirmed_user in confirmed_users:
+#     print(confirmed_user)
+# pets=['dog','cat','dog','goldfish','cat','rabbit','cat']
+# print(pets)
+# while 'cat' in pets:
+#     pets.remove('cat')
+# print(pets)
+
+# responses={}
+# polling_active=True
+# while polling_active:
+#     name=input("\nWhat is your name?")
+#     mountain_name=input("Which mountain would you like to climb someday?")
+#     responses[name]=mountain_name
+#     repeat=input("Would you like to let another person response?(yes/no)")
+#     if repeat=='no':
+#         polling_active=False
+# #调查结束，显示结果
+# print("\n---Poll Results----")
+# for name,mountain_name in responses.items():
+#     print(f"{name} would like to climb {mountain_name}.")
+
+# def greet_user():
+#     """显示简单的问候语"""
+#     print("Hello!")
+# greet_user()
+
+# def greet_user(username):
+#     """显示简单的问候语"""
+#     print(f"Hello,{username.title()}!")
+# greet_user("zhangsan")
+
+# def describe_pet(animal_type,pet_name):
+#     """显示宠物的信息"""
+#     print(f"\nI have a {animal_type}.")
+#     print(f"My {animal_type}'s name is {pet_name.title()}.")
+# describe_pet('hamster','harry')
+# describe_pet('dog','whillie')
+
+# def describe_pet(animal_type,pet_name):
+#     """显示宠物的信息"""
+#     print(f"\nI have a {animal_type}.")
+#     print(f"My {animal_type}'s name is {pet_name.title()}.")
+# describe_pet(animal_type='hamster',pet_name='harry')
+
+# def describe_pet(pet_name,animal_type='dog'):
+#     """显示宠物的信息"""
+#     print(f"\nI have a {animal_type}.")
+#     print(f"My {animal_type}'s name is {pet_name.title()}.")
+# describe_pet(pet_name='willie')
+
+# def get_formatted_name(first_name,last_name):
+#     """返回整洁的姓名"""
+#     full_name=f"{first_name} {last_name}"
+#     return full_name.title()
+# musician=get_formatted_name('jimi','hendrix')
+# print(musician)
+
+# def get_formatted_name(first_name,middle_name,last_name):
+#     """返回整洁的姓名"""
+#     full_name=f"{first_name} {middle_name} {last_name}"
+#     return full_name.title()
+# musician=get_formatted_name('john','lee','hooker')
+# print(musician)
+
+def get_formatted_name(first_name,last_name,middle_name=''):
+    """返回整洁的姓名"""
+    #检查是否提供了中间名
+    if middle_name:
+        full_name=f"{first_name} {middle_name} {last_name}"
+    else:
+        full_name = f"{first_name} {last_name}"
+    return full_name.title()
+musician=get_formatted_name('jimi','hendrix')
+print(musician)
+
+musician=get_formatted_name('john','hooker','lee')
+print(musician)
