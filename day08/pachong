@@ -7,6 +7,7 @@ r = requests.get(url)
 r.status_code
 r.headers
 r.encoding
+r.encoding="utf-8"
 r.text
 r.cookies
 %history
