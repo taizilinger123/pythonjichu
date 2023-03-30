@@ -1,0 +1,12 @@
+In [11]: %history
+clear                          
+clear                          
+import  requests               
+url = "http://www.crazyant.net"
+r = requests.get(url)          
+r.status_code
+r.headers
+r.encoding
+r.text
+r.cookies
+%history
