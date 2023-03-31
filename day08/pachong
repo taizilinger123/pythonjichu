@@ -1,6 +1,5 @@
 In [11]: %history
-clear                          
-clear                          
+clear                                         
 import  requests               
 url = "http://www.crazyant.net"
 r = requests.get(url)          
