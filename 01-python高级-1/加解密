@@ -1,3 +1,10 @@
+  922  openssl genrsa -out private.pem 2048
+  923  openssl rsa -in private.pem -pubout -out public.pem
+  924  ls -l
+  925  cat public.pem 
+  926  openssl genrsa -out private1.pem 2048
+  927  openssl rsa -in private1.pem -pubout -out public1.pem
+
 [root@localhost encrypt]# cat  server_aes_new_db.py 
 import socket
 import threading
