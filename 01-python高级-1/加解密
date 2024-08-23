@@ -40,12 +40,12 @@ def decrypt_with_private_key(private_key, encrypted_data, key_size):
     for i in range(0, len(encrypted_data), key_size):
         chunk = encrypted_data[i:i + key_size]
 
-        # ??????????????
+        # 处理最后不足一个块大小的数据
         if len(chunk) != key_size:
             chlen = len(chunk)
             print(f"size:{chlen} vvv: {key_size}")
             if i == len(encrypted_data) - len(chunk):
-                # ?????????key_size??????
+                # 最后的块可以是小于key_size的有效加密块
                 decrypted_chunk = private_key.decrypt(
                     chunk,
                     padding.PKCS1v15()
