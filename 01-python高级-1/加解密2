@@ -1,0 +1,259 @@
+[root@localhost encrypt]# cat  server_aes_new_db.py
+import socket
+import threading
+import mysql.connector
+import logging
+from cryptography.hazmat.primitives.asymmetric import rsa, padding
+from cryptography.hazmat.primitives import serialization, hashes
+from base64 import b64decode,b64encode
+logging.basicConfig(level=logging.INFO)
+logging.info("Server started and listening on port 8082...")
+
+# Load server's private and public keys
+with open("/root/encrypt/key_server/private_key.pem", "rb") as key_file:
+    private_key_server = serialization.load_pem_private_key(
+        key_file.read(),
+        password=None,
+    )
+
+with open("/root/encrypt/key_server/public_key.pem", "rb") as key_file:
+    public_key_server = serialization.load_pem_public_key(
+        key_file.read()
+    )
+
+# def decrypt_with_private_key(private_key, encrypted_data, key_size):
+#     decrypted = private_key.decrypt(
+#     encrypted_data,
+#     padding.PKCS1v15()
+#     )
+#     return decrypted
+
+def decrypt_with_private_key(private_key, encrypted_data, key_size):
+    decrypted_data = b''
+    for i in range(0, len(encrypted_data), key_size):
+        chunk = encrypted_data[i:i + key_size]
+
+        # ??????????????
+        if len(chunk) != key_size:
+            chlen = len(chunk)
+            print(f"size:{chlen} vvv: {key_size}")
+            if i == len(encrypted_data) - len(chunk):
+                # ?????????key_size??????
+                decrypted_chunk = private_key.decrypt(
+                    chunk,
+                    padding.PKCS1v15()
+                )
+            else:
+                raise ValueError("Ciphertext length must be equal to key size")
+        else:
+            decrypted_chunk = private_key.decrypt(
+                chunk,
+                padding.PKCS1v15()
+            )
+        decrypted_data += decrypted_chunk
+    return decrypted_data
+
+
+#def encrypt_with_public_key(public_key, message, key_size):
+#    encrypted = public_key.encrypt(
+#        message,
+#        padding.PKCS1v15()
+#    )
+#    return encrypted
+
+def encrypt_with_public_key(public_key, message, key_size):
+    encrypted_data = b''
+    for i in range(0, len(message), key_size):
+        chunk = message[i:i + key_size]
+
+        # ??????????????
+        if len(chunk) != key_size:
+            chlen = len(chunk)
+            print(f"size:{chlen} vvv: {key_size}")
+            if i == len(message) - len(chunk):
+                # ?????????key_size??????
+                encrypted_chunk = public_key.encrypt(
+                    chunk,
+                    padding.PKCS1v15()
+                )
+            else:
+                raise ValueError("Ciphertext length must be equal to key size")
+        else:
+            encrypted_chunk = public_key.encrypt(
+                chunk,
+                padding.PKCS1v15()
+            )
+        encrypted_data += encrypted_chunk
+    return encrypted_data
+
+def encode_data(uuid_c, timestamp_c, pubkey_c):
+    """Encodes UUID, timestamp, and pubkey into a fixed 6-byte structure."""
+    uuid_c_encoded = uuid_c[:2].encode('utf-8')  # Use the first 2 characters of UUID
+    timestamp_c_encoded = timestamp_c[:2].encode('utf-8')  # Use the first 2 characters of timestamp
+    pubkey_c_encoded = pubkey_c[:2].encode('utf-8')  # Use the first 2 characters of public key
+    
+    # Combine into a single 6-byte structure
+    combined_data = uuid_c_encoded + timestamp_c_encoded + pubkey_c_encoded
+    return combined_data
+
+
+
+def sign_with_private_key(private_key, message):
+    signature = private_key.sign(
+        message,
+        padding.PKCS1v15(),  # ?? PKCS1v15 ??
+        hashes.SHA256()
+    )
+    return signature
+
+def receive_full_message(client_socket, buffer_size=4096):
+    data = b''
+    while True:
+        part = client_socket.recv(buffer_size)
+        data += part
+        if len(part) < buffer_size:
+            break
+    return data
+
+
+def handle_client(client_socket):
+    # Database connection setup
+    db_conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="Lahmy1c!123",
+        database="db"
+    )
+    # Create a cursor to interact with the database
+    cursor = db_conn.cursor()
+    try:
+        # Receive encrypted request from client
+        encrypted_request = receive_full_message(client_socket)
+        print(f"Received encrypted request from client. Length: {len(encrypted_request)} bytes")
+        print(encrypted_request)
+        # Assuming RSA key size (e.g., 2048 bits / 256 bytes)
+        rsa_key_size = private_key_server.key_size // 8
+        print(f"size:{rsa_key_size}")
+        print("rcv:",encrypted_request)
+        # Decrypt the request using the server's private key
+        decrypted_request = decrypt_with_private_key(private_key_server, b64decode(encrypted_request), rsa_key_size)
+        print(f"Decrypted request: {decrypted_request}")
+
+        # Assuming the decrypted request is in the format: UUID_c|timestamp_c|PubKey_c
+        decrypted_parts = decrypted_request
+        # ??UUID??
+        uuid_prefix = decrypted_parts[:2]
+        uuid_length = int.from_bytes(decrypted_parts[:2], byteorder='big')
+        uuid_start = 2  # UUID????3????
+        uuid_end = uuid_start + uuid_length
+        uuid_c = decrypted_parts[uuid_start:uuid_end].decode()
+
+        # ???????
+        timestamp_prefix = decrypted_parts[uuid_end:uuid_end+2]
+        timestamp_length = int.from_bytes(decrypted_parts[uuid_end:uuid_end+2], byteorder='big')
+        timestamp_start = uuid_end + 2
+        timestamp_end = timestamp_start + timestamp_length
+        timestamp_c = decrypted_parts[timestamp_start:timestamp_end].decode()
+
+        # ??pubkey_c
+        pubkey_c_prefix = decrypted_parts[timestamp_end:timestamp_end+2]
+        pubkey_c_pem = decrypted_parts[timestamp_end+2:].decode('utf-8', errors='ignore')
+         
+        #print("UUID:", uuid_c)
+        #print("Timestamp:", timestamp_c)
+        #print("pubkey_c:", pubkey_c_pem)
+
+
+        #print(f"decrypted_parts:{decrypted_parts}")
+        #uuid_c = decrypted_parts[0].decode('utf-8')
+        #timestamp_c = decrypted_parts[1].decode('utf-8')
+        #pubkey_c_pem = decrypted_parts[2]
+
+        
+        # Encode the data into 6 bytes
+        # final_data = encode_data(uuid_c, timestamp_c, pubkey_c_pem.decode('utf-8'))
+
+        # Log or store the final data
+        # print(f"Final encoded data: {final_data}")
+
+
+        # Store the decrypted request details in the MySQL database
+        # Ensure the table exists
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS client_requests (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            uuid_c VARCHAR(255) NOT NULL,
+            timestamp_c VARCHAR(255) NOT NULL,
+            pubkey_c TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+        """)
+        db_conn.commit()
+        cursor.execute(
+        "INSERT INTO client_requests (uuid_c, timestamp_c, pubkey_c) VALUES (%s, %s, %s)",(uuid_c, timestamp_c, pubkey_c_pem)
+        )
+        db_conn.commit()
+
+        # Properly format the public key as PEM
+        pubkey_c_pem_formatted = b"-----BEGIN PUBLIC KEY-----\n" + pubkey_c_pem.encode('utf-8') + b"\n-----END PUBLIC KEY-----\n"
+        # Deserialize the client's public key
+        public_key_client = serialization.load_pem_public_key(pubkey_c_pem_formatted)
+        #public_key_client = serialization.load_der_public_key(pubkey_c_pem)
+
+
+        # final data
+        #final_uuid = uuid_prefix + uuid_c.encode('utf-8')
+        #final_timestamp = timestamp_prefix + timestamp_c.encode('utf-8')
+        #final_pubkey_c = pubkey_c_prefix + pubkey_c_pem.encode('utf-8')
+        
+        # Encrypt the UUID_c and timestamp_c with the client's public key
+        #response_message = uuid_c.encode('utf-8') + b'|' + timestamp_c.encode('utf-8')
+        #response_message = final_uuid
+        response_message = uuid_c.encode('utf-8') + timestamp_c.encode('utf-8')
+
+        # Sign the response with the server's private key 
+        signature = sign_with_private_key(private_key_server, response_message)
+        print(f"Generated signature: {signature}")
+        
+        # Convert the signature (bytes) to a Base64 encoded string
+        signature_str = b64encode(signature).decode('utf-8')
+
+        # Print the Base64 encoded signature
+        print(f"Generated signature (Base64):   {signature_str}")
+
+        #encrypted_response = encrypt_with_public_key(public_key_client, response_message)
+        rsb_key_size = public_key_server.key_size // 8 - 11
+        encrypted_response = encrypt_with_public_key(public_key_client, signature_str.encode('utf-8'), rsb_key_size)
+        #print("encrypted_response len:", len(encrypted_response)) 
+        #print(f"Encrypted response: {encrypted_response}")
+        #response_str = b64encode(encrypted_response).decode('utf-8')
+        #print(f"encrypted_response (base64)   : {response_str}")
+
+        # Send the encrypted response and signature back to the client
+        # client_socket.send(encrypted_response + b'|' + signature)
+        client_socket.send(encrypted_response)
+        #print("Sent encrypted response and signature to client.")
+        #print("Sent encrypted response client.")
+
+    finally:
+        cursor.close()
+        db_conn.close()
+        client_socket.close()
+
+def start_server():
+    server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server_socket.bind(('0.0.0.0', 8082))
+    server_socket.listen(5)
+
+    print("Server started and listening on port 8082...")
+
+    while True:
+        client_socket, addr = server_socket.accept()
+        print(f"Connection from {addr} has been established!")
+        
+        # Start a new thread for each client connection
+        client_thread = threading.Thread(target=handle_client, args=(client_socket,))
+        client_thread.start()
+
+if __name__ == "__main__":
+    start_server()
