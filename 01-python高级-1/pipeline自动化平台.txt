@@ -76,8 +76,8 @@ pipeline {
             emailext(
                 to: 'sheng.lei@sinaero.com.cn',
                 from: 'sheng.lei@yhgj-link.com',
-                subject: "Build Failed",
-                body: "Build failed.",
+                subject: "Build Failed: ${currentBuild.fullDisplayName}",
+                body: "Build failed at ${env.BUILD_URL}. Check the logs for more details.",
                 attachLog: true
             )
         }
