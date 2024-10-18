@@ -86,7 +86,7 @@ pipeline {
                 to: 'sheng.lei@sinaero.com.cn',
                 from: 'sheng.lei@yhgj-link.com',
                 subject: "Build Success: ${currentBuild.fullDisplayName}",
-                body: "Build was successful.",
+                body: "Build ${env.BUILD_URL} was successful.",
                 attachLog: true
             )
         }
