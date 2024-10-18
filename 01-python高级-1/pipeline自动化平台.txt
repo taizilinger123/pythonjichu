@@ -1,0 +1,94 @@
+pipeline {
+    agent any
+    environment {
+        GIT_CREDENTIALS = credentials('gitea-credentials-id')
+    }
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+                [key: 'ref', value: '$.ref'],
+                [key: 'commit_message', value: '$.head_commit.message']
+            ],
+            causeString: 'Triggered by Gitea push to $ref',
+            token: 'intel.123',
+            printContributedVariables: true,
+            printPostContent: true,
+            regexpFilterText: '$commit_message',
+            regexpFilterExpression: '^((?!\\[ci skip\\]).)*$'
+        )
+    }
+    stages {
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+            }
+        }
+        stage('Clone') {
+            steps {
+                git url: 'http://10.240.12.187:3000/TMS570-Project/TMS570.git', credentialsId: 'gitea-credentials-id'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'gcc opr.c -o main'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './main'
+            }
+        }
+        stage('Commit and Push Changes') {
+            steps {
+                script {
+                    def filesModified = sh(returnStdout: true, script: "git status --porcelain").trim()
+                    if (filesModified) {
+                        withCredentials([usernamePassword(credentialsId: 'gitea-credentials-id', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                            def encodedUsername = URLEncoder.encode(GIT_USERNAME, "UTF-8")
+                            def encodedPassword = URLEncoder.encode(GIT_PASSWORD, "UTF-8")
+
+                            sh 'git config user.email "sheng.lei@sinaero.com.cn"'
+                            sh 'git config user.name "sheng.lei"'
+
+                            // 使用 git add .，Git 会根据 .gitignore 自动忽略指定的文件
+                            sh "git add ."
+
+                            sh "git commit -m 'Automated changes from Jenkins build #${env.BUILD_NUMBER} [ci skip]'"
+
+                            try {
+                                sh "git pull origin main --rebase"
+                            } catch (Exception e) {
+                                echo "Merge conflict detected. Please resolve conflicts manually."
+                                error "Merge conflict detected."
+                            }
+
+                            sh "git push http://${encodedUsername}:${encodedPassword}@10.240.12.187:3000/TMS570-Project/TMS570.git HEAD:main"
+                        }
+                    } else {
+                        echo "No files modified, skipping commit and push."
+                    }
+                }
+            }
+        }
+    }
+    post {
+        failure {
+            emailext(
+                to: 'sheng.lei@sinaero.com.cn',
+                from: 'sheng.lei@yhgj-link.com',
+                subject: "Build Failed",
+                body: "Build failed.",
+                attachLog: true
+            )
+        }
+        success {
+            emailext(
+                to: 'sheng.lei@sinaero.com.cn',
+                from: 'sheng.lei@yhgj-link.com',
+                subject: "Build Success: ${currentBuild.fullDisplayName}",
+                body: "Build was successful.",
+                attachLog: true
+            )
+        }
+    }
+}
