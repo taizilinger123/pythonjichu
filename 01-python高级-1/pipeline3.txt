@@ -1,0 +1,135 @@
+pipeline {
+    agent any
+    parameters {
+        string(name: 'REPO_URL', defaultValue: '', description: 'Git 仓库地址')
+        string(name: 'BRANCH', defaultValue: '', description: '构建的分支')
+        string(name: 'BUILD_COMMAND', defaultValue: '', description: '编译命令')
+        string(name: 'RUN_COMMAND', defaultValue: '', description: '执行命令')
+    }
+    environment {
+        GIT_CREDENTIALS = credentials('gitea-credentials-id')
+    }
+    triggers {
+        GenericTrigger(
+            genericVariables: [
+                [key: 'REPO_URL', value: '$.repository.clone_url'],
+                [key: 'BRANCH_REF', value: '$.ref'],
+                [key: 'BUILD_COMMAND', value: '$.repository.build_command'],
+                [key: 'RUN_COMMAND', value: '$.repository.run_command']
+            ],
+            causeString: 'Triggered by push to $BRANCH',
+            token: 'your-secret-token',  // 请设置一个安全的 Token
+            printContributedVariables: true,
+            printPostContent: true,
+            regexpFilterText: '$BRANCH_REF',
+            regexpFilterExpression: '^refs/heads/(.*)$',
+            regexpFilterReplace: '$1',
+            silentResponse: false
+        )
+    }
+    stages {
+        stage('Prepare') {
+            steps {
+                script {
+                    // 提取分支名称
+                    if (params.BRANCH == '') {
+                        params.BRANCH = BRANCH_REF.replaceAll('refs/heads/', '')
+                    }
+                    // 检查必需的参数
+                    if (params.REPO_URL == '') {
+                        error "REPO_URL is not specified."
+                    }
+                    if (params.BUILD_COMMAND == '') {
+                        error "BUILD_COMMAND is not specified."
+                    }
+                    if (params.RUN_COMMAND == '') {
+                        error "RUN_COMMAND is not specified."
+                    }
+                }
+            }
+        }
+        stage('Clean Workspace') {
+            steps {
+                deleteDir()
+            }
+        }
+        stage('Clone') {
+            steps {
+                git url: "${params.REPO_URL}", branch: "${params.BRANCH}", credentialsId: 'gitea-credentials-id'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh "${params.BUILD_COMMAND}"
+            }
+        }
+        stage('Test') {
+            steps {
+                sh "${params.RUN_COMMAND}"
+            }
+        }
+        stage('Commit and Push Changes') {
+            steps {
+                script {
+                    def filesModified = sh(returnStdout: true, script: "git status --porcelain").trim()
+                    if (filesModified) {
+                        withCredentials([usernamePassword(credentialsId: 'gitea-credentials-id', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD')]) {
+                            def encodedUsername = URLEncoder.encode(GIT_USERNAME, "UTF-8")
+                            def encodedPassword = URLEncoder.encode(GIT_PASSWORD, "UTF-8")
+
+                            sh 'git config user.email "your.email@example.com"'
+                            sh 'git config user.name "your-username"'
+
+                            sh "git add ."
+                            sh "git commit -m 'Automated changes from Jenkins build #${env.BUILD_NUMBER} [ci skip]'"
+
+                            try {
+                                sh "git pull origin ${params.BRANCH} --rebase"
+                            } catch (Exception e) {
+                                echo "Merge conflict detected. Please resolve conflicts manually."
+                                error "Merge conflict detected."
+                            }
+
+                            def repoHostPath = params.REPO_URL.replaceFirst(/https?:\/\//, '')
+                            sh "git push http://${encodedUsername}:${encodedPassword}@${repoHostPath} HEAD:${params.BRANCH}"
+                        }
+                    } else {
+                        echo "No files modified, skipping commit and push."
+                    }
+                }
+            }
+        }
+    }
+    post {
+        failure {
+            emailext(
+                to: 'recipient@example.com',
+                from: 'sender@example.com',
+                subject: "构建失败: ${currentBuild.fullDisplayName}",
+                body: "构建失败，详情请查看 ${env.BUILD_URL}。",
+                attachLog: true
+            )
+        }
+        success {
+            emailext(
+                to: 'recipient@example.com',
+                from: 'sender@example.com',
+                subject: "构建成功: ${currentBuild.fullDisplayName}",
+                body: "构建成功，详情请查看 ${env.BUILD_URL}。",
+                attachLog: true
+            )
+        }
+    }
+}
+
+
+stage('Read Build Config') {
+    steps {
+        script {
+            def config = readJSON file: 'build_config.json'
+            params.BUILD_COMMAND = config.build_command
+            params.RUN_COMMAND = config.run_command
+        }
+    }
+}
+
